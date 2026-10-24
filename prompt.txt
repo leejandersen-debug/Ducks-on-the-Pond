@@ -745,3 +745,38 @@ git commit push
 
 What it gives you:
 This saves the leak-review fixes and the per-request logging as two commits on main and pushes them to GitHub, which starts a Vercel production deploy. Production is still set to LOG_LEVEL=warn, so until that changes to info the live site won't write request_start or request_done lines. It will still write request_failed errors and warnings.
+
+
+PROMPT 55
+set LOG_LEVEL to info in Vercel production
+
+What it gives you:
+This changes the Vercel Production setting LOG_LEVEL from warn to info and redeploys the current production build so it takes effect. The code is unchanged. The live site now writes request_start and request_done { route, method, status, ms } for every request, which feed your request and latency numbers, plus warnings and errors. Debug lines such as health.ok stay hidden.
+
+
+PROMPT 56
+npm i @vercel/analytics
+
+What it gives you:
+This installs Vercel Web Analytics (@vercel/analytics 2.0.1) as a dependency in package.json, with 0 vulnerabilities in shipped packages. Installing alone doesn't track anything yet. The next step is adding the <Analytics /> component to app/layout.tsx and turning on Analytics for the project in the Vercel dashboard. After that it counts page views and visitors in the browser, which complements the server-side request_done logs.
+
+
+PROMPT 57
+yes, add Analytics to the layout
+
+What it gives you:
+app/layout.tsx now renders Vercel's <Analytics /> component (from @vercel/analytics/next) on every page. Once Analytics is enabled for the project in the Vercel dashboard (Analytics tab, Enable), the live site counts page views, visitors and referrers. Until then the script runs but sends nothing. In local dev it runs in debug mode and only prints to the browser console. The production build passes.
+
+
+PROMPT 58
+import { Analytics } from "@vercel/analytics/next"
+
+What it gives you:
+A check that this import line is already in app/layout.tsx (line 2), with <Analytics /> rendered inside <body>. Nothing needed to change. The "/next" ending loads the Next.js version of the component, which follows page changes inside the app so every page view is counted, not just the first page load.
+
+
+PROMPT 59
+commit and push to main
+
+What it gives you:
+This saves Vercel Web Analytics (the @vercel/analytics package and <Analytics /> in app/layout.tsx) and prompts 55–59 as one commit on main and pushes it to GitHub. That starts a production deploy. After it's live, enabling Analytics in the Vercel dashboard (Analytics tab, Enable) starts counting page views and visitors.
