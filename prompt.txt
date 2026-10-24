@@ -671,3 +671,28 @@ latest prompt log entries (Prompts 42–44) to GitHub, so the visual comparison
 and the record of how it was made sit next to the code. The push also triggers
 a production redeploy on Vercel, but the app is unchanged because neither
 file is part of the app.
+
+
+----------------------------------------------------------------------
+PROMPT 45
+----------------------------------------------------------------------
+Keep running. We have a full day ahead of us.
+
+What it gives you:
+This keeps the local dev server running at http://localhost:3005, connected
+to the Neon dev branch, so you can pick up where you left off without
+restarting anything. No code or settings changed.
+
+
+PROMPT 46
+Set up structured logging with levels (debug, info, warn, error). Each line should be JSON with a timestamp, level, an event name, and an optional details object. Read the active log level from an environment variable so I can make prod quieter than dev.
+
+What it gives you:
+A small, dependency-free logger in lib/log.ts. Call log.debug/info/warn/error("event.name", { ...details }) and it writes one JSON line ({"ts","level","event","details"}). The LOG_LEVEL environment variable (debug, info, warn or error) sets the lowest level that gets written. If it isn't set, dev shows everything and production starts at info, so prod is quieter by default. Errors put in details keep their message, code and stack instead of turning into {}, and warn/error lines go to stderr so Vercel's log viewer marks them. The health check route now uses it, and LOG_LEVEL is documented in .env.example.
+
+
+PROMPT 47
+commit and push to main
+
+What it gives you:
+This saves the structured logger (lib/log.ts), the health route that now uses it, the LOG_LEVEL note in .env.example and prompts 45–47 as one commit on main and pushes it to GitHub. The push starts a Vercel production deploy, so the live site begins writing JSON log lines at info level and above.
