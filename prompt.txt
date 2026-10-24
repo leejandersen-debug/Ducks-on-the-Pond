@@ -696,3 +696,31 @@ commit and push to main
 
 What it gives you:
 This saves the structured logger (lib/log.ts), the health route that now uses it, the LOG_LEVEL note in .env.example and prompts 45–47 as one commit on main and pushes it to GitHub. The push starts a Vercel production deploy, so the live site begins writing JSON log lines at info level and above.
+
+
+PROMPT 48
+set LOG_LEVEL to warn in Vercel production
+
+What it gives you:
+This adds a LOG_LEVEL=warn environment variable to the Vercel project's Production environment. After the next production deploy, the live site only writes warn and error log lines and drops debug and info. Preview deployments and local dev are unchanged (info and debug by default). No code changed.
+
+
+PROMPT 49
+how do I access the error log.  Show me step by step at the most basic level, as I have never done this before.
+
+What it gives you:
+A beginner walkthrough of two ways to see the app's error logs on Vercel. The first is the website: vercel.com, then your project, then the Logs tab, filtered to Error and Production. The second is one terminal command (npx vercel logs) that prints the same records. It also covers where local dev logs appear (the terminal running npm run dev), and it notes that the Hobby plan keeps logs only for a short window. It also flags that a harmless SSL warning from the database driver currently shows up as an "error" in the log.
+
+
+PROMPT 50
+yes, fix the sslmode warning
+
+What it gives you:
+The database driver (pg) no longer prints its "SECURITY WARNING" about sslmode each time the server starts, so the Vercel error log shows only real problems. lib/db.ts now changes sslmode=require to sslmode=verify-full in the connection string before connecting. That is exactly how pg was already behaving, so connection security is unchanged. Doing it in code covers local dev, previews and production at once, without editing the Neon-managed connection strings stored in Vercel. Production picks it up on the next push to main.
+
+
+PROMPT 51
+commit and push to main
+
+What it gives you:
+This saves the sslmode fix in lib/db.ts and prompts 48–51 as one commit on main and pushes it to GitHub. The push starts a Vercel production deploy, which also picks up the LOG_LEVEL=warn setting. After that, the live site writes only warn and error lines, and the database driver's SSL warning no longer appears in the error log.
