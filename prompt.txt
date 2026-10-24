@@ -780,3 +780,17 @@ commit and push to main
 
 What it gives you:
 This saves Vercel Web Analytics (the @vercel/analytics package and <Analytics /> in app/layout.tsx) and prompts 55–59 as one commit on main and pushes it to GitHub. That starts a production deploy. After it's live, enabling Analytics in the Vercel dashboard (Analytics tab, Enable) starts counting page views and visitors.
+
+
+PROMPT 60
+answer these questions: [image: Live URL; Logging — paste 2-3 real log lines from your app (scrubbed of secrets); The leak review: one line I almost logged that would have leaked a secret, and how I fixed it; Metrics — how I can read requests / errors / latency (link or describe the dashboard view; attach a screenshot); Environments — what differs between my dev and prod config, and how I proved the split; The one friction point I hit, and how I cleared it]
+
+What it gives you:
+Ready-to-paste answers for the lesson's observability write-up, built from live data: the production URL, real production log lines pulled with vercel logs, the leak that was nearly logged (a malformed DATABASE_URL whose parse error carries the password) and its fix, where to read requests, errors and latency (Vercel's Observability tab plus a one-line CLI query, with current numbers), the dev/prod differences proved by different Neon database hosts and different log output, and the friction point (middleware can't see a response's status or timing in Next.js 16, so instrumentation.ts was used).
+
+
+PROMPT 61
+commit and push to main
+
+What it gives you:
+This saves prompts 60–61 in prompt.txt as a commit on main and pushes it to GitHub. No app code changed. The push still starts a routine Vercel production deploy, and the site behaves the same afterward.
