@@ -1,16 +1,4 @@
 {
-  "services": {
-    "web": {
-      "root": "apps/web",
-      "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
-    },
-    "api": {
-      "root": "apps/api",
-      "entrypoint": "src/app.ts"
-    }
-  },
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": { "service": "api" } },
-    { "source": "/(.*)", "destination": { "service": "web" } }
-  ]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs"
 }

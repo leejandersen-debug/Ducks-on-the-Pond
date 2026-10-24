@@ -1,20 +1,29 @@
 {
   "name": "card-app",
   "private": true,
-  "workspaces": [
-    "apps/*"
-  ],
   "engines": {
     "node": "24.x"
   },
   "scripts": {
-    "dev": "concurrently -n api,web -c blue,green \"npm run dev -w apps/api\" \"npm run dev -w apps/web\"",
-    "build": "npm run build --workspaces --if-present",
-    "typecheck": "npm run typecheck --workspaces"
+    "dev": "next dev --port 3005",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1",
+    "@types/node": "^24.19.2",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "neonctl": "^8.11.1",
+    "typescript": "^5.9.3",
     "vercel": "^65.2.0"
+  },
+  "dependencies": {
+    "@vercel/functions": "^3.10.3",
+    "next": "^16.4.3",
+    "pg": "^8.23.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   }
 }
