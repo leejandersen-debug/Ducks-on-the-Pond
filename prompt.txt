@@ -1,0 +1,622 @@
+PROMPT LOG: Ducks on the Pond (trading card collection & trade app)
+======================================================================
+Every prompt from the build, in order, each followed by one paragraph on
+what it gives you. Lines starting with "!" are terminal commands you ran
+yourself in the session; they're logged too because they moved the build forward.
+
+
+----------------------------------------------------------------------
+PROMPT 01
+----------------------------------------------------------------------
+I have a new project. I have create a decision document that I want you to
+use as a guidance. Don't act on it yet, but this will be guidance for what we
+will build:
+
+Data shape: Relational. My app has a shared card catalog that every user draws
+from, a collection of the copies each user owns, and trades that move copies
+between two users. Those are clean links between separate things, which is
+relational by nature. A document model would copy each card's player and set
+details into every user's collection, so fixing a mistake or answering "who
+owns this card?" would get messy. Tradeoff: I have to settle the structure up
+front, including how the catalog and collections split and how parallels,
+autographs and serial-numbered cards are represented. If I get that wrong,
+reshaping the tables once real users have built collections is real work.
+
+Database: Postgres. Once the data is relational, Postgres follows. Row-level
+security keeps each user's collection private, and a JSONB column can hold
+unusual card attributes without breaking the structure. SQLite struggles with
+many people writing at once, and that's exactly what a multi-user app does.
+Tradeoff: Every schema change, like adding grading companies or trade tables,
+is a migration I have to write, test and run against live data. That upkeep
+is mine.
+
+Backend language: TypeScript (Node). One language runs across the web app, the
+API and the React Native mobile app. The phone and server can share the same
+definitions for a Card or a Trade, so they can't drift apart. Python on the
+backend would split the project into two languages. Tradeoff: Node is poor at
+heavy computation. If I tried to run card-image recognition myself, I'd need a
+separate worker in another language. Right now that's a call to an outside
+service, so the cost is acceptable, but the limit is real.
+
+Backend framework: Next.js. The web pages and the API that my mobile app calls
+live in one project with one deploy. With Express, I'd build and run the
+backend as a separate second project. Tradeoff: Next.js is designed mainly for
+websites, and it dictates how my routes, caching and rendering work. My mobile
+app's API inherits those rules, and leaving Next.js later would mean rewriting
+the API layer, not just moving it.
+
+Frontend: React (via Next.js). React on the web carries over directly to React
+Native on mobile, so I learn one way of building screens and use it on both.
+Vue or Svelte wouldn't give me that path to the phone. Tradeoff: I'm using
+Next.js's version of React, with its split between server and client
+components and its rules for loading data. The web frontend can't change
+direction unless the backend framework changes with it.
+
+Hosting: Vercel. This is the last row because it's the easiest to change. My
+backend handles short requests: API calls from the phone, page loads and a
+nightly price-update job. That fits Vercel's model better than an always-on
+server on Render. Tradeoff: Vercel's functions start and stop with each
+request instead of staying running, so they can't hold long-lived Postgres
+connections. I need a connection pooler, and a continuous background job like
+price scraping wouldn't fit here. That job would have to run on another host
+such as Render.
+
+What it gives you:
+This sets the ground rules for the whole project without building anything.
+The decision document fixes the stack (relational data in Postgres,
+TypeScript, Next.js for both pages and API, React, Vercel hosting) and, just
+as important, records the tradeoff you accepted for each choice. Claude saved
+it as standing guidance, so later work is checked against it, and replied
+with a few early warnings: Vercel no longer offers its own Postgres (Neon via
+the Marketplace is the usual route), row-level security needs the user's
+identity passed to Postgres on every request, and the catalog/copy structure
+is the riskiest design decision to get right.
+
+
+----------------------------------------------------------------------
+PROMPT 02
+----------------------------------------------------------------------
+let's start with the schema sketch
+
+What it gives you:
+This produces schema-sketch.sql, a first-draft Postgres design you can review
+before anything is built. It splits the data into three layers: a shared
+catalog (sets, then cards, then variants, where a variant is a card plus its
+parallel plus autograph/relic flags), per-user collections (one "copies" row
+per physical card, holding the owner, serial number and grade), and trades
+that move specific copies between two users. It also surfaced a real gap in
+your decision document: collections are meant to be private, but trading
+requires other users to see something of what you own.
+
+
+----------------------------------------------------------------------
+PROMPT 03
+----------------------------------------------------------------------
+For the gap, make a clickable button that allows a card to be seen as
+"tradeable." This can be turned on and off at will. Any user can add any of
+their own cards. If there is a conflict with serial numbers, flag the admin
+via the users email that there is a conflict, but do not allow the card to be
+entered until the conflict is resolved. Make that an admin tool. Store card
+photos as their own cards. I like the idea of a wishlist, so add that in.
+
+What it gives you:
+This turns five product decisions into schema. Each card copy gets an on/off
+"tradeable" switch that controls whether other users can see it. Any user can
+add cards to the shared catalog, but only admins can edit or delete them.
+Serial numbers become unique per variant: a colliding entry is held in a
+review queue, every admin is emailed with both users' details, and an admin
+tool approves or rejects it. Users can attach front, back and extra photos to
+their own copies, and a wishlist lets users want "any version of this card" or
+one exact parallel, with a minimum grade and maximum price.
+
+
+----------------------------------------------------------------------
+PROMPT 04
+----------------------------------------------------------------------
+Wishlist can be visible to other users.
+
+What it gives you:
+This confirms how wishlists should be shared. The sketch already made
+wishlist entries visible to other users by default, so no change was needed.
+Each entry also has a private setting, and Claude offered to remove it if you
+want every wishlist always public. Public wishlists are what let the app match
+one user's wants against other users' tradeable cards.
+
+
+----------------------------------------------------------------------
+PROMPT 05
+----------------------------------------------------------------------
+A couple more items before we build. Need a field for "Paid price", "Listed
+Price" and "Sold Price". When a card has a sold price entered, the card gets
+tagged as sold and removed from inventory, but the record is still there to
+allow for tracking. Provide a report for Inventory, For Sale cards, and Sold
+cards.
+
+What it gives you:
+This adds the money side of a collection. Each copy gets a paid, listed and
+sold price, stored in cents. Entering a sold price tags the card as sold, fills
+in the sale date, switches off "tradeable" and cancels open trade offers, while
+the record stays for history. Four reports come with it: inventory (everything
+not sold), for sale (anything with a listed price, plus margin), sold (sale
+history with profit per card) and a summary of totals. Claude also made two
+choices you didn't ask for: sold cards stop holding their serial number, so a
+buyer can enter the card later without a conflict, and prices stay private,
+so other users never see what you paid.
+
+
+----------------------------------------------------------------------
+PROMPT 06
+----------------------------------------------------------------------
+Scaffold a minimal full-stack skeleton: Express backend with one health-check
+route, React frontend that renders a hello-world page and calls that route,
+Postgres connection read from an environment variable, structured so I can
+add one resource next. Give me the run commands and a deploy path for Vercel.
+Keep it minimal — no auth, no extra features.
+
+What it gives you:
+This gave you the first runnable code: an Express API with a /api/health
+route that also tests the database, a React (Vite) page that calls it, a
+database connection read from DATABASE_URL, run commands and a step-by-step
+Vercel deploy path. It also introduced a mismatch with your decision document,
+which chose Next.js rather than Express plus a separate React app. Claude
+built what this prompt asked for but only mentioned the conflict in passing.
+That mismatch was caught in review (Prompt 26) and corrected in Prompt 28.
+
+
+----------------------------------------------------------------------
+PROMPT 07
+----------------------------------------------------------------------
+git remote add origin https://github.com/leejandersen-debug/Ducks-on-the-Pond
+
+What it gives you:
+This connects the project to your GitHub repository. The folder wasn't a Git
+repository yet, so Claude first ran "git init" on a main branch, then added
+your repo as "origin" and confirmed the remote was empty. Nothing was
+committed or pushed; the project was just ready to be saved to GitHub.
+
+
+----------------------------------------------------------------------
+PROMPT 08
+----------------------------------------------------------------------
+yes, commit and push to main
+
+What it gives you:
+This made the first commit (the skeleton plus the schema sketch) and pushed it
+to GitHub's main branch, with main set to track the remote so a plain "git
+push" works afterward. Claude confirmed beforehand that .gitignore kept .env
+files and node_modules out, so no secrets went up.
+
+
+----------------------------------------------------------------------
+PROMPT 09
+----------------------------------------------------------------------
+Run on localhost:3005 before we commit to vercel
+
+What it gives you:
+This was a local test run before involving Vercel. Claude started the app with
+the web page on port 3005 and the API behind it, opened it in your browser,
+and confirmed the page loaded and the health route answered. The database
+showed as "not_configured" at this point because no .env file existed yet.
+
+
+----------------------------------------------------------------------
+PROMPT 10
+----------------------------------------------------------------------
+Anything missing from my dependency list?
+
+What it gives you:
+This audited package.json against the code. Every imported package was
+listed and nothing unused was installed. Claude flagged one non-package gap,
+that no Node version was pinned, and listed packages you'll need later, each
+with the feature that needs it: a migration tool, zod for validation, vitest
+for tests, Resend for email and Vercel Blob for photos.
+
+
+----------------------------------------------------------------------
+PROMPT 11
+----------------------------------------------------------------------
+yes, add the engines field
+
+What it gives you:
+This pinned Node.js to version 24 using the "engines" field in package.json,
+so Vercel builds and runs the app on the same Node version you use locally.
+At this stage the project had two apps, so the field was added in each of
+them as well as at the root.
+
+
+----------------------------------------------------------------------
+PROMPT 12
+----------------------------------------------------------------------
+Explain to me what the "engines" are
+
+What it gives you:
+This gave a plain explanation, with no code changes. "engines" declares which
+version of Node.js the project expects; "24.x" means any Node 24 release. It
+doesn't install Node, and npm only warns locally if your version doesn't
+match, but Vercel enforces it, which keeps the two environments in step. It
+also covered when to change it: after a newer long-term-support release
+replaces 24.
+
+
+----------------------------------------------------------------------
+PROMPT 13
+----------------------------------------------------------------------
+commit and push to main
+
+What it gives you:
+This saved the Node 24 pin to GitHub as its own commit, keeping a clean,
+single-purpose history.
+
+
+----------------------------------------------------------------------
+PROMPT 14
+----------------------------------------------------------------------
+what folder is the .env file in?
+
+What it gives you:
+This clarified where database secrets live. No .env file existed yet; it
+belonged next to the committed template, .env.example, in the API folder.
+Claude gave the copy command and explained that .gitignore keeps the real
+.env off GitHub. (After the Next.js switch in Prompt 28, local settings moved
+to .env.development.local at the project root.)
+
+
+----------------------------------------------------------------------
+PROMPT 15
+----------------------------------------------------------------------
+should we deploy to Vercel before creating the .env file or do that
+afterwards?
+
+What it gives you:
+This settled the order of operations. You had no database yet, so the
+recommendation was to link the Vercel project and add Neon through it first;
+Vercel then writes the connection string for you. After that, test the
+database locally, and only then deploy. It also noted that you had to install
+the Vercel CLI and log in yourself.
+
+
+----------------------------------------------------------------------
+PROMPT 16
+----------------------------------------------------------------------
+! npm i -g vercel
+
+What it gives you:
+This first attempt to install the Vercel CLI failed with a permissions error
+(EACCES), because a global install writes to a system folder that needs admin
+rights. Instead of using sudo, Claude installed the CLI as a dev dependency of
+the project. It then runs with "npx vercel" and needs no special permissions.
+
+
+----------------------------------------------------------------------
+PROMPT 17
+----------------------------------------------------------------------
+! npx vercel login
+
+What it gives you:
+This signed you in to Vercel through your browser. Claude then created the
+Vercel project "ducks-on-the-pond" and linked the folder to it, and started
+adding the Neon database. That stopped because Neon's marketplace terms have
+to be accepted in a browser by you, and Claude gave you the link.
+
+
+----------------------------------------------------------------------
+PROMPT 18
+----------------------------------------------------------------------
+I accepted the terms
+
+What it gives you:
+This unblocked the database setup. Claude created the Neon Postgres database
+"ducks-on-the-pond-db", connected it to the Vercel project (which set
+DATABASE_URL for production, preview and development), pulled the connection
+string into your local .env, and restarted the app. The local page then
+showed "Database: ok" over Neon's pooled connection. It also caught a
+.gitignore rule added by Vercel that would have hidden .env.example, and
+fixed it.
+
+
+----------------------------------------------------------------------
+PROMPT 19
+----------------------------------------------------------------------
+commit and push, then deploy a preview
+
+What it gives you:
+This was the first real test on Vercel, and it found a bug. The preview's API
+crashed (FUNCTION_INVOCATION_FAILED) because the API's own build step put its
+compiled files where Node read them as the wrong module type. Claude traced it
+in the logs and a local Vercel build, removed that build step so Vercel
+compiles the TypeScript itself, redeployed, confirmed the preview returned
+"db: ok", and pushed the fix to GitHub.
+
+
+----------------------------------------------------------------------
+PROMPT 20
+----------------------------------------------------------------------
+Vercel is connected to the Github repo
+
+What it gives you:
+This confirmed automatic deploys work. Claude checked that the latest push to
+main had started a production deploy, found it ready, and tested the public
+production URL (https://ducks-on-the-pond-psi.vercel.app): the page loaded and
+/api/health returned "db: ok". From here, pushing to main deploys to
+production and other branches get previews. It also recommended a separate
+Neon branch for development before any migrations.
+
+
+----------------------------------------------------------------------
+PROMPT 21
+----------------------------------------------------------------------
+set up a Neon dev branch
+
+What it gives you:
+This began separating development data from production. Claude installed the
+Neon CLI (neonctl) as a dev dependency and checked the npm audit warnings it
+printed: all 38 were in development tools, and the app's shipped packages had
+none. You then needed to log in to Neon yourself before the branch could be
+created.
+
+
+----------------------------------------------------------------------
+PROMPT 22
+----------------------------------------------------------------------
+! npx neonctl auth
+
+What it gives you:
+This Neon login attempt timed out, because the CLI waits only 60 seconds for
+the browser step. Claude explained two ways forward: retry and finish the
+browser approval quickly (copying the printed URL if no tab opens), or create
+a Neon API key in the console.
+
+
+----------------------------------------------------------------------
+PROMPT 23
+----------------------------------------------------------------------
+npx neonctl auth
+
+What it gives you:
+This second login succeeded, and Claude finished the setup. It created a "dev"
+branch from production (an instant copy that shares storage) and pointed your
+local environment at the dev branch's pooled URL, plus the direct URL that
+migrations need. It removed the production values from the local file so
+nothing local can touch production, and confirmed the local app was healthy
+on dev while production stayed on main.
+
+
+----------------------------------------------------------------------
+PROMPT 24
+----------------------------------------------------------------------
+commit and push to main
+
+What it gives you:
+This saved the Neon CLI addition to GitHub. Claude noted that pushes to main
+now trigger a production redeploy automatically.
+
+
+----------------------------------------------------------------------
+PROMPT 25
+----------------------------------------------------------------------
+I'm following a lesson plan and I need to hold off on deploying the schema.
+
+What it gives you:
+This puts a hold on the database work. Claude confirmed nothing from the
+schema had been applied: schema-sketch.sql is only a file in the repo, and
+both Neon branches had no tables of their own. It saved the hold so no future
+session runs migrations, creates tables or picks a migration tool until you
+say so. Editing the sketch is still allowed.
+
+
+----------------------------------------------------------------------
+PROMPT 26
+----------------------------------------------------------------------
+ansswer these questions: [image]
+  Stack scaffolded (from my decision doc):
+  Review — the four checks:
+  - Is it my stack?
+  - Secrets out of the repo (.gitignore lists .env)?
+  - Anything extra creep in?
+  - Does it run locally?
+
+What it gives you:
+This was the first formal review, checked against the actual repo and
+history, and it gave an honest result. The stack did not fully match: the
+backend and frontend frameworks were Express and Vite instead of Next.js.
+Secrets were clean. Some extras had crept in, namely Neon agent skill files,
+unused Neon Auth variables on Vercel, and dev tools. The app ran locally. This
+is the prompt that caught the framework mismatch introduced in Prompt 06.
+
+
+----------------------------------------------------------------------
+PROMPT 27
+----------------------------------------------------------------------
+Why did we deviate from the backend and frotend framework
+
+What it gives you:
+This produced a straight explanation of the mismatch. Your scaffold prompt
+asked for Express and a separate React app, which contradicted the decision
+document. Claude noticed but only mentioned it after building, when it should
+have stopped and asked first. It set out what the change cost in your
+document's own terms (two apps instead of one project and one deploy) and gave
+two options: re-scaffold on Next.js while it was still cheap, or keep Express
+and update the document.
+
+
+----------------------------------------------------------------------
+PROMPT 28
+----------------------------------------------------------------------
+re-scaffold on Next.js
+
+What it gives you:
+This brought the code back in line with the decision document. The two-app
+setup was replaced by a single Next.js 16 app: app/api/health/route.ts for
+the API, a hello-world page that calls it, lib/db.ts for the database pool
+(with Vercel's connection cleanup), and vercel.json pinned to Next.js. Local
+database settings moved to .env.development.local, which "vercel env pull"
+can't overwrite. Claude verified the typecheck, build, local run and a local
+Vercel build.
+
+
+----------------------------------------------------------------------
+PROMPT 29
+----------------------------------------------------------------------
+git commit push
+
+What it gives you:
+This shipped the Next.js version. The commit replaced the Express and Vite
+files, and production was checked after deploy: served by Next.js and
+returning "db: ok". Claude also reviewed AGENTS.md, a file Next.js generates
+automatically, and kept it because Next.js recreates it if deleted.
+
+
+----------------------------------------------------------------------
+PROMPT 30
+----------------------------------------------------------------------
+remove the Neon skill files
+
+What it gives you:
+This removed one of the extras flagged in review: 15 Neon agent guide files
+in .agents/, .claude/skills/ and skills-lock.json, installed by the Neon
+setup and unused by the app. Claude deleted them from Git and from disk; the
+app was unaffected.
+
+
+----------------------------------------------------------------------
+PROMPT 31
+----------------------------------------------------------------------
+commit and push to main
+
+What it gives you:
+This saved the cleanup to GitHub, leaving the repo with only the app, its
+config, the schema sketch and AGENTS.md.
+
+
+----------------------------------------------------------------------
+PROMPT 32
+----------------------------------------------------------------------
+remove the Neon Auth variables from Vercel
+
+What it gives you:
+This removed the two unused Neon Auth variables (NEON_AUTH_BASE_URL and
+VITE_NEON_AUTH_URL) from all Vercel environments. Claude then checked further
+and found that Neon Auth itself was still turned on in Neon, on both the main
+and dev branches. It asked before turning it off, because that could delete
+data and you might want Neon Auth as a login provider later.
+
+
+----------------------------------------------------------------------
+PROMPT 33
+----------------------------------------------------------------------
+leave it available if it doesn't affect anything
+
+What it gives you:
+This kept Neon Auth available, after verifying it's harmless. A read-only
+check of the dev database showed Neon Auth sits in its own neon_auth area
+(9 tables, 0 users), separate from where your tables will go, with no name
+clashes and nothing in the app pointing to it. Claude noted that if you pick
+another login provider, such as Clerk, it should be turned off then.
+
+
+----------------------------------------------------------------------
+PROMPT 34
+----------------------------------------------------------------------
+run the four review checks again
+
+What it gives you:
+This started a second review run, which you interrupted before it finished,
+so there was no result.
+
+
+----------------------------------------------------------------------
+PROMPT 35
+----------------------------------------------------------------------
+run the four checks again, but make the table text only.
+
+What it gives you:
+This re-ran all four checks. Stack, secrets and local run passed, and the run
+found something new: four high-severity security warnings in shipped code. The
+cause was @vercel/functions pulling in an outdated zod (4.1.11) with a known
+memory-exhaustion flaw. Claude judged it low risk, since zod there reads only
+Vercel's own config, and recommended an override over the "--force" fix,
+which would have downgraded @vercel/functions. The answer still used tables,
+which wasn't what you wanted.
+
+
+----------------------------------------------------------------------
+PROMPT 36
+----------------------------------------------------------------------
+Lets try this again. answer this but without tables. Just text only: [image]
+  Stack scaffolded (from my decision doc):
+  Review — the four checks:
+  - Is it my stack?
+  - Secrets out of the repo (.gitignore lists .env)?
+  - Anything extra creep in?
+  - Does it run locally?
+
+What it gives you:
+This gave the review in the format you asked for: plain text, one short answer
+per check, ready to paste into your lesson work. Stack: yes. Secrets: yes.
+Extras: almost none, with the zod warning as the one open item. Runs locally:
+yes.
+
+
+----------------------------------------------------------------------
+PROMPT 37
+----------------------------------------------------------------------
+fix the zod vulnerability with the override
+
+What it gives you:
+This patched the security warning without side effects. A first, broad
+override forced zod 4 onto every package, including Vercel CLI parts that
+need zod 3, so Claude narrowed it to apply only under @vercel/functions. The
+shipped package now uses zod 4.6.7, the audit of shipped code shows 0
+vulnerabilities, and the dev tools keep their own versions. The typecheck,
+build and local health check all passed.
+
+
+----------------------------------------------------------------------
+PROMPT 38
+----------------------------------------------------------------------
+commit and push to main
+
+What it gives you:
+This shipped the zod fix. Claude waited for the new production deploy to
+finish and confirmed the live health check returned "db: ok", closing the
+last open item from review.
+
+
+----------------------------------------------------------------------
+PROMPT 39
+----------------------------------------------------------------------
+run the four review checks again
+
+What it gives you:
+This was a clean final review, in plain text. Stack: yes, matching the
+decision document row for row. Secrets: yes, none in any commit. Extras: no,
+with only needed packages shipped, 0 vulnerabilities and only database
+variables on Vercel. Runs locally: yes, healthy locally on the Neon dev
+branch and in production on main. This is the sign-off that the scaffold
+matches the decision document.
+
+
+----------------------------------------------------------------------
+PROMPT 40
+----------------------------------------------------------------------
+build a text file called prompt.txt that logs every prompt with a one
+paragraph explanation of what the prompt gives me. Recreate the prompts from
+the start and continue throughout the build.
+
+What it gives you:
+This creates this file, prompt.txt: a running record of every prompt in the
+build, each with a paragraph on what it produced. It doubles as lesson notes
+and as a playbook for rebuilding the project. From here on, each new prompt
+is added to the end of the file as the build continues.
+
+
+----------------------------------------------------------------------
+PROMPT 41
+----------------------------------------------------------------------
+commit and push to main
+
+What it gives you:
+This adds prompt.txt to the GitHub repo, so the prompt log sits next to the
+code it describes and is versioned with it. Every later update to the log
+ships with the build. The push also triggers a production redeploy on Vercel,
+but the app is unchanged because prompt.txt isn't part of the app.
