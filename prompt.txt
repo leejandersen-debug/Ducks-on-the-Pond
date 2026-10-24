@@ -724,3 +724,24 @@ commit and push to main
 
 What it gives you:
 This saves the sslmode fix in lib/db.ts and prompts 48–51 as one commit on main and pushes it to GitHub. The push starts a Vercel production deploy, which also picks up the LOG_LEVEL=warn setting. After that, the live site writes only warn and error lines, and the database driver's SSL warning no longer appears in the error log.
+
+
+PROMPT 52
+Review for leaks. Read every line you added. Cut anything that logs a password, token, full card number, email, or a whole request body. Log a reference (the user's ID, the event, the status), never the secret. Search your code for req.body and any token name and fix each hit.
+
+What it gives you:
+A line-by-line leak review of the logging code, with three fixes. (1) lib/db.ts: a malformed DATABASE_URL could have printed the full connection string, password included, because URL parse errors carry their input. It's now passed through without being parsed. (2) The health route now logs and returns only the error code and status, not the driver's message or stack, which can name the database host and role. (3) lib/log.ts gained a safety net: values under sensitive keys (password, token, authorization, cookie, session, api key, email, body, card number, connection string) become "[redacted]". Inside any string, URL passwords, email addresses and Luhn-valid card numbers are masked, and Error objects keep only name, code, message and stack. Searching all tracked files and git history found no req.body use, no token or secret names in logs and no credentials.
+
+
+PROMPT 53
+add one INFO line when a request arrives and one when it finishes — route, status, and how many milliseconds it took. Do this once, in middleware, so every route gets it without me touching each handler: log.info("request_done", { route, status, ms }). That single line is what later becomes my requests-and-latency numbers. Then add a real error path: when a route throws, I log log.error("request_failed", { route, message }) — the message, never the whole request object.
+
+What it gives you:
+Every request now writes request_start { route, method } when it arrives and request_done { route, method, status, ms } when it finishes. A route that throws also writes request_failed { route, message }, only the message, never the request or its headers. In Next.js 16, middleware (now called proxy.ts) runs before the route and can't see the status or duration, so this lives in instrumentation.ts instead, which still means one file and no handler changes. It hooks the timer Next.js already runs around every request, using three small OpenTelemetry packages. The route is the pattern (/api/cards/[id], not /api/cards/123), so requests group cleanly for latency numbers. Query strings are dropped so tokens in URLs never reach the log.
+
+
+PROMPT 54
+git commit push
+
+What it gives you:
+This saves the leak-review fixes and the per-request logging as two commits on main and pushes them to GitHub, which starts a Vercel production deploy. Production is still set to LOG_LEVEL=warn, so until that changes to info the live site won't write request_start or request_done lines. It will still write request_failed errors and warnings.
