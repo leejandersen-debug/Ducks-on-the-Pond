@@ -620,3 +620,54 @@ This adds prompt.txt to the GitHub repo, so the prompt log sits next to the
 code it describes and is versioned with it. Every later update to the log
 ships with the build. The push also triggers a production redeploy on Vercel,
 but the app is unchanged because prompt.txt isn't part of the app.
+
+
+----------------------------------------------------------------------
+PROMPT 42
+----------------------------------------------------------------------
+last thing for the evening. Compare the 2 scaffolds we ran. The first one
+that used express and the one we corrected using next.js.
+
+What it gives you:
+This is a side-by-side review of the two scaffolds, taken from Git history
+rather than memory. The Express + Vite version is at c8c81a9 and the Next.js
+version at 2527d9b. The comparison covers how closely each matches the
+decision document, size and structure, how you'd add the next resource, local
+development, the Vercel deploy experience, database handling, security, and
+what Express did better. It ends with the reasons the Next.js version is the
+right one to build on, and closes the evening's work with a clear record of
+why the correction was worth making.
+
+
+----------------------------------------------------------------------
+PROMPT 43
+----------------------------------------------------------------------
+Recreate this in a word document with file structure and data paths that I
+can visually see.
+
+What it gives you:
+This turns the scaffold comparison into scaffold-comparison.docx, a 9-page
+Word document you can see at a glance. It has the bottom line and an
+at-a-glance table, then side-by-side file trees of both versions with
+color-coded folders, secret files marked in red and a note on what each file
+does. Box-and-arrow diagrams trace a request from the browser to the Neon
+database, locally and in production, for each version (8 steps across 2
+servers for Express, 6 steps in 1 server for Next.js). A table shows where
+each setting and secret lives and which database branch it points to,
+followed by a side-by-side of what it takes to add the next resource and the
+full written comparison. The color key is the same throughout: amber for
+Express, blue for Next.js, green for the database and red for secrets and
+problems.
+
+
+----------------------------------------------------------------------
+PROMPT 44
+----------------------------------------------------------------------
+commit and push to main
+
+What it gives you:
+This saves the Word comparison document (scaffold-comparison.docx) and the
+latest prompt log entries (Prompts 42–44) to GitHub, so the visual comparison
+and the record of how it was made sit next to the code. The push also triggers
+a production redeploy on Vercel, but the app is unchanged because neither
+file is part of the app.
