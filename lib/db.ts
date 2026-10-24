@@ -3,8 +3,15 @@ import { attachDatabasePool } from "@vercel/functions";
 
 // pg already treats sslmode=require/prefer/verify-ca as verify-full, but warns about it on every
 // cold start. Saying verify-full explicitly keeps the same behavior and silences the warning.
+// A malformed string is passed through untouched: URL's parse error carries the full input,
+// password included, and would end up in the logs.
 function withVerifyFull(connectionString: string) {
-  const url = new URL(connectionString);
+  let url: URL;
+  try {
+    url = new URL(connectionString);
+  } catch {
+    return connectionString;
+  }
   if (["require", "prefer", "verify-ca"].includes(url.searchParams.get("sslmode") ?? "")) {
     url.searchParams.set("sslmode", "verify-full");
   }

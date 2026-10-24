@@ -12,10 +12,9 @@ export async function GET() {
     log.debug("health.ok");
     return Response.json({ status: "ok", db: "ok" });
   } catch (err) {
-    log.error("health.db_unreachable", { err });
-    return Response.json(
-      { status: "error", db: "unreachable", error: (err as NodeJS.ErrnoException).code ?? (err as Error).message },
-      { status: 503 },
-    );
+    // Only the error code: driver messages can name the database host and role.
+    const code = (err as NodeJS.ErrnoException).code ?? "unknown";
+    log.error("health.db_unreachable", { code, status: 503 });
+    return Response.json({ status: "error", db: "unreachable", error: code }, { status: 503 });
   }
 }
