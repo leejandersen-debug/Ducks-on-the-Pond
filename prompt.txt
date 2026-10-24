@@ -794,3 +794,73 @@ commit and push to main
 
 What it gives you:
 This saves prompts 60–61 in prompt.txt as a commit on main and pushes it to GitHub. No app code changed. The push still starts a routine Vercel production deploy, and the site behaves the same afterward.
+
+
+PROMPT 62
+Can I look at logs in terminal?
+
+What it gives you:
+The terminal commands for reading the app's logs. npx vercel logs shows production logs, with filters for errors, request_done lines, a route or a time window, and --json for machine-readable output. Running npm run dev yourself shows local logs live as requests happen. There are also a couple of tips for making the JSON lines easier to read.
+
+
+PROMPT 63
+show me the path to database_URL
+
+What it gives you:
+Every place DATABASE_URL is set or read, without showing its secret value. It's set locally in .env.development.local (Neon dev branch) and in Vercel's project settings for production and preview (Neon main branch, managed by the Neon integration). It's read by the app in lib/db.ts, and .env.example holds only a localhost placeholder.
+
+
+PROMPT 64
+restart the app
+
+What it gives you:
+This restarts the local dev server at http://localhost:3005 so it reloads .env.development.local from scratch. After the restart, local health returns 503 ENOTFOUND, because DATABASE_URL in .env.development.local had been changed (13:30) to a placeholder host, "nowhere". Production still returns db ok on its own Neon main branch, which shows dev and prod config really are separate. The new error path logged health.db_unreachable with only the error code, not the connection string.
+
+
+PROMPT 65
+I purposely broke it to test the log
+
+What it gives you:
+Confirmation that the deliberate break was a clean test of the error logging. The bad DATABASE_URL produced health.db_unreachable at error level with only { code: "ENOTFOUND", status: 503 }, plus a request_done line recording the 503 and its timing. The server output has no connection string or hostname in it, and production stayed healthy on its own database. This also notes the one thing still to do: put the real DATABASE_URL back when the test is finished.
+
+
+PROMPT 66
+I did not get an error in the error log on Vercel.  Why is that?
+
+What it gives you:
+The explanation: the break was made in .env.development.local, which only the local dev server on your computer reads. Its logs print in that local terminal and are never sent to Vercel. The live site uses its own DATABASE_URL stored in Vercel, which still works, so production had no error to log. This also covers safe ways to see a real error in Vercel's log, such as a preview deployment with a deliberately failing route, without breaking the live site.
+
+
+PROMPT 67
+yes, do the preview test
+
+What it gives you:
+A real error in Vercel's own log without touching the live site. A throwaway branch (test/error-log) adds a temporary /api/boom route that throws on purpose. Pushing it builds a separate preview deployment, and calling /api/boom there makes Vercel record request_failed (error) and request_done (status 500). You can see them in the Logs tab filtered to Error and Preview. Production never receives the test route, and the branch is deleted afterward.
+
+
+PROMPT 68
+restore the DATABASE_URL and restart the app
+
+What it gives you:
+This puts the correct pooled DATABASE_URL for the Neon dev branch back on line 5 of .env.development.local, fetched fresh from Neon with neonctl and written without printing the password. It then restarts the local dev server, so local health is back to db ok and the log shows health.ok and request_done with status 200 again. The file is still ignored by Git, and production isn't affected.
+
+
+PROMPT 69
+delete the preview deployment
+
+What it gives you:
+This removes the preview deployment from the error-log test (ducks-on-the-pond-lfwdo7iq0, built from the deleted test/error-log branch) with vercel rm, after first confirming it was a preview and not attached to the production URL. The throwaway /api/boom route is now gone everywhere: from the branch, GitHub and Vercel. The live site is unaffected and still healthy.
+
+
+PROMPT 70
+I need a basic functional frontend.  I don't need any styling, that will come later, but I need to be able to test the functionality.
+
+What it gives you:
+An unstyled but fully working test harness for the whole app, running against the Neon dev branch only (you chose to lift the schema hold for dev; production's database is untouched). The schema sketch is now a real migration (migrations/, run with npm run migrate:dev using node-pg-migrate). It adds the functions the sketch only described (add_copy with the serial-conflict queue, propose/respond/complete_trade, resolve_conflict) and fixes four gaps found on the way: RLS was bypassed by the owner role, reports leaked other users' tradeable cards, every user could read every email, and trades carried the old owner's paid price to the new owner. npm run seed:dev loads three test users (alice, bob, and carol the admin) and sample cards. Pages: Catalog, My collection, Wishlist (with trade matches), Trades (propose, counter, accept, decline, cancel, complete), Reports and Admin. A "Test user" dropdown stands in for login and only works where TEST_LOGIN=1 (local dev). An end-to-end script exercised every flow through the real forms, including forged requests, which were rejected.
+
+
+PROMPT 71
+commit and push to main
+
+What it gives you:
+This saves the functional test frontend (pages, server actions, data helpers, the first SQL migration, the dev seed script and the npm scripts) and prompts 62–71 as one commit on main and pushes it to GitHub. That starts a Vercel production deploy. Production gets the new pages, but its database has no schema yet, so they show "The database schema hasn't been applied in this environment yet." Test login stays off there, and nothing errors. The schema has only been applied to the Neon dev branch.

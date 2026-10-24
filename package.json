@@ -8,7 +8,11 @@
     "dev": "next dev --port 3005",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "migrate:dev": "node --env-file=.env.development.local scripts/assert-dev-branch.mjs && node --env-file=.env.development.local node_modules/node-pg-migrate/bin/node-pg-migrate.js -m migrations -d DATABASE_URL_UNPOOLED --check-order up",
+    "migrate:dev:down": "node --env-file=.env.development.local scripts/assert-dev-branch.mjs && node --env-file=.env.development.local node_modules/node-pg-migrate/bin/node-pg-migrate.js -m migrations -d DATABASE_URL_UNPOOLED --check-order down",
+    "migrate:create": "node-pg-migrate -m migrations -j sql create",
+    "seed:dev": "node --env-file=.env.development.local scripts/assert-dev-branch.mjs && node --env-file=.env.development.local scripts/seed-dev.mjs"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",
@@ -16,6 +20,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "neonctl": "^8.11.1",
+    "node-pg-migrate": "^9.0.0",
     "typescript": "^5.9.3",
     "vercel": "^65.2.0"
   },
