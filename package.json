@@ -1,7 +1,9 @@
 {
   "name": "card-app",
   "private": true,
-  "workspaces": ["apps/*"],
+  "workspaces": [
+    "apps/*"
+  ],
   "engines": {
     "node": "24.x"
   },
@@ -11,6 +13,7 @@
     "typecheck": "npm run typecheck --workspaces"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "vercel": "^65.2.0"
   }
 }
