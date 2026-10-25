@@ -864,3 +864,25 @@ commit and push to main
 
 What it gives you:
 This saves the functional test frontend (pages, server actions, data helpers, the first SQL migration, the dev seed script and the npm scripts) and prompts 62–71 as one commit on main and pushes it to GitHub. That starts a Vercel production deploy. Production gets the new pages, but its database has no schema yet, so they show "The database schema hasn't been applied in this environment yet." Test login stays off there, and nothing errors. The schema has only been applied to the Neon dev branch.
+(Follow-up: production showed "The database isn't reachable" instead of "schema hasn't been applied", because the missing app_rw role fails with error 22023, not 42P01. lib/db-status.ts now treats both as "schema not applied". This fix is uncommitted.)
+
+
+PROMPT 72
+[pasted lesson steps: pick one break from the menu and apply it in development, note the known-good state; reproduce the symptom as a user; catch it in the logs (filter to error, find the earliest loud line, screenshot it); diagnose in one or two sentences; recover to working and screenshot the working app]
+
+What it gives you:
+A guided break-and-recover exercise on the dev environment. The break: a wrong password in DATABASE_URL in .env.development.local. The known-good state (the original env file and commit 96b1cb8) was saved first. The symptom: every page says "The database isn't reachable from this environment." The earliest loud error line is {"level":"error","event":"db_unavailable","details":{"code":"28P01"}}, where 28P01 is Postgres's "invalid password", so the cause is wrong database credentials. To make the failure visible in the log, the page-level database check now logs db_unavailable with the error code only, never the password or host. Recovery restores the saved env file and restarts the app.
+
+
+PROMPT 73
+answer these in this order: [image: Break I chose (from the menu); The symptom (in plain words, as a user would report it); The smoking-gun log line (paste it, and attach the screenshot); The cause it points to; How I recovered (reversed the break / rolled back); Proof it works again (what I checked, plus the screenshot)]
+
+What it gives you:
+Ready-to-paste answers for the break-and-recover exercise, in the order asked. It also performs the recovery: the saved known-good .env.development.local is copied back (confirmed byte-for-byte identical), the dev server is restarted, and health, My collection as Alice, and a clean error log confirm the app works again.
+
+
+PROMPT 74
+commit and push to main
+
+What it gives you:
+This saves the database-status fixes and prompts 72–74 as one commit on main and pushes it to GitHub. Production then shows the correct "schema hasn't been applied" notice instead of "database isn't reachable", and logs db_unavailable with only the error code when the pages can't use the database. That production deploy will log one db_unavailable error (code 22023, missing app_rw role) per page view until the schema is applied there.
