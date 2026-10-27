@@ -983,3 +983,24 @@ commit and push it
 
 What it gives you:
 The topSimilarity logging change, the updated ASSEMBLY.md and prompts 86–87 saved as one commit on main and pushed to GitHub. The push starts a Vercel production deploy, after which each live search logs its top score in search.query.
+
+
+PROMPT 88
+check the live logs for topSimilarity
+
+What it gives you:
+Proof that the topSimilarity change is live. Claude confirmed the newest production deploy (built from commit eb0466c) was ready, sent two searches to the live /api/search, and read them back with vercel logs. The vacation question logged results 3, topSimilarity 0.4289, status 200 in 2853 ms (a cold start). The break-room coffee question logged results 3, topSimilarity 0.2828, status 200 in 53 ms. Both scores match local exactly, and only the coffee one falls below the 0.33 floor, so production logs now show which searches had an answer.
+
+
+PROMPT 89
+answer these questions: [image: Live URL where the assembled system runs: / The seams I wired, in order, and how I verified each (the log evidence that convinced me): / The end-to-end test — the question I asked and the passage that came back: / One integration bug I hit — which of the three suspects it was (config / path / environment) and how the logs helped me catch it: / One thing the wire-and-verify rhythm caught that big-bang would have buried:]
+
+What it gives you:
+The assembly lesson's five review answers in plain text, drawn from ASSEMBLY.md and the live checks. Live URL: https://ducks-on-the-pond-psi.vercel.app/search. Seams, in order, each with its log evidence: endpoint to corpus (curl POST, search.query with results 3), page to endpoint (browser POST, the same lines triggered from the page), logs to real traffic (three questions, each logged; the gap that led to topSimilarity), and the live system (Vercel production logs). End-to-end test: the vacation question returned the employee handbook's PTO passages, including "The 15-day PTO figure and the 8 paid holidays above apply to full-time employees." Bug: environment, a missing libonnxruntime.so.1 that the production log named directly. Caught by the rhythm: the logging gap where every search reported results: 3, even when the page said "Not in the documents".
+
+
+PROMPT 90
+commit and push the prompt log
+
+What it gives you:
+Prompts 88–90 in prompt.txt saved as one commit on main and pushed to GitHub. No app code changed. The push still starts a routine Vercel production deploy, and the site behaves the same afterward.
