@@ -969,3 +969,17 @@ Record the assembly. Note each seam you wired and how you verified it, the log e
 
 What it gives you:
 The whole search system working live and recorded. The /search page now posts to /api/search from the browser (app/search/search-box.tsx) instead of calling the search code on the server. A headless browser typed the vacation question and the page showed the 15-day PTO passage, with request_start, search.query (results 3) and request_done (200) in the log. Three more browser queries (dog, Sunday hours, break-room coffee) each logged the query, result count, status and timing; the coffee one correctly showed "Not in the documents". The schema hold was lifted for production: both migrations were applied to the Neon main branch and the 109 chunks loaded (same 30/34/18/11/16 split), and the work was pushed to main. The first live test hit a 500. Running the three suspects pointed to an environment mismatch: the production log said libonnxruntime.so.1 was missing, because Next.js file tracing hadn't shipped the embedding runtime's Linux library. An outputFileTracingIncludes entry in next.config.ts fixed it, and the live search then returned the same passages and scores as local, with search.query and request_done (200, 4347 ms cold start) in Vercel's production logs. lib/embed.ts also caches the model in /tmp on Vercel. ASSEMBLY.md records each seam, how it was verified, the log evidence and four integration bugs, along with a logging gap (results: 3 even when nothing passes the score floor) and a chunking flaw found along the way.
+
+
+PROMPT 86
+add the top similarity to the search.query log
+
+What it gives you:
+The search.query log line now includes topSimilarity, the score of the best match (null when there are no results), so the log shows whether a search actually had an answer. Before this, every search logged results: 3, even when the page showed "Not in the documents". Checked locally: the vacation question logs topSimilarity 0.4289, above the 0.33 floor, and the break-room coffee question logs 0.2828, below it. ASSEMBLY.md now records the logging gap as fixed. The change is local only until it's committed and pushed.
+
+
+PROMPT 87
+commit and push it
+
+What it gives you:
+The topSimilarity logging change, the updated ASSEMBLY.md and prompts 86–87 saved as one commit on main and pushed to GitHub. The push starts a Vercel production deploy, after which each live search logs its top score in search.query.

@@ -32,7 +32,7 @@ Three different questions through the browser, each of which appeared in the log
 - "what time does the store open on Sunday?" gave results 3, status 200, 472 ms. The page showed the operations manual header (0.390) and Opening Procedure (0.373).
 - "what brand of coffee is in the break room?" gave results 3, status 200, 467 ms. The page showed "Not in the documents" because the best match was below 0.33.
 
-No search went unlogged. Gap found: `search.query` says `results: 3` even when the page tells the user nothing matched, because the 0.33 floor is applied in the browser. The log can't tell an answered question from an unanswered one. Suggested fix: add the top similarity to `search.query`.
+No search went unlogged. Gap found: `search.query` said `results: 3` even when the page told the user nothing matched, because the 0.33 floor is applied in the browser. The log couldn't tell an answered question from an unanswered one. Fixed: `search.query` now includes `topSimilarity`. The vacation question logs 0.4289 (answered) and the coffee question 0.2828 (below 0.33, "Not in the documents").
 
 ## Seam 4: the whole system, live (https://ducks-on-the-pond-psi.vercel.app)
 

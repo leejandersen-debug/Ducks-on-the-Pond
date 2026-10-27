@@ -25,8 +25,9 @@ export async function searchCorpus(userId: string | null, query: string, limit =
        from doc_chunks order by embedding <=> $1::vector limit $2`,
       [vector, limit],
     )).rows.map((r) => ({ ...r, similarity: Number(Number(r.similarity).toFixed(4)) })));
-    // The logger scrubs emails and card numbers out of the query text.
-    log.info("search.query", { query, results: results.length });
+    // The logger scrubs emails and card numbers out of the query text. topSimilarity shows
+    // whether the best match clears MIN_SIMILARITY, i.e. whether the page had an answer to show.
+    log.info("search.query", { query, results: results.length, topSimilarity: results[0]?.similarity ?? null });
     return results;
   } catch (err) {
     // Code only: driver messages can name the database host and role.
