@@ -1,0 +1,35 @@
+SKU,Product,Category,Season,MSRP,Price,StaffPrice
+BOOT-GPH-001,Granite Peak Hiker,Boots,3-Season,199.00,185.00,129.50
+BOOT-SPM-001,Summit Pro Mountaineering Boot,Boots,Winter,340.00,320.00,224.00
+BOOT-CTS-001,Creekside Trail Shoe,Boots,Summer,120.00,120.00,84.00
+JKT-WRH-001,Wind River Hardshell,Jackets,All-Season,260.00,240.00,168.00
+JKT-BDJ-001,Basecamp Down Jacket,Jackets,Winter,199.00,199.00,139.30
+JKT-RLF-001,Ridgeline Fleece,Jackets,3-Season,99.00,89.00,62.30
+PCK-DB22-001,Daybreak 22L Daypack,Packs,All-Season,110.00,110.00,77.00
+PCK-TH45-001,Trailhead 45L Pack,Packs,3-Season,230.00,210.00,147.00
+PCK-EXP65-001,Expedition 65L Pack,Packs,All-Season,280.00,280.00,196.00
+CMP-CRQ2-001,Cirque 2 Tent,Camping,3-Season,379.00,350.00,245.00
+CMP-ASP20-001,Aspen 20F Sleeping Bag,Camping,Winter,160.00,160.00,112.00
+CMP-BSP-001,Backcountry Sleeping Pad,Camping,All-Season,79.00,75.00,52.50
+CMP-STV-001,Trailhead Pocket Stove,Camping,All-Season,55.00,49.00,34.30
+CMP-FLT-001,Streamline Water Filter,Camping,Summer,89.00,89.00,62.30
+CMP-COOK-001,Summit Cookset 2-Person,Camping,All-Season,65.00,59.00,41.30
+ACC-HLP-001,Beacon 300 Headlamp,Accessories,All-Season,45.00,39.00,27.30
+ACC-POLE-001,Switchback Trekking Poles,Accessories,3-Season,120.00,110.00,77.00
+ACC-SOCK-001,Merino Trail Socks,Accessories,All-Season,24.00,22.00,15.40
+ACC-GLV-001,Ridge Insulated Gloves,Accessories,Winter,49.00,45.00,31.50
+ACC-HAT-001,Wool Summit Beanie,Accessories,Winter,29.00,26.00,18.20
+ACC-BTL-001,Cascade 1L Water Bottle,Accessories,All-Season,32.00,29.00,20.30
+ACC-GAIT-001,Alpine Gaiters,Accessories,Winter,55.00,49.00,34.30
+LYR-BASE-001,Wind River Base Layer Top,Layers,Winter,59.00,55.00,38.50
+LYR-BASE-002,Wind River Base Layer Bottom,Layers,Winter,59.00,55.00,38.50
+LYR-PUF-001,Featherline Puffy Vest,Layers,3-Season,129.00,119.00,83.30
+FOOT-SOCK-002,Lightweight Liner Socks,Accessories,Summer,16.00,14.00,9.80
+FOOT-INSL-001,TrailForm Insoles,Accessories,All-Season,40.00,35.00,24.50
+NAV-MAP-001,Wind River Range Topo Map,Accessories,All-Season,15.00,15.00,10.50
+NAV-COMP-001,Fieldmate Baseplate Compass,Accessories,All-Season,28.00,25.00,17.50
+CLB-HARN-001,Crag Climbing Harness,Climbing,3-Season,75.00,69.00,48.30
+CLB-CHALK-001,Chalk Bag + Chalk,Climbing,All-Season,28.00,24.00,16.80
+CLB-ROPE-001,Dynamic Climbing Rope 60m,Climbing,All-Season,199.00,189.00,132.30
+WIN-SNOW-001,Backcountry Snowshoes,Winter,Winter,210.00,199.00,139.30
+WIN-CRMP-001,Alpine Crampons,Winter,Winter,160.00,149.00,104.30

@@ -20,7 +20,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <nav>
           <a href="/">Home</a> | <a href="/catalog">Catalog</a> | <a href="/collection">My collection</a> |{" "}
           <a href="/wants">Wishlist</a> | <a href="/trades">Trades</a> | <a href="/reports">Reports</a> |{" "}
-          <a href="/admin">Admin</a>
+          <a href="/admin">Admin</a> | <a href="/search">Search</a>
         </nav>
         {testLoginEnabled() ? (
           <form action={switchUser}>

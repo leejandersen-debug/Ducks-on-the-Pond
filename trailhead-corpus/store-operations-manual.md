@@ -1,0 +1,360 @@
+# Trailhead Supply Co. — Store Operations Manual
+
+**Location:** 214 Pine Street, Pinedale, WY 82941
+**Phone:** (307) 367-4180
+**Store Hours:** Monday–Saturday 9:00am–6:00pm · Sunday 10:00am–4:00pm
+
+---
+
+## About This Manual
+
+This manual is the day-to-day operating guide for everyone who works a shift at Trailhead Supply Co. It covers the procedures you'll run most often: opening and closing the store, handling cash, processing returns, helping unhappy customers, taking in repairs, renting gear, and what to do when something goes wrong.
+
+Keep a copy at the front register and a copy in the back office. If a procedure here ever conflicts with a more specific policy document (for example, the **Returns & Shipping Policy** or the **Employee Handbook**), the specific policy document wins. This manual tells you the *steps*; those documents hold the *rules*.
+
+If you're ever unsure who to ask, here's the team:
+
+- **Greta Lindqvist** — CEO / Owner
+- **Cal Okafor** — COO
+- **Priya Nair** — Retail Floor Manager
+- **Rosa Iglesias** — Customer Experience Lead
+- **Devon Walsh** — E-commerce & Fulfillment Lead
+- **Sam Whitfield** — Buyer / Inventory Manager
+- **Lewis Tran** — Repair Shop Technician
+- **Hana Kim** — Marketing & Community
+- **Brett Castellano** — Senior Sales Associate
+- **Nadia Foster** — Bookkeeper (part-time)
+
+When this manual says "the on-shift manager," it means whichever of Priya, Rosa, Brett, or another designated lead is running the floor that day.
+
+---
+
+## 1. Opening Procedure
+
+The opening shift sets the tone for the whole day. Give yourself at least 30 minutes before the doors open so you're never rushing the count or the floor walk.
+
+1. **Arrive by 8:30am.** Park in the rear lot and enter through the back staff door. Never prop the front door open before the store is ready.
+2. **Unlock and re-secure the back door.** Lock it behind you. The store is not open to walk-ins until 9:00am sharp (10:00am on Sunday).
+3. **Disarm the alarm.** The keypad is on the wall just inside the back door. Enter your assigned code within 30 seconds of opening the door. If the panel shows a fault or a zone trouble light, do **not** ignore it — call the on-shift manager before going further.
+4. **Turn on the lights.** Hit the main bank of switches in the back hallway first, then the sales-floor switches behind the front counter. Turn on the window display lights last so the storefront looks "open" from the street.
+5. **Power up the back office.** Turn on the office computer, the receipt printer, and the label printer if you'll be tagging stock.
+6. **Start the POS.** Wake the front register, log in with your associate credentials, and open a new sales session for the day. Confirm the date and the assigned drawer match.
+7. **Verify the guest network is up.** Confirm the **Trailhead-Guest** wifi network is broadcasting (check from your own phone). Customers ask for it constantly. Never share the password verbally or in writing — direct them to the printed card at the counter.
+8. **Count the float.** Count the register drawer and confirm it holds the standard **$200 float** (see Section 3 for the breakdown). If the count is off, do not "fix" it yourself — note the amount and call the on-shift manager or Nadia Foster.
+9. **Walk the sales floor.** Do a quick loop:
+   - Straighten displays knocked out of place.
+   - Check that price tags are present and facing out.
+   - Pick up any trash or stray hangers.
+   - Confirm fitting rooms are empty and clean.
+   - Make sure aisles are clear and nothing is a trip hazard.
+10. **Check the repair pickup shelf.** Note any completed repairs waiting for customer pickup so you're ready if someone comes in for theirs (see Section 8).
+11. **Set out the day's essentials.** Receipt paper, gift cards, shopping bags, and a working pen at the register. Unlock the display cases that hold higher-value items.
+12. **Unlock the front door at 9:00am.** (10:00am on Sunday.) Flip the sign to OPEN, turn on the OPEN light, and you're live.
+
+> If you are opening alone and anything feels wrong — the door already unlocked, the alarm already disarmed, signs of forced entry — **do not enter.** Step back outside, call the on-shift manager, and if you suspect a break-in call 911.
+
+---
+
+## 2. Closing Procedure
+
+Closing is about leaving the store clean, secure, and ready for tomorrow's opener. Start the wind-down a few minutes before close, but never rush a customer out the door — finish helping anyone already in the store.
+
+1. **Begin at the posted closing time.** That's 6:00pm Monday–Saturday and 4:00pm Sunday. Turn off the OPEN light and flip the sign to CLOSED. Lock the front door once the last customer has left.
+2. **Walk the floor for stragglers.** Check fitting rooms, the repair area, and the back corners to confirm no customers remain.
+3. **Cash out the register.** Run the end-of-day count and reconcile against the POS total (full steps in Section 3). Pull the day's cash for deposit, leaving the **$200 float** in the drawer for tomorrow.
+4. **Close the POS batch.** Run the close/settlement on the card terminal so the day's card transactions batch out. Print the closing report and leave it in the office tray for Nadia Foster.
+5. **Secure cash and reports.** Place the deposit bag and reconciliation report in the safe. Lock the drawer.
+6. **Tidy the sales floor.** Re-fold and re-rack returned try-ons, straighten displays, face the shelves, and run the vacuum or broom over high-traffic areas. Empty the front trash if it's full.
+7. **Lock the display cases.** Secure any cases holding high-value items.
+8. **Check the back.** Confirm the back staff door is locked, the receiving door is locked, and any space heaters or non-essential equipment are off.
+9. **Turn off the lights.** Window displays first, then the sales floor, then the back hallway. Leave designated security/night lights on per the switch labels.
+10. **Arm the alarm.** Set the alarm from the back-door keypad. Wait for the confirmation tone, then exit through the back door within the exit delay.
+11. **Lock the back door** behind you and physically check that it's secured.
+12. **Final walk-around.** Confirm the front door is locked from the outside and the storefront looks buttoned up.
+
+---
+
+## 3. Register & Cash Handling
+
+Cash is one of the few places a small mistake becomes a real problem fast. Follow these steps exactly, every shift.
+
+### The Float
+
+Every drawer starts and ends the day with a **$200 float**. The standard breakdown is:
+
+- $50 in ones
+- $40 in fives
+- $50 in tens
+- $40 in twenties
+- $20 in coin (assorted rolls and loose)
+
+Counts can drift slightly as you make change — what matters is that the drawer totals $200 at open and that $200 stays in the drawer at close.
+
+### During the Day
+
+1. **One cashier per drawer where possible.** If you take over a drawer mid-shift, do a quick count first so any discrepancy is tied to the right person.
+2. **Make change carefully.** Count the customer's bill into the drawer *after* you've handed back their change, not before, so there's no confusion about what they gave you.
+3. **Keep large bills under the till tray.** Move $50 and $100 bills under the cash tray as you take them rather than leaving them in the open slots.
+4. **Do cash drops over the threshold.** When the cash in the drawer (excluding the $200 float) exceeds **$300**, do a cash drop:
+   - Count out the excess in round amounts.
+   - Place it in a drop envelope and write the date, time, drawer number, and amount on the front.
+   - Initial it and place it in the safe.
+   - Note the drop in the POS or the drop log.
+   Don't let the drawer hold more loose cash than it needs to.
+
+### Refunds
+
+1. **Refunds require a manager PIN.** No refund or override goes through on an associate login alone — a manager (Priya, Rosa, Brett, or another lead) must enter their PIN at the terminal.
+2. Never share or write down a manager PIN, and never enter a refund under someone else's PIN. The manager who authorizes the refund must be the one to enter it.
+3. Follow the full return steps in Section 4 — the refund itself is the last step there.
+
+### End-of-Day Reconciliation
+
+1. Run the POS end-of-day report to get the expected cash total.
+2. Count the full drawer.
+3. Subtract the **$200 float**. The remainder should match the POS-expected cash (cash sales minus cash refunds and any drops already pulled).
+4. **If it matches**, pull the cash for deposit, leave the float, and record the reconciliation.
+5. **If it's off:**
+   - Recount once, slowly. Most discrepancies are a miscount.
+   - Check for an un-logged cash drop, a refund entered as the wrong type, or a transaction rung on the wrong drawer.
+   - **Small discrepancy (under $5):** note the over/short on the reconciliation sheet and move on. It will be reviewed.
+   - **Larger discrepancy ($5 or more):** do not adjust anything to "make it balance." Note the exact amount and the details, then call **Nadia Foster** (bookkeeper). If Nadia isn't reachable, call **Cal Okafor** (COO).
+6. Lock the deposit and reconciliation report in the safe. Never take cash home, and never leave the deposit out overnight.
+
+---
+
+## 4. Processing a Customer Return
+
+This section covers the **register steps** for a return. The **rules** — what's eligible, the time windows, what condition an item must be in — live in the **Returns & Shipping Policy**. That document is the source of truth. When in doubt about whether a return qualifies, read the policy or ask the on-shift manager; don't guess.
+
+In short, the policy allows **refunds within a 30-day window** and **exchanges or store credit within 45 days**, but always confirm the current policy rather than relying on memory.
+
+1. **Greet the customer and find out what they want** — a refund, an exchange, or store credit. This affects which window applies.
+2. **Confirm the item is within the return window.** Use the receipt or order date against the Returns & Shipping Policy:
+   - For a **refund**, the item must be within the **30-day** window.
+   - For an **exchange or store credit**, the item must be within the **45-day** window.
+   If the customer is outside the applicable window, don't promise anything — explain the policy and, if they'd like, call the on-shift manager to see whether any exception applies.
+3. **Inspect the item's condition and tags.** Per the policy, confirm the item is in resalable condition with tags attached (or matching the policy's condition requirements for that category). Worn, washed, or damaged items generally don't qualify for a standard refund — flag these for the manager.
+4. **Look up the proof of purchase.**
+   - **In-store purchase:** scan or enter the receipt to pull up the original transaction.
+   - **Online order:** look up the order in the e-commerce system by order number, email, or name. If you can't find it, contact Devon Walsh (E-commerce & Fulfillment Lead) before processing.
+5. **Process the refund or exchange in the POS.**
+   - Refunds go back to the **original payment method**. Card purchases refund to the same card; cash purchases refund as cash; gift-card purchases refund to store credit.
+   - **A manager PIN is required** to authorize the refund or override (see Section 3).
+   - For an exchange, ring the return and the new item so the receipt shows both, and collect or refund any price difference.
+6. **Hand the customer their refund receipt** and confirm how long a card refund may take to appear (per the Returns & Shipping Policy).
+7. **Route the returned item:**
+   - **Resalable, with tags:** re-tag if needed and restock it on the floor.
+   - **Lightly used or out of season:** route to the clearance area per Sam Whitfield's clearance guidance.
+   - **Worn or damaged but fixable:** route to Lewis Tran in the repair shop to assess (see Section 8).
+   - **Damaged and not resalable:** set it aside in the back for the manager to mark down or write off — don't return it to the floor.
+8. **Log the return.** Record it in the returns log (date, item, reason, refund/exchange, and who authorized). Accurate logging helps Sam and Devon track patterns and defective products.
+
+---
+
+## 5. Handling a Customer Complaint
+
+Most complaints are recoverable if you stay calm and treat the person like a guest, not a problem. The goal is a customer who leaves feeling heard, even when we can't give them exactly what they asked for.
+
+1. **Listen first. Don't interrupt.** Let the customer tell the whole story before you respond. People often just need to be heard.
+2. **Acknowledge it sincerely.** "I'm sorry that happened — let's figure this out." Don't get defensive, don't blame a coworker, and don't blame the customer.
+3. **Get the facts.** Ask clarifying questions: What did they buy or expect? When? Do they have a receipt or order number? Repeat the key points back so they know you understood.
+4. **Resolve within your authority.** If the fix is something you're empowered to do — a return within policy, a swap, a small courtesy like helping re-fit a pack — do it. Aim to solve it at the counter whenever you can.
+5. **Escalate when it's beyond you.** Pull in a manager when:
+   - The customer is asking for an exception to policy.
+   - The complaint involves a refund or amount beyond your authority.
+   - The customer is upset and asking for a manager.
+   - You're simply not sure of the right call.
+   Escalate to **Priya Nair** (Retail Floor Manager) for floor and product issues, or to **Rosa Iglesias** (Customer Experience Lead) for service-quality and follow-up issues. Hand off calmly: introduce the customer and summarize what you've already learned so they don't have to repeat themselves.
+6. **Follow through.** If you promise a callback or a fixed order, make sure it actually happens — assign it to a name, not "someone."
+7. **Log the complaint.** Record it in the complaint log: date, customer, what happened, how it was resolved, and who handled it. Patterns in the log help us fix root causes instead of the same complaint over and over.
+
+> A customer who complains and gets a good response often becomes a regular. Treat every complaint as a chance to earn that.
+
+---
+
+## 6. Onboarding a New Hire
+
+A good first week makes the difference between a hire who sticks and one who quietly drifts away. This section covers the operational steps. The **Employee Handbook** holds the benefits, pay, scheduling, and conduct policies — make sure the new hire receives and reads it.
+
+### Before Day One
+
+1. **Paperwork to Nadia Foster.** Confirm the new hire has completed and returned all onboarding paperwork (tax forms, direct deposit, emergency contact, signed offer) to **Nadia Foster** before their first shift. They can't be put on payroll without it.
+2. **Set up access.** The manager requests a POS associate login and an alarm code for the new hire ahead of day one.
+3. **Schedule the first shifts** as shadowing shifts (see First Week) and put them on the schedule.
+4. **Pull a buddy.** Assign an experienced associate (often Brett Castellano or another senior associate) to be the new hire's go-to person.
+
+### Day One
+
+1. **Welcome and store tour.** Walk the whole store: sales floor and departments, fitting rooms, register, back office, receiving, repair shop, restrooms, break area, and emergency exits. Point out fire extinguishers and the first-aid kit.
+2. **Hand over the Employee Handbook.** Give them a copy of the **Employee Handbook**, confirm they know it's the source for policies and benefits, and ask them to read it within their first week and sign the acknowledgment.
+3. **Set up their POS login.** Have them log in, run a practice/no-sale transaction, and walk through ringing a sale, the basics of returns (manager-PIN steps from Section 4), and the guest wifi question (point them to the **Trailhead-Guest** card, no password shared).
+4. **Cover the basics of opening/closing** at a high level, and where this manual lives.
+5. **Introduce the team and the buddy.** Make sure they know who to ask for what.
+
+### First Week
+
+1. **Shadow shifts.** The new hire works alongside their buddy: watching, then doing under supervision, then doing solo for simple tasks. Cover register, returns, the floor walk, and customer greeting.
+2. **Daily check-in.** The buddy or manager checks in at the end of each shift — what went well, what felt confusing.
+3. **Build confidence gradually.** Don't leave a brand-new hire alone on a closing or cash-out until they've done several with support.
+
+### 30 / 60 / 90-Day Check-Ins
+
+1. **30 days:** The manager sits down with the new hire to review how it's going, answer questions, and confirm they're comfortable with core procedures.
+2. **60 days:** Check on growth areas and give specific feedback. Identify any training gaps.
+3. **90 days:** A fuller review of performance and fit, with goals for the next stretch. Loop in Priya Nair or the relevant manager.
+
+---
+
+## 7. Receiving & Restocking Inventory
+
+Deliveries arrive at the receiving door. Handle them promptly so stock isn't sitting in boxes when it could be selling.
+
+1. **Receive the delivery.** Accept the boxes, sign for the count of cartons (not the contents yet), and move them into the receiving area. Don't sign that the *contents* are correct until you've actually checked.
+2. **Find the purchase order.** Pull the matching purchase order (PO) for the shipment. Sam Whitfield keeps open POs in the receiving binder and the inventory system.
+3. **Check the delivery against the PO.** Open the boxes and verify:
+   - The items match what was ordered (style, color, size run).
+   - The quantities match the PO.
+   - Nothing is damaged, crushed, or missing.
+   Note any shortages, overages, or damaged goods on the packing slip.
+4. **Log it with Sam Whitfield.** **Sam Whitfield** (Buyer / Inventory Manager) logs the received stock into the inventory system so counts stay accurate. If Sam isn't in, set the paperwork aside in his tray and flag discrepancies — don't enter inventory under your own guesswork.
+5. **Report problems immediately.** If something's wrong (wrong item, big shortage, damage), tell Sam so he can contact the vendor while it's still fresh.
+6. **Price and tag.** Print and attach price tags / labels per the inventory system. Confirm prices match the system before tagging. Remove or update any old tags.
+7. **Stock the floor.** Place new stock in its department. Follow first-in/first-out where it matters — bring older stock forward, put new stock behind. Keep displays full and faced.
+8. **Move overflow to backstock.** Anything the floor can't hold goes to the labeled backstock area, organized by category so it's easy to find for restocking. Don't leave empty boxes blocking aisles or exits — break them down and recycle them.
+
+---
+
+## 8. Repair Intake
+
+Trailhead's repair shop is part of what makes us different. Lewis Tran runs it, but anyone on the floor may need to take in a drop-off when Lewis is busy.
+
+1. **Greet the customer and look at the item.** Find out what's wrong — a busted zipper, a torn seam, a delaminated boot, a tent pole, a broken pack buckle.
+2. **Set expectations honestly.** Don't promise a turnaround or a price you can't back up. If you're not sure it's fixable, say so and let Lewis make the call.
+3. **Have Lewis Tran assess it.** **Lewis Tran** (Repair Shop Technician) inspects the item and writes an **estimate** — what the repair involves, the expected cost, and a rough timeline. If Lewis isn't available, take the item in as "pending assessment" and tell the customer Lewis will follow up with the estimate before any work begins.
+4. **Tag the item.** Lewis tags the gear with a repair tag showing the ticket number, customer name, and a short description. The tag stays on the item the entire time it's in the shop.
+5. **Create a repair ticket.** Open a repair ticket in the system (or the repair log) capturing:
+   - Customer name and phone number.
+   - Item description and the problem.
+   - The estimate and approval status.
+   - Any deposit taken.
+   - Drop-off date and target ready date.
+6. **Give the customer their copy.** Hand them the customer copy of the ticket (or the ticket number) so they can reference it at pickup.
+7. **Get approval before doing the work.** No repair beyond the agreed estimate happens without the customer okaying it. If the job turns out bigger than estimated, Lewis contacts the customer before continuing.
+8. **Notify the customer when ready.** When the repair is done, call or message the customer that it's ready for pickup. Move the item to the **repair pickup shelf** and note it so the opener sees it (Section 1).
+9. **At pickup,** confirm the customer's name against the ticket, collect any balance due, and have them check the repair before they leave.
+
+---
+
+## 9. Rental Checkout & Return
+
+We rent gear so customers can try the outdoors before they invest. Rentals only work if gear comes back in shape to rent again — so the inspection steps matter.
+
+### Checking Out a Rental
+
+1. **Confirm availability and fit.** Make sure the item is rentable and is the right size for the customer.
+2. **Collect a valid photo ID and a deposit.**
+   - Take a government-issued photo **ID** and record the renter's name and contact info on the rental agreement.
+   - Collect the **deposit** for the item per the rental rate sheet. The deposit is refundable when the gear comes back on time and in good condition.
+3. **Inspect the gear together — going out.** Before it leaves, inspect the item with the customer and note its condition on the agreement (existing scuffs, wear, missing accessories). Both of you should agree on the starting condition so there's no dispute at return.
+4. **Complete the rental agreement.** Record:
+   - Item(s) and any included accessories.
+   - Checkout date and the **due date**.
+   - Deposit amount and rental rate.
+   - The agreed out-condition.
+   Have the customer sign it.
+5. **Go over the basics.** Remind them of the due date, the late-fee policy (below), and that the gear should come back clean and dry.
+
+### Returning a Rental
+
+1. **Inspect the gear — coming in.** Check the returned item against the out-condition noted at checkout. Look for new damage, missing parts, or excessive wear.
+2. **Check the return date for late fees.**
+   - **On time and in good condition:** refund the full deposit and close out the rental.
+   - **Late:** apply the late fee per the rental rate sheet for each day past the due date, deducting it from the deposit before refunding the remainder.
+   - **Damaged or missing parts:** flag it for the on-shift manager. Repair or replacement costs may be deducted from the deposit per the agreement. Don't decide a damage charge on your own — get the manager.
+3. **Refund the deposit** (less any late fee or damage charge) to the original payment method, using a manager PIN if the system treats it as a refund/override.
+4. **Clean and inspect for re-rental.** Wipe down, dry out, and check the gear over. If it needs work, route it to Lewis Tran (Section 8) rather than putting it back in the rental pool damaged.
+5. **Restock the rental item** in the rental area and mark it available in the system so it can go out again.
+6. **File the completed agreement** so we have a record of the full rental.
+
+---
+
+## 10. Opening & Closing Checklists
+
+Quick daily reference. Use these alongside the full procedures in Sections 1 and 2.
+
+### Opening Checklist
+
+- [ ] Arrive by 8:30am; enter through the back, lock the door behind you
+- [ ] Disarm the alarm; report any fault
+- [ ] Lights on — back, floor, then window displays
+- [ ] Power up office computer, receipt printer, label printer
+- [ ] Start the POS; open the day's sales session
+- [ ] Confirm the **Trailhead-Guest** wifi is broadcasting
+- [ ] Count the drawer — confirm the **$200 float**
+- [ ] Walk the sales floor; straighten, clean, clear hazards
+- [ ] Check the repair pickup shelf
+- [ ] Stock the register (receipt paper, bags, pens, gift cards)
+- [ ] Unlock display cases
+- [ ] Unlock the front door at 9:00am (10:00am Sunday); flip sign to OPEN
+
+### Closing Checklist
+
+- [ ] At close, OPEN light off, sign to CLOSED, front door locked after last customer
+- [ ] Walk the floor — confirm no customers remain
+- [ ] Cash out and reconcile against the POS; leave the **$200 float**
+- [ ] Close the POS batch; print the closing report
+- [ ] Deposit bag + report into the safe; lock the drawer
+- [ ] Tidy the floor — re-rack, face shelves, sweep/vacuum
+- [ ] Lock display cases
+- [ ] Confirm back staff door and receiving door are locked
+- [ ] Turn off heaters/non-essential equipment
+- [ ] Lights off — displays, floor, then hallway (leave night lights)
+- [ ] Arm the alarm; wait for confirmation
+- [ ] Lock the back door; final exterior walk-around
+
+---
+
+## 11. Emergency Procedures
+
+Your first job in any emergency is the safety of people — customers, coworkers, and yourself. Property comes second. Stay calm; people will follow your lead.
+
+### Medical / Injury
+
+1. **Check the scene and the person.** Make sure it's safe to approach. Don't move someone who's badly hurt unless they're in immediate danger.
+2. **Call 911** for anything serious — chest pain, severe bleeding, a bad fall, a head injury, trouble breathing, or any time you're unsure. It's always better to call.
+3. **Notify the on-shift manager** immediately so they can help manage the situation and the floor.
+4. **Give first aid only within your training.** The first-aid kit is in the back office/break area. Stay with the person and keep them calm until help arrives.
+5. **Clear the area** so responders can reach the person and other customers stay safe.
+6. **File an incident report.** Once the person is cared for, write up what happened: date, time, who was involved, what occurred, what was done, and any witnesses. Give it to the on-shift manager, who routes it to Cal Okafor.
+
+### Fire / Evacuation
+
+1. **If you see fire or smoke**, alert everyone in the store calmly and clearly.
+2. **For a small, contained fire** (like a trash can), use a fire extinguisher *only if* you're trained and it's safe — aim at the base, sweep side to side. If it's not immediately controllable, leave it.
+3. **Evacuate.** Move customers and staff out the nearest safe exit. Don't let anyone go back for belongings.
+4. **Call 911** from a safe distance.
+5. **Account for people.** Gather staff at the designated meeting point in the parking lot and confirm everyone's out.
+6. **Don't re-enter** until the fire department says it's safe.
+7. **Notify the on-shift manager and Cal Okafor**, and file an incident report afterward.
+
+### Severe-Weather Closure
+
+Pinedale weather can turn fast. Winter storms, high wind, and dangerous cold can all justify closing or delaying open.
+
+1. **Watch official sources.** Follow local weather alerts and road conditions before and during your shift.
+2. **A closure decision is the manager's call.** Only the on-shift manager, Priya Nair, Cal Okafor, or Greta Lindqvist decides to close early, delay opening, or stay closed. Don't decide on your own — call them.
+3. **If told to close:**
+   - Help any customers in the store wrap up and leave safely.
+   - Run the closing procedure (Section 2) if there's time and it's safe to do so.
+   - At minimum, secure the registers and cash, lock the doors, and arm the alarm.
+4. **Communicate the closure.** The manager coordinates with Hana Kim to post the closure on our channels so customers aren't driving out for nothing.
+5. **Stay safe getting home.** Don't put yourself at risk to finish a non-essential task. If conditions are dangerous, securing the store and leaving comes first.
+
+---
+
+## Questions?
+
+If a situation isn't covered here, use good judgment, keep people safe, and ask. Reach the store at **(307) 367-4180**. For floor and product questions, ask **Priya Nair**. For customer-service questions, ask **Rosa Iglesias**. For cash and bookkeeping, ask **Nadia Foster**. For anything bigger, the door's always open with **Cal Okafor** and **Greta Lindqvist**.
+
+Thanks for taking care of the store — and the people in it.

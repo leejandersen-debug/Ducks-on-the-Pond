@@ -886,3 +886,74 @@ commit and push to main
 
 What it gives you:
 This saves the database-status fixes and prompts 72–74 as one commit on main and pushes it to GitHub. Production then shows the correct "schema hasn't been applied" notice instead of "database isn't reachable", and logs db_unavailable with only the error code when the pages can't use the database. That production deploy will log one db_unavailable error (code 22023, missing app_rw role) per page view until the schema is applied there.
+
+
+PROMPT 75
+npm install chromadb
+
+What it gives you:
+This installs the Chroma vector-database client (chromadb 3.5.0) as a dependency, with 0 vulnerabilities in shipped packages. Before installing, Claude flagged that Chroma is a second database outside the decision document's Postgres-only stack. You chose to install it anyway as a deliberate exception. The package is only a client: it does nothing until it's pointed at a Chroma server (Chroma Cloud or self-hosted, since Vercel can't host one), and nothing in the app uses it yet.
+
+
+PROMPT 76
+use a local chroma store that persists to a folder inside the project.  This is a part of the lesson plan.
+
+What it gives you:
+A local Chroma vector database that saves its data to chroma-data/ inside the project. Start it with npm run chroma (it runs on localhost:8000 using the server built into the chromadb package, so no Python or Docker is needed). The app connects through lib/chroma.ts, with CHROMA_HOST and CHROMA_PORT in .env.development.local (documented in .env.example). chroma-data/ is in .gitignore because it holds generated database files, and .DS_Store was added too. A smoke test wrote two vectors, found the nearest match, survived a server restart with the data intact, and was then deleted, leaving an empty store. Vercel can't reach this local store, so production would need Chroma Cloud later.
+
+
+PROMPT 77
+Let's switch back to the prompt.txt.  We are doing the final lesson plan for the day.
+
+What it gives you:
+Prompt logging moves back to prompt.txt, picking up at PROMPT 77 after the pause. The RAG-corpus part of the lesson (cleaning, chunking, embedding, storing and querying the Trailhead documents) is recorded in prompt1.txt as PROMPTS 1–18 and is now closed; prompt1.txt stays in the project as that section's record. New prompts for the day's final lesson are logged here.
+
+
+PROMPT 78
+The lesson plan lists a 5-line Assembly plan that looks like this: [image: THE FIVE-LINE ASSEMBLY PLAN. Each line: connect what to what, then the check that proves it worked. 1. Search config → skeleton (keys and settings in place); check: app still starts clean. 2. Search call → one backend route (the route that will answer queries); check: route returns chunks. 3. Backend route → frontend search box (type a query, see a result); check: results show on the page. 4. Search → ingested course corpus (point at real data, not a sample); check: chunk count matches D4. 5. Logs → one real end-to-end query (yesterday's eyes, working today); check: log shows query + passage. "This is a shape to fill, not an answer key — your steps, your checks."]
+What would a more accurate 5-line Assembly plan look like for our skeleton?  Do not use tables, only text.
+
+What it gives you:
+The five-line assembly plan rewritten for this project, in plain text, with no code written yet. 1. Chroma config into the Next.js skeleton: the existing lib/chroma.ts and CHROMA_HOST/CHROMA_PORT, plus the same embedding model as ingestion and a "search unavailable" check modeled on dbProblem(); check: the dev server starts clean and /api/health reports Chroma reachable. 2. The query into one route, app/api/search/route.ts (GET ?q=), returning the top 3 chunks with id, source, section and similarity; check: the dog question returns the Pet Policy at 0.457, the same as the terminal tool. 3. The route into a /search page in the existing nav; check: the same top 3 appear on the page, and a question with no answer (the coffee one) shows "not in the documents". 4. Search into the real "trailhead" collection, not a sample; check: 109 chunks, split 30/34/18/16/11 by document as counted in the terminal. 5. The existing JSON logger into one real query; check: the dev server log shows search_done with the query (scrubbed), the top chunk id, section and similarity, and request_done for /api/search with status 200, logging the passage's id rather than its text. The whole thing runs locally only: Vercel can't reach the local Chroma store, so production should answer "search unavailable" until it's hosted.
+
+
+PROMPT 79
+We are back to using postgres for our database.  Chroma was only for that lesson plan. Let's fix this 5 line plan.
+
+What it gives you:
+The five-line assembly plan rewritten for Postgres, with Chroma out of the app (it was only for the RAG-corpus lesson). Claude confirmed the Neon dev branch offers pgvector (vector 0.8.6, not yet installed). 1. Vector schema into the skeleton: a node-pg-migrate migration run only on the dev branch adds the vector extension and a doc_chunks table (text, source, section, 384-dimension embedding, cosine index, read access for app_rw under RLS), plus a lib/embed.ts that runs the same all-MiniLM-L6-v2 model in the app; check: the migration applies on dev, the app starts clean and existing pages still work. 2. The corpus into the table: a dev-guarded script loads the 109 chunks and their saved vectors from chunks/*.embeddings.json without re-embedding; check: count is 109, split 34/30/18/16/11 by document. 3. One route, app/api/search/route.ts, embeds the question and ranks rows by cosine distance; check: the dog question returns the Pet Policy at about 0.457, the same score Chroma gave. 4. A /search page with a minimum-score rule; check: the same top 3 on the page, and the coffee question shows "not in the documents". 5. The JSON logger logs search_done with the scrubbed question, top chunk id, section and score, plus request_done for the route; check: one browser search shows both lines. The corpus load moved to step 2 because the route can't return real chunks before the table has data. Production stays without the schema under the hold, so search there shows "search unavailable" through the existing database check.
+
+
+PROMPT 80
+Let's reset expectations.  We are back to the baseball card tool.  Try this again using our architecture of next.js and using our database (not chroma)
+
+What it gives you:
+The five-line assembly plan rewritten for the baseball card app itself: searching the card catalog in Neon Postgres from the Next.js app, with no Chroma and no vectors. Claude checked the dev branch first: it holds 1 set (2024 Topps Chrome), 4 cards (Ohtani #1, Judge #99, De La Cruz #150, Holliday #200), 4 parallels and 6 variants, and pg_trgm and unaccent are available but not installed. 1. Search setup into the skeleton: a dev-only migration adds pg_trgm and unaccent, a card_search view (one row per variant, built like the existing labels, security_invoker so RLS applies) and trigram indexes on player and set names; no keys or outside service. Check: the migration applies on dev, the app starts clean and existing pages work. 2. lib/search.ts plus one route, app/api/search/route.ts (GET ?q=), returning matching variants with label, links and a match score; check: "ohtani" returns his 2 variants, a typo like "ohtnai" still finds him, "de la cruz" and "chrome 99" work, an empty query gets a 400. 3. A /search page in the nav, a server component calling the same lib/search.ts (no fetch to its own API), linking results to the set page; check: typing "judge" shows 2024 Topps Chrome #99 Aaron Judge, and nonsense shows "no cards found". 4. Search over the real catalog, not a sample; check: a blank search counts 6 variants across 4 cards, matching the catalog page and the tables, and a card added on /catalog shows up right away. 5. The JSON logger writes search_done with result count, top variant id and timing, and request logging adds request_done for /api/search; check: one browser search shows both lines. Production stays without the schema under the hold, so search there shows the existing "database unavailable" message.
+
+
+PROMPT 81
+So far, so good.  one quick change.  Let's use the ingested course corpus for #4.
+
+What it gives you:
+Step 4 of the assembly plan changed to use the course corpus, the five Trailhead documents already chunked and embedded (109 chunks), loaded into Neon Postgres instead of Chroma. Wire: the step 1 dev migration also installs pgvector and creates a doc_chunks table (text, source, section, 384-number embedding, cosine index, read-only for app_rw under RLS); a dev-guarded script loads chunks/*.embeddings.json without re-embedding; lib/search.ts embeds the question with the same all-MiniLM-L6-v2 model and ranks chunks by cosine distance; the /search page shows the top passages under the card results, with a minimum-score rule so a question with no answer shows "not in the documents". Check: the table holds 109 rows, split 34/30/18/16/11 by document, matching the Chroma count; reloading doesn't duplicate; and the dog question returns the Pet Policy at about 0.457, the same score Chroma gave, which proves nothing was lost moving the corpus into Postgres. Steps 1, 2, 3 and 5 are otherwise unchanged.
+
+
+PROMPT 82
+Add a POST /api/search route to the backend. It takes a query string, runs it through the same embedding + vector-store lookup we built for the corpus, and returns the top three matching passages as JSON. Log the incoming query and the number of results at info level.
+
+What it gives you:
+A working semantic search endpoint over the course corpus, backed by Neon Postgres (dev branch) instead of Chroma. A new migration, applied to the dev branch only, installs pgvector and creates doc_chunks (text, source, section, 384-number embedding, cosine index, read-only for the app role under RLS). A dev-guarded script, npm run load-corpus:dev, loaded the 109 chunks and their saved vectors without re-embedding (34/30/18/16/11 by document, and reloading leaves 109). lib/embed.ts embeds questions with the same all-MiniLM-L6-v2 settings, lib/search.ts ranks chunks by cosine distance, and app/api/search/route.ts takes POST {"query": "..."} and returns the top three passages (id, source, section, similarity, text). Bad input gets a 400, a missing table a 503, and GET a 405. Each search logs search.query with the query and the result count at info level; the logger scrubs emails and card numbers out of the query, and the existing request logging adds request_done with the status and time. Verified: the dog question returns the Pet Policy at 0.457 and the Sunday-hours question 0.3868, the same scores as Chroma, and existing pages still load. @huggingface/transformers is now a direct dependency. Production is untouched under the schema hold.
+
+
+PROMPT 83
+What was my last prompt to you?
+
+What it gives you:
+A reminder of where the build left off. This was a new session, so Claude read the prompt log: the last logged prompt was PROMPT 82, which added the POST /api/search route that embeds a query, looks up the top three passages from the course corpus in Neon Postgres (dev branch), returns them as JSON, and logs the query and result count at info level.
+
+
+PROMPT 84
+Test — one query, not ten. I don't open the browser. I don't wire anything else. I send exactly one request straight at the new endpoint — a question I know the corpus can answer: "how many days of vacation do I get in a year?" One test, aimed at one seam.
+
+What it gives you:
+One curl POST to /api/search on the dev server (port 3005), with no browser and no other wiring. It returned HTTP 200 in about 2.6 seconds with three passages, all from employee-handbook.md and all from the time-off part of the handbook. The top result was employee-handbook-11 ("7. Paid Time Off & Holidays › PTO accrual", similarity 0.4289) and the second was employee-handbook-13 ("Part-time and seasonal accrual", 0.3864). The second passage carries the answer ("The 15-day PTO figure ... apply to full-time employees"), so the endpoint works. The test also showed a chunking flaw: the sentence that states the answer, "Full-time employees accrue 15 days of paid time off per year", sits at the end of employee-handbook-10, a chunk labeled "6. Pay & Timekeeping › Clocking in and out". The top hit contains the PTO section but not that sentence. The server log showed request_start, search.query with the query and results: 3 at info level, and request_done with status 200 in 2491 ms.

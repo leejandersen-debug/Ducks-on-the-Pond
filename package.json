@@ -12,7 +12,10 @@
     "migrate:dev": "node --env-file=.env.development.local scripts/assert-dev-branch.mjs && node --env-file=.env.development.local node_modules/node-pg-migrate/bin/node-pg-migrate.js -m migrations -d DATABASE_URL_UNPOOLED --check-order up",
     "migrate:dev:down": "node --env-file=.env.development.local scripts/assert-dev-branch.mjs && node --env-file=.env.development.local node_modules/node-pg-migrate/bin/node-pg-migrate.js -m migrations -d DATABASE_URL_UNPOOLED --check-order down",
     "migrate:create": "node-pg-migrate -m migrations -j sql create",
-    "seed:dev": "node --env-file=.env.development.local scripts/assert-dev-branch.mjs && node --env-file=.env.development.local scripts/seed-dev.mjs"
+    "seed:dev": "node --env-file=.env.development.local scripts/assert-dev-branch.mjs && node --env-file=.env.development.local scripts/seed-dev.mjs",
+    "load-corpus:dev": "node --env-file=.env.development.local scripts/assert-dev-branch.mjs && node --env-file=.env.development.local scripts/load-corpus.mjs",
+    "chroma": "chroma run --path ./chroma-data --port 8000",
+    "query": "node --env-file=.env.development.local scripts/query-chunks.mjs"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",
@@ -25,11 +28,14 @@
     "vercel": "^65.2.0"
   },
   "dependencies": {
+    "@chroma-core/default-embed": "^0.1.9",
+    "@huggingface/transformers": "^3.8.1",
     "@opentelemetry/api": "^1.9.1",
     "@opentelemetry/context-async-hooks": "^3.0.0",
     "@opentelemetry/sdk-trace-base": "^2.12.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/functions": "^3.10.3",
+    "chromadb": "^3.5.0",
     "next": "^16.4.3",
     "pg": "^8.23.1",
     "react": "^19.3.1",
@@ -38,6 +44,9 @@
   "overrides": {
     "@vercel/functions": {
       "zod": "^4.6.7"
+    },
+    "@huggingface/transformers": {
+      "sharp": "^0.35.5"
     }
   }
 }

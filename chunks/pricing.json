@@ -1,0 +1,308 @@
+[
+  {
+    "id": "pricing-000",
+    "source": "pricing.csv",
+    "index": 0,
+    "section": "Boots",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Granite Peak Hiker — SKU BOOT-GPH-001, Category Boots, Season 3-Season, MSRP $199.00, Price $185.00, Staff price $129.50."
+  },
+  {
+    "id": "pricing-001",
+    "source": "pricing.csv",
+    "index": 1,
+    "section": "Boots",
+    "words": 18,
+    "overlapWords": 0,
+    "text": "Summit Pro Mountaineering Boot — SKU BOOT-SPM-001, Category Boots, Season Winter, MSRP $340.00, Price $320.00, Staff price $224.00."
+  },
+  {
+    "id": "pricing-002",
+    "source": "pricing.csv",
+    "index": 2,
+    "section": "Boots",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Creekside Trail Shoe — SKU BOOT-CTS-001, Category Boots, Season Summer, MSRP $120.00, Price $120.00, Staff price $84.00."
+  },
+  {
+    "id": "pricing-003",
+    "source": "pricing.csv",
+    "index": 3,
+    "section": "Jackets",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Wind River Hardshell — SKU JKT-WRH-001, Category Jackets, Season All-Season, MSRP $260.00, Price $240.00, Staff price $168.00."
+  },
+  {
+    "id": "pricing-004",
+    "source": "pricing.csv",
+    "index": 4,
+    "section": "Jackets",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Basecamp Down Jacket — SKU JKT-BDJ-001, Category Jackets, Season Winter, MSRP $199.00, Price $199.00, Staff price $139.30."
+  },
+  {
+    "id": "pricing-005",
+    "source": "pricing.csv",
+    "index": 5,
+    "section": "Jackets",
+    "words": 16,
+    "overlapWords": 0,
+    "text": "Ridgeline Fleece — SKU JKT-RLF-001, Category Jackets, Season 3-Season, MSRP $99.00, Price $89.00, Staff price $62.30."
+  },
+  {
+    "id": "pricing-006",
+    "source": "pricing.csv",
+    "index": 6,
+    "section": "Packs",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Daybreak 22L Daypack — SKU PCK-DB22-001, Category Packs, Season All-Season, MSRP $110.00, Price $110.00, Staff price $77.00."
+  },
+  {
+    "id": "pricing-007",
+    "source": "pricing.csv",
+    "index": 7,
+    "section": "Packs",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Trailhead 45L Pack — SKU PCK-TH45-001, Category Packs, Season 3-Season, MSRP $230.00, Price $210.00, Staff price $147.00."
+  },
+  {
+    "id": "pricing-008",
+    "source": "pricing.csv",
+    "index": 8,
+    "section": "Packs",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Expedition 65L Pack — SKU PCK-EXP65-001, Category Packs, Season All-Season, MSRP $280.00, Price $280.00, Staff price $196.00."
+  },
+  {
+    "id": "pricing-009",
+    "source": "pricing.csv",
+    "index": 9,
+    "section": "Camping",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Cirque 2 Tent — SKU CMP-CRQ2-001, Category Camping, Season 3-Season, MSRP $379.00, Price $350.00, Staff price $245.00."
+  },
+  {
+    "id": "pricing-010",
+    "source": "pricing.csv",
+    "index": 10,
+    "section": "Camping",
+    "words": 18,
+    "overlapWords": 0,
+    "text": "Aspen 20F Sleeping Bag — SKU CMP-ASP20-001, Category Camping, Season Winter, MSRP $160.00, Price $160.00, Staff price $112.00."
+  },
+  {
+    "id": "pricing-011",
+    "source": "pricing.csv",
+    "index": 11,
+    "section": "Camping",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Backcountry Sleeping Pad — SKU CMP-BSP-001, Category Camping, Season All-Season, MSRP $79.00, Price $75.00, Staff price $52.50."
+  },
+  {
+    "id": "pricing-012",
+    "source": "pricing.csv",
+    "index": 12,
+    "section": "Camping",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Trailhead Pocket Stove — SKU CMP-STV-001, Category Camping, Season All-Season, MSRP $55.00, Price $49.00, Staff price $34.30."
+  },
+  {
+    "id": "pricing-013",
+    "source": "pricing.csv",
+    "index": 13,
+    "section": "Camping",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Streamline Water Filter — SKU CMP-FLT-001, Category Camping, Season Summer, MSRP $89.00, Price $89.00, Staff price $62.30."
+  },
+  {
+    "id": "pricing-014",
+    "source": "pricing.csv",
+    "index": 14,
+    "section": "Camping",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Summit Cookset 2-Person — SKU CMP-COOK-001, Category Camping, Season All-Season, MSRP $65.00, Price $59.00, Staff price $41.30."
+  },
+  {
+    "id": "pricing-015",
+    "source": "pricing.csv",
+    "index": 15,
+    "section": "Accessories",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Beacon 300 Headlamp — SKU ACC-HLP-001, Category Accessories, Season All-Season, MSRP $45.00, Price $39.00, Staff price $27.30."
+  },
+  {
+    "id": "pricing-016",
+    "source": "pricing.csv",
+    "index": 16,
+    "section": "Accessories",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Switchback Trekking Poles — SKU ACC-POLE-001, Category Accessories, Season 3-Season, MSRP $120.00, Price $110.00, Staff price $77.00."
+  },
+  {
+    "id": "pricing-017",
+    "source": "pricing.csv",
+    "index": 17,
+    "section": "Accessories",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Merino Trail Socks — SKU ACC-SOCK-001, Category Accessories, Season All-Season, MSRP $24.00, Price $22.00, Staff price $15.40."
+  },
+  {
+    "id": "pricing-018",
+    "source": "pricing.csv",
+    "index": 18,
+    "section": "Accessories",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Ridge Insulated Gloves — SKU ACC-GLV-001, Category Accessories, Season Winter, MSRP $49.00, Price $45.00, Staff price $31.50."
+  },
+  {
+    "id": "pricing-019",
+    "source": "pricing.csv",
+    "index": 19,
+    "section": "Accessories",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Wool Summit Beanie — SKU ACC-HAT-001, Category Accessories, Season Winter, MSRP $29.00, Price $26.00, Staff price $18.20."
+  },
+  {
+    "id": "pricing-020",
+    "source": "pricing.csv",
+    "index": 20,
+    "section": "Accessories",
+    "words": 18,
+    "overlapWords": 0,
+    "text": "Cascade 1L Water Bottle — SKU ACC-BTL-001, Category Accessories, Season All-Season, MSRP $32.00, Price $29.00, Staff price $20.30."
+  },
+  {
+    "id": "pricing-021",
+    "source": "pricing.csv",
+    "index": 21,
+    "section": "Accessories",
+    "words": 16,
+    "overlapWords": 0,
+    "text": "Alpine Gaiters — SKU ACC-GAIT-001, Category Accessories, Season Winter, MSRP $55.00, Price $49.00, Staff price $34.30."
+  },
+  {
+    "id": "pricing-022",
+    "source": "pricing.csv",
+    "index": 22,
+    "section": "Layers",
+    "words": 19,
+    "overlapWords": 0,
+    "text": "Wind River Base Layer Top — SKU LYR-BASE-001, Category Layers, Season Winter, MSRP $59.00, Price $55.00, Staff price $38.50."
+  },
+  {
+    "id": "pricing-023",
+    "source": "pricing.csv",
+    "index": 23,
+    "section": "Layers",
+    "words": 19,
+    "overlapWords": 0,
+    "text": "Wind River Base Layer Bottom — SKU LYR-BASE-002, Category Layers, Season Winter, MSRP $59.00, Price $55.00, Staff price $38.50."
+  },
+  {
+    "id": "pricing-024",
+    "source": "pricing.csv",
+    "index": 24,
+    "section": "Layers",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Featherline Puffy Vest — SKU LYR-PUF-001, Category Layers, Season 3-Season, MSRP $129.00, Price $119.00, Staff price $83.30."
+  },
+  {
+    "id": "pricing-025",
+    "source": "pricing.csv",
+    "index": 25,
+    "section": "Accessories",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Lightweight Liner Socks — SKU FOOT-SOCK-002, Category Accessories, Season Summer, MSRP $16.00, Price $14.00, Staff price $9.80."
+  },
+  {
+    "id": "pricing-026",
+    "source": "pricing.csv",
+    "index": 26,
+    "section": "Accessories",
+    "words": 16,
+    "overlapWords": 0,
+    "text": "TrailForm Insoles — SKU FOOT-INSL-001, Category Accessories, Season All-Season, MSRP $40.00, Price $35.00, Staff price $24.50."
+  },
+  {
+    "id": "pricing-027",
+    "source": "pricing.csv",
+    "index": 27,
+    "section": "Accessories",
+    "words": 19,
+    "overlapWords": 0,
+    "text": "Wind River Range Topo Map — SKU NAV-MAP-001, Category Accessories, Season All-Season, MSRP $15.00, Price $15.00, Staff price $10.50."
+  },
+  {
+    "id": "pricing-028",
+    "source": "pricing.csv",
+    "index": 28,
+    "section": "Accessories",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Fieldmate Baseplate Compass — SKU NAV-COMP-001, Category Accessories, Season All-Season, MSRP $28.00, Price $25.00, Staff price $17.50."
+  },
+  {
+    "id": "pricing-029",
+    "source": "pricing.csv",
+    "index": 29,
+    "section": "Climbing",
+    "words": 17,
+    "overlapWords": 0,
+    "text": "Crag Climbing Harness — SKU CLB-HARN-001, Category Climbing, Season 3-Season, MSRP $75.00, Price $69.00, Staff price $48.30."
+  },
+  {
+    "id": "pricing-030",
+    "source": "pricing.csv",
+    "index": 30,
+    "section": "Climbing",
+    "words": 18,
+    "overlapWords": 0,
+    "text": "Chalk Bag + Chalk — SKU CLB-CHALK-001, Category Climbing, Season All-Season, MSRP $28.00, Price $24.00, Staff price $16.80."
+  },
+  {
+    "id": "pricing-031",
+    "source": "pricing.csv",
+    "index": 31,
+    "section": "Climbing",
+    "words": 18,
+    "overlapWords": 0,
+    "text": "Dynamic Climbing Rope 60m — SKU CLB-ROPE-001, Category Climbing, Season All-Season, MSRP $199.00, Price $189.00, Staff price $132.30."
+  },
+  {
+    "id": "pricing-032",
+    "source": "pricing.csv",
+    "index": 32,
+    "section": "Winter",
+    "words": 16,
+    "overlapWords": 0,
+    "text": "Backcountry Snowshoes — SKU WIN-SNOW-001, Category Winter, Season Winter, MSRP $210.00, Price $199.00, Staff price $139.30."
+  },
+  {
+    "id": "pricing-033",
+    "source": "pricing.csv",
+    "index": 33,
+    "section": "Winter",
+    "words": 16,
+    "overlapWords": 0,
+    "text": "Alpine Crampons — SKU WIN-CRMP-001, Category Winter, Season Winter, MSRP $160.00, Price $149.00, Staff price $104.30."
+  }
+]

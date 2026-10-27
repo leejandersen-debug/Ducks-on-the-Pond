@@ -5,3 +5,9 @@ next-env.d.ts
 .vercel
 .env*
 !.env.example
+
+# Local Chroma vector store (npm run chroma), persisted to ./chroma-data
+chroma-data/
+
+# macOS folder metadata
+.DS_Store

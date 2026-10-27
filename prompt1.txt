@@ -1,0 +1,131 @@
+PROMPT LOG 1 (temporary). prompt.txt is paused at PROMPT 76 and resumes when the user says so.
+
+
+PROMPT 1
+For this part of the lesson plan, suspend temporarily the prompts into prompt.txt and start a new one called prompt1.txt.  I'll let you know when we can pick back up with the prompt.txt.
+from this file: /Users/landersen/Claude/Code/Working Folder/Week 8/trailhead-corpus/returns-shipping-policy.txt, "Strip the repeating page header, the footer, and the page numbers from this file."
+
+What it gives you:
+Prompt logging now goes to this file (prompt1.txt) instead of prompt.txt until you say to switch back. returns-shipping-policy.txt is cleaned for loading into the vector store: 15 repeating page headers ("Trailhead Supply Co. — Confidential"), 15 page numbers ("Page N of 15") and the one closing footer line (the shop's address and slogan) are removed, and the extra blank lines they left are collapsed. The file goes from 257 to 209 lines, and a line-by-line comparison confirms every line of real content is unchanged. The original was backed up first, because the trailhead-corpus folder isn't in Git.
+
+
+PROMPT 2
+merge the (CONTINUED) headings into their sections
+
+What it gives you:
+The four "(CONTINUED)" headings left over from the old page breaks are removed from returns-shipping-policy.txt: Sections 1, 4, 6 and 7. Their text now flows straight on under the original section heading, so each section is one unbroken block. Each was checked to follow its own section before it was removed. The document now reads as a clean outline (title, Overview & Contact, Sections 1–9, Quick Reference Summary) in 201 lines, ready to split into chunks by section for the vector store.
+
+
+PROMPT 3
+Chunk this into pieces of roughly 300–400 words, with about 50 words of overlap between consecutive chunks, and try to break on paragraph boundaries rather than mid-sentence.
+
+What it gives you:
+returns-shipping-policy.txt is split into 11 chunks of 340–399 words, saved to chunks/returns-shipping-policy.json. Each chunk has an id, the source file, the section it starts in, its word count and its overlap size. Chunks break only between paragraphs. Each chunk after the first starts with the previous chunk's last whole sentences (19–52 words, usually 40–50) so meaning carries across boundaries. Overlaps never reach back past a section heading, which is why two are shorter. The work is done by a reusable script, scripts/chunk-text.mjs, for the other corpus files. Checks in code confirm all 101 paragraphs appear whole and in order, every chunk ends on a full sentence, and every overlap is an exact copy of the previous chunk's ending starting on a clean boundary. Those checks caught and fixed two bugs: periods inside "trailheadsupply.co" being treated as sentence ends, and overlaps spanning section headings.
+
+
+PROMPT 4
+alle the embedding model on all chunks that places text in meaning-space.  Do they all come back with no errors and no skipped chunks?
+
+What it gives you:
+All 11 chunks were embedded with Chroma's default local model (all-MiniLM-L6-v2, which runs on your machine with no API key). The answer is yes: 11 attempted, 11 embedded, 0 errors, 0 skipped. Every vector has the expected 384 dimensions, contains only real numbers, is normalized (length 1.000) and differs from the others. The work is done by a reusable script, scripts/embed-chunks.mjs, which saves chunks/returns-shipping-policy.embeddings.json and exits with an error if any chunk fails. Two extra checks: the chunks run 423–510 tokens, all under the tokenizer's 512-token cutoff, and a test showed the text past token 256 still changes the vector, so no chunk text was silently dropped. The model was trained on shorter passages, though, so smaller chunks may give sharper search results. Installing the model's package pulled in a vulnerable image library (sharp); a scoped override to the patched version brought shipped vulnerabilities back to 0.
+
+
+PROMPT 5
+store the embedded chunks in the local chroma store
+
+What it gives you:
+All 11 embedded chunks from the returns & shipping policy are stored in a Chroma collection named "trailhead" in the local store (persisted in chroma-data/). Each is saved with its text, its precomputed vector (nothing was re-embedded) and metadata: source file, section, position, word, overlap and token counts. The collection uses the same all-MiniLM-L6-v2 model and cosine distance, so plain-English questions are compared in the same meaning-space. A reusable script, scripts/store-chunks.mjs, does this. Reading everything back confirmed every chunk's text, vector and metadata matched exactly, and running it again replaced the chunks instead of duplicating them (still 11). Sample questions found the right sections: boots → Section 1 Returns, Hawaii shipping → Section 6 Zones & Rates, shipping to Canada → Section 8 International.
+
+
+PROMPT 6
+run a count against the store. The number it reports is your chunk count.
+
+What it gives you:
+A direct count of the "trailhead" collection in the local Chroma store, which is the authoritative number of chunks stored. It reports 11, which matches the 11 chunks the chunker produced from returns-shipping-policy.txt, so nothing was lost or duplicated on the way in. "trailhead" is the only collection in the store.
+
+
+PROMPT 7
+Answer these questions first before we chunk, embed and store the other documents: [image: Final chunk count; Chunk size and overlap I chose (and why); Cleaning, one thing I had to strip from the documents to get clean text; The spot-check that made me trust the result (e.g., a chunk I read that was a coherent, whole idea); One thing that went sideways and how I fixed it]
+
+What it gives you:
+Ready-to-paste answers for the chunking write-up, based on the returns & shipping policy: the final count (11, confirmed by counting the store), the size and overlap (300–400 words with about 50 words of overlap, breaking on paragraphs, and why), the cleaning step (repeating page headers, page numbers, the footer and "(CONTINUED)" headings), a spot-check of one chunk read in full that holds a whole idea (Section 6's zone rates), and what went sideways (dots in "trailheadsupply.co" were read as sentence endings, splitting overlaps mid-sentence, fixed by smarter sentence detection that automated checks then confirmed).
+
+
+PROMPT 8
+We are going to use this terminal as the query to the chromadb that we loaded our chunks into.
+
+What it gives you:
+A terminal search tool for the local Chroma store, scripts/query-chunks.mjs, run with npm run query. Pass a plain-English question (npm run query -- "How much does shipping to Hawaii cost?") or run it with no question for an interactive prompt that keeps taking questions until you enter a blank line. It embeds your question with the same all-MiniLM-L6-v2 model as the stored chunks and prints the closest chunks (3 by default, change with -n), each with its id, cosine distance (lower is closer), source file, section and a short preview. Tested: Hawaii shipping returns the Section 6 zone-rates chunk first, worn boots returns Section 1 Returns, and Canada returns Section 8 International.
+
+
+PROMPT 9
+"can I bring my dog to the office?"  give me a similarity score on the returned chunks.
+
+What it gives you:
+The query results for an off-topic question, with a similarity score on each chunk. The query tool now prints cosine similarity (1 minus Chroma's distance; 1 means identical meaning, higher is closer) beside the distance. The top three chunks scored only 0.160 (overview), 0.143 (Section 3, Non-Returnable Items) and 0.139 (Section 9, Questions), compared with about 0.57 for a genuine match like the Hawaii shipping question. None of them is about dogs or the office: the store holds only the returns & shipping policy, so a vector search still returns its nearest chunks even when nothing is relevant. The low scores are the signal that there's no real answer in the store yet; the dog policy most likely lives in the employee handbook, which hasn't been loaded.
+
+
+PROMPT 10
+chunk, embed and store the other four documents
+
+What it gives you:
+All five Trailhead documents are now in the local Chroma "trailhead" collection: 109 chunks in total (employee handbook 30, customer FAQ 18, store operations manual 16, pricing 34, returns & shipping policy 11), each embedded, stored and read back exactly. The chunker (scripts/chunk-text.mjs) now handles each format. Markdown is cleaned in code without touching the source files: horizontal rules, bold/italic markers, link syntax, a duplicated "Sizing & Fit" heading and the handbook's ASCII org chart (the same people are listed in the text above it) are removed, and the store-hours table becomes plain "Day: hours" lines. Sections are recorded as paths such as "17. Technology & Acceptable Use › Wifi", and each chunk lists every section it covers. The pricing CSV becomes one chunk per product written as a sentence ("Granite Peak Hiker — SKU …, Price $185.00, Staff price $129.50."), because each row is a separate fact. The first run left 7 chunks over the model's 512-token limit, so their endings would never have reached the model; the chunker now counts tokens and re-chunks a dense document with a smaller word limit (the handbook and operations manual went to 375 words), so 0 chunks are cut off. Test queries: the dog-in-the-office question now finds the handbook's Pet Policy at similarity 0.457 (up from 0.160), and the Cirque 2 tent price matches its pricing row at 0.831. One weak spot: "What do I do if a customer gets hurt?" matches customer-service chunks ahead of the Medical / Injury procedure, which only comes first when the question is worded "first aid for an injured customer".
+
+
+PROMPT 11
+run a count against the store
+
+What it gives you:
+A direct count of the local Chroma store after all five documents were loaded. "trailhead" is still the only collection, and it reports 109 chunks: employee-handbook.md 30, pricing.csv 34, product-faq.md 18, store-operations-manual.md 16 and returns-shipping-policy.txt 11. These match what the chunker produced for each file, so nothing was lost, and re-storing the returns policy replaced its 11 chunks instead of duplicating them.
+
+
+PROMPT 12
+"can I bring my dog to the office?"  give me the top 3 similarity scores.
+
+What it gives you:
+The top three chunks for the dog question now that all five documents are loaded, with their similarity scores. First is employee-handbook-19, the handbook's Pet Policy, at 0.457 (up from 0.160 when only the returns policy was loaded); it holds the answer: animals are welcome in the office on Fridays, leashed, with other team members' consent. Second is employee-handbook-18 at 0.381, office etiquette that runs into the start of the Pet Policy section. Third is employee-handbook-25 at 0.259, workplace safety and anti-harassment, which isn't relevant. The clear gap between first and third shows the search separates the real answer from filler, and the match works even though the policy says "animals", not "dog".
+
+
+PROMPT 13
+"what are the store hours on Sunday?" give me the top 3
+
+What it gives you:
+The top three chunks for the Sunday hours question, with similarity scores. First is employee-handbook-08 at 0.387, which contains the handbook's store-hours table (Sunday 10:00 am – 4:00 pm) but starts in an unrelated section (first days and the employee file). Second is store-operations-manual-00 at 0.344, whose header line gives the same hours (Sunday 10:00am–4:00pm). Third is pricing-006 at 0.316, the Daybreak 22L Daypack price row, which is irrelevant. So the right answer is retrievable from the top two, but the scores are low and close together, and a price row made the top 3. The FAQ chunk that directly answers "What are your store hours?" only ranked 13th (0.242), because it shares a chunk with rental questions that dilute its meaning. A short fact buried in a 300–400-word chunk about other topics scores poorly; smaller chunks, or splitting on FAQ questions and sub-headings, would help.
+
+
+PROMPT 14
+who is the operations manager? give me top 3
+
+What it gives you:
+The top three chunks for the operations-manager question, with similarity scores, and a check of what the documents actually say. First is employee-handbook-05 at 0.441, the Company Overview & Org Chart section, which names Cal Okafor as Co-founder and COO "responsible for operations and fulfillment" ("Cal runs operations beneath her"). Second is store-operations-manual-00 at 0.373, whose team list names Cal Okafor as COO. Third is store-operations-manual-10 at 0.260, receiving inventory with Sam Whitfield (Buyer / Inventory Manager), which is a near miss. No document uses the title "operations manager"; the closest role is the COO, Cal Okafor. The search still found it because it matches meaning ("operations") rather than the exact title. For day-to-day store operations, the manual's "on-shift manager" is whoever of Priya Nair (Retail Floor Manager), Rosa Iglesias or Brett Castellano is running the floor, which is in chunk 00 too.
+
+
+PROMPT 15
+how is the coffee in the breakroom in the morning?
+
+What it gives you:
+A test with a question the documents can't answer. The top three chunks are all from the handbook and all score low: employee-handbook-18 at 0.259 (break-room etiquette: "Empty the coffee pot if it's the dregs"), employee-handbook-17 at 0.252 (code of conduct running into the start of the break-room section) and employee-handbook-08 at 0.233 (first days and work schedule). A text search of the whole corpus finds "coffee" only twice: emptying the pot and not leaving your mug on the back-office counter. Nothing says how the coffee is or anything about mornings. The search still returns its nearest chunks, but scores around 0.25, well below the 0.45–0.83 of real answers, signal "not in the documents". A chatbot built on this store should say it doesn't know rather than guess from these chunks.
+
+
+PROMPT 16
+give the answers to the 3 queries I posted in this format: [image: QUERY 1 (meaning-only): Top result + score / Verdict (pass/fail) / Why, and which words did NOT overlap; QUERY 2 (straightforward): Top result + score / Verdict / Why; QUERY 3 (harder / edge): Top result + score / Verdict / Why it passed or failed]
+
+What it gives you:
+The three test queries written up in the requested format. Query 1 (meaning-only), "can I bring my dog to the office?": the top result is the handbook's Pet Policy at 0.457, a pass, because the chunk never says "dog" (it says "animals" and "pets") yet the search matched on meaning. Query 2 (straightforward), "what are the store hours on Sunday?": the top result is the handbook chunk with the store-hours table at 0.387, a pass, though a weak one, since the scores were low and the FAQ's direct answer ranked 13th. Query 3 (harder / edge), "who is the operations manager?": the top result is the handbook's org chart at 0.441, a pass, because no document uses that title and the search still found the COO, Cal Okafor, who runs operations.
+
+
+PROMPT 17
+add in the last query
+
+What it gives you:
+The coffee question added as a fourth query in the same format. Query 4 (no answer in the documents), "how is the coffee in the breakroom in the morning?": the top result is employee-handbook-18 (Office Etiquette, break-room rules) at 0.259, a pass, because the store correctly has nothing to offer. The word "coffee" appears only twice in the whole corpus (empty the pot if it's the dregs; don't leave your mug on the back-office counter) and nothing describes the coffee or mornings. The search still returned its nearest chunks, but at about 0.25, far below the 0.39–0.46 of the three real answers, which is the signal to say "I don't know" rather than guess.
+
+
+PROMPT 18
+I need an edqe query that will fail with the same display parameters.
+
+What it gives you:
+An edge query that fails, written up in the same format. Query 5 (harder / edge), "What do I do if a customer gets hurt in the store?": the top result is employee-handbook-16 (Code of Conduct: Substances, Discipline, How we treat customers) at 0.571, a fail. The answer exists, in the operations manual's Medical / Injury procedure (check the scene, call 911, notify the on-shift manager, first aid within your training, clear the area, file an incident report), but that chunk, store-operations-manual-14, ranked 14th at 0.340. It shares its chunk with the closing checklist and the fire and severe-weather procedures, which dilutes its meaning, and the question's words ("customer", "store") pulled in customer-service chunks instead. Its words barely overlap with the question: the procedure is headed "Medical / Injury", "hurt" appears once ("badly hurt"), and "customers" appears only in "other customers stay safe". The failure is the dangerous kind: the wrong chunk scored higher than any correct answer in the earlier tests, so a score threshold alone wouldn't catch it.
+
+
+(Closed 2026-10-25 after PROMPT 18: logging returned to prompt.txt at PROMPT 77.)
