@@ -1004,3 +1004,24 @@ commit and push the prompt log
 
 What it gives you:
 Prompts 88–90 in prompt.txt saved as one commit on main and pushed to GitHub. No app code changed. The push still starts a routine Vercel production deploy, and the site behaves the same afterward.
+
+
+PROMPT 91
+did we make a "decision document" for this build?
+
+What it gives you:
+A check on where the build's decision document lives. Yes: you gave Claude a decision document on 2026-10-23 that sets the stack for the trading-card app (relational data, Postgres, TypeScript, Next.js, React, Vercel), and Claude has followed it as binding guidance since then. It is not saved as a file in the repo. It exists only in Claude's memory notes, along with the later updates: the Express + Vite detour that was reverted, migrations with node-pg-migrate, Neon Auth kept in reserve, and Chroma allowed for the RAG lesson only.
+
+
+PROMPT 92
+yes, save it as DECISIONS.md
+
+What it gives you:
+The build's decision document saved in the repo as DECISIONS.md instead of only in Claude's memory. It has the original stack decisions from 2026-10-23 (relational data, Postgres, TypeScript, Next.js, React, Vercel), each with its reason and tradeoff, followed by dated updates: the single Next.js app after the Express + Vite revert, Neon Auth kept in reserve, migrations with node-pg-migrate and RLS through withUser(), Chroma limited to the RAG lesson, and the rule that each production migration still needs approval. Anyone opening the repo can now see why the app is built the way it is.
+
+
+PROMPT 93
+commit and push it
+
+What it gives you:
+DECISIONS.md and prompts 91–93 in prompt.txt saved as one commit on main and pushed to GitHub. No app code changed. The push still starts a routine Vercel production deploy, and the site behaves the same afterward.
