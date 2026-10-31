@@ -1025,3 +1025,108 @@ commit and push it
 
 What it gives you:
 DECISIONS.md and prompts 91–93 in prompt.txt saved as one commit on main and pushed to GitHub. No app code changed. The push still starts a routine Vercel production deploy, and the site behaves the same afterward.
+
+
+PROMPT 94
+Where is the public facing app located:
+
+What it gives you:
+The app's public address. It runs on Vercel at https://ducks-on-the-pond-psi.vercel.app. The search page from the assembly lesson is at https://ducks-on-the-pond-psi.vercel.app/search. Each push to main on GitHub (leejandersen-debug/Ducks-on-the-Pond) deploys there automatically.
+
+
+PROMPT 95
+create a test evidence of the break and recover testing we did, i.e. logs + metrics document that displays it works.
+
+What it gives you:
+A private evidence page at https://claude.ai/artifact/9bTWXPm2Ckj1od26VSNLP9 for the three deliberate breaks run on 2026-10-24, built from the real log lines in the dev server output and Vercel's preview log. Test 1, the lesson exercise: a wrong database password caught as db_unavailable 28P01, broken for 2 min 40 s on a timeline drawn to scale, then recovered with health 200 in 95 ms and My collection 200 with 0 error lines. Test 2: an unreachable host caught as health.db_unreachable ENOTFOUND with a 503 in 8 ms, recovered to 200 in 101 ms. Test 3: a throwing /api/boom route on a Vercel preview that logged request_failed and 500s, never reached production (404 there), and was deleted afterward. A production re-check on 2026-10-30 gave 5 of 5 health calls at 200 with a median of 188 ms. Every log excerpt contains error codes only, with no passwords or connection strings.
+
+
+PROMPT 96
+Now do the same for the search-test log.
+
+What it gives you:
+A second private evidence page, at https://claude.ai/artifact/FjGsoRi5cdXFSs1F86dFqS, for the course-corpus search. It is built from the real dev server and Vercel production log lines recorded on 2026-10-27, and it shows each seam of the assembly with its check. Seam 1: a curl POST to /api/search returned 200 in 2,491 ms with the PTO passages (top 0.4289). Seam 2: the browser search box made POST /api/search 200 in 1,074 ms and showed the 15-day sentence. Seam 3: three questions were all logged, which revealed the results: 3 gap, fixed by adding topSimilarity (before and after log lines shown). Seam 4: the live 500 caused by the missing libonnxruntime.so.1, its fix, and the first live search at 4,347 ms (a cold start). A fresh production check on 2026-10-30 sent four questions twice, and all 8 searches returned 200 at 30–71 ms on the server once warm. A chart compares each top score with the 0.33 floor, and the scores match local exactly.
+
+
+PROMPT 97
+Do I need to claim my Claude API credit?
+
+What it gives you:
+The answer, and how to claim. The monthly API credits for subscribers are not added on their own; you have to claim them. On claude.ai, go to Settings > Billing (Team owners use Organization settings > Billing). In the API credits section, choose "Link organization", pick or create a Console organization, accept the Supplemental Credit Terms, and confirm. You can link only one organization, and changing it later means contacting support. To be eligible you need a Max, Ultra or Team plan that you have been on for at least 7 days. Pro, Free and Enterprise plans don't get the credits. The amounts are $100 a month on Max, $200 on Ultra, and up to $500 pooled on Team. Unused credits expire at the end of each billing cycle and don't roll over, so claiming early gives you more time to use them. There is no deadline to claim. Sources: the Claude Code email of 2026-10-17 and support article 17154008.
+
+
+PROMPT 98
+Where is the API credits section: [Image #1: screenshot of claude.ai Settings > Billing. It shows the Pro plan, billed annually and set to auto-renew on Jul 9, 2027, then Payment (a Visa set as default), Usage credits ($0.00 current balance, a "Buy usage credits" button and Auto-reload), and Invoices (Jul 9, 2026, $200, Paid). There is no API credits section.]
+
+What it gives you:
+The reason the section is missing: the account is on the Pro plan. The monthly API credits are only for Max, Ultra and Team, so Billing doesn't show an API credits section on Pro. Nothing is missing and there is nothing to claim. The "Usage credits" section on the page is a different thing. It's prepaid credit for going past your plan limits in Claude and Claude Code, and it doesn't fund Claude API (Console) usage. To get the API credits, you would have to upgrade to Max ($100 a month in credits) or Ultra ($200), and stay on that plan for 7 days before the section appears. Otherwise, API usage for the app is billed through your Console organization as usual.
+
+
+PROMPT 99
+Your explanation is confusing.  Do I have api credits in the pro plan? Or do I need to buy them?
+
+What it gives you:
+A plain answer. No, the Pro plan doesn't include API credits. To use the Claude API, you buy credits in the Claude Console (platform.claude.com) under Billing. The "Buy usage credits" button in claude.ai Settings > Billing doesn't work for this, because those credits only cover Claude and Claude Code usage past your plan limits.
+
+
+PROMPT 100
+then why do I have an Claude Pro plan if I can't get API credits?  That seems backwards.  I have the most expensive plan, but it doesn't give me credits?  How does that work?
+
+What it gives you:
+How the plans fit together. Pro is the entry-level paid plan, not the top one: $200 a year, paid annually (the Jul 9, 2026 invoice). Max ($100 a month and up), Ultra and Team cost more, and only those plans come with monthly API credits. A subscription pays for you using Claude yourself: the claude.ai app, Claude Code, and this whole build. The Claude API is a separate pay-as-you-go service for apps that call Claude from their own code, and it's billed by the token through the Console. That's why Pro doesn't need to include API credits for this project.
+
+
+PROMPT 101
+Here is what the lesson plan is telling me: [Image #2: lesson text, "Before you start: give your engine a key." It says the engine sends the context and the question to Claude through the Claude API, which needs an API key. It assumes a Max plan, which includes $100 of API credit every month that you claim once: on claude.ai go to Settings > Billing > API credits and link a Claude Console organization. Then you make a key at platform.claude.com, add it to .env as ANTHROPIC_API_KEY, confirm .env is in .gitignore, and on Day 5 set the same key in the host's environment settings. The credit refreshes monthly, and when it runs out, requests stop.]  Tell me what my options are?  Can I add max for this month and cancel at any time or do I have to pay for a year in advance?
+
+What it gives you:
+Two options. Option A (recommended) is to stay on Pro and buy a small amount of API credit at platform.claude.com > Billing. A lesson-sized engine uses very little, so a few dollars should cover it. Then create a key, put it in .env as ANTHROPIC_API_KEY, and continue the lesson unchanged. Only the "claim the credit" step is skipped. Option B is to upgrade to Max. Max is billed monthly, and you can cancel anytime, effective at the end of the period. The upgrade starts right away, and the unused part of the annual Pro becomes a prorated credit, roughly $135 for 8 months left of $200, so the first Max month may be mostly covered. The catches: the API credit shows up only after 7 days on Max, and when you cancel Max you drop to the Free plan, not back to annual Pro, so keeping Pro means buying it again. Sources: support.claude.com articles 11049752, 8325617 and 17154008.
+
+
+PROMPT 102
+Let's go with plan A.  How much should I buy and does it get billed to my account?
+
+What it gives you:
+The amount to buy and how billing works. Buy $10, or the smallest amount the Console allows. A lesson-sized question with about 3,000 tokens of context and a 300-token answer costs around 1 cent on Sonnet 5.5 ($2/$10 per million tokens) and around 2 cents on Opus 5.5 ($4/$20). $10 covers several hundred questions. For billing: it's a one-time prepaid charge on a card you add on the Console's Billing page (platform.claude.com/settings/billing), separate from your claude.ai Pro subscription and its Visa on file. It won't show up on your Pro plan. Leave auto-reload off: with prepaid credit, when the balance hits $0 requests just stop and nothing more is charged, so the purchase is the most you can spend. Failed requests aren't charged.
+
+
+PROMPT 103
+Direct me in how to buy API credits.  There is no option in Billing
+
+What it gives you:
+Where to buy them. API credits aren't sold on claude.ai. The Billing page in claude.ai Settings only covers the Pro subscription and usage credits. They're bought on a separate site, the Claude Console. Go to platform.claude.com/settings/billing and sign in with the same email. If asked, create an organization (a name is enough). On the Billing page, click "Buy credits", add a card if asked, enter $10, and confirm, leaving auto-reload off. The credits show up right away. If there's still no "Buy credits" button, the account's role in that organization isn't Admin or Billing, or the organization is set up for invoicing, and Anthropic support has to fix it.
+
+
+PROMPT 104
+I bought the API credits.  Now what do I do?
+
+What it gives you:
+The key set up the safe way. In the Console (platform.claude.com > API Keys > Create key), create a key named something like "ducks-dev" and copy it right away, because it's only shown once. An empty ANTHROPIC_API_KEY= line was added to .env.development.local, the local file that already holds DATABASE_URL. It's covered by the .env* rule in .gitignore and never committed. Paste the key after the = and save. It doesn't go in .env.local, because `vercel env pull` rewrites that file and would erase the key. A blank ANTHROPIC_API_KEY= line was also added to .env.example, the committed template, so the repo records that the variable exists without its value. The key goes in Vercel's environment settings on Day 5. Never paste the key into the chat.
+
+
+PROMPT 105
+I saved the key in .env.development.local
+
+What it gives you:
+A check that doesn't reveal the key. It reads the ANTHROPIC_API_KEY line from the file on disk and reports only its length, its first 7 characters ("sk-ant-"), and whether it contains quotes or spaces. It then calls the free /v1/models endpoint, which costs nothing, and expects HTTP 200. The first check showed the line was still empty on disk (length 0, HTTP 401). The paste hadn't been saved: the editor showed the change, but the file wasn't written. The fix is to save with Cmd+S (the tab's dot disappears) and run the check again.
+
+
+PROMPT 106
+I saved it, check again
+
+What it gives you:
+Confirmation that the key works. The file now has a single ANTHROPIC_API_KEY line, 106 characters long, starting with "sk-ant-", with no quotes or spaces. The free /v1/models call returned HTTP 200, so the key is valid and linked to the Console organization. .env.development.local is still gitignored, so the key stays out of the repo. The only env change waiting to be committed is the blank ANTHROPIC_API_KEY= line in .env.example. Next: restart `npm run dev` so Next.js loads the new variable, then go on to the engine step of the lesson.
+
+
+PROMPT 107
+Extend my Week 8 search script into a question-answering engine. Behavior: take a question from the command line, retrieve the top 3 chunks from my existing vector store, format them into a context block that keeps each chunk's document name and section label, then ask Claude through the Claude API (key from ANTHROPIC_API_KEY in my .env) to answer using only that context. The prompt must forbid outside knowledge, require the answer to name its source document and section, and require the exact reply 'I don't know' when the context doesn't contain the answer. Print the answer, then the source line.
+
+What it gives you:
+scripts/ask.mjs, run with `npm run ask -- "question"` (add --context to also print the block sent to Claude). It retrieves the top 3 chunks from the local Chroma "trailhead" collection, using the same embedding model and connection as query-chunks.mjs. It wraps each chunk in <chunk><document>…</document><section>…</section><content>…</content></chunk> and calls claude-opus-5-5 through @anthropic-ai/sdk 1.3.0, which reads the key from ANTHROPIC_API_KEY in .env.development.local. The system prompt forbids outside knowledge, requires the source document and section copied exactly from the chunk tags, and requires the exact reply "I don't know" when the context lacks the answer. Structured output (a JSON schema with answer, source_document and source_section) makes the reply parseable. The script prints the answer and then "Source: <document> · <section>", or "Source: none" for "I don't know". It warns if the cited source isn't one of the retrieved chunks. Server-side fallbacks ("default") retry a safety-declined request on another model, and refusals and API errors produce clear messages. Four live tests (about 5¢ in total): Hawaii shipping gave $27 from returns-shipping-policy.txt · SECTION 6; new-hire PTO gave 15 days from employee-handbook.md · 7. Paid Time Off & Holidays; the break-room coffee brand gave "I don't know"; the capital of Wyoming, an outside-knowledge test, gave "I don't know".
+
+
+PROMPT 108
+yes, commit it
+
+What it gives you:
+The question-answering engine saved in git. One commit on main: scripts/ask.mjs, the npm "ask" script and the @anthropic-ai/sdk dependency (package.json and package-lock.json), the blank ANTHROPIC_API_KEY= placeholder in .env.example, and prompt-log entries 94–108. The real key in .env.development.local is gitignored and was not committed. Nothing was pushed, so Vercel hasn't deployed anything.
