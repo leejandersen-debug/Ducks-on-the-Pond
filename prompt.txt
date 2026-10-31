@@ -1130,3 +1130,10 @@ yes, commit it
 
 What it gives you:
 The question-answering engine saved in git. One commit on main: scripts/ask.mjs, the npm "ask" script and the @anthropic-ai/sdk dependency (package.json and package-lock.json), the blank ANTHROPIC_API_KEY= placeholder in .env.example, and prompt-log entries 94–108. The real key in .env.development.local is gitignored and was not committed. Nothing was pushed, so Vercel hasn't deployed anything.
+
+
+PROMPT 109
+push it
+
+What it gives you:
+The commits on GitHub (leejandersen-debug/Ducks-on-the-Pond, main), which starts Vercel's automatic production deploy. The pushed commits only add a command-line script (scripts/ask.mjs) and the @anthropic-ai/sdk dependency. No database migration is included, and the live site's pages and API routes are unchanged. The engine runs locally and needs the local Chroma store, so ANTHROPIC_API_KEY doesn't need to be in Vercel yet. That comes on Day 5.
