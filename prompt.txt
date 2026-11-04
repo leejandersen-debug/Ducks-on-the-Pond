@@ -1137,3 +1137,45 @@ push it
 
 What it gives you:
 The commits on GitHub (leejandersen-debug/Ducks-on-the-Pond, main), which starts Vercel's automatic production deploy. The pushed commits only add a command-line script (scripts/ask.mjs) and the @anthropic-ai/sdk dependency. No database migration is included, and the live site's pages and API routes are unchanged. The engine runs locally and needs the local Chroma store, so ANTHROPIC_API_KEY doesn't need to be in Vercel yet. That comes on Day 5.
+
+
+PROMPT 110
+answer these questions in text form only: [Image #3: lesson worksheet with blanks to fill in. My spec (as given to the AI). Review notes, what I checked and what I caught. Run #2, my factual question: Q, A, source it cited, verified against the document? Run #3, meaning-only win: Q, A, words in the passage my question never used. Run #4, the refusal: Q, A, how many tries it took and what I fixed.]
+
+What it gives you:
+The filled-in worksheet as plain text. Spec: the PROMPT 107 text. Review notes: the unsaved key caught (length 0, HTTP 401), the key kept out of .env.local because `vercel env pull` rewrites it, cited sources checked against the retrieved chunks, the commit scanned for keys, and the PTO citation naming a subsection label. Run #2: Hawaii shipping gave $27, citing returns-shipping-policy.txt · SECTION 6. That was checked against line 113 of the source file and matches. Run #3: a new live run, "Can my pup tag along when I clock in?", answered "Fridays only, leashed, with coworkers' consent" from employee-handbook.md · 11. Pet Policy, although the question used none of the passage's words (pet, animal, office, Friday, leashed, consent). Run #4: "What brand of coffee is in the break room?" gave exactly "I don't know" on the first try, with nothing to fix. "What is the capital of Wyoming?" also got "I don't know", which shows the engine ignores outside knowledge.
+
+
+PROMPT 111
+for this project I need to come up with a "golden set" of questions that can exercise this application in any setting. The following picture is an idea of where we want to go. Just take note, and do not take action yet, but this is the idea we are looking at: [Image #1: "WHERE THE QUESTIONS LIVE" — hunt across the whole corpus; a set drawn from one document tests one document. employee-handbook.md: PTO days + paid holidays, the pet policy (Fridays...), staff discount %, founding date and founders, store hours (single-fact goldmine). product-faq.md: sizing quirks (the hardshell that runs half a size small), care and warranty answers, gift cards, pickup, rentals (meaning-only questions thrive here). returns-shipping-policy.txt: 30-day refund window, 45-day exchange window, free-shipping threshold, shipping zones and rates (home of the precision pair). store-operations-manual.md: how returns get processed, how new hires onboard, opening/closing procedure (pairs with the docs above for cross-doc items). pricing.csv: catalog prices by SKU, MSRP vs store vs staff price (structured data, harder retrieval, honest test). The deliberate gaps: no wifi password anywhere, no price-match policy, no second store, no Denver (refusal items live here). A strong ten: a spread of single facts, a cross-document pair or two, the 30-vs-45 precision case, two refusals.]
+
+What it gives you:
+The golden-set plan on record, with nothing built yet. The target is ten questions drawn from the whole corpus: several single facts (mostly from the employee handbook), one or two cross-document pairs (the store operations manual matched with the returns policy or the handbook), the 30-day refund vs 45-day exchange precision case, at least one meaning-only question (product FAQ), at least one structured-data question (pricing.csv), and two refusals built on the deliberate gaps (wifi password, price matching, a second store or Denver).
+
+
+PROMPT 112
+Here is the direction according to the syllabus: [pasted syllabus steps] 1. Item #1, built start to finish: a single-fact item from the handbook, phrased the way a real staff member would ask: "How much of a discount do I get on gear as staff?" 2. Items #2–#6, single facts spread wide: five more single-fact items, no two from the same section of the same document (PTO, the pet policy, shipping costs, sizing, hours, founding). Phrase at least two in the asker's vocabulary rather than the document's (the "dog on Fridays" move). 3. Item #7, one cross-document item ("How do I process a customer's return?" or "what does a new hire get, and how are they onboarded?"), with the rule from one document and the steps from another. List both passages in the source field; the pass criteria must demand both halves. 4. Item #8, the precision case: one item that forces the 30-versus-45 distinction, worded so only one window can claim it (Row B's lawyer test). 5. Items #9–#10, two refusals: off-corpus questions where the only passing answer is "I don't know", with inverted pass criteria written out (any confident answer fails). 6. The verify pass, then the freeze: walk all ten with the documents open, confirm each expected answer against its passage, fix what's drifted, sharpen any question two answers could claim. Then number the set 1–10, save it as golden-set.md, and stop editing it. That save is the freeze.
+
+What it gives you:
+golden-set.md at the project root, frozen 2026-11-03. Each of the ten items has a question, expected answer, source (document, section and line), pass and fail criteria. 1: staff discount, 30% (handbook §12). 2: "vacation days I build up", 15 days PTO (handbook §7). 3: "bring my dog in", Fridays only, leashed, coworkers' consent (handbook §11). 4: Hawaii shipping, $27 (policy §6). 5: fleece under the "Wind River shell", size up because it runs a half-size small (FAQ Sizing & Fit, meaning-only). 6: Cirque 2 tent staff price, $245.00 (pricing.csv). 7: register handling of a refund, which requires both the policy rule (5–7 business days, original packaging) and the manual steps (manager PIN, routing, logging). 8: boots received 38 days ago, no refund but exchange or credit still open. 9: wifi password and 10: price matching, both refusals with inverted criteria. Every answer was checked against its source line. Two findings are recorded in the file. First, the chunker labels each chunk with the first section it contains, so both accepted labels are listed for each item. Second, ask.mjs can cite only one source document, so item 7 may fail its credit check. A Denver refusal was considered and dropped because the corpus implies there's only the Pinedale store.
+
+
+PROMPT 113
+Now I need to test the questions. Here is the shape of the exercise: [Image #3: worksheet template. One line per item: "#1 | Q: ... | Expected: ... | Source: doc — section | Pass: ...", "#2 | Q: ... | Expected: ... | Source: ... | Pass: ...", "#9 | Q: ... | Expected: I don't know — not in the corpus | Source: none | Pass: any confident answer fails", "#10 | ...". Then "Verify pass notes — anything you caught or sharpened before the freeze: ..."]
+
+What it gives you:
+The frozen golden set written out in the worksheet's one-line-per-item shape, as plain text ready to paste: all ten items with question, expected answer, source (document — section) and pass criteria, followed by the verify-pass notes (the line checks, the chunk-label quirk, the single-source limit in ask.mjs for item 7, the two vocabulary rewrites, the item 8 wording that passes the lawyer test, the refusal bait checks, and the Denver item that was dropped). golden-set.md itself was not edited, so the freeze holds. None of the questions have been run through the engine yet.
+
+
+PROMPT 114
+yes, run all ten and grade them
+
+What it gives you:
+The frozen golden set run through the engine and graded: 9 of 10 pass, recorded in golden-run-2026-11-03.md (golden-set.md is unchanged). Local Chroma was started with `npm run chroma`, then each question ran through `npm run ask -- --context`. Passes: #1 30% discount, #2 15 days PTO, #3 dogs on Fridays (leashed, consent), #4 Hawaii $27, #5 size up the Wind River Hardshell, #6 Cirque 2 staff price $245.00, #8 no refund at day 38, and #9 and #10 exact "I don't know" even with bait chunks retrieved. Fail: #7, the cross-document register return. Section 4 of the operations manual is split across two chunks, and top-3 retrieval returned only the first, so the answer lacks the manager PIN, routing and logging steps and the policy's 5–7 business day refund timing. It credits only one document, because ask.mjs allows a single source. #8 passed, but it didn't mention the exchange or store credit still open to day 45, because that passage wasn't retrieved. Candidate fixes for later: more chunks, keeping numbered procedures in one chunk, or a multi-source answer schema, then rerun the same frozen set.
+
+
+PROMPT 115
+commit it
+
+What it gives you:
+The golden set and its first graded run saved in git. One commit on main: golden-set.md (the frozen ten-item set), golden-run-2026-11-03.md (9 of 10 pass, with #7 failing on retrieval and on the single-source limit) and prompt-log entries 111–115. Nothing was pushed.
