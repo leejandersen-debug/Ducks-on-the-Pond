@@ -1179,3 +1179,45 @@ commit it
 
 What it gives you:
 The golden set and its first graded run saved in git. One commit on main: golden-set.md (the frozen ten-item set), golden-run-2026-11-03.md (9 of 10 pass, with #7 failing on retrieval and on the single-source limit) and prompt-log entries 111–115. Nothing was pushed.
+
+
+PROMPT 116
+push it
+
+What it gives you:
+The golden-set commit on GitHub (leejandersen-debug/Ducks-on-the-Pond, main), which starts Vercel's automatic production deploy. The pushed commit only adds two Markdown files and prompt-log entries. There's no code change and no database migration, and the live site's pages and API routes are unchanged. This entry is in the working tree and goes in with the next commit.
+
+
+PROMPT 117
+answer the worksheet questions in text form only
+
+What it gives you:
+The golden-set worksheet (the one-line-per-item shape from PROMPT 113) answered in plain text, ready to paste: ten lines with Q, Expected, Source and Pass, then the verify-pass notes. No new worksheet image came with this prompt, so the answer follows the PROMPT 113 template.
+
+
+PROMPT 118
+Here is the worked example for the exercise we are about to do. Don't do anything, just use this as an example: [pasted worked example] Item #1, one complete grade, both verdicts. Golden item: "How long do I have to return something for a refund?", expected answer 30 days, expected source returns-shipping-policy.txt §1. Retrieval verdict first: run the question and read only the retrieved list (returns-shipping-policy.txt §1 at 0.81, the FAQ's shipping section at 0.64, the ops manual's returns SOP at 0.58). The expected source is in the list (rank 1, but anywhere would do), so HIT, recorded before reading a word of the answer. Answer verdict second: the engine says "You have 30 days from delivery, as long as the item is unused with tags attached", source returns-shipping-policy.txt §1. The claim matches the golden answer and the receipt names the expected source, so PASS. Row one reads HIT / PASS. The cadence is about ninety seconds per item; the discipline is the order: retrieved list first, answer second, verdicts written down before the next run.
+
+What it gives you:
+The grading method on record, with nothing run yet. Each golden item gets two verdicts in a fixed order. First a retrieval verdict (HIT or MISS: is the expected source anywhere in the retrieved list, read before the answer). Then an answer verdict (PASS or FAIL: does the claim match the golden answer and does the receipt name the expected source). Each row is recorded as HIT/PASS, HIT/FAIL, MISS/PASS or MISS/FAIL before the next item runs.
+
+
+PROMPT 119
+[pasted exercise steps] Set up your scoresheet: ten rows with columns for the question, expected source, retrieval verdict, answer verdict and a short note. Run all ten, grading as you go: retrieval verdict from the retrieved list before reading the answer, every time. Anywhere in the list is a hit, cross-document items need both sources, and a gap item takes a dash for retrieval and is graded on its refusal. Grade every answer on both planks: the claim matches the golden answer and the receipt names the expected source. Write a note on every FAIL naming what went wrong; those notes become the next session's fix list. Total up as two fractions with stated denominators, retrieval accuracy and answer quality side by side, and don't average them. Read your own table: which measure is weaker? Find the single row that best illustrates it and say what it shows; that row is where the next session's work starts.
+
+What it gives you:
+scoresheet-2026-11-03.md at the project root. All ten items were graded in the required order: retrieved lists from `npm run query` (same collection, model and top 3 as the engine) were graded and saved first, then the answers came from `npm run ask`. Retrieval accuracy 7/8 (#9 and #10 take a dash). Answer quality 9/10. #7 FAIL: missing citation (only the ops manual credited), and the answer stops at step 5 with no manager PIN, routing or logging, because chunk ops -06 wasn't retrieved. Retrieval is the weaker measure, and #8 (MISS / PASS) shows it best: the 45-day chunk never reached Claude, so the precision case's 30-vs-45 choice never happened, yet the answer passed on the 30-day line alone. The fix list covers retrieving SECTION 2 for #8, keeping procedures in one chunk for #7, multi-source citations in ask.mjs, and grading receipts by chunk ID, because chunks -01 and -02 share the label "SECTION 1 — RETURNS".
+
+
+PROMPT 120
+Here is the shape the answers need to be in (text form only): [Image #6: worksheet template. "My scoresheet (one line per item): 1. [question] | expected source | retrieval: HIT/MISS | answer: PASS/FAIL | note", "2. ...". "Totals: Retrieval accuracy: __ / __", "Answer quality: __ / __". "The weaker measure and the row that proves it: ..."]
+
+What it gives you:
+The PROMPT 119 scoresheet rewritten in the worksheet's shape as plain text, ready to paste: ten one-line rows (question, expected source, retrieval verdict, answer verdict, note), the two totals (retrieval 7 / 8, answer 9 / 10), and the weaker measure (retrieval), proved by row #8 (MISS / PASS).
+
+
+PROMPT 121
+commit it
+
+What it gives you:
+The scoresheet saved in git. One commit on main: scoresheet-2026-11-03.md (retrieval 7 / 8, answer 9 / 10, the weaker measure proved by row #8, and the fix list) and prompt-log entries 116–121. Nothing was pushed.
