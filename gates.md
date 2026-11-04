@@ -1,8 +1,10 @@
 # Baseline Gates — Trailhead RAG Engine
 
-Retrieval ≥ 80% (≥ 7 / 8; the two refusal items have no source and are excluded) · Answer ≥ 7 / 10.
-Why: retrieval matches the worked 8/10 bar on our denominator; answer sits one below it because our answer check is stricter (the receipt must name the expected source, and cross-document items need both halves and both credits), so 7/10 still means real work in v1.
-Committed 2026-11-03 (thresholds first committed in ebc9c67, before the scored run; unchanged since).
+Retrieval ≥ 8 / 10 · Answer ≥ 7 / 10. Every item counts once on each measure, refusals included.
+Why: retrieval matches the worked 8/10 bar; answer sits one below it because our answer check is stricter (the receipt must name the expected source, and cross-document items need both halves and both credits), so 7/10 still means real work in v1.
+Committed 2026-11-03. The retrieval denominator changed from 8 to 10 at the user's direction; the 80% bar is unchanged from ebc9c67.
+
+Refusal-item retrieval rule: HIT when no retrieved chunk contains the asked-for fact (there is nothing in the corpus to find); MISS if a retrieved chunk does contain it, because then the item is no longer a gap.
 
 ---
 
@@ -12,7 +14,7 @@ Golden set: `golden-set.md` (10 items, frozen 2026-11-03).
 
 | Measure | Gate | Denominator |
 |---------|------|-------------|
-| Retrieval accuracy | **≥ 80%**, which is **≥ 7 / 8** for this set | The 8 items with an expected source (#1–#8). Gap items #9–#10 take a dash and are left out, because there is no source to retrieve. |
+| Retrieval accuracy | **≥ 8 / 10** | All 10 items. Gap items #9–#10 use the refusal-item retrieval rule above. |
 | Answer quality | **≥ 7 / 10** | All 10 items, refusals included. |
 
 Scoring rules (unchanged from `scoresheet-2026-11-03.md`):

@@ -1263,3 +1263,10 @@ Here's our official run on this lesson: [pasted steps] 2. Commit your gate: thre
 
 What it gives you:
 The official run, start to finish. Step 2: gates.md opens with the three-line gate (retrieval ≥ 80% (7 / 8), answer ≥ 7 / 10, the why sentence defending one-below-the-worked-bar on the answer side, and the date), committed first. The thresholds are unchanged from ebc9c67. Step 3: last session's scores were retrieval 7 / 8 (PASS) and answer 9 / 10 (PASS), so no lever needed a fix. Step 4: the plain discount probe never surfaced the plant (rank 91 of 110). The gear-care probe retrieved it at rank 1 and the answer still gave 30% from the handbook, so no hardening was needed. ask.mjs gained a --log flag that prints the retrieved chunk ids and similarity scores from the same query that feeds Claude, and the log line was captured from that run. The planted chunk was then deleted from the Chroma store (back to 109 chunks). Step 5: baseline-report-v1.md was rewritten as the one-page report.
+
+
+PROMPT 128
+Do not leave out the two refusal items. Each test question is valued with 1 result. Using this criteria, run the test again.
+
+What it gives you:
+Retrieval scored out of 10, the refusals included, and the golden set rerun on the clean 109-chunk store. gates.md now reads retrieval ≥ 8 / 10 and answer ≥ 7 / 10, with every item counting once on each measure. It adds a refusal-item retrieval rule: HIT when no retrieved chunk contains the asked-for fact, MISS if one does. The bar is still 80%. The rerun graded retrieval lists first (npm run query), then answers (npm run ask --log), and the scores, verdicts and filed misses were updated in a new scoresheet and in baseline-report-v1.md.
