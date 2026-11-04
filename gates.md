@@ -1,5 +1,11 @@
 # Baseline Gates — Trailhead RAG Engine
 
+Retrieval ≥ 80% (≥ 7 / 8; the two refusal items have no source and are excluded) · Answer ≥ 7 / 10.
+Why: retrieval matches the worked 8/10 bar on our denominator; answer sits one below it because our answer check is stricter (the receipt must name the expected source, and cross-document items need both halves and both credits), so 7/10 still means real work in v1.
+Committed 2026-11-03 (thresholds first committed in ebc9c67, before the scored run; unchanged since).
+
+---
+
 **Committed 2026-11-03, before the baseline run.** These thresholds are a decision made in advance. The run only shows which side of them the engine lands on. Don't change them after a run to make a result pass.
 
 Golden set: `golden-set.md` (10 items, frozen 2026-11-03).
