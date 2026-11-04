@@ -4,6 +4,7 @@
 //   npm run chroma                                   # the vector store must be running
 //   npm run ask -- "How much does shipping to Hawaii cost?"
 //   npm run ask -- --context "Can I return worn boots?"   # also print the context block sent
+//   npm run ask -- --log "What's the employee discount?"  # also log the retrieved chunk ids and scores
 //
 // Needs ANTHROPIC_API_KEY in .env.development.local (loaded by the npm script). Each question is
 // one Claude API call, a cent or two against the prepaid Console credit.
@@ -19,9 +20,10 @@ const DONT_KNOW = "I don't know";
 
 const args = process.argv.slice(2);
 const showContext = args.includes("--context");
-const question = args.filter((a) => a !== "--context").join(" ").trim();
+const showLog = args.includes("--log");
+const question = args.filter((a) => a !== "--context" && a !== "--log").join(" ").trim();
 if (!question) {
-  console.error('Usage: npm run ask -- [--context] "your question"');
+  console.error('Usage: npm run ask -- [--context] [--log] "your question"');
   process.exit(1);
 }
 if (!process.env.ANTHROPIC_API_KEY) {
@@ -40,7 +42,7 @@ try {
     name: COLLECTION,
     embeddingFunction: new DefaultEmbeddingFunction({ modelName: EMBED_MODEL }),
   });
-  found = await collection.query({ queryTexts: [question], nResults: TOP_K, include: ["documents", "metadatas"] });
+  found = await collection.query({ queryTexts: [question], nResults: TOP_K, include: ["documents", "metadatas", "distances"] });
 } catch (err) {
   console.error(`Couldn't query the Chroma store (is \`npm run chroma\` running?): ${err.message}`);
   process.exit(1);
@@ -50,6 +52,11 @@ const chunks = found.ids[0].map((id, i) => ({
   section: found.metadatas[0][i].section || "(no section)",
   text: found.documents[0][i].trim(),
 }));
+// Similarity is 1 - cosine distance, the same figure query-chunks.mjs prints.
+if (showLog) {
+  const list = found.ids[0].map((id, i) => `${id} #${i + 1} (${(1 - found.distances[0][i]).toFixed(2)})`);
+  console.log(`log: retrieved [${list.join(", ")}]\n`);
+}
 
 // 2. Format them into a context block that keeps each chunk's document name and section label.
 const context = chunks

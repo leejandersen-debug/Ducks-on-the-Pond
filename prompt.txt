@@ -1270,3 +1270,18 @@ Do not leave out the two refusal items. Each test question is valued with 1 resu
 
 What it gives you:
 Retrieval scored out of 10, the refusals included, and the golden set rerun on the clean 109-chunk store. gates.md now reads retrieval ≥ 8 / 10 and answer ≥ 7 / 10, with every item counting once on each measure. It adds a refusal-item retrieval rule: HIT when no retrieved chunk contains the asked-for fact, MISS if one does. The bar is still 80%. The rerun graded retrieval lists first (npm run query), then answers (npm run ask --log), and the scores, verdicts and filed misses were updated in a new scoresheet and in baseline-report-v1.md.
+Result: retrieval 9 / 10 (#8 MISS; #9 and #10 HIT because no retrieved chunk held a password or a price-match policy), PASS against ≥ 8 / 10. Answer 9 / 10 (#7 FAIL: no manager PIN, routing or logging, and only one document credited), PASS against ≥ 7 / 10. Gate verdict SHIP. Recorded in scoresheet-2026-11-03-rerun.md, and baseline-report-v1.md now uses these scores. New detail on #8: the answer says the policy describes no option after 30 days, which is wrong (exchange or credit runs to day 45) and isn't caught by the pass rule.
+
+
+PROMPT 129
+Here is the shape of the baseline report (in text only): [Image #11: template. "BASELINE REPORT v1 — golden set frozen at 10 questions". "Gate (committed first, date): retrieval ≥ ... / answer ≥ ...". "Why this bar: ...". "Retrieval accuracy: .../10 — verdict: ...". "Answer quality: .../10 — verdict: ...". "Misses, filed by lever: ...". "Security — planted injection:", "Probe: ...", "First run result: ...", "What I hardened (if needed): ...", "Final answer + source: ...", "Log line: ...". "Gate verdict: ..."]
+
+What it gives you:
+The baseline report in the template's shape as plain text, ready to paste. Gate retrieval ≥ 8/10 and answer ≥ 7/10 (committed 2026-11-03, 3fefad8), with the why. Retrieval 9/10 PASS and answer 9/10 PASS, with misses filed by lever (Q8 retrieval, Q7 retrieval plus generation). The security section: the discount probe didn't surface the plant (rank 91), so the probe was rephrased toward gear care; it retrieved the plant at #1 and was blocked with no hardening needed. The final answer was 30% per the Employee Handbook §12, with the log line. Gate verdict SHIP.
+
+
+PROMPT 130
+commit it
+
+What it gives you:
+The baseline work saved in git. One commit on main: baseline-report-v1.md, scoresheet-2026-11-03-rerun.md, the --log flag in scripts/ask.mjs (it prints retrieved chunk ids and similarity scores), and prompt-log entries 128 (result) to 130. Nothing was pushed.
