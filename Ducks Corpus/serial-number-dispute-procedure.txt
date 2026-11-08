@@ -1,0 +1,215 @@
+DUCKS ON THE POND CARDS
+SERIAL-NUMBER DISPUTE PROCEDURE
+
+Version: 1.0 DRAFT, November 2026
+Owner: Ducks on the Pond Cards support team
+Applies to: collectors who record numbered cards, and the admins who review
+serial-number conflicts.
+
+This procedure expands on section 6.6 and section 10 of the User's Guide
+(users-guide.txt) and section 7 of the Customer Service Policy
+(customer-service-policy.txt). If they ever disagree, the Customer Service
+Policy applies. Items marked [TO CONFIRM] are placeholders.
+
+
+1. WHY SERIAL NUMBERS ARE PROTECTED
+
+A numbered card is one of a limited print run, for example 23/50. Only one
+physical card carries serial 23 of that variant. To keep the records honest,
+the Application allows only one unsold copy of a variant to hold a given
+serial number across all collections.
+
+Sold copies do not count. If a collector marks serial 23 as sold, another
+collector can then record serial 23 of that variant without a conflict.
+
+
+2. WHAT IS AND IS NOT A CONFLICT
+
+Not a conflict (rejected straight away, with a message):
+
+  - The serial is higher than the print run.
+      "Serial N is higher than the print run (/M)."
+  - You already hold that serial of that variant yourself.
+      "You already have serial N of this card."
+  - The cert number is already recorded for that grading company.
+      "That already exists."
+
+A conflict (sent to an admin):
+
+  - Another collector's unsold copy of the same variant already holds the
+    serial. You see:
+      "Serial #N is already in another collection, so this was sent to an
+       admin for review."
+
+The same serial on a different variant is not a conflict. Serial 23 of the
+Gold Refractor and serial 23 of the Orange Refractor are different cards.
+
+
+3. COMMON CAUSES
+
+From most to least common [TO CONFIRM once there is real data]:
+
+  1. A typo: one collector entered the wrong serial.
+  2. The wrong variant: the card was recorded under the wrong parallel, so it
+     collides with someone else's card.
+  3. A stale record: the card was sold or traded outside the Application, and
+     the previous owner never marked it sold.
+  4. A duplicate catalog entry: the same parallel was added twice.
+  5. A counterfeit or altered card.
+
+
+4. WHAT TO DO AS A COLLECTOR
+
+4.1 Before you add the card
+
+  - Check the serial against the card itself, not a listing or a photo.
+  - Check you chose the right set, card and parallel.
+  - For a graded card, have the cert number ready.
+
+4.2 When the conflict message appears
+
+Your card is not lost. It is waiting for review. Use the "Note for admin" box
+to explain, for example:
+
+  "Card is in hand, PSA cert 12345678. Bought from a card show on
+   2026-10-12. The other entry may be a typo."
+
+Add the note when you add the card. There is no way to add or change it after
+the card has been submitted.
+
+4.3 While you wait
+
+  - Track the review under "My serial-number reviews" at the bottom of My
+    collection. Statuses are "pending admin review", "approved" and
+    "rejected".
+  - Watch for a support email asking for evidence (section 5). Email
+    notifications from the Application are not available yet, so check My
+    collection for updates.
+  - If you sold or traded away the other copy yourself, under another
+    account, tell support.
+
+4.4 After the decision
+
+  - Approved: the card is added to your collection with the details you
+    submitted. It starts not tradeable.
+  - Rejected: the card is not added. Read the admin's note to see why.
+  - If you disagree, ask for a second review (section 8).
+
+
+5. EVIDENCE
+
+5.1 What we may ask for
+
+  - A clear photo of the front and back of the card showing the serial
+    number.
+  - For a graded card, the grading company and cert number, and a photo of
+    the slab label.
+  - Proof of purchase or trade, if you have it (a receipt, invoice or
+    message).
+
+Crop or cover any personal details such as an address label before you send a
+photo. We will never ask for a password, payment card number or bank detail.
+
+5.2 How strong each kind of evidence is
+
+  Strongest   A grading company cert whose record shows the serial number.
+              We check the cert on the grading company's own website.
+  Strong      Clear photos of the front and back that show the serial and
+              match the catalog entry.
+  Supporting  Receipts, invoices or messages showing when and where the card
+              was bought.
+  Weak        Photos from a listing, or a description with no photo.
+
+
+6. HOW AN ADMIN REVIEWS A CONFLICT
+
+6.1 The queue
+
+Open the Admin page (admins only). It shows the 50 most recent conflicts,
+open ones first. Each shows the variant, the serial, who submitted it and
+when, their note and copy details, and the existing copy and its owner.
+
+6.2 Steps
+
+  1. Read both entries side by side. Check the variant, serial, grade and cert
+     number of each.
+  2. Look for an obvious recording mistake: a typo, the wrong parallel, or a
+     duplicate catalog entry.
+  3. If it is not obvious, contact both collectors for evidence (section 5).
+  4. Wait up to 14 days for replies. If a collector does not reply in that
+     time, decide on the evidence you have.
+  5. Decide (section 7) and record it.
+  6. Write a note the collector will understand. Every decision records who
+     resolved it and when.
+
+6.3 Recording the decision
+
+To approve the new submission, first free the serial:
+
+  - "Change existing copy's serial to" a corrected number, then "Save"; or
+  - "Delete existing copy", if it should not exist at all.
+
+Then enter a note and click "Approve". If the serial is still held you will
+see: "Serial N is still held by a copy. Fix or delete that copy first."
+
+To keep the existing copy, enter a note and click "Reject".
+
+Never change or delete another collector's copy without a clear reason
+written in the note.
+
+6.4 Target times
+
+  - First review: within 5 business days of submission.
+  - Waiting for evidence: up to 14 days.
+  - Second review: a reply within 10 business days of the request.
+
+
+7. DECISION RULES
+
+  Situation                                   Decision
+  ------------------------------------------  ----------------------------------
+  The new entry is a typo                     Reject. Note the likely correct
+                                              serial so the collector can re-add
+  The existing entry is a typo                Correct the existing serial,
+                                              then approve
+  Wrong variant on one side                   Reject that side, with a note to
+                                              re-add under the right variant
+  The existing owner no longer has the card   Delete the existing copy (or ask
+                                              its owner to mark it sold), then
+                                              approve
+  Both claim the card; one has a cert that    Decide for the cert holder
+  records the serial
+  Both have equal evidence                    Keep the existing copy, reject,
+                                              and explain; either may ask for a
+                                              second review
+  No evidence from either side after 14 days  Keep the existing copy, reject
+  Signs of a counterfeit or altered card      Reject, and refer to the
+                                              acceptable-use rules (Customer
+                                              Service Policy section 9)
+
+Deliberately entering a serial you do not hold, to block another collector,
+breaks the Terms of Use (section 9) and can lead to the account being
+restricted or closed.
+
+
+8. SECOND REVIEW AND COMPLAINTS
+
+If you disagree with a decision:
+
+  1. Reply to your support conversation, or contact support, and ask for a
+     second review. Include any new evidence.
+  2. An admin who did not make the first decision reviews it and replies
+     within 10 business days.
+  3. If you are still unhappy, follow the complaints steps in section 11 of
+     the Customer Service Policy. The support lead's decision is final.
+
+An admin decision settles the Application's records. It does not decide who
+legally owns a physical card.
+
+
+9. KNOWN LIMITS
+
+  - No email notifications for submitters or admins yet.
+  - The "Note for admin" cannot be edited after submission.
+  - A copy's serial can only be changed by an admin.
+  - The queue shows the 50 most recent conflicts only.

@@ -1,0 +1,217 @@
+DUCKS ON THE POND CARDS
+SECURITY AND INCIDENT RESPONSE
+
+Version: 1.0 DRAFT, November 2026
+Owner: Ducks on the Pond Cards engineering team [TO CONFIRM owner]
+
+DRAFT. Section 2 describes protections built into the current test release.
+The rest is a proposed process that has not been tested in a real incident.
+Items marked [TO CONFIRM] are placeholders.
+
+
+1. PURPOSE
+
+This document explains how Ducks on the Pond Cards protects the Application
+and the data collectors enter, how to report a security problem, and what we
+do when something goes wrong.
+
+Related documents: the Privacy Notice (privacy-notice.txt), the Terms of Use
+(terms-of-use.txt) and the Customer Service Policy
+(customer-service-policy.txt).
+
+
+2. HOW THE APPLICATION IS PROTECTED
+
+2.1 Access to data
+
+  - Row-level security in the database: each collector can change only their
+    own cards and wants, and can see only trades they are part of.
+  - Only admins can see all collection data, use the Admin page, and manage
+    market price data.
+  - Other collectors never see paid prices, listed prices, acquired dates,
+    private wants, non-tradeable cards or sold records.
+  - Test login can be switched off per environment, so visitors can browse
+    but not make changes.
+
+2.2 Data in transit and storage
+
+  - All traffic to the Application uses HTTPS.
+  - Connections to the database are encrypted, and the database server's
+    certificate is checked (sslmode=verify-full).
+  - Database credentials and other secrets are kept in the hosting
+    platform's environment settings, never in the code.
+
+2.3 Logs and error messages
+
+  - Request logs record the path only. Query strings are dropped, because
+    they can carry tokens or email addresses.
+  - The logger removes values whose names suggest secrets (passwords, tokens,
+    cookies, sessions, API keys, authorization headers, email addresses,
+    request bodies, card numbers, connection strings) and strips passwords
+    from URLs, before anything is written.
+  - Error messages shown to users never include database host or account
+    details. Unexpected errors are logged as "action_failed".
+
+2.4 Environments and changes
+
+  - Development and production use separate database branches.
+  - Development scripts refuse to run against the production database.
+  - Schema changes are made through versioned migrations, and each production
+    migration is approved before it runs.
+  - Third-party libraries are updated when security advisories are published.
+
+2.5 What the Application does not hold
+
+No passwords (the test release has no personal accounts), payment card
+numbers or bank details. This limits what an attacker could take.
+
+2.6 Known gaps [TO CONFIRM plan and dates]
+
+  - Shared test users instead of personal accounts and real sign-in.
+  - No rate limiting on the search endpoint.
+  - No automated alerts on unusual activity. Logs are reviewed by hand.
+
+
+3. REPORTING A SECURITY PROBLEM
+
+3.1 How to report
+
+Email security@ducksonthepondcards.com [TO CONFIRM]. Include:
+
+  - what you found and where (page or API route);
+  - steps to reproduce it;
+  - what an attacker could do with it;
+  - your contact details, if you want a reply.
+
+Do not include other collectors' data in your report, beyond what is needed
+to show the problem.
+
+3.2 What we promise
+
+  - We acknowledge reports within 2 business days.
+  - We give an initial assessment within 5 business days.
+  - We keep you updated until it is fixed, and credit you if you want.
+  - We will not take legal action against good-faith research that follows
+    section 3.3.
+
+3.3 Rules for testing
+
+  - Test only with the test users, or with an account you own.
+  - Do not access, change or delete other collectors' data.
+  - Do not run denial-of-service tests, spam, or automated scans that put
+    heavy load on the Application.
+  - Do not test the hosting or database providers' own systems.
+  - Give us reasonable time to fix a problem before you disclose it publicly.
+    [TO CONFIRM, for example 90 days]
+
+3.4 Collectors
+
+If you think someone has used your account, or you see another collector's
+private data, contact support straight away. Support treats it as Urgent
+(Customer Service Policy section 5).
+
+
+4. WHAT COUNTS AS AN INCIDENT
+
+A security incident is any event that puts the confidentiality, integrity or
+availability of the Application or its data at risk. Examples:
+
+  - Private data shown to the wrong collector (paid prices, private wants,
+    someone else's trades).
+  - A card's ownership changed without a valid trade or admin decision.
+  - A leaked secret, such as a database connection string.
+  - Unauthorized admin access.
+  - The Application or database unavailable because of an attack.
+  - A vulnerable third-party library being exploited.
+
+
+5. SEVERITY LEVELS
+
+  Level     Description                                    Response starts
+  --------  ---------------------------------------------  ---------------
+  SEV 1     Confirmed exposure of private data; leaked     Immediately,
+            production secret; attacker has admin or       any time
+            database access
+  SEV 2     Ownership or serial records changed            Within 4 hours
+            wrongly; suspected exposure not yet confirmed;
+            Application down for everyone
+  SEV 3     A vulnerability with no sign of use; a         Next business
+            feature broken in a way that could be abused   day
+  SEV 4     A minor weakness with low impact               Next planned
+                                                           release
+
+[TO CONFIRM: response times and who is on call.]
+
+
+6. RESPONDING TO AN INCIDENT
+
+6.1 Roles
+
+  Incident lead     Runs the response, makes decisions, keeps a timeline.
+  Engineer          Investigates, contains and fixes.
+  Communications    Updates collectors, support staff and anyone else who
+                    needs to know. In a small team one person may hold more
+                    than one role.
+
+6.2 Steps
+
+  1. Detect and report. Anyone who sees a possible incident tells the
+     incident lead at once. Support escalates any suspected data exposure as
+     Urgent.
+  2. Assess. Confirm what happened, choose a severity, and open an incident
+     record with a timeline.
+  3. Contain. Stop it getting worse. Options include:
+       - switching test login off, so the Application is read-only;
+       - rotating the database password and any other secrets that may have
+         leaked, and updating them in the hosting platform's settings;
+       - rolling back to the last good deployment;
+       - pausing the affected page or API route.
+  4. Preserve evidence. Save the relevant server logs and the deployment and
+     database state before they expire or change. Search logs by time, route
+     and codes such as action_failed and request_failed.
+  5. Fix. Correct the cause, test it on the development branch, and deploy.
+     Restore wrongly changed records from a database backup or point-in-time
+     restore where needed. [TO CONFIRM backup retention]
+  6. Recover. Turn features back on, check the health endpoint and the main
+     pages, and watch the logs closely for 48 hours.
+  7. Notify (section 7).
+  8. Review (section 8).
+
+
+7. TELLING PEOPLE
+
+  - Affected collectors: without undue delay once a SEV 1 or SEV 2 incident
+    involving their data is confirmed, and within 72 hours at most. [TO
+    CONFIRM against applicable law]
+  - What we tell them: what happened, what data was involved, what we have
+    done, what they should do, and how to contact us.
+  - Regulators: where the law requires it. [TO CONFIRM by jurisdiction]
+  - Support staff: briefed before collectors are told, so they can answer
+    questions.
+  - Reporters of the problem: told when it is fixed.
+
+We do not ask collectors to confirm passwords or payment details by email
+after an incident. Any such email is not from us.
+
+
+8. AFTER AN INCIDENT
+
+Within 10 business days of a SEV 1 or SEV 2 incident, the team writes a short
+review:
+
+  - a timeline of what happened;
+  - the cause, and why it was not caught sooner;
+  - what went well and what did not;
+  - actions to stop it happening again, each with an owner and a date.
+
+Reviews are blameless: the aim is to fix systems and processes, not to blame
+people. Agreed changes are made to this document, the Customer Service Policy
+or the code as needed.
+
+
+9. TESTING THIS PLAN
+
+  - Walk through one incident scenario as a team every 6 months. [TO CONFIRM]
+  - Check that the contacts in this document are current every 3 months.
+  - Rotate production secrets at least once a year, and whenever someone with
+    access leaves.

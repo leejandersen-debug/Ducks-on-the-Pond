@@ -1,0 +1,251 @@
+DUCKS ON THE POND CARDS
+SUBSCRIPTION PRICING GUIDE
+
+Version: 1.0 SAMPLE, November 2026
+
+SAMPLE DOCUMENT. This pricing guide is fictional. It was written as test
+content for the Ducks Corpus. The Ducks on the Pond Cards application is
+currently free, does not sell subscriptions and does not process payments.
+None of the plans, prices or terms below are on offer. Do not quote them to
+a collector or publish them as real prices.
+
+
+1. PURPOSE
+
+This guide describes the subscription plans for the Ducks on the Pond Cards
+application ("the Application"): what each plan costs, what it includes, how
+billing works, and how to upgrade, downgrade, cancel or ask for a refund.
+
+For how to use the Application, see the User's Guide (users-guide.txt). For
+how to reach support, see the Customer Service Policy
+(customer-service-policy.txt).
+
+
+2. PLANS AT A GLANCE
+
+  Plan          Monthly     Yearly       Best for
+  ------------  ----------  -----------  ---------------------------------
+  Pond          Free        Free         Trying the app, small collections
+  Flock         US$4.99     US$49.00     Active collectors and traders
+  Wetland       US$12.99    US$129.00    Dealers and very large collections
+
+Yearly prices work out to about two months free compared with paying monthly.
+Prices are in US dollars and do not include sales tax or VAT, which is added
+at checkout where it applies (section 6.4).
+
+
+3. WHAT EACH PLAN INCLUDES
+
+3.1 Features in every plan
+
+Every plan, including the free Pond plan, includes:
+
+  - Browsing the full card catalog.
+  - Serial-number protection: no two collectors can record the same serial
+    of the same card.
+  - Trading: propose, accept, decline, counter, cancel and complete trades,
+    with the same safeguards on every plan.
+  - The Summary report.
+  - Document search over the help documents.
+  - Support by email under the Customer Service Policy.
+
+No plan changes how trades work, who wins a serial-number dispute, or what
+other collectors can see about your cards. Paying for a plan never gives a
+collector priority over another collector in a trade or a review.
+
+3.2 Limits by plan
+
+  Feature                          Pond       Flock        Wetland
+  -------------------------------  ---------  -----------  -----------
+  Card copies in your collection   100        2,500        Unlimited
+  Wishlist entries                 10         250          Unlimited
+  Wishlist matching                Weekly     Daily        Daily
+  Open trades at one time          3          25           100
+  Listed (for sale) cards          10         500          Unlimited
+  Reports                          Summary    All reports  All reports
+  Document searches per day        20         200          1,000
+  Support response target          Standard   Standard     Priority
+
+"All reports" means the Summary, Inventory, For sale and Sold reports
+described in section 9 of the User's Guide.
+
+"Priority" support means Wetland requests are answered first within the
+response targets in section 5 of the Customer Service Policy. It does not
+change the outcome of a dispute.
+
+3.3 Planned features (not included in any price today)
+
+The following are planned and are not part of any plan until announced:
+card photos, market-price entry, email or push notifications, and data
+export. When one of these launches, this guide will say which plans include
+it. A plan's price will not rise during a paid period because a new feature
+is added.
+
+
+4. CHOOSING A PLAN
+
+  - Fewer than 100 cards and a few trades at a time: Pond.
+  - A growing collection, regular trading, or you want the Inventory, For
+    sale and Sold reports: Flock.
+  - Thousands of cards, many listed cards, or many trades open at once:
+    Wetland.
+
+You can change plans at any time (section 7), so starting on Pond and
+upgrading later costs nothing extra.
+
+
+5. FREE TRIAL
+
+New accounts can try Flock or Wetland free for 14 days. One trial per
+collector. No payment card is needed to start the trial. When the trial ends
+without a plan being chosen, the account returns to Pond (section 8.2 explains
+what happens to anything over the Pond limits).
+
+
+6. BILLING
+
+6.1 Billing periods
+
+Monthly plans renew every month on the day you subscribed. Yearly plans renew
+every 12 months on the same date. You can see your renewal date on the Account
+page.
+
+6.2 Payment methods
+
+Payments are taken by a third-party payment processor. Ducks on the Pond Cards
+never sees or stores your full card number. Support staff will never ask for a
+payment card number, password or bank detail, by email or any other way.
+
+6.3 Renewal reminders
+
+Yearly subscribers get a reminder 14 days before renewal. Monthly subscribers
+see the next charge and date on the Account page.
+
+6.4 Taxes
+
+Sales tax, VAT or GST is added where the law requires it, based on your billing
+address. The tax amount is shown before you confirm a purchase.
+
+6.5 Failed payments
+
+If a renewal payment fails, we try again after 3 days and after 7 days. The
+plan stays active during those 7 days. If the payment still fails, the account
+moves to Pond as described in section 8.2.
+
+6.6 Price changes
+
+We will give at least 30 days' notice before a price change applies to you.
+A new price applies from your next renewal, never to a period you have already
+paid for. Yearly subscribers keep their current price until their next yearly
+renewal.
+
+
+7. CHANGING PLANS
+
+7.1 Upgrading
+
+An upgrade takes effect straight away. You are charged the difference for the
+rest of the current billing period (a prorated charge), and the new price
+applies from your next renewal.
+
+  Example: halfway through a US$4.99 Flock month you move to Wetland
+  (US$12.99). You pay about half the US$8.00 difference, US$4.00, now, then
+  US$12.99 at the next renewal.
+
+7.2 Downgrading
+
+A downgrade takes effect at the end of the current billing period. You keep
+the higher plan's limits until then. There is no partial refund for the
+remaining time.
+
+7.3 Switching between monthly and yearly
+
+Monthly to yearly takes effect straight away, with the unused part of the
+month credited toward the yearly price. Yearly to monthly takes effect at the
+next yearly renewal.
+
+
+8. CANCELLING
+
+8.1 How to cancel
+
+Cancel at any time from the Account page. You do not need to contact support
+to cancel. The plan stays active until the end of the period you have paid
+for, and then the account moves to Pond.
+
+8.2 What happens to your data over the Pond limits
+
+Nothing is deleted when an account moves to Pond. If you have more than the
+Pond limits:
+
+  - Card copies over 100 stay in your collection and in your reports, but
+    you cannot add new copies until you are under the limit.
+  - Wishlist entries over 10 stay saved but are paused from matching. You
+    choose which 10 stay active.
+  - Open trades stay open and can be completed, but you cannot propose new
+    trades while more than 3 are open.
+  - Listed prices over the limit of 10 are kept, but only the 10 most
+    recently listed cards appear in the For sale report.
+
+Serial numbers you have recorded stay protected on every plan.
+
+8.3 Closing your account
+
+Closing an account is different from cancelling a plan. See the Customer
+Service Policy section 10 for account deletion and what happens to your data.
+
+
+9. REFUNDS
+
+  - Yearly plans: a full refund if you ask within 14 days of the first
+    yearly charge or of a yearly renewal.
+  - Monthly plans: no refund for a month that has started, except as below.
+  - Charges made in error (for example, a double charge, or a renewal after
+    you cancelled) are always refunded in full.
+  - If the Application is unavailable for more than 72 hours in a row
+    because of a problem on our side, paid subscribers get a credit for the
+    lost days on request.
+
+To ask for a refund, contact support using the details in section 4 of the
+Customer Service Policy. Include the date and amount of the charge. Do not
+send your payment card number. Refunds go back to the original payment method
+and usually arrive within 5 to 10 business days.
+
+Refunds cover subscription fees only. The Application does not process card
+sales or trades between collectors, so we cannot refund, charge or recover
+money for a sale or trade (see Customer Service Policy section 3).
+
+
+10. DISCOUNTS
+
+  - Yearly billing: about two months free compared with monthly (section 2).
+  - Card shows and clubs: a club with 10 or more members can ask for 20% off
+    Flock for its members.
+  - Discounts cannot be combined, and they do not apply to taxes.
+
+
+11. FREQUENTLY ASKED QUESTIONS
+
+Q: Is there still a free plan?
+A: Yes. Pond is free with no time limit.
+
+Q: Do paid plans get better trade terms or win serial-number disputes?
+A: No. Trading rules and dispute reviews are the same on every plan
+(section 3.1).
+
+Q: Will I lose cards if I stop paying?
+A: No. Nothing is deleted when an account moves to Pond. Some actions are
+limited until you are under the Pond limits (section 8.2).
+
+Q: Can I pay for a card sale or trade through the Application?
+A: No. Subscriptions are the only thing the Application charges for. Prices
+you enter for cards are your own records.
+
+Q: Does the price include tax?
+A: No. Tax is added at checkout where it applies (section 6.4).
+
+
+12. CHANGES TO THIS GUIDE
+
+We may update this guide. The version and date at the top show the latest
+version. Price changes follow the notice rules in section 6.6.

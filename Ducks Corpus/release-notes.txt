@@ -1,0 +1,120 @@
+DUCKS ON THE POND CARDS
+RELEASE NOTES
+
+Latest: November 2026 (test harness release)
+
+These notes list what changed in each release, newest first. Dates are when
+the change went in. Version numbers were assigned to group the changes and are
+not shown in the Application. For what the Application can do overall, see the
+Capabilities Summary (capabilities-summary.txt).
+
+
+RELEASE 0.6, 2026-11-07: HELP DOCUMENTS
+
+New
+  - The Ducks Corpus: help documents for the card application, including the
+    User's Guide, Customer Service Policy, Capabilities Summary and FAQ.
+    Further documents (Terms of Use, Privacy Notice, Serial-Number Dispute
+    Procedure, Collector Handbook, Glossary, Security and Incident Response,
+    and a sample Pricing Guide) follow.
+
+Note
+  - The Search page still searches the Trailhead Supply Co. course documents.
+    Loading the Ducks Corpus into search is planned.
+
+
+RELEASE 0.5, 2026-11-03: SEARCH QUALITY CHECKS
+
+Changes (behind the scenes)
+  - Added a fixed set of test questions with known answers, and a scoresheet,
+    to measure how well search and answers perform.
+  - Added checks that answers decline politely when the documents do not
+    cover a question, and that instructions hidden inside a document are
+    ignored.
+  - The developer question-answering tool can now save a log of each run.
+
+No change to the pages collectors use.
+
+
+RELEASE 0.4, 2026-10-31: QUESTION ANSWERING (DEVELOPER TOOL)
+
+New
+  - A command-line tool for developers (npm run ask) that answers questions
+    from the reference documents using Anthropic's Claude model, quoting its
+    sources. It is not part of the web Application yet.
+
+
+RELEASE 0.3, 2026-10-25 TO 2026-10-26: SEARCH
+
+New
+  - Search page. Ask a question in plain words and see the three closest
+    passages from the reference documents, with source, section and a
+    similarity score.
+  - "Not in the documents" is shown when nothing scores at least 0.33, with
+    the best score found.
+  - Searches can be shared by copying the page address
+    (/search?q=your+question).
+  - POST /api/search for the same search from other clients. Questions can be
+    up to 500 characters.
+
+Fixed
+  - When the database is reachable but not set up yet, pages now say so,
+    instead of showing a general error.
+  - Search now works on the hosted site, not only on developer machines.
+
+
+RELEASE 0.2, 2026-10-24: THE TEST HARNESS
+
+New
+  - The first working pages: Home, Catalog, My collection, Wishlist, Trades,
+    Reports and Admin, as unstyled forms and tables.
+  - Test user picker: switch between Alice and Bob (collectors) and Carol
+    (admin). Test login can be turned off per environment.
+  - Catalog of sets, parallels, cards and variants, with automatic Base
+    parallels and Base variants.
+  - Collection tracking with grading, serial numbers, cert numbers, prices,
+    tradeable and for-sale settings, sales and undoing a sale.
+  - Serial-number protection with admin review of conflicts.
+  - Wishlist with matching in both directions.
+  - Trades: propose, accept, decline, counter, cancel and complete.
+  - Reports: summary, inventory, for sale and sold.
+  - Database row-level security, so collectors can change only their own
+    data.
+  - Page view and visitor counts (Vercel Web Analytics).
+
+Changes (behind the scenes)
+  - Structured server logs for every request, with secrets removed before
+    anything is written.
+  - Database connections always check the server's certificate.
+
+
+RELEASE 0.1, 2026-10-23: FIRST BUILD
+
+New
+  - The Application's foundation on Next.js, React and TypeScript, hosted on
+    Vercel with a Postgres database on Neon.
+  - GET /api/health: reports whether the Application and database are up.
+
+Fixed
+  - A security update to a third-party library (zod).
+
+
+KNOWN ISSUES AND NOT YET AVAILABLE
+
+  - Sign-in uses test users only. There are no personal accounts yet.
+  - No payments, shipping, card photos or notifications.
+  - No screen for entering market prices, so the Market column is usually
+    blank.
+  - A copy's grade, serial or paid price cannot be edited after it is added.
+    Delete and re-add it (an admin can change a serial).
+  - Catalog entries cannot be edited or deleted from the pages.
+  - Test data may be reset without notice.
+
+
+COMING NEXT [TO CONFIRM]
+
+  - The Ducks Corpus in the Search page.
+  - Personal accounts and real sign-in.
+  - Email notifications for trades and serial-number reviews.
+  - Card photos and market-price entry.
+  - A styled interface.

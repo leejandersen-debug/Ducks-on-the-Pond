@@ -1,0 +1,275 @@
+DUCKS ON THE POND CARDS
+GLOSSARY
+
+Version: November 2026
+
+Terms used in the Application and in its help documents, in alphabetical
+order. "See also" points to related terms in this glossary. Section numbers
+refer to the User's Guide (users-guide.txt) unless another document is named.
+
+
+accepted
+    A trade status. The recipient agreed to the offer, and it is waiting for
+    the cards to be exchanged and the trade completed. See also: completed,
+    trade status.
+
+acquired date
+    The date you got a card. You enter it when you add a copy. When a card
+    arrives through a trade, it is set to the day the trade was completed.
+    Other collectors cannot see it.
+
+action_failed
+    The code logged when an unexpected error happens. The page says
+    "Something went wrong. It has been logged as action_failed." Report it
+    with the time it happened.
+
+admin
+    A person allowed to use the Admin page and review serial-number
+    conflicts. In the test release this is Carol.
+
+Auto (autograph)
+    A variant that carries the player's signature. See also: variant.
+
+Base
+    The standard version of the cards in a set. Every set gets a Base parallel
+    automatically, and every card gets a Base variant. See also: parallel.
+
+BGS
+    Beckett Grading Services, one of the four supported grading companies.
+
+cancelled
+    A trade status. The proposer withdrew the offer, or a card in it stopped
+    being tradeable or was sold.
+
+card
+    A numbered card in a set, for example #150 Shohei Ohtani in 2024 Topps
+    Chrome. A card can feature one or more players. Not the same as a copy.
+    See also: copy, variant.
+
+card number
+    The number printed on the back of a card within its set, such as 150 or
+    RC-12. Not the same as a serial number.
+
+catalog
+    The shared list of sets, parallels, cards and variants. Anyone signed in
+    can add to it. Entries cannot be edited or deleted from the pages.
+
+centering
+    How evenly a card's image sits within its borders, often written as a
+    ratio such as 55/45. One of the things graders check.
+
+cert number (cert #)
+    The certification number printed on a graded card's slab label. It
+    identifies that card in the grading company's records. A cert number can
+    be recorded only once per grading company.
+
+CGC
+    Certified Guaranty Company, one of the four supported grading companies.
+
+collector
+    A person who uses the Application to record and trade cards.
+
+completed
+    A trade status. The cards have changed owners in the Application. Only an
+    accepted trade can be completed.
+
+condition notes
+    Free-text notes about a copy's condition, such as soft corners or surface
+    scratches.
+
+copy
+    One physical card that you own, recorded in My collection. A copy belongs
+    to a variant and has your own details: serial, grade, cert number, price
+    paid and so on.
+
+counteroffer
+    A reply to a trade offer that changes it. It starts with the original
+    cards selected. Sending one marks the original offer "countered".
+
+countered
+    A trade status. The recipient replied with a counteroffer, which replaces
+    this offer.
+
+declined
+    A trade status. The recipient said no.
+
+Ducks Corpus
+    The set of help documents about the Application, including this
+    glossary.
+
+For sale report
+    The report of your unsold cards that have a listed price, with the margin
+    over what you paid.
+
+grade
+    A grading company's score for a card's condition, from 1 to 10 in half
+    steps. A grade must always come with a grading company.
+
+graded
+    A card that has been graded and sealed in a slab. See also: raw, slab.
+
+grading company
+    A business that grades cards. The Application supports PSA, BGS, SGC and
+    CGC.
+
+health check
+    GET /api/health, which reports whether the Application and its database
+    are up. The Home page shows the result, for example "API: ok · Database:
+    ok".
+
+Inventory report
+    The report of all your unsold cards, with paid, market and listed prices.
+
+listed price
+    The asking price you set on a card you want to sell. It puts the card in
+    your For sale report. Other collectors cannot see it.
+
+margin
+    Listed price minus paid price, shown in the For sale report.
+
+market price
+    A reference value for a card, shown in reports where one is known. Only
+    admins can manage market prices, and there is no screen to enter them
+    yet. It is not an appraisal.
+
+match
+    A tradeable copy owned by another collector that meets one of your wants,
+    or one of your tradeable copies that meets another collector's public
+    want.
+
+minimum grade
+    An optional condition on a want. Only copies at or above that grade, and
+    from the chosen grading company if one is set, will match.
+
+Note for admin
+    A note you add when you record a numbered card, read by the admin if the
+    serial is already taken. It cannot be changed after the card is
+    submitted.
+
+numbered card
+    A card from a parallel with a print run, stamped with its own serial
+    number, for example 23/50.
+
+paid price
+    What you paid for a copy. Other collectors cannot see it. It is cleared
+    when the card moves to a new owner in a trade.
+
+parallel
+    A version of the cards in a set, such as Base, Refractor or Gold
+    Refractor. A parallel can have a print run.
+
+Pond, Flock, Wetland
+    Plan names in the sample Pricing Guide (pricing-guide.txt). That guide is
+    fictional. The Application is currently free.
+
+print run
+    How many copies of a parallel were made, written with a slash, for
+    example /50. A serial number cannot be higher than the print run. A
+    variant can override its parallel's print run.
+
+private want
+    A want with Public unticked. Only you can see it, and it is not offered to
+    other collectors for matching.
+
+profit
+    Sale price minus paid price, shown in the Sold report.
+
+proposed
+    A trade status. The offer has been sent and is waiting for the recipient.
+
+PSA
+    Professional Sports Authenticator, one of the four supported grading
+    companies.
+
+public want
+    A want other collectors can see, so they can offer you a trade. Wants are
+    public by default.
+
+raw
+    An ungraded card.
+
+RC (rookie card)
+    A card from a player's first year of cards. Marked with "Rookie card" when
+    the card is added to the catalog.
+
+Relic
+    A variant that contains a piece of memorabilia, such as a piece of a
+    game-worn jersey. See also: variant.
+
+row-level security
+    A database protection that lets each collector change only their own
+    cards and wants, and see only trades they are part of.
+
+serial number
+    The individual number stamped on a numbered card, for example 23 of /50.
+    Only one unsold copy of a variant can hold a given serial number across
+    all collections.
+
+serial-number conflict
+    What happens when you record a serial number that another collector's
+    unsold copy of the same variant already holds. Your card goes to an admin
+    for review. See the Serial-Number Dispute Procedure.
+
+serial-number review
+    An admin's review of a serial-number conflict. You can follow it under "My
+    serial-number reviews" in My collection. Statuses: pending admin review,
+    approved, rejected.
+
+set
+    A product release, such as "2024 Topps Chrome (baseball)". A set has a
+    sport, year, manufacturer and name.
+
+SGC
+    Sportscard Guaranty, one of the four supported grading companies.
+
+similarity score
+    A number shown with each search result, saying how close the passage is
+    in meaning to your question. Results below 0.33 are not shown.
+
+slab
+    The sealed plastic case a grading company puts a graded card in. Its
+    label shows the grade and cert number.
+
+Sold report
+    The report of your sold cards, newest first, with sale price and profit.
+
+Summary report
+    The report that totals your inventory, cards for sale and sold cards.
+
+test user
+    One of the shared sign-ins in the test release: Alice and Bob
+    (collectors) and Carol (admin). Chosen with the Test user picker at the
+    top of every page.
+
+top loader
+    A rigid plastic holder for protecting a raw card, usually used with a
+    penny sleeve.
+
+trade
+    An offer between two collectors to exchange cards. A trade can be
+    one-sided.
+
+trade status
+    Where a trade is in its life: proposed, accepted, declined, countered,
+    cancelled or completed.
+
+tradeable
+    A setting on a copy. Only tradeable copies can be put in trades or appear
+    in other collectors' matches. Turning it off cancels open offers that
+    include the card.
+
+Undo sale
+    Reverses a sale entered by mistake. The card returns to your inventory,
+    not tradeable.
+
+variant
+    A specific card in a specific parallel, optionally with an autograph or
+    relic. Variants are what you add to your collection.
+
+want
+    An entry on your wishlist: a card or exact variant you are looking for,
+    with optional minimum grade, maximum price and notes.
+
+wishlist
+    Your list of wants. The Wishlist page also shows matches in both
+    directions.
