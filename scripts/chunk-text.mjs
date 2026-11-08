@@ -1,6 +1,7 @@
 // Splits a text file into overlapping chunks for the vector store.
 //
 //   node scripts/chunk-text.mjs <input.txt> [output.json]
+//   node scripts/chunk-text.mjs --qa "Ducks Corpus/faq.txt" chunks/faq.json   # FAQ: one Q&A per chunk
 //
 // - Chunks aim for MIN_WORDS–MAX_WORDS words (overlap included) and break only between paragraphs.
 //   If any chunk is over the model's 512-token limit, the document is re-chunked smaller.
@@ -169,9 +170,38 @@ export function chunkText(text, { maxWords = MAX_WORDS } = {}) {
   });
 }
 
+// One question and answer per chunk (--qa), for FAQ documents. Each Q&A is already a whole fact,
+// so packing several into a 300–400-word window only dilutes them (a one-line answer ranked 13th
+// of 70 that way). Each chunk starts with a header naming the document and the FAQ section
+// ("DUCKS ON THE POND CARDS FREQUENTLY ASKED QUESTIONS › PRIVACY"), and its section label is that
+// FAQ section. Text before the first question (title, version, related documents) is one chunk.
+export function chunkQa(text) {
+  const paragraphs = text.split(/\n\s*\n/).map((p) => p.replace(/\s+/g, " ").trim()).filter(Boolean);
+  let title = null;
+  let section = null;
+  const intro = [];
+  const chunks = [];
+  for (const p of paragraphs) {
+    if (!p.startsWith("Q:") && !p.startsWith("A:") && isHeading(p)) {
+      if (title === null) title = display(p);
+      else section = display(p);
+      continue;
+    }
+    if (p.startsWith("Q:")) chunks.push({ section, body: [p] });
+    else if (chunks.length) chunks.at(-1).body.push(p);
+    else intro.push(p);
+  }
+  const out = [];
+  if (intro.length) out.push({ section: title, text: [title, ...intro].filter(Boolean).join("\n\n") });
+  for (const c of chunks) out.push({ section: c.section, text: `${title} › ${c.section}\n\n${c.body.join("\n\n")}` });
+  return out.map((c, i) => ({ index: i, section: c.section, sections: c.section ? [c.section] : [], words: words(c.text), overlapWords: 0, text: c.text }));
+}
+
 // CLI
 if (import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [input, output] = process.argv.slice(2);
+  const args = process.argv.slice(2);
+  const qa = args.includes("--qa");
+  const [input, output] = args.filter((a) => a !== "--qa");
   if (!input) {
     console.error("Usage: node scripts/chunk-text.mjs <input.txt> [output.json]");
     process.exit(1);
@@ -184,6 +214,7 @@ if (import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   let pieces;
   let maxWords = MAX_WORDS;
   if (ext === ".csv") pieces = chunkCsv(raw);
+  else if (qa) pieces = chunkQa(raw);
   else {
     const text = ext === ".md" ? cleanMarkdown(raw) : raw;
     for (;;) {

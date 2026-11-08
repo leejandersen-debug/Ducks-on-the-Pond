@@ -253,6 +253,11 @@ Q: Who can see my trades?
 A: Only you and the other collector in the trade. Admins cannot see trades
    they are not part of.
 
+Q: Who can read the message I send with a trade offer?
+A: Only you and the other collector in that trade can see the trade and its
+   message. Keep payment and address details out of trade messages and
+   wishlist notes (Collector Handbook section 7).
+
 Q: Can admins see my collection?
 A: Yes. Admins can see all collection data and use it only to resolve
    serial-number conflicts and support requests.
