@@ -17,15 +17,21 @@ export type Passage = {
   id: string; source: string; section: string | null; similarity: number; text: string;
 };
 
+// The closest chunks in doc_chunks (the Ducks Corpus), with no logging. Shared by searchCorpus
+// below and POST /api/ask, which logs its own ask.query line.
+export async function retrievePassages(userId: string | null, query: string, limit = 3): Promise<Passage[]> {
+  const vector = JSON.stringify(await embed(query));
+  // <=> is cosine distance; similarity = 1 - distance (1 = same meaning).
+  return withUser(userId, async (db) => (await db.query(
+    `select id, source, section, 1 - (embedding <=> $1::vector) as similarity, content as text
+     from doc_chunks order by embedding <=> $1::vector limit $2`,
+    [vector, limit],
+  )).rows.map((r) => ({ ...r, similarity: Number(Number(r.similarity).toFixed(4)) })));
+}
+
 export async function searchCorpus(userId: string | null, query: string, limit = 3): Promise<Passage[]> {
   try {
-    const vector = JSON.stringify(await embed(query));
-    // <=> is cosine distance; similarity = 1 - distance (1 = same meaning).
-    const results: Passage[] = await withUser(userId, async (db) => (await db.query(
-      `select id, source, section, 1 - (embedding <=> $1::vector) as similarity, content as text
-       from doc_chunks order by embedding <=> $1::vector limit $2`,
-      [vector, limit],
-    )).rows.map((r) => ({ ...r, similarity: Number(Number(r.similarity).toFixed(4)) })));
+    const results = await retrievePassages(userId, query, limit);
     // The logger scrubs emails and card numbers out of the query text. topSimilarity shows
     // whether the best match clears MIN_SIMILARITY, i.e. whether the page had an answer to show.
     log.info("search.query", { query, results: results.length, topSimilarity: results[0]?.similarity ?? null });

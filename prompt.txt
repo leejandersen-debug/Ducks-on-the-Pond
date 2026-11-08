@@ -1515,3 +1515,66 @@ commit and push it
 
 What it gives you:
 The outstanding work committed to main and pushed: the Ducks baseline (scoresheet-ducks-2026-11-08.md, baseline-report-ducks-v1.md, and the planted test document injection-test/card-show-packing-tips.txt, which lives outside the corpus), GoldenQuestions.txt moved from Ducks Corpus/ to the Week 8 root with updated path references, and prompt.txt through this entry. The gates commit from before the run (695f9ca) goes up in the same push.
+
+
+PROMPT 162
+[Image #2: lesson "Write and respond" box, aim for about 100 words. "Your five-line integration plan: the pieces by name, the wire-up order with a verify note at each seam, and the one risk with its first check. This is the spec you'll open when the build session starts." Template: 1. Pieces: app-corpus/ (N docs), engine at ..., app repo ..., route /api/..., host ... 2. Corpus in — verify: store reports ~N chunks 3. Engine wired — verify: known Q cites right source; off-corpus Q refuses 4. UI + deploy — verify: live URL answers with visible receipt 5. Risk: ... — first check: ...]
+
+What it gives you:
+A five-line integration plan of about 100 words, filled in with this project's real pieces: Ducks Corpus/ (13 docs), the engine in scripts/ask.mjs, the leejandersen-debug/Ducks-on-the-Pond repo, a new /api/ask route, and Vercel at ducks-on-the-pond-psi.vercel.app. Each wire-up step has a check taken from the baseline: 70 chunks in doc_chunks, the second-review question citing the dispute procedure, the phone-number question refusing, and a live answer showing its source. The one risk is that ANTHROPIC_API_KEY exists only in .env.development.local and not in Vercel production; the first check is vercel env ls production before deploying.
+
+
+PROMPT 163
+How much of this have we completed?  What is left to swap? [Image #3: lesson slide "THE SWAP": same engine, new everything around it; what changes is the world, what must not change is the contract. Left, THE RIG (D1–D2): corpus Trailhead, shared, answers already known; surface a script in your terminal; who asks, only you; the job, prove the machinery (known answers meant every failure was easy to catch); "Keep it — your eval baseline still runs here." Centre, THE ENGINE: retrieve → context → answer, travels unchanged, with citations and refusal riding inside as the feature, not extras; two swaps happen around it: 1, the corpus swap, and 2, the surface swap. Right, THE REBUILD (today): corpus, your app corpus assembled yesterday; surface, your deployed app's UI; who asks, your users; the job, do real work (answers about your app's subject, from your files); "New failures here are wiring, not machinery." Footer: "You learned on the rig so that shipping day is a move, not a rebuild. If the feature misbehaves after the swap, the machinery is already proven — look at the wiring first."]
+
+What it gives you:
+A status check against the slide. Swap 1, the corpus swap, is done: the Ducks Corpus is chunked and loaded (70 chunks, local Chroma and Postgres, dev and production), and the unchanged engine passed its baseline on it (10/12 and 9/12, SHIP, injection blocked). Swap 2, the surface swap, is not done: the full engine (retrieve, context, Claude answer with citation and "I don't know") still runs only as scripts/ask.mjs in the terminal over local Chroma. The deployed app only has /search, which retrieves passages and has no Claude answer or citation. One departure from the slide: the Trailhead rig was deleted at your request (prompt 148), so the old eval baseline can't run as-is, though it can be restored from git. Left to do: a /api/ask route over doc_chunks reusing ask.mjs's grounding prompt and answer schema unchanged, the answer and its source shown on the page, ANTHROPIC_API_KEY set in Vercel production, deploy, then the plan's live checks.
+
+
+PROMPT 164
+Don't need the Trailhead baseline, but didn't we run the new baseline a short time ago?
+
+What it gives you:
+A correction: yes. The Ducks baseline ran today (prompt 156: gates 695f9ca, run and report a9c08ac, retrieval 10/12, answer 9/12, SHIP, injection blocked). The rig the slide says to keep is still here: scripts/ask.mjs, scripts/query-chunks.mjs and the local Chroma "ducks" store, with the frozen GoldenQuestions.txt and gates-ducks.md, so the eval baseline still runs and can be re-run after the surface swap. Deleting Trailhead removed only the old corpus, not the rig, so the "departure from the slide" in the previous answer was overstated.
+
+
+PROMPT 165
+Before we do the surface swap, let's make sure we follow the lesson plan and ensure that all of the steps have been completed.  Here are the steps: [pasted lesson steps] 1. Ingest your app corpus: same Week 8 pipeline, pointed at yesterday's folder, into a new collection beside the rig's; sanity-check with one terminal search before touching the app. 2. Spec the port in your own words, using the worked example's shape: the route, what it retrieves and from which collection, the grounded prompt's three rules, the JSON reply, and the UI states, including the refusal rendered as a normal response; behavior, not implementation. 3. Review before you run, at four checkpoints: source labels survive into the context, the grounding rule is in the prompt, the refusal path exists, and retrieval reads the app corpus's collection, not the rig's (the port's signature bug, to look for by name). 4. Deploy, then prove it at the live URL: one question the corpus answers (confirm the citation renders and open the cited file to verify the answer is there) and one it can't (confirm the refusal renders as a designed state). 5. Capture the evidence: screenshots of both behaviors at the live URL, plus one log line showing the request, put at one link anyone can view and checked in a private window; check the log line shows no key or password; then write up the submission, including what the review caught.
+
+What it gives you:
+A step-by-step status check. Step 1 (ingest) is complete: the Ducks Corpus went through the same Week 8 pipeline into its own "ducks" Chroma collection, at first beside the rig's "trailhead" until that was removed in prompt 148, and also into Postgres doc_chunks on dev and production. Terminal searches confirmed it (prompt 147), and the full 12-question baseline ran on it (prompt 156). Steps 2–5 are the surface swap itself and none has started: the five-line plan from prompt 162 is not the behavioral spec step 2 asks for, and there is no port code yet to review, deploy or capture evidence from. Step 2 is next, and it should be agreed before any code.
+
+
+PROMPT 166
+yes, draft the spec
+
+What it gives you:
+ask-spec.md, a draft port spec in the lesson's shape, describing behavior rather than implementation, for your review before any code. Route: POST /api/ask {"question"}, 1–500 characters, open to anyone. Retrieval: the top 3 chunks from Postgres doc_chunks (the Ducks Corpus, 70 chunks), not Chroma or the rig, keeping document and section labels, with no score floor so the engine decides. The three grounding rules: only the context, cite the document and section exactly, refuse with exactly "I don't know". The JSON reply covers answered and refused (a normal 200 with refused: true) plus 400/502/503/500 errors. Five UI states on the /search page (idle, working, answered with receipt and "what it read", refused as a designed non-error state pointing to support, and error), plus logging (ask.query with ids, scores and refused, never the key, prompt or passages), done-when checks at the live URL, and what's out of scope.
+
+
+PROMPT 167
+approved, run the review checkpoints
+
+What it gives you:
+The port written to the approved spec and reviewed at the lesson's four checkpoints before anything ran (no server, no API call, no deploy); notes in ask-review.md. The engine now lives in one shared file, lib/grounding.ts, used by both the rig (scripts/ask.mjs, run directly by Node 24) and the new POST /api/ask, so the two can't drift apart. The page /search now asks instead of only searching, with the five spec states; /api/search stays for the MCP server. Checkpoints, all PASS: (1) source labels survive into the context, with the context format byte-identical to the rig's committed version and every doc_chunks row labelled; (2) the grounding prompt is identical to the rig's committed prompt, with the same model and call settings; (3) the refusal path returns a normal 200 with refused: true and renders as a designed state separate from errors; (4) retrieval reads doc_chunks only, with no Chroma or rig collection anywhere in app/ or lib/, and doc_chunks holds 70 Ducks rows and 0 Trailhead rows on both dev and production. What the review caught: ANTHROPIC_API_KEY is not set in Vercel production (the planned risk, confirmed; the route would return 503); /api/ask needed adding to next.config.ts's runtime file tracing (fixed; this caused the old /search 500); and lib/chroma.ts is an unused Chroma client that could cause the signature bug (recommended for deletion). Typecheck passes. Nothing is committed or deployed.
+
+
+PROMPT 168
+deploy the api key to vercel. Ensure no secrets can be seen by outside sites
+
+What it gives you:
+ANTHROPIC_API_KEY added to Vercel as a Sensitive (Secret) variable, Production only. The value was copied from .env.development.local over stdin, never printed and never put in the command line, and Vercel shows it as Hidden and won't hand it back. It takes effect on the next production deploy; the /api/ask code isn't committed or deployed yet. Checks that no secret is visible from outside: the key is read only in the server route app/api/ask/route.ts, there are no NEXT_PUBLIC_ variables, and no client component imports server code. A local production build succeeded, and a scan of all 12 browser-served files in .next/static found no key, no "sk-ant-", no database password or host, no secret variable names, and no server-only code (the grounding prompt, the Anthropic SDK, the pg driver). Git, current files and full history (the repo is on GitHub), contains no key value and no database password; the only "sk-ant-" matches are prose in prompt.txt describing the key's format, and the tracked .env.example holds placeholders only. Error replies never echo driver or API messages. The live API sends no Access-Control-Allow-Origin header, so other websites' scripts can't read its responses in a visitor's browser. Noted: the Neon database variables are Config type rather than Secret (managed by the integration), and the endpoint itself is open to anyone, which is a cost risk, not a secret leak.
+
+
+PROMPT 169
+delete lib/chroma.ts and run the local dev test
+
+What it gives you:
+lib/chroma.ts removed with git rm (nothing imported it; typecheck still passes), and the port tested on the local dev server against the dev database. API: the second-review question returned 200 in 3.7 s with "10 business days" and source serial-number-dispute-procedure.txt; opening that file shows the answer on line 164 ("Second review: a reply within 10 business days of the request"). The phone-number question returned 200 with refused: true and source null in 2.0 s. Bad input got 400 (empty, over 500 characters, not JSON) and GET got 405. Retrieval matched the rig exactly (same three chunks at 0.57, 0.55 and 0.50). The server log shows one ask.query line (question, retrieved ids and scores, refused, source, citationMatchesContext: true) and one request_done line per question, and neither the key nor "sk-ant" appears anywhere in it. UI: headless Chrome screenshots of /search?q=... show the answered state with the Source receipt and "What it read", and the refused state as a designed "Not in the documents" answer with the support email. The error state was not triggered visually. Nothing is committed or deployed.
+
+
+PROMPT 170
+yes, commit, push and run the live checks
+
+What it gives you:
+The surface swap committed to main and pushed, which deploys it to Vercel with the new ANTHROPIC_API_KEY, followed by the spec's live checks at https://ducks-on-the-pond-psi.vercel.app: the answered question with its rendered citation, checked against the cited file; the refusal rendered as a designed state; screenshots of both; and the production log line for the request, checked for keys and passwords.

@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   // for every route that embeds a query.
   outputFileTracingIncludes: {
     "/api/search": ["./node_modules/onnxruntime-node/bin/napi-v*/linux/x64/**/*"],
+    "/api/ask": ["./node_modules/onnxruntime-node/bin/napi-v*/linux/x64/**/*"],
     "/search": ["./node_modules/onnxruntime-node/bin/napi-v*/linux/x64/**/*"],
   },
 };

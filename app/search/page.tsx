@@ -1,9 +1,10 @@
 import { dbProblem } from "@/lib/db-status";
-import { MAX_QUERY_CHARS, MIN_SIMILARITY } from "@/lib/search";
+import { MAX_QUERY_CHARS } from "@/lib/search";
 import { SearchBox } from "./search-box";
 
-// Searches this app's help documents (the Ducks Corpus) by meaning. The search box posts to
-// /api/search from the browser; a /search?q=... URL runs that search on load.
+// Answers questions from this app's help documents (the Ducks Corpus). The box posts to /api/ask
+// from the browser, which retrieves the closest passages and has Claude answer from them only, with
+// a source receipt. A /search?q=... URL asks that question on load. Spec: ask-spec.md.
 export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string | string[] }> }) {
   if (await dbProblem()) return null; // the layout shows the reason
   const raw = (await searchParams).q;
@@ -12,9 +13,9 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
   return (
     <main>
       <h1>Search</h1>
-      <p>Ask a question about Ducks on the Pond Cards: the User&apos;s Guide, FAQ, Collector Handbook, Glossary, policies
+      <p>Ask a question about Ducks on the Pond Cards. Answers come only from the User&apos;s Guide, FAQ, Collector Handbook, Glossary, policies
         (customer service, privacy, terms of use, serial-number disputes, security) and release notes.</p>
-      <SearchBox initialQuery={q} maxChars={MAX_QUERY_CHARS} minSimilarity={MIN_SIMILARITY} />
+      <SearchBox initialQuery={q} maxChars={MAX_QUERY_CHARS} />
     </main>
   );
 }

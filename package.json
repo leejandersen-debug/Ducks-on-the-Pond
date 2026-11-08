@@ -16,7 +16,7 @@
     "load-corpus:dev": "node --env-file=.env.development.local scripts/assert-dev-branch.mjs && node --env-file=.env.development.local scripts/load-corpus.mjs",
     "chroma": "chroma run --path ./chroma-data --port 8000",
     "query": "node --env-file=.env.development.local scripts/query-chunks.mjs",
-    "ask": "node --env-file=.env.development.local scripts/ask.mjs"
+    "ask": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --env-file=.env.development.local scripts/ask.mjs"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",

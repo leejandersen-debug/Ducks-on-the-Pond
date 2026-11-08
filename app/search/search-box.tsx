@@ -1,73 +1,97 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Passage } from "@/lib/search";
 
-type Props = { initialQuery: string; maxChars: number; minSimilarity: number };
+type Props = { initialQuery: string; maxChars: number };
 
-// Calls POST /api/search from the browser, the same way the mobile app will, and renders the
-// passages it returns. The limits come in as props so lib/search.ts (and its db code) stays
-// out of the client bundle.
-export function SearchBox({ initialQuery, maxChars, minSimilarity }: Props) {
-  const [query, setQuery] = useState(initialQuery);
-  const [asked, setAsked] = useState("");
-  const [results, setResults] = useState<Passage[]>([]);
+type Reply = {
+  question: string;
+  answer: string;
+  refused: boolean;
+  source: { document: string; section: string } | null;
+  passages: { id: string; document: string; section: string | null; similarity: number }[];
+};
+
+// Calls POST /api/ask from the browser and renders one of five states (ask-spec.md): idle,
+// working, answered (with the source receipt), refused (a designed answer, not an error), error.
+export function SearchBox({ initialQuery, maxChars }: Props) {
+  const [question, setQuestion] = useState(initialQuery);
+  const [reply, setReply] = useState<Reply | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [working, setWorking] = useState(false);
 
-  async function search(q: string) {
+  async function ask(q: string) {
     q = q.trim();
     if (!q) return;
-    setLoading(true);
+    setWorking(true);
     setError(null);
+    setReply(null);
     // Keep the URL shareable: /search?q=...
     window.history.replaceState(null, "", `/search?q=${encodeURIComponent(q)}`);
     try {
-      const res = await fetch("/api/search", {
+      const res = await fetch("/api/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: q }),
+        body: JSON.stringify({ question: q }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? `HTTP ${res.status}`);
-      setResults(data.results);
+      setReply(data);
     } catch (err) {
-      setResults([]);
-      setError((err as Error).message);
+      setError((err as Error).message || "Couldn't get an answer right now; try again.");
     } finally {
-      setAsked(q);
-      setLoading(false);
+      setWorking(false);
     }
   }
 
   useEffect(() => {
-    if (initialQuery) search(initialQuery);
-    // Only on first load: later searches come from the form.
+    if (initialQuery) ask(initialQuery);
+    // Only on first load: later questions come from the form.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const matches = results.filter((r) => r.similarity >= minSimilarity);
-
   return (
     <>
-      <form role="search" onSubmit={(e) => { e.preventDefault(); search(query); }}>
-        <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} maxLength={maxChars}
-          size={60} placeholder="how long does a serial-number review take?" aria-label="Search the documents" required />{" "}
-        <button disabled={loading}>{loading ? "Searching…" : "Search"}</button>
+      <form role="search" onSubmit={(e) => { e.preventDefault(); ask(question); }}>
+        <input type="search" value={question} onChange={(e) => setQuestion(e.target.value)} maxLength={maxChars}
+          size={60} placeholder="how long does a serial-number review take?" aria-label="Ask a question" required />{" "}
+        <button disabled={working}>{working ? "Thinking…" : "Ask"}</button>
       </form>
 
-      {error && <p role="alert"><strong>Error:</strong> {error}</p>}
-      {asked && !loading && !error && matches.length === 0 && (
-        <p>Not in the documents: nothing matched closely enough
-          {results[0] && ` (best match ${results[0].similarity.toFixed(3)}, below ${minSimilarity})`}.</p>
+      {working && <p aria-live="polite">Reading the documents…</p>}
+
+      {error && !working && (
+        <p role="alert"><strong>Error:</strong> Couldn&apos;t get an answer right now; try again. <small>({error})</small></p>
       )}
-      {!loading && matches.map((r, i) => (
-        <section key={r.id}>
-          <h2>{i + 1}. {r.section ?? r.source}</h2>
-          <p><small>{r.source} · {r.id} · similarity {r.similarity.toFixed(3)}</small></p>
-          <p style={{ whiteSpace: "pre-line" }}>{r.text}</p>
+
+      {reply && !working && (
+        <section aria-live="polite">
+          {reply.refused ? (
+            <>
+              <h2>Not in the documents</h2>
+              <p>That isn&apos;t covered in the Ducks on the Pond documents. Try rephrasing the question, or
+                contact support at support@ducksonthepondcards.com.</p>
+            </>
+          ) : (
+            <>
+              <h2>Answer</h2>
+              <p style={{ whiteSpace: "pre-line" }}>{reply.answer}</p>
+              {reply.source && (
+                <p><strong>Source:</strong> {reply.source.document} · {reply.source.section}</p>
+              )}
+            </>
+          )}
+
+          <details>
+            <summary>What it read ({reply.passages.length} passages)</summary>
+            <ol>
+              {reply.passages.map((p) => (
+                <li key={p.id}>{p.document} · {p.section ?? "(no section)"} <small>({p.id}, similarity {p.similarity.toFixed(3)})</small></li>
+              ))}
+            </ol>
+          </details>
         </section>
-      ))}
+      )}
     </>
   );
 }
