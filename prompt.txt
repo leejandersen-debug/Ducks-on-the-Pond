@@ -1285,3 +1285,156 @@ commit it
 
 What it gives you:
 The baseline work saved in git. One commit on main: baseline-report-v1.md, scoresheet-2026-11-03-rerun.md, the --log flag in scripts/ask.mjs (it prints retrieved chunk ids and similarity scores), and prompt-log entries 128 (result) to 130. Nothing was pushed.
+
+
+PROMPT 131
+I'm using make.com to create a webbhook from my email account.  I am trying to set up a push notification from ducksonthepondcards.com to my apple cell phone.  I can't seem to connect to the phone.  give me step by step detail on how to accomplish this.
+
+What it gives you:
+A step-by-step guide to getting a Make.com scenario to push to an iPhone. Make can't reach a phone by itself; the iPhone needs the Make app installed, signed in to the same Make account, with notifications allowed. Then the scenario's email trigger (a Gmail or Outlook "Watch emails" module, or a Make mailhook address you forward to) is filtered to ducksonthepondcards.com and connected to the "Make app > Send a push notification" module. The guide covers the usual reasons the phone won't connect, Pushover as a fallback, and a no-Make option using iOS Mail VIP alerts.
+
+
+PROMPT 132
+"Send a Push Notification" from Make is not an option
+
+What it gives you:
+The correction: Make no longer offers its own mobile app or its "Send a Push Notification" module, so it can't push to an iPhone directly. There are two working replacements, with step-by-step setup for each. ntfy is free: install the ntfy iPhone app, subscribe to a private topic name, and have Make send to it with an HTTP "Make a request" POST to https://ntfy.sh/<topic>. Pushover is paid ($5 one-time after a 30-day trial): use the user key and an app API token in Make's Pushover module. Both keep the same email trigger and the ducksonthepondcards.com filter.
+
+
+PROMPT 133
+In Make, when adding in a header in the HTTP "Make a Request", these are my options: [Image #2: Make's Headers section showing "Header 1" with a required "Name" text box (hint: "Must match pattern /^[-!#$%&'*+.^_`|~0-9A-Za-z]+$/.") and an empty "Value" text box, plus a "Map" toggle]. There is no option for Title to add in "ducks on the pond"
+
+What it gives you:
+How to fill in the header: Name and Value are free-text boxes you type into, not dropdowns. Type Title in Name (one word, no spaces, which satisfies the pattern hint) and Ducks on the Pond Cards in Value (spaces are fine there). Leave the Map toggle off. It also covers the rest of the module (POST, Raw, Text body mapped to the email subject) and how to test.
+
+
+PROMPT 134
+Where does card data reside on this application?
+
+What it gives you:
+A map of where card data lives. All of it is in Neon Postgres, defined in migrations/1792878970760_initial-schema.sql: the dev branch for local work (.env.development.local) and the main branch for production (Vercel's DATABASE_URL). The app reaches it through the pg pool in lib/db.ts, with row-level security on. The catalog goes sets → parallels → cards (with card_players and players) → card_variants. A user's owned cards are rows in copies (owner, grade, serial, prices, tradeable/sold). Around those sit copy_photos (a storage_key only; no image store is wired yet), wants, trades and trade_items, serial_conflicts and variant_prices. Queries are in lib/queries.ts and writes in app/actions.ts. Chroma and the chunks/ files hold only the RAG lesson corpus, not card data.
+
+
+PROMPT 135
+Create a new folder called Ducks Corpus
+
+What it gives you:
+A new empty folder, "Ducks Corpus", in the Week 8 project root.
+
+
+PROMPT 136
+Within Ducks Corpus, create a users guide for the Application in plain text file
+
+What it gives you:
+Ducks Corpus/users-guide.txt, a plain-text user's guide built from the app's pages, server actions and database rules. It has 13 numbered sections: overview, navigation, test-user sign-in, key terms (set, parallel, card, variant, copy, serial), Catalog, My collection (adding, tradeable, listing, selling, serial conflicts), Wishlist, Trades (statuses, counteroffers, completing), Reports, Admin, Search, common error messages and what they mean, and a step-by-step walkthrough.
+
+
+PROMPT 137
+Create a Customer Service policy in this folder
+
+What it gives you:
+Ducks Corpus/customer-service-policy.txt, a plain-text draft (v1.0) with 13 sections: purpose, service commitments, what support covers (and doesn't: payments, shipping, grading, valuations), contact details, response-time tiers, trades and the dispute process, serial-number conflict reviews, catalog corrections, acceptable use, privacy and data (checked against the app's row-level security), complaints and escalation, guidance for support staff, and policy changes. Business details the app can't supply (support email, hours, time zone, response targets, retention, support lead) are marked [TO CONFIRM].
+
+
+PROMPT 138
+Create a fake legal indemnification policy
+
+What it gives you:
+Ducks Corpus/indemnification-policy.txt, a plain-text sample policy labelled at the top and bottom as fictional, not lawyer-reviewed and not in force. It has 14 sections: scope, definitions, the nature of the service (no payments, shipping, grading or authentication), the collector's duty to indemnify, the operator's narrower IP indemnity, exclusions, a liability cap (greater of fees paid or US$100), the claim notice and defense procedure, disputes between collectors (cross-referencing the Customer Service Policy), account action, survival, governing law (placeholder state and county), severability and changes, and contact.
+
+
+PROMPT 139
+create a capabilities summary document
+
+What it gives you:
+Ducks Corpus/capabilities-summary.txt, a plain-text summary of what the app does today, checked against the code: an at-a-glance list, then catalog, collection tracking, serial-number protection, wishlist and matching, trading (with its safeguards), reports, administration, document search (top 3 passages, 0.33 similarity floor, 500-character queries, all-MiniLM-L6-v2 on pgvector), the two API endpoints with their responses, security and privacy, the platform stack, and current limitations (test-user sign-in only, no payments, shipping, photo upload, market-price entry, notifications or catalog editing).
+
+
+PROMPT 140
+create an FAQ document in this folder
+
+What it gives you:
+Ducks Corpus/faq.txt, a plain-text FAQ in Q:/A: form with about 60 questions grouped into Getting started, The catalog, My collection, Serial numbers, Wishlist, Trading, Selling and prices, Reports, Search, Privacy, and Help and support. Answers match the app's behavior and point to section numbers in the User's Guide and Customer Service Policy rather than repeating policy details.
+
+
+PROMPT 141
+commit the Ducks Corpus files
+
+What it gives you:
+One commit on main adding the five Ducks Corpus files (users-guide.txt, customer-service-policy.txt, indemnification-policy.txt, capabilities-summary.txt, faq.txt). prompt.txt was left out of the commit, since only the corpus files were asked for.
+
+
+PROMPT 142
+Create a new fake pricing guide for the app subscription
+
+What it gives you:
+Ducks Corpus/pricing-guide.txt, a plain-text subscription pricing guide marked SAMPLE and fictional at the top (the app is really free and takes no payments). It sets out three plans (Pond free, Flock US$4.99/month or US$49/year, Wetland US$12.99/month or US$129/year), per-plan limits on copies, wishlist entries, open trades, listings, reports and searches, a 14-day trial, billing, upgrades and downgrades with a proration example, cancelling (nothing deleted on moving to Pond), refunds, discounts and a short FAQ. It cross-references the User's Guide and Customer Service Policy by section number and states that paid plans never change trade rules or serial-number disputes.
+
+
+PROMPT 143
+Any ideas for other documents needed for an application like this?
+
+What it gives you:
+A short list of further Ducks Corpus documents, starting with the ones the existing corpus already refers to but doesn't have: Terms of Use (the indemnification policy says it is part of them), a Privacy Notice (the Customer Service Policy marks it [TO CONFIRM]), and the operations manual and handbook that the capabilities summary says document search covers. Then useful extras such as trading rules, a condition and grading guide, release notes and a staff support playbook, plus ideas for documents that test retrieval.
+
+
+PROMPT 144
+create the Terms of Use and privacy notice, serial number dispute procedure, release notes, collector handbook, glossary, and security and incidence response.
+
+What it gives you:
+Seven new plain-text files in Ducks Corpus, written in the same style as the others and checked against the code and git history:
+- terms-of-use.txt: marked SAMPLE and not in force; covers accounts, the test release, what the app does not do, collector content, trading rules, serial numbers, acceptable use, suspension, fees, disclaimers, and a liability limit that matches the indemnification policy.
+- privacy-notice.txt: a DRAFT describing what the app actually stores and logs (path-only request logs, logged search questions, secret redaction, the test-user cookie, Vercel and Neon as providers, embeddings made inside the app), who can see what, and the rights and retention items marked [TO CONFIRM].
+- serial-number-dispute-procedure.txt: what is and isn't a conflict, the collector's steps, evidence ranked by strength, the admin's steps, a decision-rules table, a second review, and known limits.
+- release-notes.txt: releases 0.1 to 0.6, dated from the git history, plus known issues and what's coming next.
+- collector-handbook.txt: practical collecting, grading, trading, selling and safety advice.
+- glossary.txt: about 70 app and hobby terms in A to Z order.
+- security-incident-response.txt: the protections that are really built, how to report a vulnerability and the testing rules, severity levels, response steps, notification, and the post-incident review.
+
+
+PROMPT 145
+commit the new Ducks Corpus files
+
+What it gives you:
+One commit on main adding the eight new Ducks Corpus files (pricing-guide.txt, terms-of-use.txt, privacy-notice.txt, serial-number-dispute-procedure.txt, release-notes.txt, collector-handbook.txt, glossary.txt, security-incident-response.txt). prompt.txt was left out of the commit, as before, since only the corpus files were asked for.
+
+
+PROMPT 146
+push it
+
+What it gives you:
+Six commits on main pushed to GitHub (leejandersen-debug/Ducks-on-the-Pond): the two Ducks Corpus commits and the four RAG baseline commits from 2026-11-03 that had not been pushed yet. prompt.txt stays uncommitted locally.
+
+
+PROMPT 147
+the prompts we did for the Trailhead corpus, shift to the Ducks corpus and do the same.  Make the Ducks Corpus a part of this application.  Complete the chunking for search.
+
+What it gives you:
+The Trailhead pipeline (clean, chunk, embed, store, count, query, test, load into Postgres, search page) repeated for the 13 Ducks Corpus files, and the app's Search page now searches the Ducks Corpus.
+- Cleaning: none was needed, since the files were written clean. The chunker (scripts/chunk-text.mjs) now recognizes the Ducks headings ("6. TRADES", "6.1 How trades work", "RELEASE 0.7, ...") and records them as paths such as "6. MY COLLECTION › 6.6 Serial-number conflicts". The Trailhead files re-chunk byte-for-byte the same as before.
+- Chunking: the same rules (300–400 words, about 50 words of overlap, paragraph breaks, at most 512 tokens) give 70 chunks in chunks/ducks/. Checks confirm each document rebuilds exactly from its chunks, every overlap is an exact copy and no chunk ends mid-sentence.
+- Embedding: 70 attempted, 70 embedded, 0 skipped, 0 problems, 0 cut off.
+- Local Chroma: a new "ducks" collection with 70 chunks (the "trailhead" collection still has 109). store-chunks, query-chunks and ask take --collection ducks, with Trailhead still the default. store-chunks now also removes chunks a source no longer has.
+- App: a dev-only migration adds a corpus column to doc_chunks. The loader tags chunks/ducks/ files as "ducks" and loaded all 70. lib/search.ts filters by corpus (default "ducks", using an iterative HNSW scan so the filter can't cut results short). POST /api/search takes an optional "corpus", and the Search page text now describes the Ducks documents. The User's Guide, FAQ, Capabilities Summary and Release Notes were updated to say Search covers the Ducks Corpus (release 0.7), then re-chunked.
+- Tests: a serial-review question finds the dispute procedure at 0.61 (and the ask tool answers "5 business days" with a citation); a wifi-password question tops out at 0.30, below the 0.33 cutoff, and ask says "I don't know"; the Trailhead dog question via corpus "trailhead" still scores 0.457. Weak spots: the stolen-card and stop-paying questions miss their best passage (Customer Service Policy 6.4, Pricing Guide 8.2). Nothing is committed, and production has neither the migration nor the Ducks rows yet.
+
+
+PROMPT 148
+Get rid of the Trailhead documents and chunking.  They will only serve to confuse the search engine.
+
+What it gives you:
+Search now holds only the Ducks Corpus, so an off-topic Trailhead answer can no longer come back. Removed: the trailhead-corpus folder (5 documents), the planted-injection test document (injection-test/gear-care-tips.md), the 10 Trailhead chunk and embedding files in chunks/, the 109 Trailhead rows in the dev database and the "trailhead" collection in local Chroma. All the files are still in git history. With one corpus left, the corpus column and its migration were rolled back on dev and deleted, so production needs no schema change. The search code, API route, loader and Chroma scripts went back to a single corpus: the Ducks chunks now live directly in chunks/, and the store, query and ask scripts always use "ducks" (no --collection option). The Capabilities Summary and Release Notes 0.7 were corrected and re-chunked. Result: 70 chunks in both stores. Checked on the dev server: the serial-review question still scores 0.61 for its answer, and "can I bring my dog to the office?" now tops out at 0.20, so the page says "Not in the documents". The golden set, scoresheets, baseline report and gates were kept as lesson records, even though they describe the Trailhead corpus. Nothing is committed, and production still has the Trailhead rows until the Ducks chunks are loaded there.
+
+
+PROMPT 149
+yes, load production, then commit and push
+
+What it gives you:
+Production now searches only the Ducks Corpus. In one transaction on the Neon main branch, the 109 Trailhead rows in doc_chunks were removed and the 70 Ducks chunks loaded from their saved vectors (no migration was needed). The live site answered straight away with the same scores as dev: the serial-review question 0.66 and 0.61, and the dog question 0.20, which shows "Not in the documents". The work is then committed to main and pushed. The commit covers the Trailhead removal, the Ducks chunks in chunks/, the chunker's numbered-heading support, the single-corpus scripts and search code, and the updated Ducks documents. prompt.txt and the untracked mcp-server/ folder are left out.
+
+
+PROMPT 150
+commit and push the prompt log
+
+What it gives you:
+prompt.txt committed on its own and pushed to main, bringing the log on GitHub up to date through this entry (PROMPTS 142–150: the pricing guide, the seven further Ducks Corpus documents, moving search to the Ducks Corpus and removing the Trailhead corpus, and the production load).
