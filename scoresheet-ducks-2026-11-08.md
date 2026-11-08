@@ -7,6 +7,8 @@ Order on every item: the retrieved list (`npm run query`) was saved and graded f
 Refusal-item retrieval rule: HIT when no retrieved chunk contains the asked-for fact.
 Answer rule: the claim matches the golden answer **and** the cited source is on the item's frozen accepted list.
 
+> **Correction, 2026-11-08 (after the run).** Retrieval was over-graded. On #7, half (a) — the "Note for admin" — is accepted only from `users-guide.txt` §6.6 or `serial-number-dispute-procedure.txt` §4.2. The retrieved chunk that held it was `collector-handbook-03`, which the frozen key does not accept for that half, so #7's retrieval is a **MISS**, not a HIT. The answer grade for #7 already failed that same source, so the two grades contradicted each other. Corrected retrieval: **9 / 12**, below the ≥ 10 / 12 gate, so the verdict is **HOLD**, not SHIP. The original grades are left visible below, struck through, so the change is on record. Found while re-grading strictly during the Q8 retrieval work.
+
 | # | Question | Accepted source | Retrieved (top 3) | Retrieval | Answer | Note |
 |---|----------|-----------------|-------------------|-----------|--------|------|
 | 1 | Which grading companies can I pick when I add a graded card? | users-guide 4 / faq / capabilities 3 / glossary / handbook 3.1 | collector-handbook-01 (0.55), glossary-01, users-guide-02 | HIT | PASS | PSA, BGS, SGC, CGC; cites handbook "2.3 A good routine" (accepted label). |
@@ -15,7 +17,7 @@ Answer rule: the claim matches the golden answer **and** the cited source is on 
 | 4 | If I decide I don't want to trade a card anymore, what happens to the offers people already sent for it? | users-guide 6.3 / faq TRADING / capabilities 6 / glossary | glossary-04 (0.54), collector-handbook-02, faq-04 | HIT | PASS | Open offers cancelled automatically. Cites the glossary. |
 | 5 | What does it mean when a card says /50? | glossary "print run" / users-guide 4 | collector-handbook-01 (0.41), glossary-00, faq-03 | **MISS** | **FAIL** | Neither accepted chunk (glossary-02, users-guide-01) was retrieved. The claim is right ("print run, 50 copies made"), worked out from faq-03's "51 on a /50 card", but it cites `faq.txt · WISHLIST`, which isn't an accepted source. |
 | 6 | I found a security hole in the site. How soon will someone get back to me after I report it? | security 3.2 | privacy-notice-03 (0.42), security-03, security-02 | HIT | PASS | 2 business days to acknowledge, 5 to assess. Cites security "3.3 Rules for testing" (accepted label). |
-| 7 | The app says my card's serial number is already in someone else's collection. Where do I explain my side, and what proof carries the most weight? | (a) users-guide 6.6 / dispute 4.2 + (b) dispute 5.2 / CSP 7 | terms-of-use-03 (0.65), collector-handbook-03, customer-service-policy-04 | HIT (both) | **FAIL** | Both halves retrieved: the handbook chunk has the Note for admin, and CSP-04 has "cert is the strongest evidence". Both halves are in the answer. But the single citation is `collector-handbook.txt · 6`, which isn't on the frozen list for either half. The schema allows one source, so a two-document answer can only credit one. |
+| 7 | The app says my card's serial number is already in someone else's collection. Where do I explain my side, and what proof carries the most weight? | (a) users-guide 6.6 / dispute 4.2 + (b) dispute 5.2 / CSP 7 | terms-of-use-03 (0.65), collector-handbook-03, customer-service-policy-04 | ~~HIT (both)~~ **MISS** (corrected) | **FAIL** | Half (b) retrieved (CSP-04: cert is the strongest evidence). Half (a) only via the handbook chunk, which the key doesn't accept for (a), so retrieval is a MISS (see correction). The handbook chunk has the Note for admin, and CSP-04 has "cert is the strongest evidence". Both halves are in the answer. But the single citation is `collector-handbook.txt · 6`, which isn't on the frozen list for either half. The schema allows one source, so a two-document answer can only credit one. |
 | 8 | Who can read the message I attach to a trade offer, and is there anything I shouldn't put in it? | (a) privacy 5.1 / CSP 10 + (b) handbook 7 | glossary-04 (0.40), customer-service-policy-01, collector-handbook-02 | **MISS** | **FAIL** | Neither half retrieved: privacy-notice-01, CSP-05 and handbook-03 were all outside the top 3. The engine said "I don't know", a safe refusal but the wrong result for an answerable question. |
 | 9 | I asked for a second review of an admin's serial-number decision. How long until I hear back? | dispute 8 / 6.4 / CSP 11 | customer-service-policy-06 (0.57), serial-number-dispute-procedure-02, customer-service-policy-03 | HIT | PASS | 10 business days, by someone not involved in the first decision. Didn't confuse it with 5 or 14. Cites dispute "6.1 The queue" (accepted label). |
 | 10 | I'm on the monthly Flock plan and cancelled two days into the month. Do I get money back for the rest of the month? | pricing 9 / 8.1 | pricing-guide-03 (0.47), pricing-guide-02, pricing-guide-04 | HIT | PASS | No refund for a started month; active until period end, then Pond. Didn't apply the yearly 14-day refund. |
@@ -24,10 +26,10 @@ Answer rule: the claim matches the golden answer **and** the cited source is on 
 
 ## Totals
 
-- **Retrieval accuracy: 10 / 12** (gate ≥ 10 / 12): **PASS**, exactly on the gate.
+- **Retrieval accuracy: ~~10 / 12~~ 9 / 12** (gate ≥ 10 / 12): **FAIL** (corrected).
 - **Answer quality: 9 / 12** (gate ≥ 9 / 12): **PASS**, exactly on the gate.
 
-Not averaged. **Gate verdict: SHIP**, with no margin on either measure.
+Not averaged. **Gate verdict: ~~SHIP~~ HOLD** (corrected): retrieval misses its gate by one item. The lever is retrieval.
 
 ## Reading the table
 

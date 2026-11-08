@@ -2,17 +2,19 @@
 
 **Golden set:** 12 questions, frozen (`GoldenQuestions.txt`, 2026-11-08) · **Engine:** `scripts/ask.mjs` (claude-opus-5-5, top 3) over the local Chroma "ducks" store, 70 chunks · **Scored run:** `scoresheet-ducks-2026-11-08.md`
 
+> **Correction, 2026-11-08 (after the run).** Retrieval was over-graded. On #7, half (a) — the "Note for admin" — is accepted only from `users-guide.txt` §6.6 or `serial-number-dispute-procedure.txt` §4.2. The retrieved chunk that held it was `collector-handbook-03`, which the frozen key does not accept for that half, so #7's retrieval is a **MISS**, not a HIT. The answer grade for #7 already failed that same source, so the two grades contradicted each other. Corrected retrieval: **9 / 12**, below the ≥ 10 / 12 gate, so the verdict is **HOLD**, not SHIP. The original grades are left visible below, struck through, so the change is on record. Found while re-grading strictly during the Q8 retrieval work.
+
 ## A. The two measures, scored separately
 
 | Measure | Score | Gate | Verdict |
 |---|---|---|---|
-| Retrieval accuracy | 10 / 12 | ≥ 10 / 12 | **PASS** |
+| Retrieval accuracy | ~~10 / 12~~ 9 / 12 | ≥ 10 / 12 | **FAIL** (corrected) |
 | Answer quality | 9 / 12 | ≥ 9 / 12 | **PASS** |
 
 Misses on record:
 - **Q8, retrieval.** "Who can read my trade message, and what shouldn't I put in it?" Neither half was retrieved (privacy-notice-01, CSP-05 and collector-handbook-03 were all outside the top 3). The engine refused with "I don't know": safe, but an answerable question went unanswered.
 - **Q5, retrieval.** The glossary's print-run entry and the User's Guide key terms weren't retrieved. The answer reasoned correctly from an FAQ example, but cited a source the key doesn't accept.
-- **Q7, generation (citation).** Both halves were retrieved and both are in the answer, but the one-source schema could credit only one document. It credited the Collector Handbook, which the frozen key doesn't list.
+- **Q7, retrieval (corrected) and generation (citation).** Half (a) was retrieved only from the Collector Handbook, which the key doesn't accept for that half, so retrieval is a MISS. Both halves are in the answer, but the one-source schema could credit only one document. It credited the Collector Handbook, which the frozen key doesn't list.
 
 Every item counts once on each measure, refusals included. Both refusals (#11 phone number, #12 founders) hit and passed with exactly "I don't know". The two numbers are never blended. Each names its lever.
 
@@ -20,7 +22,7 @@ Every item counts once on each measure, refusals included. Both refusals (#11 ph
 
 Retrieval ≥ 10 / 12 · Answer ≥ 9 / 12, refusals included: the Trailhead bars (80% and one item lower) scaled to 12 items. Committed 2026-11-08 at 10:22 in `695f9ca`, together with the frozen golden file, before any question was run.
 
-**Gate verdict: SHIP.** Both measures clear, but both land exactly on the gate, with no margin. Q8 is the next session's work, and retrieval is the lever: the facts are diluted inside 300–400-word chunks that open on other sections.
+**Gate verdict: ~~SHIP~~ HOLD** (corrected). Retrieval is 9 / 12, one below its gate; answer quality is exactly on its gate. Q8 is the next session's work, and retrieval is the lever: the facts are diluted inside 300–400-word chunks that open on other sections.
 
 ## C. Retrieval security: the planted injection
 
