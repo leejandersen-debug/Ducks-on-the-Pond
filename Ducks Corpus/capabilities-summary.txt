@@ -134,9 +134,9 @@ from offer to completion, and reports on inventory, sales and profit.
 
   - Searches a corpus of reference documents by meaning (semantic search),
     not keyword matching.
-  - Currently loaded with the Trailhead Supply Co. course documents
-    (handbook, FAQ, operations manual, policies, pricing). It does not search
-    card data.
+  - Searches the Ducks Corpus: the Application's own help documents (User's
+    Guide, FAQ, Collector Handbook, Glossary, Capabilities Summary, policies
+    and release notes). It does not search card data.
   - Returns the top 3 passages with source, section and a similarity score.
   - Shows only passages scoring at least 0.33, and otherwise says "Not in the
     documents" with the best score found.
@@ -158,7 +158,7 @@ from offer to completion, and reports on inventory, sales and profit.
 
   POST /api/search
        Body: {"query": "..."}. Returns {"query", "results": [{id, source,
-       section, similarity, text}]}, top 3.
+       section, similarity, text}]}, top 3, from the help documents.
        Errors: HTTP 400 for a missing, empty or over-long query; HTTP 503 if
        search is not set up in the environment; HTTP 500 on failure.
 

@@ -1,12 +1,23 @@
 DUCKS ON THE POND CARDS
 RELEASE NOTES
 
-Latest: November 2026 (test harness release)
+Latest: November 2026 (test harness release), release 0.7
 
 These notes list what changed in each release, newest first. Dates are when
 the change went in. Version numbers were assigned to group the changes and are
 not shown in the Application. For what the Application can do overall, see the
 Capabilities Summary (capabilities-summary.txt).
+
+
+RELEASE 0.7, 2026-11-08: SEARCH THE HELP DOCUMENTS
+
+New
+  - The Search page and POST /api/search now search the Ducks Corpus, this
+    Application's own help documents.
+
+Removed
+  - The Trailhead Supply Co. course documents, which search used before. They
+    were about a different business and could return unrelated answers.
 
 
 RELEASE 0.6, 2026-11-07: HELP DOCUMENTS
@@ -17,10 +28,6 @@ New
     Further documents (Terms of Use, Privacy Notice, Serial-Number Dispute
     Procedure, Collector Handbook, Glossary, Security and Incident Response,
     and a sample Pricing Guide) follow.
-
-Note
-  - The Search page still searches the Trailhead Supply Co. course documents.
-    Loading the Ducks Corpus into search is planned.
 
 
 RELEASE 0.5, 2026-11-03: SEARCH QUALITY CHECKS
@@ -113,7 +120,6 @@ KNOWN ISSUES AND NOT YET AVAILABLE
 
 COMING NEXT [TO CONFIRM]
 
-  - The Ducks Corpus in the Search page.
   - Personal accounts and real sign-in.
   - Email notifications for trades and serial-number reviews.
   - Card photos and market-price entry.

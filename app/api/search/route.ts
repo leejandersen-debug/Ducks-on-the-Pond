@@ -1,8 +1,9 @@
 import { MAX_QUERY_CHARS, searchCorpus, searchUnavailable } from "@/lib/search";
 import { currentUserId } from "@/lib/session";
 
-// POST /api/search  {"query": "can I bring my dog to the office?"}
+// POST /api/search  {"query": "how long does a serial-number review take?"}
 // -> {"query": "...", "results": [{ id, source, section, similarity, text }, ...]}  (top 3)
+// Searches this app's help documents (the Ducks Corpus).
 // searchCorpus logs the query and result count (search.query) or the failure (search.failed).
 export async function POST(request: Request) {
   let query: unknown;

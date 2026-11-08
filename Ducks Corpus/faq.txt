@@ -230,8 +230,8 @@ A: No. Reports only show your own cards.
 SEARCH
 
 Q: What does the Search page search?
-A: Reference documents, currently the Trailhead Supply Co. course documents
-   (handbook, FAQ, operations manual, policies and pricing). It does not
+A: The Ducks on the Pond Cards help documents: the User's Guide, this FAQ,
+   the Collector Handbook, Glossary, policies and release notes. It does not
    search cards or collections.
 
 Q: Why does it say "Not in the documents"?

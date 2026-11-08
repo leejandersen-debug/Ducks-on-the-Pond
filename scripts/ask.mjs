@@ -2,17 +2,19 @@
 // store (the same retrieval as query-chunks.mjs), then asks Claude to answer from those chunks only.
 //
 //   npm run chroma                                   # the vector store must be running
-//   npm run ask -- "How much does shipping to Hawaii cost?"
-//   npm run ask -- --context "Can I return worn boots?"   # also print the context block sent
-//   npm run ask -- --log "What's the employee discount?"  # also log the retrieved chunk ids and scores
+//   npm run ask -- "How long does a serial-number review take?"
+//   npm run ask -- --context "Can I undo a sale?"            # also print the context block sent
+//   npm run ask -- --log "Who can see what I paid for a card?" # also log the retrieved chunk ids and scores
 //
+// Answers from the "ducks" collection: the card app's own help documents (the Ducks Corpus).
 // Needs ANTHROPIC_API_KEY in .env.development.local (loaded by the npm script). Each question is
 // one Claude API call, a cent or two against the prepaid Console credit.
 import Anthropic from "@anthropic-ai/sdk";
 import { ChromaClient } from "chromadb";
 import { DefaultEmbeddingFunction } from "@chroma-core/default-embed";
 
-const COLLECTION = "trailhead";
+const COLLECTION = "ducks";
+const AUDIENCE = "Ducks on the Pond Cards collectors and support staff"; // named in the grounding prompt
 const EMBED_MODEL = "Xenova/all-MiniLM-L6-v2"; // must match the model the chunks were stored with
 const TOP_K = 3;
 const CLAUDE_MODEL = "claude-opus-5-5";
@@ -65,7 +67,7 @@ const context = chunks
 if (showContext) console.log(`--- context sent to Claude ---\n${context}\n------------------------------\n`);
 
 // 3. Ask Claude to answer from that context only.
-const system = `You answer questions for Trailhead staff using only the context chunks provided in the user's message.
+const system = `You answer questions for ${AUDIENCE} using only the context chunks provided in the user's message.
 
 Rules:
 - Use only information stated in the context chunks. Do not use outside knowledge, general knowledge, or assumptions, even if you believe you know the answer.

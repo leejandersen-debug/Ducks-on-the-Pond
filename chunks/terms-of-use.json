@@ -1,0 +1,97 @@
+[
+  {
+    "id": "terms-of-use-00",
+    "source": "terms-of-use.txt",
+    "index": 0,
+    "section": "DUCKS ON THE POND CARDS TERMS OF USE",
+    "sections": [
+      "DUCKS ON THE POND CARDS TERMS OF USE",
+      "1. ABOUT THESE TERMS",
+      "2. DEFINITIONS",
+      "3. WHO CAN USE THE APPLICATION"
+    ],
+    "words": 276,
+    "overlapWords": 0,
+    "text": "DUCKS ON THE POND CARDS TERMS OF USE\n\nVersion: 1.0 SAMPLE, November 2026\n\nSAMPLE DOCUMENT. These terms are fictional. They were written as test content for the Ducks Corpus and have not been drafted or reviewed by a lawyer. They are not legal advice and are not in force. Do not rely on them or publish them as real terms. Items marked [TO CONFIRM] are placeholders.\n\n1. ABOUT THESE TERMS\n\nThese Terms of Use (\"Terms\") are the agreement between you and Ducks on the Pond Cards (\"we\", \"us\", \"our\") for your use of the Ducks on the Pond Cards application (\"the Application\").\n\nBy creating an account or using the Application, you agree to these Terms. If you do not agree, do not use the Application.\n\nThese Terms include, and should be read with:\n\n- the Indemnification Policy (indemnification-policy.txt) - the Privacy Notice (privacy-notice.txt) - the Customer Service Policy (customer-service-policy.txt) - the Serial-Number Dispute Procedure (serial-number-dispute-procedure.txt) - the Pricing Guide (pricing-guide.txt), if paid plans are ever offered\n\nIf these Terms and one of those documents disagree, these Terms apply, except that the Privacy Notice governs how we handle personal information.\n\n2. DEFINITIONS\n\nAccount Your registered access to the Application. In the current test release, accounts are the test users Alice, Bob and Carol. Collector A person with an account. Collector Content Anything a collector enters: catalog entries, copies, serial numbers, grades, cert numbers, prices, dates, condition notes, wants, trade messages and notes to admins. Trade An offer between two collectors to exchange cards, recorded in the Application. Admin A person we authorize to review serial-number conflicts and support requests.\n\nOther terms are explained in the Glossary (glossary.txt)."
+  },
+  {
+    "id": "terms-of-use-01",
+    "source": "terms-of-use.txt",
+    "index": 1,
+    "section": "3. WHO CAN USE THE APPLICATION",
+    "sections": [
+      "3. WHO CAN USE THE APPLICATION",
+      "4. THE TEST RELEASE",
+      "5. WHAT THE APPLICATION DOES AND DOES NOT DO"
+    ],
+    "words": 325,
+    "overlapWords": 58,
+    "text": "Collector Content Anything a collector enters: catalog entries, copies, serial numbers, grades, cert numbers, prices, dates, condition notes, wants, trade messages and notes to admins. Trade An offer between two collectors to exchange cards, recorded in the Application. Admin A person we authorize to review serial-number conflicts and support requests. Other terms are explained in the Glossary (glossary.txt).\n\n3. WHO CAN USE THE APPLICATION\n\na. You must be at least 18, or at least 13 with the permission of a parent or guardian who agrees to these Terms for you. [TO CONFIRM age limits] b. You must give accurate account details and keep them up to date. c. You are responsible for everything done through your account. Do not share your sign-in details. Tell us at once if you think someone else has used your account (section 4 of the Customer Service Policy). d. One person, one account, unless we agree otherwise in writing.\n\n4. THE TEST RELEASE\n\nThe Application is currently an unstyled test release. In this release:\n\n- Sign-in uses shared test users instead of personal accounts. - Data may be reset at any time without notice. - Features may change, break or be removed without notice. - Test login may be switched off in some environments, so you can browse but not make changes.\n\nDo not enter information in the test release that you cannot afford to lose, or that you would not want other testers to see.\n\n5. WHAT THE APPLICATION DOES AND DOES NOT DO\n\nThe Application is a record-keeping and matching tool. It keeps a shared catalog, records the cards collectors say they own, matches wishlists, and records trade offers and their outcomes.\n\nThe Application does not:\n\n- process payments, hold money, or act as an escrow service; - ship, store, inspect, authenticate or grade cards; - guarantee that a card exists, matches its description, or is worth any amount; - make any trade happen in the physical world."
+  },
+  {
+    "id": "terms-of-use-02",
+    "source": "terms-of-use.txt",
+    "index": 2,
+    "section": "5. WHAT THE APPLICATION DOES AND DOES NOT DO",
+    "sections": [
+      "5. WHAT THE APPLICATION DOES AND DOES NOT DO",
+      "6. YOUR CONTENT",
+      "6. YOUR CONTENT › 6.1 You own it",
+      "6. YOUR CONTENT › 6.2 Shared catalog entries",
+      "6. YOUR CONTENT › 6.3 What other collectors can see",
+      "6. YOUR CONTENT › 6.4 Accuracy",
+      "7. TRADING RULES"
+    ],
+    "words": 340,
+    "overlapWords": 46,
+    "text": "The Application does not: - process payments, hold money, or act as an escrow service; - ship, store, inspect, authenticate or grade cards; - guarantee that a card exists, matches its description, or is worth any amount; - make any trade happen in the physical world.\n\nTrades and sales are agreements between collectors. We are not a party to them. Market prices shown in reports are for reference only and are not an appraisal or an offer to buy.\n\n6. YOUR CONTENT\n\n6.1 You own it\n\nYou keep ownership of your Collector Content. You give us a worldwide, non-exclusive, royalty-free licence to store, copy, display and process it only as needed to run, support and improve the Application.\n\n6.2 Shared catalog entries\n\nSets, parallels, cards and variants you add to the catalog become part of a shared catalog used by every collector. You agree that we may keep, correct and display those entries even after your account closes, without your name attached.\n\n6.3 What other collectors can see\n\nYour username, your tradeable cards (including grade, serial number and cert number) and your public wants are visible to other collectors. Paid prices, listed prices, acquired dates, private wants, non-tradeable cards and sold records are not shown to them. See the Privacy Notice for details.\n\n6.4 Accuracy\n\nYou are responsible for the accuracy of your Collector Content. Enter only cards you actually own, and serial and cert numbers exactly as they appear on the card or slab.\n\n7. TRADING RULES\n\nWhen you trade through the Application you agree to:\n\na. Mark a card as tradeable only if you have it in hand and are willing to trade it. b. Describe cards honestly in your collection and in trade messages. c. Agree delivery directly with your trading partner. You are responsible for the cost and risk of sending your cards. d. Click \"Complete (cards exchanged)\" only after the physical cards have been exchanged as agreed. e. Follow the dispute steps in section 6.4 of the Customer Service Policy if a trade goes wrong."
+  },
+  {
+    "id": "terms-of-use-03",
+    "source": "terms-of-use.txt",
+    "index": 3,
+    "section": "7. TRADING RULES",
+    "sections": [
+      "7. TRADING RULES",
+      "8. SERIAL NUMBERS",
+      "9. ACCEPTABLE USE",
+      "10. SUSPENSION AND CLOSURE",
+      "10. SUSPENSION AND CLOSURE › 10.1 By you",
+      "10. SUSPENSION AND CLOSURE › 10.2 By us"
+    ],
+    "words": 303,
+    "overlapWords": 52,
+    "text": "Agree delivery directly with your trading partner. You are responsible for the cost and risk of sending your cards. d. Click \"Complete (cards exchanged)\" only after the physical cards have been exchanged as agreed. e. Follow the dispute steps in section 6.4 of the Customer Service Policy if a trade goes wrong.\n\nA completed trade moves the cards' records to their new owners. We may correct those records if both collectors agree, or if the evidence clearly shows a recording mistake.\n\n8. SERIAL NUMBERS\n\nOnly one unsold copy of a numbered variant can hold a given serial number across all collections. If you record a serial number that is already held, your card is sent for admin review under the Serial-Number Dispute Procedure. Admin decisions under that procedure, including any second review, are final for the purposes of the Application's records. They do not decide legal ownership of a physical card.\n\n9. ACCEPTABLE USE\n\nYou must not:\n\n- misrepresent a card, its grade, its serial number or its condition; - enter serial or cert numbers you do not hold, to block another collector; - repeatedly fail to send cards for trades you completed; - send abusive, threatening or discriminatory messages; - use the Application for any illegal purpose, including selling stolen or counterfeit cards; - try to access other collectors' private data, or anything you are not authorized to access; - probe, scan or test the Application's security, except as allowed in the Security and Incident Response document (security-incident-response.txt); - overload the Application, or use bots or scripts to collect data from it; - copy or resell the shared catalog as your own product.\n\n10. SUSPENSION AND CLOSURE\n\n10.1 By you\n\nYou can stop using the Application at any time and ask us to delete your account and collection (Privacy Notice section 8)."
+  },
+  {
+    "id": "terms-of-use-04",
+    "source": "terms-of-use.txt",
+    "index": 4,
+    "section": "10. SUSPENSION AND CLOSURE › 10.2 By us",
+    "sections": [
+      "10. SUSPENSION AND CLOSURE › 10.2 By us",
+      "10. SUSPENSION AND CLOSURE › 10.3 What survives",
+      "11. FEES",
+      "12. DISCLAIMERS",
+      "13. LIMITATION OF LIABILITY",
+      "14. CHANGES TO THE APPLICATION AND THESE TERMS"
+    ],
+    "words": 308,
+    "overlapWords": 22,
+    "text": "You can stop using the Application at any time and ask us to delete your account and collection (Privacy Notice section 8).\n\n10.2 By us\n\nWe may warn, restrict, suspend or close an account that breaks these Terms. Unless there is a risk to other collectors or to the Application, we will warn you first and give you a chance to respond. If you disagree with a decision, use the complaints steps in section 11 of the Customer Service Policy.\n\n10.3 What survives\n\nSections 5, 6.2, 11, 12, 13 and 16 continue to apply after an account closes. Trade records involving other collectors may be kept, with your details removed, so their histories stay accurate.\n\n11. FEES\n\nThe Application is currently free. If we introduce paid plans, we will give at least 30 days' notice, and prices and billing terms will be set out in the Pricing Guide. No one will be moved to a paid plan without choosing it.\n\n12. DISCLAIMERS\n\nThe Application is provided \"as is\" and \"as available\". To the extent the law allows, we make no promises that it will be uninterrupted, error-free or secure, that data will never be lost, or that any search result, match or report is complete or accurate.\n\n13. LIMITATION OF LIABILITY\n\nTo the extent the law allows:\n\na. We are not liable for indirect, incidental, special or consequential losses, or for lost profits, lost data or lost cards. b. We are not liable for anything another collector does or fails to do, including in a trade or sale. c. Our total liability to you in any 12-month period is limited to the greater of the fees you paid us in that period and US$100.\n\nNothing in these Terms limits liability that cannot be limited by law.\n\nYour obligation to indemnify us is set out in the Indemnification Policy."
+  },
+  {
+    "id": "terms-of-use-05",
+    "source": "terms-of-use.txt",
+    "index": 5,
+    "section": "14. CHANGES TO THE APPLICATION AND THESE TERMS",
+    "sections": [
+      "14. CHANGES TO THE APPLICATION AND THESE TERMS",
+      "15. CONTACT",
+      "16. GOVERNING LAW"
+    ],
+    "words": 168,
+    "overlapWords": 49,
+    "text": "Our total liability to you in any 12-month period is limited to the greater of the fees you paid us in that period and US$100. Nothing in these Terms limits liability that cannot be limited by law. Your obligation to indemnify us is set out in the Indemnification Policy.\n\n14. CHANGES TO THE APPLICATION AND THESE TERMS\n\nWe may change the Application at any time. We may change these Terms by posting a new version with a new date. For changes that materially affect you, we will give at least 30 days' notice. If you keep using the Application after a change takes effect, the new Terms apply.\n\n15. CONTACT\n\nQuestions about these Terms: support@ducksonthepondcards.com [TO CONFIRM]. See section 4 of the Customer Service Policy for what to include.\n\n16. GOVERNING LAW\n\nThese Terms are governed by the laws of [TO CONFIRM jurisdiction]. Disputes will be heard in the courts of [TO CONFIRM], unless the law where you live gives you the right to bring a claim locally."
+  }
+]

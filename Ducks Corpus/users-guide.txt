@@ -370,11 +370,12 @@ this page regularly.
 
 11. SEARCH
 
-The Search page searches the course reference documents (the Trailhead Supply
-Co. handbook, FAQ, operations manual, policies and pricing) by meaning, not by
-exact words. It does not search card data.
+The Search page searches the Ducks on the Pond Cards help documents (this
+User's Guide, the FAQ, Collector Handbook, Glossary, policies and release
+notes) by meaning, not by exact words. It does not search card data.
 
-Type a question, for example "can I bring my dog to the office?", and click
+Type a question, for example "how long does a serial-number review take?", and
+click
 "Search". Results show the matching passages, their source document and a
 similarity score. If nothing is close enough, the page says "Not in the
 documents" and shows the best score it found.

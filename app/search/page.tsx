@@ -2,7 +2,7 @@ import { dbProblem } from "@/lib/db-status";
 import { MAX_QUERY_CHARS, MIN_SIMILARITY } from "@/lib/search";
 import { SearchBox } from "./search-box";
 
-// Searches the course corpus (the Trailhead documents) by meaning. The search box posts to
+// Searches this app's help documents (the Ducks Corpus) by meaning. The search box posts to
 // /api/search from the browser; a /search?q=... URL runs that search on load.
 export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string | string[] }> }) {
   if (await dbProblem()) return null; // the layout shows the reason
@@ -12,7 +12,8 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
   return (
     <main>
       <h1>Search</h1>
-      <p>Ask a question about the Trailhead Supply Co. documents (handbook, FAQ, operations manual, policies, pricing).</p>
+      <p>Ask a question about Ducks on the Pond Cards: the User&apos;s Guide, FAQ, Collector Handbook, Glossary, policies
+        (customer service, privacy, terms of use, serial-number disputes, security) and release notes.</p>
       <SearchBox initialQuery={q} maxChars={MAX_QUERY_CHARS} minSimilarity={MIN_SIMILARITY} />
     </main>
   );

@@ -1,0 +1,69 @@
+[
+  {
+    "id": "serial-number-dispute-procedure-00",
+    "source": "serial-number-dispute-procedure.txt",
+    "index": 0,
+    "section": "DUCKS ON THE POND CARDS SERIAL-NUMBER DISPUTE PROCEDURE",
+    "sections": [
+      "DUCKS ON THE POND CARDS SERIAL-NUMBER DISPUTE PROCEDURE",
+      "1. WHY SERIAL NUMBERS ARE PROTECTED",
+      "2. WHAT IS AND IS NOT A CONFLICT",
+      "3. COMMON CAUSES",
+      "4. WHAT TO DO AS A COLLECTOR",
+      "4. WHAT TO DO AS A COLLECTOR › 4.1 Before you add the card"
+    ],
+    "words": 371,
+    "overlapWords": 0,
+    "text": "DUCKS ON THE POND CARDS SERIAL-NUMBER DISPUTE PROCEDURE\n\nVersion: 1.0 DRAFT, November 2026 Owner: Ducks on the Pond Cards support team Applies to: collectors who record numbered cards, and the admins who review serial-number conflicts.\n\nThis procedure expands on section 6.6 and section 10 of the User's Guide (users-guide.txt) and section 7 of the Customer Service Policy (customer-service-policy.txt). If they ever disagree, the Customer Service Policy applies. Items marked [TO CONFIRM] are placeholders.\n\n1. WHY SERIAL NUMBERS ARE PROTECTED\n\nA numbered card is one of a limited print run, for example 23/50. Only one physical card carries serial 23 of that variant. To keep the records honest, the Application allows only one unsold copy of a variant to hold a given serial number across all collections.\n\nSold copies do not count. If a collector marks serial 23 as sold, another collector can then record serial 23 of that variant without a conflict.\n\n2. WHAT IS AND IS NOT A CONFLICT\n\nNot a conflict (rejected straight away, with a message):\n\n- The serial is higher than the print run. \"Serial N is higher than the print run (/M).\" - You already hold that serial of that variant yourself. \"You already have serial N of this card.\" - The cert number is already recorded for that grading company. \"That already exists.\"\n\nA conflict (sent to an admin):\n\n- Another collector's unsold copy of the same variant already holds the serial. You see: \"Serial #N is already in another collection, so this was sent to an admin for review.\"\n\nThe same serial on a different variant is not a conflict. Serial 23 of the Gold Refractor and serial 23 of the Orange Refractor are different cards.\n\n3. COMMON CAUSES\n\nFrom most to least common [TO CONFIRM once there is real data]:\n\n1. A typo: one collector entered the wrong serial. 2. The wrong variant: the card was recorded under the wrong parallel, so it collides with someone else's card. 3. A stale record: the card was sold or traded outside the Application, and the previous owner never marked it sold. 4. A duplicate catalog entry: the same parallel was added twice. 5. A counterfeit or altered card.\n\n4. WHAT TO DO AS A COLLECTOR"
+  },
+  {
+    "id": "serial-number-dispute-procedure-01",
+    "source": "serial-number-dispute-procedure.txt",
+    "index": 1,
+    "section": "4. WHAT TO DO AS A COLLECTOR › 4.1 Before you add the card",
+    "sections": [
+      "4. WHAT TO DO AS A COLLECTOR › 4.1 Before you add the card",
+      "4. WHAT TO DO AS A COLLECTOR › 4.2 When the conflict message appears",
+      "4. WHAT TO DO AS A COLLECTOR › 4.3 While you wait",
+      "4. WHAT TO DO AS A COLLECTOR › 4.4 After the decision",
+      "5. EVIDENCE",
+      "5. EVIDENCE › 5.1 What we may ask for",
+      "5. EVIDENCE › 5.2 How strong each kind of evidence is",
+      "6. HOW AN ADMIN REVIEWS A CONFLICT",
+      "6. HOW AN ADMIN REVIEWS A CONFLICT › 6.1 The queue"
+    ],
+    "words": 388,
+    "overlapWords": 0,
+    "text": "4.1 Before you add the card\n\n- Check the serial against the card itself, not a listing or a photo. - Check you chose the right set, card and parallel. - For a graded card, have the cert number ready.\n\n4.2 When the conflict message appears\n\nYour card is not lost. It is waiting for review. Use the \"Note for admin\" box to explain, for example:\n\n\"Card is in hand, PSA cert 12345678. Bought from a card show on 2026-10-12. The other entry may be a typo.\"\n\nAdd the note when you add the card. There is no way to add or change it after the card has been submitted.\n\n4.3 While you wait\n\n- Track the review under \"My serial-number reviews\" at the bottom of My collection. Statuses are \"pending admin review\", \"approved\" and \"rejected\". - Watch for a support email asking for evidence (section 5). Email notifications from the Application are not available yet, so check My collection for updates. - If you sold or traded away the other copy yourself, under another account, tell support.\n\n4.4 After the decision\n\n- Approved: the card is added to your collection with the details you submitted. It starts not tradeable. - Rejected: the card is not added. Read the admin's note to see why. - If you disagree, ask for a second review (section 8).\n\n5. EVIDENCE\n\n5.1 What we may ask for\n\n- A clear photo of the front and back of the card showing the serial number. - For a graded card, the grading company and cert number, and a photo of the slab label. - Proof of purchase or trade, if you have it (a receipt, invoice or message).\n\nCrop or cover any personal details such as an address label before you send a photo. We will never ask for a password, payment card number or bank detail.\n\n5.2 How strong each kind of evidence is\n\nStrongest A grading company cert whose record shows the serial number. We check the cert on the grading company's own website. Strong Clear photos of the front and back that show the serial and match the catalog entry. Supporting Receipts, invoices or messages showing when and where the card was bought. Weak Photos from a listing, or a description with no photo.\n\n6. HOW AN ADMIN REVIEWS A CONFLICT"
+  },
+  {
+    "id": "serial-number-dispute-procedure-02",
+    "source": "serial-number-dispute-procedure.txt",
+    "index": 2,
+    "section": "6. HOW AN ADMIN REVIEWS A CONFLICT › 6.1 The queue",
+    "sections": [
+      "6. HOW AN ADMIN REVIEWS A CONFLICT › 6.1 The queue",
+      "6. HOW AN ADMIN REVIEWS A CONFLICT › 6.2 Steps",
+      "6. HOW AN ADMIN REVIEWS A CONFLICT › 6.3 Recording the decision",
+      "6. HOW AN ADMIN REVIEWS A CONFLICT › 6.4 Target times",
+      "7. DECISION RULES"
+    ],
+    "words": 275,
+    "overlapWords": 0,
+    "text": "6.1 The queue\n\nOpen the Admin page (admins only). It shows the 50 most recent conflicts, open ones first. Each shows the variant, the serial, who submitted it and when, their note and copy details, and the existing copy and its owner.\n\n6.2 Steps\n\n1. Read both entries side by side. Check the variant, serial, grade and cert number of each. 2. Look for an obvious recording mistake: a typo, the wrong parallel, or a duplicate catalog entry. 3. If it is not obvious, contact both collectors for evidence (section 5). 4. Wait up to 14 days for replies. If a collector does not reply in that time, decide on the evidence you have. 5. Decide (section 7) and record it. 6. Write a note the collector will understand. Every decision records who resolved it and when.\n\n6.3 Recording the decision\n\nTo approve the new submission, first free the serial:\n\n- \"Change existing copy's serial to\" a corrected number, then \"Save\"; or - \"Delete existing copy\", if it should not exist at all.\n\nThen enter a note and click \"Approve\". If the serial is still held you will see: \"Serial N is still held by a copy. Fix or delete that copy first.\"\n\nTo keep the existing copy, enter a note and click \"Reject\".\n\nNever change or delete another collector's copy without a clear reason written in the note.\n\n6.4 Target times\n\n- First review: within 5 business days of submission. - Waiting for evidence: up to 14 days. - Second review: a reply within 10 business days of the request.\n\n7. DECISION RULES\n\nSituation Decision ------------------------------------------ ---------------------------------- The new entry is a typo Reject."
+  },
+  {
+    "id": "serial-number-dispute-procedure-03",
+    "source": "serial-number-dispute-procedure.txt",
+    "index": 3,
+    "section": "7. DECISION RULES",
+    "sections": [
+      "7. DECISION RULES",
+      "8. SECOND REVIEW AND COMPLAINTS",
+      "9. KNOWN LIMITS"
+    ],
+    "words": 300,
+    "overlapWords": 11,
+    "text": "Situation Decision ------------------------------------------ ---------------------------------- The new entry is a typo Reject.\n\nNote the likely correct serial so the collector can re-add The existing entry is a typo Correct the existing serial, then approve Wrong variant on one side Reject that side, with a note to re-add under the right variant The existing owner no longer has the card Delete the existing copy (or ask its owner to mark it sold), then approve Both claim the card; one has a cert that Decide for the cert holder records the serial Both have equal evidence Keep the existing copy, reject, and explain; either may ask for a second review No evidence from either side after 14 days Keep the existing copy, reject Signs of a counterfeit or altered card Reject, and refer to the acceptable-use rules (Customer Service Policy section 9)\n\nDeliberately entering a serial you do not hold, to block another collector, breaks the Terms of Use (section 9) and can lead to the account being restricted or closed.\n\n8. SECOND REVIEW AND COMPLAINTS\n\nIf you disagree with a decision:\n\n1. Reply to your support conversation, or contact support, and ask for a second review. Include any new evidence. 2. An admin who did not make the first decision reviews it and replies within 10 business days. 3. If you are still unhappy, follow the complaints steps in section 11 of the Customer Service Policy. The support lead's decision is final.\n\nAn admin decision settles the Application's records. It does not decide who legally owns a physical card.\n\n9. KNOWN LIMITS\n\n- No email notifications for submitters or admins yet. - The \"Note for admin\" cannot be edited after submission. - A copy's serial can only be changed by an admin. - The queue shows the 50 most recent conflicts only."
+  }
+]

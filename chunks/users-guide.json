@@ -1,0 +1,152 @@
+[
+  {
+    "id": "users-guide-00",
+    "source": "users-guide.txt",
+    "index": 0,
+    "section": "DUCKS ON THE POND CARDS USER'S GUIDE",
+    "sections": [
+      "DUCKS ON THE POND CARDS USER'S GUIDE",
+      "1. WHAT THE APPLICATION DOES",
+      "2. GETTING AROUND",
+      "3. SIGNING IN (TEST USERS)"
+    ],
+    "words": 331,
+    "overlapWords": 0,
+    "text": "DUCKS ON THE POND CARDS USER'S GUIDE\n\nVersion: November 2026 (test harness release)\n\n1. WHAT THE APPLICATION DOES\n\nDucks on the Pond is a sports card collection and trading application. With it you can:\n\n- Browse and build a shared catalog of card sets, parallels, cards and variants. - Record the cards you own (your \"copies\"), including grade, serial number, purchase price and acquisition date. - Mark cards as tradeable, list them for sale, and record sales. - Keep a wishlist of cards you want and see which other collectors have matching cards available to trade. - Propose, accept, decline, counter, cancel and complete trades with other collectors. - View reports on your inventory, cards for sale, sold cards and profit. - (Admins) Review serial-number conflicts.\n\nThe current release is an unstyled test harness. Pages are plain forms and tables. Styling will come later.\n\n2. GETTING AROUND\n\nEvery page has a navigation bar at the top with these links:\n\nHome | Catalog | My collection | Wishlist | Trades | Reports | Admin | Search\n\nBelow the navigation bar is the test user picker (see section 3).\n\nAfter you submit any form, the page reloads and shows a message near the top:\n\n- \"Done: ...\" means the action worked. - \"Error: ...\" means it did not, and says why.\n\nThe Home page also shows a status line such as \"API: ok · Database: ok\". If the database is unreachable, pages show the reason instead of their content.\n\n3. SIGNING IN (TEST USERS)\n\nThere is no real login yet. Instead, a \"Test user\" drop-down at the top of every page lets you choose who you are:\n\n- Alice: collector - Bob: collector - Carol: admin\n\nChoose a name and click \"Switch\". Choose \"(signed out)\" to browse without a user.\n\nYou must pick a test user before you can see My collection, Wishlist, Trades or Reports, or make any change. If you try without one, you will see \"Pick a test user first.\""
+  },
+  {
+    "id": "users-guide-01",
+    "source": "users-guide.txt",
+    "index": 1,
+    "section": "3. SIGNING IN (TEST USERS)",
+    "sections": [
+      "3. SIGNING IN (TEST USERS)",
+      "4. KEY TERMS",
+      "5. CATALOG",
+      "5. CATALOG › 5.1 Browsing sets",
+      "5. CATALOG › 5.2 Adding a set"
+    ],
+    "words": 347,
+    "overlapWords": 41,
+    "text": "Choose \"(signed out)\" to browse without a user. You must pick a test user before you can see My collection, Wishlist, Trades or Reports, or make any change. If you try without one, you will see \"Pick a test user first.\"\n\nIn some environments test login is turned off. The page then says \"Test login is off in this environment, so you can browse but not make changes.\" You can still view the Catalog, but you cannot add or change anything.\n\n4. KEY TERMS\n\nSet A product release, for example \"2024 Topps Chrome (baseball)\". A set has a sport, year, manufacturer and name.\n\nParallel A version of the cards in a set, for example Base, Refractor or Gold Refractor. A parallel may have a print run (for example /50, meaning only 50 were made). Every set gets a \"Base\" parallel automatically.\n\nCard A numbered card in a set, for example #150 Shohei Ohtani. A card can feature one or more players and can be marked as a rookie card (shown as RC).\n\nVariant A specific card in a specific parallel, optionally with an autograph (Auto) or a piece of memorabilia (Relic). Every card gets a Base variant automatically. Variants are what you add to your collection.\n\nCopy One physical card that you own. A copy belongs to a variant and has your own details: serial number, grade, cert number, price paid, and so on.\n\nSerial The individual number stamped on a numbered card, for example number 23 of /50. Only one unsold copy of a variant can hold a given serial number across all collections.\n\nRaw An ungraded card.\n\nGraded A card graded by a grading company. The supported companies are PSA, BGS, SGC and CGC. Grades run from 1 to 10 in half steps.\n\n5. CATALOG\n\nOpen \"Catalog\" from the navigation bar.\n\n5.1 Browsing sets\n\nThe Sets table lists every set by year (newest first), manufacturer and name, with its sport and how many parallels and cards it has. Click a set's name to open it.\n\n5.2 Adding a set\n\nUnder \"Add a set\", fill in:"
+  },
+  {
+    "id": "users-guide-02",
+    "source": "users-guide.txt",
+    "index": 2,
+    "section": "5. CATALOG › 5.2 Adding a set",
+    "sections": [
+      "5. CATALOG › 5.2 Adding a set",
+      "5. CATALOG › 5.3 Inside a set",
+      "6. MY COLLECTION",
+      "6. MY COLLECTION › 6.1 Adding a card"
+    ],
+    "words": 347,
+    "overlapWords": 6,
+    "text": "Under \"Add a set\", fill in:\n\n- Sport (defaults to baseball) - Year - Manufacturer (for example Topps) - Name (for example Chrome)\n\nClick \"Add set\". A Base parallel is created for the set automatically.\n\n5.3 Inside a set\n\nThe set page shows the set's title, its parallels, and its cards.\n\nAdding a parallel: Enter a Name (for example Gold Refractor) and, if the parallel is numbered, a Print run (for example 50). Leave Print run blank if the parallel is not numbered. Click \"Add parallel\".\n\nAdding a card: Under \"Add a card\", enter: - Card number (for example 150 or RC-12) - Players, separated by commas (for example Shohei Ohtani) - Title, only if the card is not named after its player(s) - Tick \"Rookie card\" if it is one Click \"Add card\". The card's Base variant is created automatically.\n\nAdding a variant: Each card row has an \"Add a variant\" form. Choose a parallel, tick Auto and/or Relic if they apply, and optionally enter a print run override (for when this variant's print run differs from its parallel's). Click \"Add\".\n\nTo return to the set list, click \"← Catalog\" at the top of the set page.\n\n6. MY COLLECTION\n\nOpen \"My collection\" from the navigation bar. You must be signed in as a test user.\n\n6.1 Adding a card\n\nUnder \"Add a card to my collection\":\n\n1. Choose the Card variant. If it is not in the list, add it in the Catalog first (section 5). 2. Serial number: only for numbered cards, for example 23 for a card numbered 23/50. 3. Grading: choose \"Raw (ungraded)\" or a grading company. If you choose a company you must also enter a Grade, and if you enter a Grade you must choose a company. You can also enter the Cert # from the slab. 4. Paid: what you paid, in dollars. 5. Acquired: the date you got the card. 6. Condition notes: anything worth remembering about its condition. 7. Note for admin: used only if the serial number is already taken (see section 6.6).\n\nClick \"Add card\"."
+  },
+  {
+    "id": "users-guide-03",
+    "source": "users-guide.txt",
+    "index": 3,
+    "section": "6. MY COLLECTION › 6.1 Adding a card",
+    "sections": [
+      "6. MY COLLECTION › 6.1 Adding a card",
+      "6. MY COLLECTION › 6.2 The \"In my collection\" table",
+      "6. MY COLLECTION › 6.3 Making a card tradeable",
+      "6. MY COLLECTION › 6.4 Listing a card for sale",
+      "6. MY COLLECTION › 6.5 Recording a sale",
+      "6. MY COLLECTION › 6.6 Serial-number conflicts"
+    ],
+    "words": 343,
+    "overlapWords": 53,
+    "text": "You can also enter the Cert # from the slab. 4. Paid: what you paid, in dollars. 5. Acquired: the date you got the card. 6. Condition notes: anything worth remembering about its condition. 7. Note for admin: used only if the serial number is already taken (see section 6.6). Click \"Add card\".\n\nRules checked when you add a card: - The serial number cannot be higher than the print run. For example, you cannot add serial 51 to a /50 card. - You cannot add the same serial number of the same variant twice to your own collection. - A cert number can only be used once per grading company.\n\n6.2 The \"In my collection\" table\n\nEach card you own (and have not sold) is listed with its Cert, Acquired date, Paid price, Tradeable setting, Listed price, a Sell form and a Delete button.\n\n6.3 Making a card tradeable\n\nClick \"Turn on\" in the Tradeable column. Only tradeable cards can appear in trades or in other collectors' wishlist matches. Click \"Turn off\" to stop offering the card. Turning a card off automatically cancels any open trade offers that include it.\n\n6.4 Listing a card for sale\n\nEnter an asking price in the Listed price box and click \"Save\". Listed cards appear in the \"For sale\" report. Clear the box and save to remove the price.\n\n6.5 Recording a sale\n\nIn the Sell column, enter the price the card sold for and, optionally, the date sold (it defaults to today). Click \"Mark sold\". The card moves to the \"Sold\" table, is no longer tradeable, and any open trade offers that include it are cancelled.\n\nTo reverse a sale entered by mistake, click \"Undo sale\" in the Sold table. The card returns to your inventory. It stays not tradeable; turn Tradeable back on if you want to offer it again.\n\n6.6 Serial-number conflicts\n\nIf you add a numbered card whose serial number is already held by another collector's unsold copy of the same variant, the card is not added right away. You will see:"
+  },
+  {
+    "id": "users-guide-04",
+    "source": "users-guide.txt",
+    "index": 4,
+    "section": "6. MY COLLECTION › 6.6 Serial-number conflicts",
+    "sections": [
+      "6. MY COLLECTION › 6.6 Serial-number conflicts",
+      "6. MY COLLECTION › 6.7 Deleting a card",
+      "7. WISHLIST",
+      "7. WISHLIST › 7.1 Adding a want",
+      "7. WISHLIST › 7.2 Matches",
+      "8. TRADES",
+      "8. TRADES › 8.1 Proposing a trade"
+    ],
+    "words": 331,
+    "overlapWords": 31,
+    "text": "If you add a numbered card whose serial number is already held by another collector's unsold copy of the same variant, the card is not added right away. You will see:\n\n\"Serial #N is already in another collection, so this was sent to an admin for review.\"\n\nUse the \"Note for admin\" box to explain, for example \"I have the card in hand; the other entry may be a typo.\"\n\nTrack these under \"My serial-number reviews\" at the bottom of the page. Each review shows \"pending admin review\", \"approved\" or \"rejected\", plus any note from the admin. If approved, the card is added to your collection.\n\n6.7 Deleting a card\n\nClick \"Delete\" on the card's row. This permanently removes the copy from your collection. Use \"Mark sold\" instead if you sold the card and want to keep the record.\n\n7. WISHLIST\n\nOpen \"Wishlist\" from the navigation bar.\n\n7.1 Adding a want\n\nUnder \"Add a want\":\n\n1. Choose what you want. The list has two groups: - \"Any version of a card\": any variant of that card will match. - \"An exact variant\": only that variant will match. 2. Minimum grade (optional): choose a grading company and/or a minimum grade, for example PSA 9. Only copies from that company, at or above that grade, will match. 3. Max price (optional): the most you would pay. 4. Notes (optional). 5. Public: ticked by default. Public wants can be seen by other collectors, who can then offer you trades. Untick it to keep the want private.\n\nClick \"Add want\". Click \"Remove\" on a want to delete it.\n\n7.2 Matches\n\n\"Tradeable copies that match my wants\" lists other collectors' tradeable cards that satisfy one of your wants. Click \"propose a trade\" next to a match to open the Trades page with that collector and card already selected.\n\n\"My tradeable copies that others want\" lists your tradeable cards that match another collector's public want, and who wants them.\n\n8. TRADES\n\nOpen \"Trades\" from the navigation bar."
+  },
+  {
+    "id": "users-guide-05",
+    "source": "users-guide.txt",
+    "index": 5,
+    "section": "8. TRADES › 8.1 Proposing a trade",
+    "sections": [
+      "8. TRADES › 8.1 Proposing a trade",
+      "8. TRADES › 8.2 Trade statuses",
+      "8. TRADES › 8.3 Responding to a trade offered to you",
+      "8. TRADES › 8.4 Cancelling a trade you proposed",
+      "8. TRADES › 8.5 Completing a trade"
+    ],
+    "words": 342,
+    "overlapWords": 6,
+    "text": "Open \"Trades\" from the navigation bar.\n\n8.1 Proposing a trade\n\n1. Under \"Propose a trade\", choose a collector in \"Trade with\" and click \"Show their tradeable cards\". 2. Under \"I give\", tick the cards you will hand over. Only your tradeable cards are listed. If none are listed, turn on Tradeable in My collection. 3. Under \"I get\", tick the cards you want from them. Only their tradeable cards are listed. 4. Optionally add a Message. 5. Click \"Propose trade\".\n\nYou must pick at least one card. A trade can be one-sided (for example, you only give, or you only ask). Every card must be tradeable, unsold and owned by the person offering it.\n\n8.2 Trade statuses\n\nproposed Sent and waiting for the recipient to respond. accepted The recipient agreed. Waiting for the cards to be exchanged. declined The recipient said no. countered The recipient replied with a counteroffer, which replaces this offer. cancelled The proposer withdrew it, or a card in it stopped being tradeable or was sold. completed The cards have changed owners.\n\n8.3 Responding to a trade offered to you\n\nUnder \"My trades\", an offer you received with status \"proposed\" has three options:\n\n- Accept - Decline - Counter...: opens a counteroffer to the same collector with the same cards preselected. Change the selection, add a message, and click \"Send counteroffer\". The original offer is marked \"countered\" and the new offer is labelled \"(counteroffer)\".\n\n8.4 Cancelling a trade you proposed\n\nWhile your offer is \"proposed\" or \"accepted\", you can click \"Cancel\".\n\n8.5 Completing a trade\n\nOnce a trade is \"accepted\", either collector can click \"Complete (cards exchanged)\" after the physical cards have been swapped. The cards then move to their new owners in one step.\n\nWhen a card changes owner through a trade: - It arrives in the new owner's collection with Tradeable turned off. - The previous owner's paid price and listed price are cleared, so one collector's purchase price never shows in another's collection. - Its Acquired date is set to the day the trade was completed."
+  },
+  {
+    "id": "users-guide-06",
+    "source": "users-guide.txt",
+    "index": 6,
+    "section": "8. TRADES › 8.5 Completing a trade",
+    "sections": [
+      "8. TRADES › 8.5 Completing a trade",
+      "9. REPORTS",
+      "10. ADMIN (SERIAL-NUMBER CONFLICTS)"
+    ],
+    "words": 293,
+    "overlapWords": 54,
+    "text": "When a card changes owner through a trade: - It arrives in the new owner's collection with Tradeable turned off. - The previous owner's paid price and listed price are cleared, so one collector's purchase price never shows in another's collection. - Its Acquired date is set to the day the trade was completed.\n\nThe same card can be in more than one open offer. Whichever trade is completed first wins. The others will then fail with \"A card in this trade has changed owner or been sold.\"\n\n9. REPORTS\n\nOpen \"Reports\" from the navigation bar. Reports show only your own cards.\n\nSummary: - Inventory: number of unsold cards, their total cost (what you paid) and total market value (where a market price is known). - For sale: number of cards with a listed price and the listed total. - Sold: number of sold cards, total revenue and total profit.\n\nInventory: every unsold card with Paid, Market, Listed and Tradeable.\n\nFor sale: every unsold card with a listed price, with Paid, Listed and Margin (listed price minus paid price).\n\nSold: every sold card, newest first, with Sold on, Paid, Sold for and Profit (sold price minus paid price).\n\nPrices you never entered show as blank, so totals and margins include only the cards that have the relevant prices.\n\n10. ADMIN (SERIAL-NUMBER CONFLICTS)\n\nOnly admins can use the Admin page. Switch to Carol to try it. Anyone else sees \"Admins only.\"\n\nEach conflict shows: - Its status (open, approved or rejected), the variant and the serial number. - Who submitted it, when, their note, and the details of their copy (grade, cert, condition notes, price paid). - The existing copy that already holds the serial number, and its owner.\n\nTo resolve an open conflict:"
+  },
+  {
+    "id": "users-guide-07",
+    "source": "users-guide.txt",
+    "index": 7,
+    "section": "10. ADMIN (SERIAL-NUMBER CONFLICTS)",
+    "sections": [
+      "10. ADMIN (SERIAL-NUMBER CONFLICTS)",
+      "11. SEARCH",
+      "12. COMMON MESSAGES"
+    ],
+    "words": 338,
+    "overlapWords": 53,
+    "text": "Each conflict shows: - Its status (open, approved or rejected), the variant and the serial number. - Who submitted it, when, their note, and the details of their copy (grade, cert, condition notes, price paid). - The existing copy that already holds the serial number, and its owner. To resolve an open conflict:\n\nTo approve: first free up the serial number. Either change the existing copy's serial (\"Change existing copy's serial to\", then \"Save\") or click \"Delete existing copy\". Then optionally enter a Note and click \"Approve\". The submitted card is added to the submitter's collection. If you approve while the serial is still held, you will see \"Serial N is still held by a copy. Fix or delete that copy first.\"\n\nTo reject: optionally enter a Note explaining why and click \"Reject\". The submitted card is not added.\n\nThe submitter sees the result and your note under \"My serial-number reviews\" in My collection. Email notifications to admins are not set up yet, so check this page regularly.\n\n11. SEARCH\n\nThe Search page searches the Ducks on the Pond Cards help documents (this User's Guide, the FAQ, Collector Handbook, Glossary, policies and release notes) by meaning, not by exact words. It does not search card data.\n\nType a question, for example \"how long does a serial-number review take?\", and click \"Search\". Results show the matching passages, their source document and a similarity score. If nothing is close enough, the page says \"Not in the documents\" and shows the best score it found.\n\nA search can be shared by copying the page address, which looks like /search?q=your+question.\n\n12. COMMON MESSAGES\n\n\"Pick a test user at the top of the page first.\" Choose Alice, Bob or Carol in the Test user picker and click Switch.\n\n\"Enter both a grading company and a grade, or neither.\" For a raw card leave both blank. For a graded card fill in both.\n\n\"Serial N is higher than the print run (/M).\" Check the serial number, or check that you chose the right variant."
+  },
+  {
+    "id": "users-guide-08",
+    "source": "users-guide.txt",
+    "index": 8,
+    "section": "12. COMMON MESSAGES",
+    "sections": [
+      "12. COMMON MESSAGES",
+      "13. A QUICK WALKTHROUGH"
+    ],
+    "words": 264,
+    "overlapWords": 45,
+    "text": "\"Enter both a grading company and a grade, or neither.\" For a raw card leave both blank. For a graded card fill in both. \"Serial N is higher than the print run (/M).\" Check the serial number, or check that you chose the right variant.\n\n\"You already have serial N of this card.\" That serial of that variant is already in your collection.\n\n\"Serial #N is already in another collection, so this was sent to an admin for review.\" Not an error. See section 6.6.\n\n\"That already exists.\" A set, parallel, card, variant or cert number with the same details is already recorded.\n\n\"One of the values isn't valid.\" Check numbers, prices and dates for typos.\n\n\"Every card must be tradeable and owned by the side offering it.\" A card in the trade was turned off, sold or moved. Reload the Trades page and choose again.\n\n\"Pick another user to trade with.\" / \"Pick at least one card.\" Choose a different collector, and tick at least one card.\n\n\"You can't accept a trade that is cancelled.\" (and similar) The trade's status changed. Only proposed trades can be accepted, declined or countered, and only proposed or accepted trades can be cancelled.\n\n\"Only an accepted trade can be completed.\" The recipient must accept the trade before it can be completed.\n\n\"A card in this trade has changed owner or been sold.\" Another trade or a sale used one of the cards first.\n\n\"Something went wrong. It has been logged as action_failed.\" An unexpected error. Try again; if it repeats, report it with the time it happened."
+  },
+  {
+    "id": "users-guide-09",
+    "source": "users-guide.txt",
+    "index": 9,
+    "section": "13. A QUICK WALKTHROUGH",
+    "sections": [
+      "13. A QUICK WALKTHROUGH"
+    ],
+    "words": 204,
+    "overlapWords": 46,
+    "text": "\"A card in this trade has changed owner or been sold.\" Another trade or a sale used one of the cards first. \"Something went wrong. It has been logged as action_failed.\" An unexpected error. Try again; if it repeats, report it with the time it happened.\n\n13. A QUICK WALKTHROUGH\n\n1. Switch to Alice. In Catalog, add a set, then open it and add a card and a numbered parallel. 2. In My collection, add a copy of that card and click \"Turn on\" under Tradeable. 3. Switch to Bob. Add his own card and make it tradeable. 4. Still as Bob, go to Wishlist and add a public want for Alice's card. It appears under \"Tradeable copies that match my wants\". Click \"propose a trade\", tick Bob's card under \"I give\", and click \"Propose trade\". 5. Switch to Alice. In Trades, click Accept (or Counter... to change it). 6. Click \"Complete (cards exchanged)\". Each card now appears in the other collector's collection. 7. As Alice, add a numbered copy using a serial number Bob already holds. It goes to the admin queue. 8. Switch to Carol and resolve it on the Admin page. 9. Open Reports to see inventory, for-sale and sold totals."
+  }
+]

@@ -1,10 +1,11 @@
 // Asks the local Chroma store a plain-English question and prints the closest chunks.
 //
 //   npm run chroma                                          # the server must be running
-//   node scripts/query-chunks.mjs "How much does shipping to Hawaii cost?"
-//   node scripts/query-chunks.mjs -n 5 "Can I return worn boots?"
+//   node scripts/query-chunks.mjs "How long does a serial-number review take?"
+//   node scripts/query-chunks.mjs -n 5 "Can I undo a sale?"
 //   node scripts/query-chunks.mjs                           # no question: interactive prompt
 //
+// Searches the "ducks" collection: the card app's own help documents (the Ducks Corpus).
 // The question is embedded with the collection's own model (all-MiniLM-L6-v2), so it lands in
 // the same meaning-space as the stored chunks. Similarity is cosine similarity (1 - Chroma's
 // cosine distance): 1 means identical meaning, and higher is closer.
@@ -12,7 +13,7 @@ import { createInterface } from "node:readline/promises";
 import { ChromaClient } from "chromadb";
 import { DefaultEmbeddingFunction } from "@chroma-core/default-embed";
 
-const COLLECTION = "trailhead";
+const COLLECTION = "ducks";
 const MODEL = "Xenova/all-MiniLM-L6-v2";
 const PREVIEW_WORDS = 60;
 

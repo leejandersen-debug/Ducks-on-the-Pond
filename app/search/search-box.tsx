@@ -52,7 +52,7 @@ export function SearchBox({ initialQuery, maxChars, minSimilarity }: Props) {
     <>
       <form role="search" onSubmit={(e) => { e.preventDefault(); search(query); }}>
         <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} maxLength={maxChars}
-          size={60} placeholder="can I bring my dog to the office?" aria-label="Search the documents" required />{" "}
+          size={60} placeholder="how long does a serial-number review take?" aria-label="Search the documents" required />{" "}
         <button disabled={loading}>{loading ? "Searching…" : "Search"}</button>
       </form>
 

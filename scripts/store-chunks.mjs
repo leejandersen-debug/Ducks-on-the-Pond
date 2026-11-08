@@ -1,8 +1,9 @@
 // Stores embedded chunks (from scripts/embed-chunks.mjs) in the local Chroma store.
 //
 //   npm run chroma                                   # the server must be running
-//   node scripts/store-chunks.mjs chunks/returns-shipping-policy.embeddings.json
+//   node scripts/store-chunks.mjs chunks/faq.embeddings.json
 //
+// The collection is "ducks": the card app's own help documents (the Ducks Corpus).
 // Uses the vectors already computed, so nothing is re-embedded. The collection is created with
 // the same model as its embedding function, so text queries land in the same meaning-space.
 // Upsert by chunk id: running it again replaces those chunks instead of duplicating them.
@@ -10,8 +11,9 @@ import { readFileSync } from "node:fs";
 import { ChromaClient } from "chromadb";
 import { DefaultEmbeddingFunction } from "@chroma-core/default-embed";
 
-const COLLECTION = "trailhead";
 const MODEL = "Xenova/all-MiniLM-L6-v2";
+
+const COLLECTION = "ducks";
 
 const input = process.argv[2];
 if (!input) {
@@ -39,6 +41,14 @@ await collection.upsert({
     words: c.words, overlap_words: c.overlapWords, tokens: c.tokens,
   })),
 });
+
+// Remove chunks this source no longer has (re-chunking can make fewer), so the store matches the file.
+const keep = new Set(chunks.map((c) => c.id));
+const stale = (await collection.get({ where: { source: chunks[0].source }, include: [] })).ids.filter((id) => !keep.has(id));
+if (stale.length) {
+  await collection.delete({ ids: stale });
+  console.log(`removed ${stale.length} stale chunk(s) from ${chunks[0].source}: ${stale.join(", ")}`);
+}
 
 // Read everything back and compare with what was sent.
 const stored = await collection.get({ ids: chunks.map((c) => c.id), include: ["documents", "embeddings", "metadatas"] });

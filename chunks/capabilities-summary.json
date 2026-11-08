@@ -1,0 +1,87 @@
+[
+  {
+    "id": "capabilities-summary-00",
+    "source": "capabilities-summary.txt",
+    "index": 0,
+    "section": "DUCKS ON THE POND CARDS CAPABILITIES SUMMARY",
+    "sections": [
+      "DUCKS ON THE POND CARDS CAPABILITIES SUMMARY",
+      "1. AT A GLANCE",
+      "2. CATALOG",
+      "3. COLLECTION TRACKING"
+    ],
+    "words": 309,
+    "overlapWords": 0,
+    "text": "DUCKS ON THE POND CARDS CAPABILITIES SUMMARY\n\nVersion: November 2026 (test harness release)\n\nThis document summarizes what the Ducks on the Pond Cards application can do today, what it cannot do yet, and how it is built. For step-by-step instructions see the User's Guide (users-guide.txt). For support terms see the Customer Service Policy (customer-service-policy.txt).\n\n1. AT A GLANCE\n\nDucks on the Pond Cards is a web application for sports card collectors. It keeps a shared card catalog, tracks each collector's own cards, matches collectors' wishlists against cards others are willing to trade, runs trades from offer to completion, and reports on inventory, sales and profit.\n\nAvailable now: catalog, collection tracking, grading and serial numbers, tradeable and for-sale flags, sale records, wishlist with matching, trades with counteroffers, reports, admin review of serial-number conflicts, document search, health API.\n\nNot yet: real sign-in, payments, shipping, card photos, market price entry, email or push notifications, styled interface, mobile app.\n\n2. CATALOG\n\n- Shared by all collectors: anyone signed in can add to it. - Four levels: Set > Parallel > Card > Variant. - Sets record sport, year, manufacturer and name. - Every new set gets a Base parallel automatically; every new card gets a Base variant automatically. - Parallels can be numbered (a print run such as /50) or not numbered. - Cards record a card number (such as 150 or RC-12), one or more players, an optional title, and a rookie flag. - Variants can be marked Autograph and/or Relic, and can override the parallel's print run. - Duplicate entries are rejected.\n\n3. COLLECTION TRACKING\n\n- Add a copy of any catalog variant to your collection. - Record per copy: serial number, grading company and grade, cert number, price paid, date acquired and condition notes. - Supported grading companies: PSA, BGS, SGC and CGC. Grades 1 to 10 in half steps."
+  },
+  {
+    "id": "capabilities-summary-01",
+    "source": "capabilities-summary.txt",
+    "index": 1,
+    "section": "3. COLLECTION TRACKING",
+    "sections": [
+      "3. COLLECTION TRACKING",
+      "4. SERIAL-NUMBER PROTECTION",
+      "5. WISHLIST AND MATCHING",
+      "6. TRADING"
+    ],
+    "words": 306,
+    "overlapWords": 46,
+    "text": "- Add a copy of any catalog variant to your collection. - Record per copy: serial number, grading company and grade, cert number, price paid, date acquired and condition notes. - Supported grading companies: PSA, BGS, SGC and CGC. Grades 1 to 10 in half steps.\n\nUngraded (\"raw\") cards are supported. - Built-in checks: - A serial number cannot exceed the print run. - A grade needs a grading company, and a company needs a grade. - A cert number can be used only once per grading company. - You cannot record the same serial of the same variant twice. - Mark a copy tradeable or not tradeable. - Set a listed (asking) price. - Mark a copy sold with a sale price and date (defaults to today); undo a sale. - Delete a copy.\n\n4. SERIAL-NUMBER PROTECTION\n\n- Across all collections, only one unsold copy of a variant can hold a given serial number. - If a collector adds a serial number someone else already holds, the copy is held for admin review instead of being rejected outright. The collector can attach a note for the admin. - Collectors can track their reviews (pending, approved or rejected, with the admin's note) on the My collection page. - Admins see both entries side by side and can change the existing copy's serial, delete it, then approve or reject the new one.\n\n5. WISHLIST AND MATCHING\n\n- Want \"any version\" of a card, or one exact variant. - Optional conditions: minimum grade, a specific grading company, maximum price, and notes. - Wants are public by default (other collectors can see them) or private. - Automatic matching in both directions: - Other collectors' tradeable copies that meet your wants, each with a one-click link to propose a trade. - Your tradeable copies that meet other collectors' public wants."
+  },
+  {
+    "id": "capabilities-summary-02",
+    "source": "capabilities-summary.txt",
+    "index": 2,
+    "section": "6. TRADING",
+    "sections": [
+      "6. TRADING",
+      "7. REPORTS",
+      "8. ADMINISTRATION",
+      "9. DOCUMENT SEARCH"
+    ],
+    "words": 368,
+    "overlapWords": 71,
+    "text": "- Want \"any version\" of a card, or one exact variant. - Optional conditions: minimum grade, a specific grading company, maximum price, and notes. - Wants are public by default (other collectors can see them) or private. - Automatic matching in both directions: - Other collectors' tradeable copies that meet your wants, each with a one-click link to propose a trade. - Your tradeable copies that meet other collectors' public wants.\n\n6. TRADING\n\n- Propose a trade to any other collector, choosing cards to give and cards to receive from each side's tradeable copies. One-sided trades are allowed. - Attach a message to a trade. - The recipient can accept, decline or counter. A counteroffer starts with the original cards preselected and replaces the original offer. - The proposer can cancel while the trade is proposed or accepted. - Either collector can complete an accepted trade once the cards have been exchanged. Ownership of every card in the trade moves in a single step. - Safeguards: - Every card must be tradeable, unsold and owned by the side offering it. - Turning a card off as tradeable, or selling it, automatically cancels open offers that include it. - The same card can sit in several offers; the first to complete wins and the rest are blocked. - Cards that change hands arrive not tradeable, with the previous owner's paid and listed prices removed and today's acquired date. - Trade statuses: proposed, accepted, declined, countered, cancelled, completed.\n\n7. REPORTS\n\n- Summary: inventory count, cost and market value; for-sale count and listed total; sold count, revenue and profit. - Inventory report: all unsold cards with paid, market and listed prices. - For-sale report: listed cards with margin (listed minus paid). - Sold report: sold cards, newest first, with profit (sold minus paid). - Reports show only the signed-in collector's own cards.\n\n8. ADMINISTRATION\n\n- Admin role (Carol in the test environment). - Serial-number conflict queue showing the 50 most recent conflicts, open ones first. - Admins can edit or delete any copy for conflict resolution, and every decision records who resolved it and an optional note. - Admins can see all collection data. Only admins can manage market price data."
+  },
+  {
+    "id": "capabilities-summary-03",
+    "source": "capabilities-summary.txt",
+    "index": 3,
+    "section": "9. DOCUMENT SEARCH",
+    "sections": [
+      "9. DOCUMENT SEARCH",
+      "10. API",
+      "11. SECURITY AND PRIVACY"
+    ],
+    "words": 287,
+    "overlapWords": 57,
+    "text": "- Admin role (Carol in the test environment). - Serial-number conflict queue showing the 50 most recent conflicts, open ones first. - Admins can edit or delete any copy for conflict resolution, and every decision records who resolved it and an optional note. - Admins can see all collection data. Only admins can manage market price data.\n\n9. DOCUMENT SEARCH\n\n- Searches a corpus of reference documents by meaning (semantic search), not keyword matching. - Searches the Ducks Corpus: the Application's own help documents (User's Guide, FAQ, Collector Handbook, Glossary, Capabilities Summary, policies and release notes). It does not search card data. - Returns the top 3 passages with source, section and a similarity score. - Shows only passages scoring at least 0.33, and otherwise says \"Not in the documents\" with the best score found. - Questions up to 500 characters. - Searches are shareable by URL: /search?q=your+question. - Embeddings use the all-MiniLM-L6-v2 model (384 dimensions), stored in Postgres with pgvector. - A developer command-line tool (npm run ask) can answer questions from the corpus using Claude; this is not yet part of the web application.\n\n10. API\n\nGET /api/health Reports whether the application and database are up. Responses: {\"status\":\"ok\",\"db\":\"ok\"}, {\"status\":\"ok\", \"db\":\"not_configured\"}, or HTTP 503 with {\"status\":\"error\", \"db\":\"unreachable\"}.\n\nPOST /api/search Body: {\"query\": \"...\"}. Returns {\"query\", \"results\": [{id, source, section, similarity, text}]}, top 3, from the help documents. Errors: HTTP 400 for a missing, empty or over-long query; HTTP 503 if search is not set up in the environment; HTTP 500 on failure.\n\nBoth endpoints are called from the browser the same way a future mobile app will call them.\n\nCollection, wishlist, trade and admin actions are performed through the web pages' forms, not through a public API."
+  },
+  {
+    "id": "capabilities-summary-04",
+    "source": "capabilities-summary.txt",
+    "index": 4,
+    "section": "11. SECURITY AND PRIVACY",
+    "sections": [
+      "11. SECURITY AND PRIVACY",
+      "12. PLATFORM AND TECHNOLOGY",
+      "13. CURRENT LIMITATIONS"
+    ],
+    "words": 361,
+    "overlapWords": 60,
+    "text": "Errors: HTTP 400 for a missing, empty or over-long query; HTTP 503 if search is not set up in the environment; HTTP 500 on failure. Both endpoints are called from the browser the same way a future mobile app will call them. Collection, wishlist, trade and admin actions are performed through the web pages' forms, not through a public API.\n\n11. SECURITY AND PRIVACY\n\n- Row-level security in the database: each collector can change only their own cards and wants, and can see only trades they are part of. - Other collectors can see tradeable cards and public wants. The interface does not show them paid prices, listed prices, acquired dates, private wants or sold records. - Error messages shown to users never include database host or account details. Unexpected errors are logged as \"action_failed\" for follow-up. - Test login can be switched off per environment. When it is off, visitors can browse but not make changes.\n\n12. PLATFORM AND TECHNOLOGY\n\n- Language and framework: TypeScript, Next.js (App Router), React. - Database: Postgres on Neon, with a separate development branch and production branch, and versioned schema migrations. - Hosting: Vercel, on Node.js 24. - Monitoring: structured server logs and Vercel Web Analytics (page views and visitors, once enabled in the dashboard). - Developer tools: seed data for development, corpus loading and query scripts, and a safety check that refuses to run development scripts against the production database.\n\n13. CURRENT LIMITATIONS\n\n- Sign-in: test users only (Alice, Bob, Carol). There are no personal accounts or passwords yet. - Payments: none. Prices are records only; no money moves through the application. - Shipping: not handled. Collectors arrange delivery themselves. - Card photos: the database can store photo records, but uploading and viewing photos is not built yet. - Market prices: the reports can show them, but there is no screen for entering them yet, so the market column is usually blank. - Notifications: no emails or push notifications for trades or admin reviews. Collectors and admins must check the pages. - Editing: a copy's grade, serial or paid price cannot be edited after it is added (except by an admin changing a serial)."
+  },
+  {
+    "id": "capabilities-summary-05",
+    "source": "capabilities-summary.txt",
+    "index": 5,
+    "section": "13. CURRENT LIMITATIONS",
+    "sections": [
+      "13. CURRENT LIMITATIONS"
+    ],
+    "words": 63,
+    "overlapWords": 30,
+    "text": "Collectors and admins must check the pages. - Editing: a copy's grade, serial or paid price cannot be edited after it is added (except by an admin changing a serial).\n\nDelete and re-add it instead. - Catalog: entries cannot be edited or deleted from the interface. - Interface: unstyled test harness; no mobile app yet. - Test data may be reset without notice."
+  }
+]

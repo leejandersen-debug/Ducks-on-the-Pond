@@ -1,7 +1,7 @@
 // Loads embedded chunks (from scripts/embed-chunks.mjs) into the doc_chunks table.
 //
 //   npm run load-corpus:dev                                   # every chunks/*.embeddings.json
-//   npm run load-corpus:dev -- chunks/product-faq.embeddings.json
+//   npm run load-corpus:dev -- chunks/faq.embeddings.json
 //
 // Uses the vectors already computed, so nothing is re-embedded. Upserts by chunk id, and removes
 // rows for a source that the new file no longer has (e.g. after re-chunking into fewer pieces),

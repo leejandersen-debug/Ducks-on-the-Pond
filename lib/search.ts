@@ -2,14 +2,15 @@ import { withUser } from "@/lib/db";
 import { embed } from "@/lib/embed";
 import { log } from "@/lib/log";
 
-// Semantic search over the course corpus (doc_chunks). Runs inside withUser(), so RLS applies.
+// Semantic search over doc_chunks, which holds this app's help documents (the Ducks Corpus).
+// Runs inside withUser(), so RLS applies.
 // Used by POST /api/search and the /search page, so both search and log the same way.
 
 export const MAX_QUERY_CHARS = 500;
 
 // Below this, the best match isn't really about the question. Set from measured scores: real
-// answers came back at 0.39–0.46 and their runners-up at 0.34–0.38; an unanswerable question
-// (the break-room coffee) topped out at 0.26.
+// answers come back at 0.42–0.66, and an unanswerable question (a card-show wifi password) tops
+// out at 0.30.
 export const MIN_SIMILARITY = 0.33;
 
 export type Passage = {

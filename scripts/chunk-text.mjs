@@ -31,11 +31,17 @@ const MODEL = "Xenova/all-MiniLM-L6-v2";
 
 const words = (s) => s.split(/\s+/).filter(Boolean).length;
 // A sentence ends at . ! or ? followed by a space and a capital, digit or opening quote/bracket,
-// so the dots in "trailheadsupply.co" or "support@trailheadsupply.co" don't end a sentence.
+// so the dots in "ducksonthepondcards.com" or "support@ducksonthepondcards.com" don't end a sentence.
 const sentences = (p) => p.split(/(?<=[.!?]["')\]]*)\s+(?=["'(\[A-Z0-9])/).map((s) => s.trim()).filter(Boolean);
-const isHeading = (p) => /^#{1,6} /.test(p) || (/^[A-Z0-9 &—–'-]+$/.test(p) && words(p) <= 12);
+// Numbered plain-text headings (the Ducks Corpus): "6. TRADES" is a section, "6.1 How trades work"
+// a subsection under it. They sit one and two levels below the all-caps document title.
+const isNumberedSection = (p) => /^\d+\. [A-Z][A-Z0-9 &,'()\/-]*$/.test(p) && words(p) <= 12;
+const isNumberedSubsection = (p) => /^\d+\.\d+ ["A-Z][^.!?]*$/.test(p) && words(p) <= 12;
+const isHeading = (p) => /^#{1,6} /.test(p) || isNumberedSection(p) || isNumberedSubsection(p)
+  || (/^[A-Z0-9 &—–'-]+$/.test(p) && words(p) <= 12)
+  || (/^RELEASE \d+(\.\d+)*, [\d-]+( TO [\d-]+)?: [A-Z0-9 ()&,'-]+$/.test(p)); // release-notes.txt
 // Markdown headings keep their "#" while chunking (it marks them as headings); output drops it.
-const headingLevel = (p) => p.match(/^(#{1,6}) /)?.[1].length ?? 1;
+const headingLevel = (p) => p.match(/^(#{1,6}) /)?.[1].length ?? (isNumberedSubsection(p) ? 3 : isNumberedSection(p) ? 2 : 1);
 const display = (p) => p.replace(/^#{1,6} /, "");
 
 // Markdown to plain paragraphs. Headings keep their "#" so chunkText can find them.
@@ -54,7 +60,7 @@ export function cleanMarkdown(md) {
     .join("\n\n");
 }
 
-// One chunk per row: "Granite Peak Hiker — SKU BOOT-GPH-001, Category Boots, ..., Price $185.00, ...".
+// One chunk per row: "Gold Refractor — SKU ..., Category ..., Price $185.00, ...".
 // The second column (the name) leads, since that's what people ask about.
 export function chunkCsv(csv) {
   const [header, ...rows] = csv.trim().split(/\r?\n/).map((l) => l.split(",").map((c) => c.trim()));

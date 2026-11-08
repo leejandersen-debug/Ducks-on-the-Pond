@@ -1,0 +1,66 @@
+[
+  {
+    "id": "privacy-notice-00",
+    "source": "privacy-notice.txt",
+    "index": 0,
+    "section": "DUCKS ON THE POND CARDS PRIVACY NOTICE",
+    "sections": [
+      "DUCKS ON THE POND CARDS PRIVACY NOTICE",
+      "1. WHO WE ARE",
+      "2. THE TEST RELEASE",
+      "3. WHAT WE COLLECT",
+      "3. WHAT WE COLLECT › 3.1 Information you enter",
+      "3. WHAT WE COLLECT › 3.2 Information collected automatically"
+    ],
+    "words": 315,
+    "overlapWords": 0,
+    "text": "DUCKS ON THE POND CARDS PRIVACY NOTICE\n\nVersion: 1.0 DRAFT, November 2026\n\nDRAFT. This notice describes how the current test release handles data, based on how the Application is built. It has not been reviewed by a lawyer or a privacy professional and is not yet in force. Items marked [TO CONFIRM] are placeholders.\n\n1. WHO WE ARE\n\nDucks on the Pond Cards (\"we\", \"us\") runs the Ducks on the Pond Cards application (\"the Application\"). We are responsible for the personal information described in this notice.\n\nContact for privacy questions: privacy@ducksonthepondcards.com [TO CONFIRM], or the support contact in section 4 of the Customer Service Policy.\n\n2. THE TEST RELEASE\n\nThe current release uses shared test users (Alice, Bob and Carol) instead of personal accounts. It does not ask for your name, email address, password, postal address or payment details. Anything typed into the test release can be seen by anyone else using the same test user, and may be reset without notice. Please do not enter real personal details.\n\nThe rest of this notice describes what the Application stores in general, and applies in full once personal accounts are introduced.\n\n3. WHAT WE COLLECT\n\n3.1 Information you enter\n\n- Account details: your username. (Once personal accounts arrive: your email address and sign-in details. [TO CONFIRM]) - Collection: the cards you own, serial numbers, grading company, grade, cert number, price paid, date acquired, listed price, sale price and date, and condition notes. - Wishlist: the cards you want, minimum grade, maximum price, notes, and whether each want is public or private. - Trades: offers you make and receive, the cards in them, their status, and trade messages. - Serial-number reviews: your note for the admin, and the admin's decision and note. - Catalog entries you add: sets, parallels, cards and variants. - Search questions you type on the Search page. - Anything you send to support."
+  },
+  {
+    "id": "privacy-notice-01",
+    "source": "privacy-notice.txt",
+    "index": 1,
+    "section": "3. WHAT WE COLLECT › 3.2 Information collected automatically",
+    "sections": [
+      "3. WHAT WE COLLECT › 3.2 Information collected automatically",
+      "4. HOW WE USE IT",
+      "5. WHO CAN SEE IT",
+      "5. WHO CAN SEE IT › 5.1 Other collectors",
+      "5. WHO CAN SEE IT › 5.2 Admins and support staff",
+      "5. WHO CAN SEE IT › 5.3 Service providers"
+    ],
+    "words": 386,
+    "overlapWords": 0,
+    "text": "3.2 Information collected automatically\n\n- Server logs. For every request we record the page or API route (the path only, never the part after \"?\"), the method, the response status and how long it took. Search requests also record the question you typed and how many results came back. Errors are recorded with a short error code. - Log protection. The logger removes values whose names suggest secrets, such as passwords, tokens, cookies, session IDs, API keys, email addresses, request bodies, card numbers and database connection details, before anything is written. - Analytics. We use Vercel Web Analytics to count page views and visitors. [TO CONFIRM: confirm with the provider's current documentation that this is cookie-free and does not store IP addresses.] - Test user choice. A cookie remembers which test user you picked.\n\nWe do not collect payment card details, bank details, precise location, contacts, or photos. (Card photos are planned but not built.)\n\n4. HOW WE USE IT\n\n- To run the Application: show your collection, find wishlist matches, record trades and produce your reports. - To protect serial numbers and resolve serial-number conflicts. - To answer support requests and investigate trade disputes. - To keep the Application secure and fix errors. - To understand which pages are used, so we can improve them.\n\nWe do not sell your personal information, and we do not use it for advertising.\n\n5. WHO CAN SEE IT\n\n5.1 Other collectors\n\nOther collectors can see:\n\n- your username; - your tradeable cards, including grade, serial number and cert number; - your public wants.\n\nThey cannot see your paid prices, listed prices, acquired dates, private wants, non-tradeable cards or sold records. Only the two collectors in a trade can see that trade and its message.\n\nWhen a card moves to another collector through a trade, your paid and listed prices are removed from it, and its acquired date is reset.\n\n5.2 Admins and support staff\n\nAdmins can see all collection data. They use it only to resolve serial-number conflicts and support requests. Support staff look at your data only to answer your request.\n\n5.3 Service providers\n\nWe use these providers to run the Application. Each processes data only on our instructions:\n\n- Vercel: hosting, server logs and web analytics. - Neon: the Postgres database where Application data is stored."
+  },
+  {
+    "id": "privacy-notice-02",
+    "source": "privacy-notice.txt",
+    "index": 2,
+    "section": "5. WHO CAN SEE IT › 5.3 Service providers",
+    "sections": [
+      "5. WHO CAN SEE IT › 5.3 Service providers",
+      "5. WHO CAN SEE IT › 5.4 When the law requires it",
+      "6. HOW LONG WE KEEP IT",
+      "7. HOW WE PROTECT IT",
+      "8. YOUR CHOICES AND RIGHTS",
+      "9. CHILDREN"
+    ],
+    "words": 360,
+    "overlapWords": 33,
+    "text": "We use these providers to run the Application. Each processes data only on our instructions: - Vercel: hosting, server logs and web analytics. - Neon: the Postgres database where Application data is stored.\n\nSearch works by turning your question into numbers (an embedding) inside the Application itself, so your search question is not sent to an outside AI service. A separate developer tool can send questions and reference-document passages to Anthropic's Claude model, but it is not part of the web Application and never sends collection data. [TO CONFIRM provider list before publication.]\n\n5.4 When the law requires it\n\nWe may share information if the law requires it, or to protect the safety of collectors or the public.\n\n6. HOW LONG WE KEEP IT\n\n- Collection, wishlist and trade data: while your account is open. - Trade records involving another collector: kept after you leave, with your details removed, so the other collector's history stays accurate. - Catalog entries: kept as part of the shared catalog, without your name. - Server logs: [TO CONFIRM, for example 30 days]. - Support conversations: [TO CONFIRM, for example 2 years]. - Test environments: may be reset at any time.\n\n7. HOW WE PROTECT IT\n\n- Database row-level security, so each collector can change only their own cards and wants, and can see only trades they are part of. - Encrypted connections to the database, with the server certificate checked. - Error messages never show database host or account details. - Development tools refuse to run against the production database.\n\nSee the Security and Incident Response document (security-incident-response.txt) for more, including what we do if data is exposed.\n\n8. YOUR CHOICES AND RIGHTS\n\n- Make a want private by unticking \"Public\". - Turn a card's Tradeable setting off to hide it from other collectors. - Ask us for a copy of your data. - Ask us to correct your data. - Ask us to delete your account and collection.\n\nWe confirm your identity first and complete requests within 30 days. Depending on where you live, you may have further rights, including the right to complain to a data protection authority. [TO CONFIRM by jurisdiction]"
+  },
+  {
+    "id": "privacy-notice-03",
+    "source": "privacy-notice.txt",
+    "index": 3,
+    "section": "9. CHILDREN",
+    "sections": [
+      "9. CHILDREN",
+      "10. CHANGES TO THIS NOTICE"
+    ],
+    "words": 114,
+    "overlapWords": 35,
+    "text": "We confirm your identity first and complete requests within 30 days. Depending on where you live, you may have further rights, including the right to complain to a data protection authority. [TO CONFIRM by jurisdiction]\n\n9. CHILDREN\n\nThe Application is not meant for children under 13, and we do not knowingly collect their personal information. If you think a child under 13 has given us information, contact us and we will delete it. [TO CONFIRM age limits; must match the Terms of Use section 3.]\n\n10. CHANGES TO THIS NOTICE\n\nWe will post any changes here with a new date. For significant changes we will tell collectors in the Application before they take effect."
+  }
+]
