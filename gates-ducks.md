@@ -10,7 +10,7 @@ Refusal-item retrieval rule: HIT when no retrieved chunk contains the asked-for 
 
 **Committed before the run.** These thresholds are a decision made in advance. The run only shows which side of them the engine lands on. Don't change them after a run to make a result pass.
 
-Golden set: `Ducks Corpus/GoldenQuestions.txt` (12 items, frozen 2026-11-08). Engine: `scripts/ask.mjs` (claude-opus-5-5, top 3) over the local Chroma "ducks" store, 70 chunks.
+Golden set: `GoldenQuestions.txt` (12 items, frozen 2026-11-08). Engine: `scripts/ask.mjs` (claude-opus-5-5, top 3) over the local Chroma "ducks" store, 70 chunks.
 
 | Measure | Gate | Denominator |
 |---------|------|-------------|
