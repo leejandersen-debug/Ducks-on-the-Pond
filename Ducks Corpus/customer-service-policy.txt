@@ -1,0 +1,266 @@
+DUCKS ON THE POND CARDS
+CUSTOMER SERVICE POLICY
+
+Version: 1.0 DRAFT, November 2026
+Owner: Ducks on the Pond Cards support team
+Applies to: everyone who uses the Ducks on the Pond Cards application, and
+everyone who answers their questions.
+
+Items marked [TO CONFIRM] are placeholders. Replace them with confirmed details
+before this policy is published.
+
+
+1. PURPOSE
+
+This policy explains how Ducks on the Pond Cards supports the collectors who
+use the application: what we help with, how to reach us, how quickly we
+respond, and how we handle trade problems, serial-number disputes, account
+questions and complaints.
+
+For how to use the application itself, see the Ducks on the Pond Cards User's
+Guide (users-guide.txt).
+
+
+2. OUR SERVICE COMMITMENTS
+
+  - Be courteous, patient and plain-spoken with every collector.
+  - Respond within the times in section 5.
+  - Treat every collector the same way, whatever the size or value of their
+    collection.
+  - Never ask for a password, a payment card number or a bank detail.
+  - Explain decisions, especially when the answer is no.
+  - Protect collectors' personal and collection information (section 10).
+
+
+3. WHAT WE HELP WITH
+
+Customer service covers:
+
+  - Using the application: catalog, collection, wishlist, trades, reports and
+    search.
+  - Errors and messages shown by the application.
+  - Catalog corrections: wrong set details, missing parallels, cards or
+    variants, wrong print runs.
+  - Serial-number conflicts and their admin review.
+  - Trade problems inside the application, such as a trade that cannot be
+    completed or a card that moved unexpectedly.
+  - Account and test-user access.
+  - Requests to correct or delete your data.
+  - Complaints about the application or about our service.
+
+What we do not cover:
+
+  - Payments. The application does not process payments. Sale prices and paid
+    prices are records you enter yourself. We cannot refund, charge or
+    reverse money between collectors.
+  - Shipping or handing over physical cards. Trading partners arrange this
+    between themselves.
+  - Card authentication or grading. Contact the grading company (PSA, BGS, SGC
+    or CGC) about a grade or cert number.
+  - Valuations. Market prices shown in reports are for reference only and are
+    not an appraisal or an offer to buy.
+
+
+4. HOW TO CONTACT US
+
+  Email:          support@ducksonthepondcards.com [TO CONFIRM]
+  Website:        ducksonthepondcards.com
+  Support hours:  Monday to Friday, 9:00 a.m. to 5:00 p.m. [TO CONFIRM time
+                  zone], excluding public holidays
+
+Please include:
+
+  - Your username.
+  - The page you were on (for example My collection or Trades).
+  - What you did, what you expected, and what happened.
+  - The exact message shown, if there was one.
+  - The date and approximate time.
+  - For a card: its set, card number, parallel and serial number.
+  - For a trade: the other collector's username and the trade date.
+
+A screenshot helps. Do not send photos that show personal details such as an
+address label.
+
+
+5. RESPONSE TIMES
+
+Times are business hours, from when we receive the request.
+
+  Priority  Examples                                  First reply  Target fix
+  --------  ----------------------------------------  -----------  ----------
+  Urgent    Cannot reach the application at all;      4 hours      1 business
+            a card moved to the wrong owner; a                     day
+            suspected account misuse or data exposure
+  High      A trade cannot be completed; a feature    1 business   3 business
+            is broken for you                         day          days
+  Normal    How-to questions; catalog corrections;    2 business   5 business
+            serial-number reviews                     days         days
+  Low       Suggestions and feature requests          5 business   Reviewed
+                                                      days         monthly
+
+If we cannot meet a target, we will tell you before it passes, explain why,
+and give a new date.
+
+[TO CONFIRM: these targets are a starting proposal.]
+
+
+6. TRADES
+
+6.1 How trades work
+
+Trades happen between collectors. The application records offers and, once
+both sides agree, moves the cards to their new owners when either collector
+clicks "Complete (cards exchanged)". Only complete a trade after the physical
+cards have actually been exchanged.
+
+6.2 Before you complete a trade
+
+  - Agree the delivery method with your trading partner using the trade
+    message.
+  - Check the cards you receive against the trade: set, card number, parallel,
+    serial number, grade and cert number.
+  - Do not click Complete until you have the cards you were promised.
+
+6.3 Trade problems we can help with
+
+  - A trade that will not complete. The most common reason is that a card in
+    it was sold, turned off as tradeable, or moved in another trade first. The
+    application cancels or blocks those trades on purpose.
+  - A trade completed by mistake before the cards were exchanged.
+  - A card received that does not match the trade.
+
+6.4 Trade disputes
+
+If you and your trading partner disagree about a completed trade:
+
+  1. Contact the other collector first, through a new trade message or your
+     agreed channel, and try to resolve it between you.
+  2. If that does not work within 7 days, contact us with the details in
+     section 4 and any evidence (photos of the cards received, messages).
+  3. We will contact both collectors, review the trade record, and reply with
+     our findings within 10 business days.
+
+What we can do: correct the ownership records in the application when both
+collectors agree, or when the evidence clearly shows a recording mistake.
+
+What we cannot do: force a collector to send or return a physical card,
+recover a card lost in the post, or pay compensation.
+
+If we find that a collector deliberately misrepresented a card or did not send
+cards for completed trades, we may restrict or close their account (section
+9).
+
+
+7. SERIAL-NUMBER CONFLICTS
+
+Only one unsold copy of a numbered variant can hold a given serial number. If
+you add a serial number that another collection already holds, your card goes
+to an admin for review instead of being added straight away.
+
+How we review:
+
+  - We aim to review every conflict within 5 business days.
+  - We compare the two entries and may ask either collector for a clear photo
+    of the front and back of the card showing the serial number, and the cert
+    number for a graded card.
+  - If one entry is a typo or a duplicate, we correct or remove it and approve
+    the valid one.
+  - If both collectors appear to hold the same serial, we ask both for
+    evidence and decide based on what they send. A grading company cert that
+    records the serial number is the strongest evidence.
+  - If a collector does not reply within 14 days, we decide on the evidence we
+    have.
+
+You will see the outcome, and the admin's note explaining it, under "My
+serial-number reviews" in My collection. If you disagree, ask for a second
+review (section 11).
+
+Email notifications for reviews are not yet available, so check My collection
+for updates.
+
+
+8. CATALOG CORRECTIONS
+
+Any collector can add sets, parallels, cards and variants. If you find a
+mistake you cannot fix yourself, such as a wrong print run or a duplicated set,
+send us the set, the card number, what is wrong and a source if you have one
+(for example a manufacturer checklist). We confirm the correction before
+changing it, because a catalog change affects every collector's records.
+
+
+9. ACCOUNTS AND ACCEPTABLE USE
+
+Collectors must:
+
+  - Enter honest information about the cards they own.
+  - Only mark cards as tradeable if they actually have them and are willing to
+    trade them.
+  - Complete trades only after the cards have been exchanged.
+  - Be respectful in trade messages and wishlist notes.
+
+We may warn, restrict or close an account for: misrepresenting cards,
+repeatedly failing to deliver on completed trades, abusive messages, or
+deliberately entering false serial numbers. Unless there is a risk to other
+collectors, we warn first and give the collector a chance to respond.
+
+Test environment note: the current release uses test users (Alice, Bob and
+Carol) instead of personal accounts. Data in a test environment may be reset
+without notice.
+
+
+10. PRIVACY AND YOUR DATA
+
+  - Other collectors can see your username, your tradeable cards (including
+    grade, serial and cert number) and your public wants. The application
+    does not show them your paid prices, listed prices, acquired dates,
+    private wants, non-tradeable cards or sold records.
+  - Only the two collectors in a trade can see that trade and its message.
+  - Admins can see all collection data, and use it only to resolve
+    serial-number conflicts and support requests.
+  - When a card moves to another collector through a trade, your paid and
+    listed prices are removed from it.
+  - Support staff only look at your collection data to answer your request.
+  - You can ask us to correct your data, or to delete your account and
+    collection. We confirm your identity first and complete the request
+    within 30 days. Trade records involving other collectors may be kept, with
+    your details removed, so their histories stay accurate.
+
+[TO CONFIRM: retention periods and the full privacy notice.]
+
+
+11. COMPLAINTS AND ESCALATION
+
+If you are unhappy with our service or a decision:
+
+  1. Reply to your support conversation and say you want to make a complaint.
+     We acknowledge complaints within 2 business days.
+  2. A team member who was not involved in the original decision reviews it
+     and replies within 10 business days.
+  3. If you are still unhappy, ask for it to go to the support lead [TO
+     CONFIRM name or role], whose decision is final.
+
+We record every complaint and review them each month to improve the
+application and this policy.
+
+
+12. FOR SUPPORT STAFF
+
+  - Reply first with a summary of the problem in your own words, so the
+    collector knows you understood it.
+  - Check the User's Guide's "Common messages" section before escalating an
+    error.
+  - Never change another collector's cards, serial numbers or trades without a
+    clear reason recorded in the admin note.
+  - When approving or rejecting a serial-number conflict, always write a note
+    the collector will understand.
+  - Escalate to engineering any message that says "Something went wrong. It
+    has been logged as action_failed." Include the time it happened, so the
+    log entry can be found.
+  - Escalate any suspected data exposure as Urgent immediately.
+
+
+13. CHANGES TO THIS POLICY
+
+We review this policy at least every 6 months and whenever the application
+changes how trades, sales or accounts work. Significant changes are announced
+in the application at least 14 days before they take effect.

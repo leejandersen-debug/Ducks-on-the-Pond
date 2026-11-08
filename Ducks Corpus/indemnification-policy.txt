@@ -1,0 +1,209 @@
+DUCKS ON THE POND CARDS
+INDEMNIFICATION POLICY
+
+Version: 1.0 SAMPLE, November 2026
+
+SAMPLE DOCUMENT. This policy is fictional. It was written as test content for
+the Ducks Corpus and has not been drafted or reviewed by a lawyer. It is not
+legal advice and is not in force. Do not rely on it or publish it as a real
+policy.
+
+
+1. PURPOSE AND SCOPE
+
+This Indemnification Policy explains who is responsible when a claim, loss or
+legal cost arises from the use of the Ducks on the Pond Cards application
+("the Application"). It forms part of the Terms of Use and applies to every
+person who creates an account, adds catalog or collection data, lists cards,
+or takes part in trades through the Application ("you" or "Collector").
+
+"Ducks on the Pond Cards", "we", "us" and "our" mean the operator of the
+Application, together with its owners, officers, employees, contractors and
+agents.
+
+This policy should be read together with the Customer Service Policy
+(customer-service-policy.txt) and the User's Guide (users-guide.txt).
+
+
+2. DEFINITIONS
+
+  Claim       Any demand, complaint, lawsuit, arbitration, regulatory inquiry
+              or other proceeding, whether threatened or actual.
+
+  Losses      Damages, judgments, settlements, fines, penalties, costs and
+              expenses, including reasonable attorneys' fees and court costs.
+
+  Collector   A registered user of the Application, including test users in
+              a test environment.
+
+  Collector   Any information a Collector enters, including catalog entries,
+  Content     card copies, serial numbers, grades, cert numbers, prices,
+              wishlist notes, trade messages and photos.
+
+  Trade       An offer, counteroffer or completed exchange of cards between
+              Collectors recorded in the Application.
+
+
+3. NATURE OF THE SERVICE
+
+The Application is a record-keeping and matching tool. In particular:
+
+  a. We do not buy, sell, hold, ship, insure, authenticate or grade cards.
+  b. We do not process payments. Paid prices, listed prices and sold prices
+     are records entered by Collectors.
+  c. Trades are agreements made directly between Collectors. Recording a trade
+     as complete in the Application does not mean we have verified that any
+     card was delivered or matched its description.
+  d. Market prices shown in reports are for reference only and are not an
+     appraisal, a guarantee of value, or an offer to buy.
+  e. Serial-number conflict reviews are administrative decisions about
+     records in the Application. They are not a legal finding of ownership or
+     authenticity.
+
+
+4. YOUR OBLIGATION TO INDEMNIFY US
+
+You agree to defend, indemnify and hold harmless Ducks on the Pond Cards from
+and against any Claims and Losses arising out of or relating to:
+
+  a. Your use or misuse of the Application.
+  b. Collector Content you submit, including any inaccurate, misleading or
+     false description of a card's set, parallel, serial number, grade, cert
+     number, condition or price.
+  c. Any Trade or sale you take part in, including failure to deliver a card,
+     delivery of a card that does not match its description, loss or damage
+     in transit, and any dispute with another Collector.
+  d. Any counterfeit, altered, stolen or misrepresented card you list,
+     describe or trade.
+  e. Your breach of the Terms of Use, the Customer Service Policy or this
+     policy.
+  f. Your violation of any law or regulation, including laws on consumer
+     protection, taxes on sales, import and export, and fraud.
+  g. Your infringement of another person's intellectual property, privacy or
+     publicity rights, for example by uploading card photos or images you do
+     not have the right to use.
+  h. Access to the Application through your account by anyone you allowed to
+     use it.
+
+
+5. OUR OBLIGATION TO INDEMNIFY YOU
+
+Ducks on the Pond Cards will defend and indemnify you against third-party
+Claims that the Application's software itself, as provided by us and used as
+intended, infringes a third party's copyright or trademark.
+
+This obligation does not apply to Claims arising from Collector Content,
+Trades, or your combination of the Application with other software or data.
+
+If such a Claim is made, we may, at our option: obtain the right for you to
+keep using the Application; modify it so it no longer infringes; or suspend
+the affected feature. This section states our entire liability for
+infringement Claims.
+
+
+6. EXCLUSIONS
+
+Neither party is required to indemnify the other for Losses to the extent
+they were caused by the other party's own fraud, gross negligence or wilful
+misconduct.
+
+We are not responsible for:
+
+  a. The accuracy of catalog data added by Collectors.
+  b. Any Collector's failure to honor a Trade.
+  c. The value, condition, authenticity or grade of any card.
+  d. Decisions made in serial-number conflict reviews, provided they were
+     made in good faith on the information available.
+  e. Loss of data in a test environment, which may be reset without notice.
+  f. Interruptions caused by third-party hosting, database or network
+     providers.
+
+
+7. LIMITATION OF LIABILITY
+
+To the fullest extent permitted by law:
+
+  a. We are not liable for indirect, incidental, special, consequential or
+     punitive damages, including lost profits, lost trading opportunities or
+     loss of collection value.
+  b. Our total liability to you for all Claims relating to the Application in
+     any 12-month period is limited to the greater of (i) the fees you paid us
+     in that period, or (ii) one hundred U.S. dollars (US$100). The
+     Application is currently free, so in most cases the limit is US$100.
+
+Nothing in this policy limits liability that cannot be limited by law.
+
+
+8. INDEMNIFICATION PROCEDURE
+
+A party seeking indemnification ("the Indemnified Party") must:
+
+  1. Give the other party ("the Indemnifying Party") written notice of the
+     Claim within 30 days of learning about it. A late notice only reduces
+     the obligation to the extent the delay causes harm.
+  2. Allow the Indemnifying Party to control the defense and settlement of
+     the Claim, using counsel reasonably acceptable to the Indemnified Party.
+  3. Provide reasonable cooperation and information, at the Indemnifying
+     Party's expense.
+
+The Indemnifying Party may not settle a Claim in a way that admits fault on
+behalf of the Indemnified Party, or imposes obligations on it, without its
+written consent, which will not be unreasonably withheld.
+
+The Indemnified Party may take part in the defense with its own counsel at
+its own expense.
+
+Notices to us should be sent to: legal@ducksonthepondcards.com (fictional
+address for this sample).
+
+
+9. DISPUTES BETWEEN COLLECTORS
+
+Disputes between Collectors about Trades should first follow the trade dispute
+process in section 6.4 of the Customer Service Policy. We may help by
+reviewing records and correcting ownership data, but we are not a party to
+any Trade and do not act as an arbitrator, escrow agent or guarantor.
+
+If you bring a Claim against us that arises from a dispute with another
+Collector, you release us from that Claim, except to the extent it results
+from our own fraud, gross negligence or wilful misconduct.
+
+
+10. ACCOUNT ACTION
+
+If a Claim against us arises from your conduct, we may restrict, suspend or
+close your account while the Claim is investigated, as described in section 9
+of the Customer Service Policy. Doing so does not end your obligations under
+this policy.
+
+
+11. SURVIVAL
+
+Your obligations under this policy continue after your account is closed or
+deleted, for any Claim relating to activity that happened while the account
+was open.
+
+
+12. GOVERNING LAW
+
+This policy is governed by the laws of the State of [Fictional State], without
+regard to its conflict-of-law rules. Any proceeding relating to this policy
+will be brought in the courts located in [Fictional County].
+
+
+13. SEVERABILITY AND CHANGES
+
+If any part of this policy is found unenforceable, the rest remains in effect,
+and the unenforceable part is applied to the greatest extent permitted.
+
+We may update this policy. Significant changes are announced in the
+Application at least 14 days before they take effect. Continuing to use the
+Application after that date means you accept the updated policy.
+
+
+14. CONTACT
+
+Questions about this policy: legal@ducksonthepondcards.com (fictional address
+for this sample).
+
+END OF SAMPLE DOCUMENT

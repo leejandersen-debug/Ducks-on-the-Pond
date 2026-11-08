@@ -1,0 +1,280 @@
+DUCKS ON THE POND CARDS
+FREQUENTLY ASKED QUESTIONS
+
+Version: November 2026 (test harness release)
+
+Related documents: User's Guide (users-guide.txt), Capabilities Summary
+(capabilities-summary.txt), Customer Service Policy
+(customer-service-policy.txt).
+
+
+GETTING STARTED
+
+Q: What is Ducks on the Pond Cards?
+A: A web application for sports card collectors. You can record the cards you
+   own, keep a wishlist, find collectors who have the cards you want, trade
+   with them, and see reports on your inventory, sales and profit.
+
+Q: Does it cost anything?
+A: No. The application is currently free.
+
+Q: How do I sign in?
+A: There are no personal accounts yet. Use the "Test user" drop-down at the
+   top of any page, choose Alice, Bob or Carol, and click "Switch".
+
+Q: Which test user should I pick?
+A: Alice and Bob are collectors. Carol is an admin and is the only one who can
+   use the Admin page. To try a trade, act as one collector, then switch to
+   the other to respond.
+
+Q: Why does the page say "Test login is off in this environment"?
+A: Test sign-in has been turned off where you are, usually in production. You
+   can browse the catalog but cannot add or change anything.
+
+Q: Why does a page say "Pick a test user first"?
+A: My collection, Wishlist, Trades and Reports belong to a particular
+   collector. Choose a test user at the top of the page and try again.
+
+Q: Is there a mobile app?
+A: Not yet. The web application works in a phone's browser.
+
+
+THE CATALOG
+
+Q: What is the difference between a set, a parallel, a card and a variant?
+A: A set is a product release, such as 2024 Topps Chrome. A parallel is a
+   version of the set's cards, such as Base or Gold Refractor /50. A card is
+   one numbered card in the set, such as #150 Shohei Ohtani. A variant is a
+   specific card in a specific parallel, optionally with an autograph or
+   relic. You add variants to your collection.
+
+Q: The card I own is not in the catalog. What do I do?
+A: Add it. Go to Catalog, open or add the set, add the parallel if it is
+   missing, add the card, then add the variant. Anyone signed in can add to
+   the catalog.
+
+Q: Why does every set already have a Base parallel?
+A: The application creates a Base parallel for every new set, and a Base
+   variant for every new card, so you can add base cards straight away.
+
+Q: I made a mistake in the catalog. Can I edit or delete it?
+A: Not from the interface yet. Contact support with the set, card number and
+   what is wrong. Catalog changes affect every collector, so support confirms
+   corrections before making them.
+
+Q: Why did I get "That already exists"?
+A: A set, parallel, card or variant with the same details is already in the
+   catalog. Look for it in the list instead of adding it again.
+
+
+MY COLLECTION
+
+Q: How do I add a card I own?
+A: Go to My collection, choose the variant under "Add a card to my
+   collection", fill in any details you have (serial number, grade, cert
+   number, price paid, date acquired, condition) and click "Add card".
+
+Q: Which grading companies are supported?
+A: PSA, BGS, SGC and CGC. Grades go from 1 to 10 in half steps. Choose "Raw
+   (ungraded)" for an ungraded card.
+
+Q: Why do I get "Enter both a grading company and a grade, or neither"?
+A: A graded card needs both its company and its grade. For a raw card, leave
+   both blank.
+
+Q: Can I edit a card after adding it?
+A: You can change its Tradeable setting and its listed price, mark it sold,
+   or undo a sale. The grade, serial number, cert number and price paid cannot
+   be edited yet. Delete the card and add it again with the right details.
+
+Q: What is the difference between Delete and Mark sold?
+A: Delete removes the card permanently. Mark sold keeps it as a sale record,
+   so it shows in your Sold report with its profit. Use Mark sold if you sold
+   the card.
+
+Q: I marked a card sold by mistake. Can I undo it?
+A: Yes. Click "Undo sale" in the Sold table. The card returns to your
+   collection. It comes back not tradeable, so turn Tradeable on again if you
+   want to offer it.
+
+Q: Can I upload photos of my cards?
+A: Not yet. Photo upload is planned but not built.
+
+
+SERIAL NUMBERS
+
+Q: What is a serial number?
+A: The number stamped on a numbered card, for example 23 on a card numbered
+   23/50. Enter just the 23.
+
+Q: Why was my card "sent to an admin for review"?
+A: Another collector already holds an unsold copy of the same variant with
+   that serial number. Only one copy of each serial can exist, so an admin
+   checks which entry is correct.
+
+Q: How long does a serial-number review take?
+A: The aim is 5 business days. Check the status under "My serial-number
+   reviews" on the My collection page, as review emails are not set up yet.
+
+Q: What happens during a review?
+A: The admin compares both entries and may ask either collector for a photo
+   of the card's front and back. If one entry is a typo, it is corrected and
+   the valid one approved. The admin's note explains the decision.
+
+Q: What if I disagree with the decision?
+A: Ask for a second review. See section 11 of the Customer Service Policy.
+
+Q: Why do I get "Serial N is higher than the print run"?
+A: The serial you entered is larger than the number made, for example 51 on a
+   /50 card. Check the number, and check you chose the right variant.
+
+
+WISHLIST
+
+Q: What is the difference between "Any version of a card" and "An exact
+   variant"?
+A: "Any version" matches every parallel and variant of that card. "An exact
+   variant" matches only that one, for example only the Gold Refractor /50.
+
+Q: Can other collectors see my wishlist?
+A: Only wants marked Public. Public is ticked by default. Untick it to keep a
+   want private.
+
+Q: Why are no matches showing?
+A: Matches only include other collectors' cards that are marked tradeable and
+   meet your minimum grade and grading company, if you set them. Try loosening
+   the minimum grade, or check back later.
+
+Q: Does the max price filter matches?
+A: No. It is saved with your want for reference, but matching uses the card
+   and grade only.
+
+
+TRADING
+
+Q: How do I start a trade?
+A: Go to Trades, choose a collector under "Trade with", click "Show their
+   tradeable cards", tick the cards you will give and the cards you want, and
+   click "Propose trade". Or click "propose a trade" next to a match on your
+   Wishlist page.
+
+Q: Why can't I see my card in the "I give" list?
+A: Only tradeable cards are listed. Turn on Tradeable for the card in My
+   collection.
+
+Q: Can a trade be one-sided?
+A: Yes. You can only give or only ask, as long as at least one card is
+   chosen.
+
+Q: How do I make a counteroffer?
+A: On a trade offered to you, click "Counter...". The same cards are
+   preselected; change them, add a message, and click "Send counteroffer". The
+   original offer is marked "countered".
+
+Q: Who can complete a trade?
+A: Either collector, once the trade is accepted. Only click "Complete (cards
+   exchanged)" after you have actually received the cards.
+
+Q: What happens when a trade is completed?
+A: The cards move to their new owners in one step. Each card arrives not
+   tradeable, with today's date as its acquired date, and without the previous
+   owner's paid or listed price.
+
+Q: Why was my trade cancelled when nobody cancelled it?
+A: A card in it was turned off as tradeable, sold, or traded in another deal.
+   The application cancels offers that include those cards.
+
+Q: Why do I get "A card in this trade has changed owner or been sold"?
+A: The same card was in another offer that was completed first, or its owner
+   sold it. Propose a new trade with the cards that are still available.
+
+Q: How do the physical cards get delivered?
+A: The two collectors arrange it between themselves. The application does not
+   handle shipping or payment.
+
+Q: What if the other collector never sends the card?
+A: Do not click Complete until you have received it. If a completed trade
+   goes wrong, contact the other collector first, then support. See section
+   6.4 of the Customer Service Policy.
+
+
+SELLING AND PRICES
+
+Q: Can I sell cards through the application?
+A: You can list an asking price and record sales, but no payments go through
+   the application. You arrange the sale yourself and then record it with
+   "Mark sold".
+
+Q: Why is the Market column in my reports blank?
+A: Market prices can be shown, but there is no screen to enter them yet, so
+   most cards have none.
+
+Q: How is profit calculated?
+A: Sold price minus the price you paid. If you did not enter a paid price,
+   profit is left blank for that card.
+
+Q: What is Margin in the For sale report?
+A: Your listed price minus the price you paid.
+
+
+REPORTS
+
+Q: What reports are there?
+A: A summary, an inventory report, a for-sale report and a sold report. See
+   section 9 of the User's Guide.
+
+Q: Do my reports include other collectors' cards?
+A: No. Reports only show your own cards.
+
+
+SEARCH
+
+Q: What does the Search page search?
+A: Reference documents, currently the Trailhead Supply Co. course documents
+   (handbook, FAQ, operations manual, policies and pricing). It does not
+   search cards or collections.
+
+Q: Why does it say "Not in the documents"?
+A: No passage was similar enough to your question. Try rewording it. The page
+   shows the best score it found so you can see how close it came.
+
+Q: Is there a length limit on questions?
+A: Yes, 500 characters.
+
+
+PRIVACY
+
+Q: What can other collectors see about me?
+A: Your username, your tradeable cards (including grade, serial and cert
+   number) and your public wants. The application does not show them your
+   prices, acquired dates, private wants, non-tradeable cards or sales.
+
+Q: Who can see my trades?
+A: Only you and the other collector in the trade. Admins cannot see trades
+   they are not part of.
+
+Q: Can admins see my collection?
+A: Yes. Admins can see all collection data and use it only to resolve
+   serial-number conflicts and support requests.
+
+Q: Can I delete my data?
+A: Yes. Contact support. See section 10 of the Customer Service Policy.
+
+
+HELP AND SUPPORT
+
+Q: How do I contact support?
+A: See section 4 of the Customer Service Policy for contact details and what
+   to include in your request.
+
+Q: What does "Something went wrong. It has been logged as action_failed"
+   mean?
+A: An unexpected error happened and was recorded. Try again. If it keeps
+   happening, contact support and say when it happened.
+
+Q: Will I get an email when someone offers me a trade?
+A: Not yet. Email and push notifications are not built. Check your Trades
+   page.
+
+Q: Is my test data permanent?
+A: No. Data in a test environment may be reset without notice.
