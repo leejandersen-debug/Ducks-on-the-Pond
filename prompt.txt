@@ -1599,3 +1599,17 @@ commit and push the prompt log
 
 What it gives you:
 prompt.txt committed on its own and pushed to main, bringing the log on GitHub up to date through this entry (PROMPTS 171–173: the evidence page, the grounded-feature worksheet, and this commit).
+
+
+PROMPT 174
+Run the golden questions against the live /api/ask
+
+What it gives you:
+The 12 frozen golden questions run through the live POST /api/ask (commit 911d891, production Postgres) and graded with the same rules and gates as the rig baseline (scoresheet-ducks-live-2026-11-08.md). All 12 returned 200 in 1.4–5.6 s. Retrieval was graded from each reply's passages before the answers were read. It is identical to the rig on every item (same chunks, order and scores), so production doc_chunks and local Chroma hold the same corpus. Retrieval 10/12 (misses #5, #8) and answer 9/12 (fails #5, #7, #8): the same scores and the same items as the rig, so SHIP. The only difference: on #9 the live answer cited the Customer Service Policy rather than the dispute procedure, both accepted, which is normal model variation. The swap introduced no new failures. A first attempt sent empty bodies (a script bug: a stdin redirect replaced the request body), and the route correctly answered those with 400.
+
+
+PROMPT 175
+Commit and push
+
+What it gives you:
+The live golden-question scoresheet (scoresheet-ducks-live-2026-11-08.md) and prompt.txt through this entry, committed to main and pushed.
