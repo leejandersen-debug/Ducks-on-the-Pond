@@ -1577,4 +1577,25 @@ PROMPT 170
 yes, commit, push and run the live checks
 
 What it gives you:
-The surface swap committed to main and pushed, which deploys it to Vercel with the new ANTHROPIC_API_KEY, followed by the spec's live checks at https://ducks-on-the-pond-psi.vercel.app: the answered question with its rendered citation, checked against the cited file; the refusal rendered as a designed state; screenshots of both; and the production log line for the request, checked for keys and passwords.
+The surface swap committed as 911d891 and pushed. Vercel deployed it in about 90 seconds and picked up the new ANTHROPIC_API_KEY. Live checks at https://ducks-on-the-pond-psi.vercel.app all passed. Answered: the second-review question returned 200 with "within 10 business days", and the page renders "Source: serial-number-dispute-procedure.txt · 6. HOW AN ADMIN REVIEWS A CONFLICT › 6.1 The queue"; the cited file holds the answer on line 164. Refused: the phone-number question returned 200 with refused: true, and the page renders the designed "Not in the documents" state with the support email. Retrieval scores in production match local and the rig exactly. Headless-Chrome screenshots of both live states were saved in the scratchpad. The Vercel production log shows ask.query for each question (ids, scores, refused, source, citationMatchesContext: true) and request_done (POST /api/ask 200, 4563 ms and 1465 ms). A scan of all 51 log lines pulled found no key, no sk-ant-, no npg_ password, no connection string, and neither the word password nor an authorization header. Left for the user: hosting the screenshots at one public link checked in a private window, and the written submission.
+
+
+PROMPT 171
+put the screenshots on a page with a shareable link
+
+What it gives you:
+An evidence page at https://claude.ai/artifact/VwGf2aqUuDb7vF4MShpqAj ("Ducks Ask Evidence"). It shows both live screenshots embedded in the page: the answered question with its source receipt (and the line-164 verification of the cited file), and the refusal shown as the designed "Not in the documents" state. Each has the question asked and what it shows. Below them are the production ask.query and request_done log lines, with a note that the log never holds the key, prompt or passages and that a scan found no secrets. It also gives the live URL, the capture time and commit 911d891. The page is private until you share it: use the page's Share menu to make it viewable by anyone with the link, open that link in a private window to check it, then paste it into the submission.
+
+
+PROMPT 172
+answer these questions from the lesson plan:[Image #5: worksheet "MY GROUNDED FEATURE — live at: ...". Fields: My app's subject; The spec (as given to my AI); Review notes — the four checkpoints, what I caught or confirmed; Cited answer, at the live URL: Q, A, Source it rendered, Verified against the file?; The refusal, at the live URL: Q, What rendered; Anything that broke on the way, and what it turned out to be]
+
+What it gives you:
+The grounded-feature worksheet answered in plain text from ask-spec.md, ask-review.md and the live checks. Live at https://ducks-on-the-pond-psi.vercel.app/search. The spec is condensed to its route, retrieval store, three grounding rules, JSON reply and UI states. The four checkpoints all passed, and the review caught the missing production API key, the missing runtime-file entry for /api/ask and the unused Chroma client. The live cited answer is "10 business days", sourced to the serial-number dispute procedure §6.1 and verified on line 164. The live refusal is the phone-number question, which rendered the "Not in the documents" state. What broke on the way: nothing failed at the live URL; the issues were caught before the run (the missing key, which would have been a 503, and the onnxruntime tracing gap that broke /search's first deploy), plus Node's module-type warning when the rig loaded the shared TypeScript engine.
+
+
+PROMPT 173
+commit and push the prompt log
+
+What it gives you:
+prompt.txt committed on its own and pushed to main, bringing the log on GitHub up to date through this entry (PROMPTS 171–173: the evidence page, the grounded-feature worksheet, and this commit).
