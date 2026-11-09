@@ -24,7 +24,7 @@ export default async function AdminPage({ searchParams }: { searchParams: FlashP
     )).rows;
     return { profiles, conflicts, existing, variants: await listVariants(db) };
   });
-  if (!data) return <main><h1>Admin</h1><p>Admins only. Switch to Carol (admin) to use this page.</p></main>;
+  if (!data) return <main><h1>Admin</h1><p className="notice">Admins only. Sign in with the administrator account to use this page.</p></main>;
 
   const name = (id: string | null) => data.profiles.find((p) => p.id === id)?.username ?? id;
   const variant = (id: string) => data.variants.find((v) => v.id === id)?.label ?? id;
@@ -42,7 +42,7 @@ export default async function AdminPage({ searchParams }: { searchParams: FlashP
         const held = data.existing.find((c) => c.copy_id === k.existing_copy_id);
         const pending = k.pending_copy ?? {};
         return (
-          <section key={k.id} style={{ border: "1px solid", padding: 8, marginBottom: 8 }}>
+          <section key={k.id} className="card">
             <p><strong>{k.status}</strong>: {variant(k.variant_id)} serial #{k.serial_number}</p>
             <p>
               Submitted by {name(k.submitted_by)} on {new Date(k.created_at).toLocaleString()}
@@ -61,14 +61,14 @@ export default async function AdminPage({ searchParams }: { searchParams: FlashP
               <>
                 {held && (
                   <div>
-                    <form action={adminUpdateSerial} style={{ display: "inline" }}>
+                    <form action={adminUpdateSerial} className="inline">
                       <input type="hidden" name="back" value={BACK} />
                       <input type="hidden" name="copy_id" value={held.copy_id} />
                       Change existing copy&apos;s serial to <input name="serial_number" type="number" min={1} size={5} required />{" "}
                       <button>Save</button>
                     </form>{" "}
                     or{" "}
-                    <form action={adminDeleteCopy} style={{ display: "inline" }}>
+                    <form action={adminDeleteCopy} className="inline">
                       <input type="hidden" name="back" value={BACK} />
                       <input type="hidden" name="copy_id" value={held.copy_id} />
                       <button>Delete existing copy</button>

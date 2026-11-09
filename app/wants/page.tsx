@@ -1,3 +1,4 @@
+import { SignInPrompt } from "../sign-in-prompt";
 import { addWant, deleteWant } from "../actions";
 import { Flash, type FlashParams } from "../flash";
 import { withUser } from "@/lib/db";
@@ -18,7 +19,7 @@ export default async function WantsPage({ searchParams }: { searchParams: FlashP
   if (await dbProblem()) return null; // the layout shows the reason
   const sp = await searchParams;
   const me = await currentUserId();
-  if (!me) return <main><h1>Wishlist</h1><p>Pick a test user first.</p></main>;
+  if (!me) return <main><h1>Wishlist</h1><SignInPrompt /></main>;
 
   const data = await withUser(me, async (db) => ({
     wants: (await db.query("select * from wants where user_id = $1 order by created_at", [me])).rows,
@@ -53,7 +54,7 @@ export default async function WantsPage({ searchParams }: { searchParams: FlashP
       <Flash ok={sp.ok} error={sp.error} />
 
       <h2>My wants</h2>
-      <table border={1} cellPadding={4}>
+      <table>
         <thead><tr><th>Card</th><th>Minimum grade</th><th>Max price</th><th>Public</th><th>Notes</th><th></th></tr></thead>
         <tbody>
           {data.wants.map((w) => (

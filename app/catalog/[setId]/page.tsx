@@ -59,7 +59,7 @@ export default async function SetPage({ params, searchParams }: {
       </form>
 
       <h2>Cards</h2>
-      <table border={1} cellPadding={4}>
+      <table>
         <thead><tr><th>#</th><th>Card</th><th>Rookie</th><th>Variants</th><th>Add a variant</th></tr></thead>
         <tbody>
           {cards.map((k) => (

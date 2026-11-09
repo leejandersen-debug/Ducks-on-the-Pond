@@ -45,7 +45,7 @@ async function act(fd: FormData, action: string, fn: (db: PoolClient, me: string
   let target: string;
   try {
     const me = await currentUserId();
-    if (!me) throw new UserError("Pick a test user at the top of the page first.");
+    if (!me) throw new UserError("Sign in first (top right).");
     const message = await withUser(me, (db) => fn(db, me));
     target = withMessage(backTo(fd), "ok", message);
   } catch (err) {

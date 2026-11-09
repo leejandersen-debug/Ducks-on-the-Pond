@@ -1,3 +1,4 @@
+import { SignInPrompt } from "../sign-in-prompt";
 import { addCopy, deleteCopy, markSold, setListedPrice, setTradeable, undoSale } from "../actions";
 import { Flash, type FlashParams } from "../flash";
 import { withUser } from "@/lib/db";
@@ -14,7 +15,7 @@ export default async function CollectionPage({ searchParams }: { searchParams: F
   if (await dbProblem()) return null; // the layout shows the reason
   const sp = await searchParams;
   const me = await currentUserId();
-  if (!me) return <main><h1>My collection</h1><p>Pick a test user first.</p></main>;
+  if (!me) return <main><h1>My collection</h1><SignInPrompt /></main>;
 
   const { copies, variants, companies, conflicts } = await withUser(me, async (db) => ({
     copies: (await db.query(
@@ -38,7 +39,7 @@ export default async function CollectionPage({ searchParams }: { searchParams: F
       <Flash ok={sp.ok} error={sp.error} />
 
       <h2>In my collection ({owned.length})</h2>
-      <table border={1} cellPadding={4}>
+      <table>
         <thead>
           <tr><th>Card</th><th>Cert</th><th>Acquired</th><th>Paid</th><th>Tradeable</th><th>Listed price</th><th>Sell</th><th></th></tr>
         </thead>
@@ -88,7 +89,7 @@ export default async function CollectionPage({ searchParams }: { searchParams: F
       </table>
 
       <h2>Sold ({sold.length})</h2>
-      <table border={1} cellPadding={4}>
+      <table>
         <thead><tr><th>Card</th><th>Paid</th><th>Sold for</th><th>Sold on</th><th></th></tr></thead>
         <tbody>
           {sold.map((c) => (

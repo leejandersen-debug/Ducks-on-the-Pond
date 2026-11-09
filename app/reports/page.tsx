@@ -1,3 +1,4 @@
+import { SignInPrompt } from "../sign-in-prompt";
 import { Flash, type FlashParams } from "../flash";
 import { withUser } from "@/lib/db";
 import { dbProblem } from "@/lib/db-status";
@@ -11,7 +12,7 @@ export default async function ReportsPage({ searchParams }: { searchParams: Flas
   if (await dbProblem()) return null; // the layout shows the reason
   const sp = await searchParams;
   const me = await currentUserId();
-  if (!me) return <main><h1>Reports</h1><p>Pick a test user first.</p></main>;
+  if (!me) return <main><h1>Reports</h1><SignInPrompt /></main>;
 
   // The report views already filter to the signed-in user.
   const r = await withUser(me, async (db) => ({
@@ -66,7 +67,7 @@ export default async function ReportsPage({ searchParams }: { searchParams: Flas
 
 function Table({ rows, cols }: { rows: Row[]; cols: [string, (c: Row) => string][] }) {
   return (
-    <table border={1} cellPadding={4}>
+    <table>
       <thead><tr><th>Card</th>{cols.map(([h]) => <th key={h}>{h}</th>)}</tr></thead>
       <tbody>
         {rows.map((c) => (

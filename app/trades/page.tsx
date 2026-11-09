@@ -1,3 +1,4 @@
+import { SignInPrompt } from "../sign-in-prompt";
 import { completeTrade, proposeTrade, respondTrade } from "../actions";
 import { Flash, type FlashParams } from "../flash";
 import { withUser } from "@/lib/db";
@@ -12,7 +13,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Flash
   if (await dbProblem()) return null; // the layout shows the reason
   const sp = await searchParams;
   const me = await currentUserId();
-  if (!me) return <main><h1>Trades</h1><p>Pick a test user first.</p></main>;
+  if (!me) return <main><h1>Trades</h1><SignInPrompt /></main>;
 
   const counterId = one(sp.counter);
   const data = await withUser(me, async (db) => {
@@ -96,7 +97,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Flash
         const iAmRecipient = t.recipient_id === me;
         const tradeItems = data.items.filter((i) => i.trade_id === t.id);
         return (
-          <section key={t.id} style={{ border: "1px solid", padding: 8, marginBottom: 8 }}>
+          <section key={t.id} className="card">
             <p>
               <strong>{t.status}</strong>: {t.proposer} → {t.recipient}, {new Date(t.created_at).toLocaleString()}
               {t.replaces_trade ? " (counteroffer)" : ""}
@@ -120,7 +121,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Flash
               <TradeButton id={t.id} action="cancel" label="Cancel" />
             )}
             {t.status === "accepted" && (
-              <form action={completeTrade} style={{ display: "inline" }}>
+              <form action={completeTrade} className="inline">
                 <input type="hidden" name="back" value="/trades" />
                 <input type="hidden" name="trade_id" value={t.id} />{" "}
                 <button>Complete (cards exchanged)</button>
@@ -135,7 +136,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Flash
 
 function TradeButton({ id, action, label }: { id: string; action: string; label: string }) {
   return (
-    <form action={respondTrade} style={{ display: "inline" }}>
+    <form action={respondTrade} className="inline">
       <input type="hidden" name="back" value="/trades" />
       <input type="hidden" name="trade_id" value={id} />
       <input type="hidden" name="action" value={action} />

@@ -20,7 +20,7 @@ export default async function CatalogPage({ searchParams }: { searchParams: Flas
       <h1>Catalog</h1>
       <Flash ok={sp.ok} error={sp.error} />
       <h2>Sets</h2>
-      <table border={1} cellPadding={4}>
+      <table>
         <thead><tr><th>Year</th><th>Manufacturer</th><th>Name</th><th>Sport</th><th>Parallels</th><th>Cards</th></tr></thead>
         <tbody>
           {sets.map((s) => (
