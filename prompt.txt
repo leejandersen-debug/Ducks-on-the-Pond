@@ -1660,3 +1660,10 @@ change my account email to ducksonthepondcards@gmail.com
 
 What it gives you:
 Your production account (Garvkong, admin) now uses ducksonthepondcards@gmail.com, changed in one transaction on the Neon main branch. Any confirmation link sent to the old address was cancelled. The address shows as unconfirmed, so the banner stays until you confirm it. You can sign in with that email, or with Garvkong, and the same password. Once Resend is installed (with the same Gmail address), confirmation and reset emails can reach you.
+
+
+PROMPT 182-186
+If I accept the resend terms, what would that cost me? / I accepted the resend terms on the free plan / I have the resend key, but how do I add it to vercel? / I dont see "Environment Variables" in the settings page / The key is saved in Vercel
+
+What it gives you:
+Email switched on in production. Cost: Resend's free plan is $0 forever (3,000 emails a month, 100 a day), far above this app's needs; Pro is $20 a month. The Vercel Marketplace install requires a domain you own to send from, so instead you signed up at resend.com with ducksonthepondcards@gmail.com and saved its key in Vercel as RESEND_API_KEY (Production only, Sensitive). The direct link was vercel.com/team-lee5/ducks-on-the-pond/settings/environment-variables, since the team's Settings page has no such section. Checked by name only (vercel env ls: Hidden, Production). The waiting commits (reply-to address, prompt log) were pushed to redeploy so the site picks up the key. Without a domain, email comes from onboarding@resend.dev and reaches only ducksonthepondcards@gmail.com; a domain is needed before other collectors sign up.
