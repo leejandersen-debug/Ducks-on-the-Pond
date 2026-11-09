@@ -1653,3 +1653,10 @@ For resend, use ducksonthepondcards@gmail.com
 
 What it gives you:
 ducksonthepondcards@gmail.com is now the app's email mailbox: every app email (reset, confirmation) has it as the reply-to address (lib/email.ts; EMAIL_REPLY_TO can override it). It can't be the From address: Resend only sends from domains you've verified, and nobody can verify gmail.com, so until you own a domain the sender stays onboarding@resend.dev. Sign up for Resend (through the Vercel terms page) with ducksonthepondcards@gmail.com, since that test sender only delivers to the Resend account's own address. A retry of the install still reported the terms as not accepted. Found while checking: the production admin account (Garvkong) uses a different email, so its confirmation and reset emails can't be delivered until its email is changed to ducksonthepondcards@gmail.com or a domain is verified. Committed locally, not pushed; it goes out with the Resend install's redeploy.
+
+
+PROMPT 181
+change my account email to ducksonthepondcards@gmail.com
+
+What it gives you:
+Your production account (Garvkong, admin) now uses ducksonthepondcards@gmail.com, changed in one transaction on the Neon main branch. Any confirmation link sent to the old address was cancelled. The address shows as unconfirmed, so the banner stays until you confirm it. You can sign in with that email, or with Garvkong, and the same password. Once Resend is installed (with the same Gmail address), confirmation and reset emails can reach you.
