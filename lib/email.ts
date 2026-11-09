@@ -4,9 +4,12 @@ import { log } from "@/lib/log";
 // Vercel Marketplace, which sets RESEND_API_KEY. Without a key: in development the email is
 // printed to the server console so the flow can be tested; anywhere else sending fails.
 // Until a domain is verified in Resend, the sender must be onboarding@resend.dev, which only
-// delivers to the Resend account owner's own address. Set EMAIL_FROM once a domain is verified.
+// delivers to the Resend account's own address (ducksonthepondcards@gmail.com). Set EMAIL_FROM once
+// a domain is verified in Resend.
 
 const FROM = process.env.EMAIL_FROM || "Ducks on the Pond Cards <onboarding@resend.dev>";
+// Replies to app emails go to the app's own mailbox (Resend can't send *from* a gmail.com address).
+const REPLY_TO = process.env.EMAIL_REPLY_TO || "ducksonthepondcards@gmail.com";
 
 export class EmailError extends Error {}
 
@@ -23,7 +26,7 @@ export async function sendEmail(to: string, subject: string, text: string, html:
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ from: FROM, to: [to], subject, text, html }),
+    body: JSON.stringify({ from: FROM, to: [to], reply_to: REPLY_TO, subject, text, html }),
   });
   if (!res.ok) {
     // Status and Resend's error name only: the body can echo the recipient address.
