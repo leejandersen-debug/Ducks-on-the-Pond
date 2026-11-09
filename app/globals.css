@@ -174,3 +174,9 @@ summary { cursor: pointer; font-weight: 600; color: var(--teal); }
 
 .dev-tools { border-top: 1px dashed var(--line); background: var(--surface); padding: 0.5rem 1rem; font-size: 0.85rem; }
 .dev-tools form { max-width: 1200px; margin: 0 auto; }
+
+/* ── Account notices ──────────────────────────────── */
+
+.right { text-align: right; margin: -0.5rem 0 1rem; font-size: 0.9rem; }
+.verify-banner { background: var(--yellow-tint); border-bottom: 2px solid var(--yellow); }
+.verify-banner .bar { margin: 0 auto; padding: 0.5rem 1rem; justify-content: flex-start; }

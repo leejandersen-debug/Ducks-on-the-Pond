@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
 import { switchUser } from "./actions";
-import { signOut } from "./auth-actions";
+import { resendVerification, signOut } from "./auth-actions";
 import { withUser } from "@/lib/db";
 import { dbProblem } from "@/lib/db-status";
 import { listProfiles, type Profile } from "@/lib/queries";
@@ -16,6 +16,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const problem = await dbProblem();
   const profiles: Profile[] = problem ? [] : await withUser(null, listProfiles);
   const profile = profiles.find((p) => p.id === me);
+  // false only for a real account that hasn't confirmed its email (test users have no account).
+  const verified = profile ? await withUser(me, async (db) =>
+    (await db.query("select auth_email_verified($1) v", [me])).rows[0].v as boolean | null).catch(() => null) : null;
 
   return (
     <html lang="en">
@@ -48,6 +51,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             {profile?.is_admin && <Link href="/admin">Admin</Link>}
           </nav>
         </header>
+
+        {verified === false && (
+          <div className="verify-banner">
+            <form action={resendVerification} className="bar">
+              <span>Please confirm your email address: we sent you a link when you signed up.</span>
+              <button className="small">Send it again</button>
+            </form>
+          </div>
+        )}
 
         <div className="page">
           {problem ? <p className="flash error"><strong>{problem}</strong></p> : children}

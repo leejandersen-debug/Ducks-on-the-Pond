@@ -15,10 +15,10 @@ const SECTIONS = [
   { href: "/search", title: "Help & search", text: "Ask a question; answers come from the help documents." },
 ];
 
-export default async function Home({ searchParams }: { searchParams: Promise<{ welcome?: string }> }) {
+export default async function Home({ searchParams }: { searchParams: Promise<{ welcome?: string; mail?: string; verify?: string; reset?: string }> }) {
   if (await dbProblem()) return null; // the layout shows the reason
   const me = await currentUserId();
-  const { welcome } = await searchParams;
+  const { welcome, mail, verify, reset } = await searchParams;
 
   if (!me) {
     return (
@@ -45,6 +45,12 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ w
         <p className="flash ok"><strong>Your account is ready, and you are the administrator.</strong> The Admin page is now in the menu.</p>
       )}
       {welcome === "1" && <p className="flash ok"><strong>Welcome!</strong> Your account is ready.</p>}
+      {welcome && !mail && <p className="flash ok">We emailed you a link to confirm your address.</p>}
+      {mail === "failed" && <p className="flash error">We couldn&apos;t send the confirmation email just now. Use &ldquo;Send it again&rdquo; above in a few minutes.</p>}
+      {verify === "sent" && <p className="flash ok">A new confirmation link is on its way. Check your spam folder too.</p>}
+      {verify === "wait" && <p className="flash error">Too many emails sent. Try again in an hour.</p>}
+      {verify === "failed" && <p className="flash error">Couldn&apos;t send the email right now. Try again in a few minutes.</p>}
+      {reset === "1" && <p className="flash ok"><strong>Password changed.</strong> You&apos;re signed in, and every other device was signed out.</p>}
       <h1>Welcome back, {profile?.display_name ?? profile?.username}</h1>
       <div className="tiles">
         {SECTIONS.map((s) => (
