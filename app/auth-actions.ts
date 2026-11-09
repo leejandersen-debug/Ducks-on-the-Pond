@@ -7,7 +7,7 @@ import {
   dummyHash, hashPassword, MIN_PASSWORD, newSessionToken, SESSION_COOKIE, SESSION_DAYS, tokenHash, verifyPassword,
 } from "@/lib/auth";
 import { withUser } from "@/lib/db";
-import { appUrl, emailBody, EmailError, sendEmail } from "@/lib/email";
+import { appUrl, emailBody, EmailError, emailFrom, sendEmail } from "@/lib/email";
 import { text } from "@/lib/forms";
 import { log } from "@/lib/log";
 import { currentUserId } from "@/lib/session";
@@ -29,6 +29,7 @@ const LIMITS = {
   resetEmail: [3, 60],    // reset emails to one address
   resetIp: [10, 60],      // reset requests from one address
   verifyUser: [3, 60],    // "send it again" verification emails
+  testEmail: [5, 60],     // admin test emails
 } as const;
 
 const db = <T,>(fn: (c: PoolClient) => Promise<T>) => withUser(null, fn);
@@ -231,4 +232,43 @@ export async function resendVerification(): Promise<void> {
     result = "failed";
   }
   redirect(`/?verify=${result}`);
+}
+
+// ── Admin: test email ───────────────────────────────────────
+
+// Sends a test email to the signed-in admin's own address and reports exactly what happened,
+// so email can be checked without signing up or resetting a password.
+export async function sendTestEmail(): Promise<void> {
+  const me = await currentUserId();
+  const back = (kind: "ok" | "error", message: string) => `/admin?${kind}=${encodeURIComponent(message)}`;
+  if (!me) redirect("/signin");
+  let target: string;
+  try {
+    const { admin, email } = await withUser(me, async (c) => (await c.query(
+      "select app_is_admin() admin, auth_own_email($1) email", [me])).rows[0] as { admin: boolean; email: string | null });
+    if (!admin) target = back("error", "Admins only.");
+    else if (!email) target = back("error", "This account has no email address (development test users can't receive email).");
+    else {
+      const s = await retryAfter(`test:user:${me}`, LIMITS.testEmail);
+      if (s) target = back("error", wait(s));
+      else {
+        await count(`test:user:${me}`);
+        const sentAt = new Date().toUTCString();
+        const body = emailBody("Admin", `This is a test email from Ducks on the Pond Cards, sent ${sentAt}. If you can read it, the site can send email.`,
+          "Open the site", `${appUrl()}/admin`, `Sent from ${emailFrom()} through Resend.`);
+        const id = await sendEmail(email, "Test email from Ducks on the Pond Cards", body.text, body.html);
+        log.info("test_email_sent", { profileId: me, id });
+        target = back("ok", id
+          ? `Test email sent to ${email} (Resend id ${id}). Check the inbox and the Spam folder.`
+          : `Development: no RESEND_API_KEY here, so the email was printed to the server console instead of sent.`);
+      }
+    }
+  } catch (err) {
+    if (err instanceof EmailError) target = back("error", `${err.message}${err.detail ? ` (${err.detail})` : ""}`);
+    else {
+      log.error("test_email_failed", { code: (err as { code?: string }).code });
+      target = back("error", "Couldn't send the test email. It has been logged as test_email_failed.");
+    }
+  }
+  redirect(target);
 }

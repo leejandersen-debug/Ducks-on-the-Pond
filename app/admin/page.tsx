@@ -1,4 +1,5 @@
 import { adminDeleteCopy, adminUpdateSerial, resolveConflict } from "../actions";
+import { sendTestEmail } from "../auth-actions";
 import { Flash, type FlashParams } from "../flash";
 import { withUser } from "@/lib/db";
 import { dbProblem } from "@/lib/db-status";
@@ -31,11 +32,19 @@ export default async function AdminPage({ searchParams }: { searchParams: FlashP
 
   return (
     <main>
-      <h1>Admin: serial-number conflicts</h1>
+      <h1>Admin</h1>
       <Flash ok={sp.ok} error={sp.error} />
+
+      <section className="card">
+        <h2 className="tight">Email</h2>
+        <p>Send a test email to your own address to check that the site can send email.</p>
+        <form action={sendTestEmail}><button className="primary">Send a test email</button></form>
+      </section>
+
+      <h2>Serial-number conflicts</h2>
       <p>
         Someone tried to add a serial number another collection already holds. To approve, first fix
-        the existing copy&apos;s serial or delete it, then approve. Admin emails aren&apos;t wired up yet.
+        the existing copy&apos;s serial or delete it, then approve.
       </p>
       {data.conflicts.length === 0 && <p>No conflicts.</p>}
       {data.conflicts.map((k) => {

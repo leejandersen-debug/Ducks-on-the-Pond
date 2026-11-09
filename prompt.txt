@@ -1667,3 +1667,17 @@ If I accept the resend terms, what would that cost me? / I accepted the resend t
 
 What it gives you:
 Email switched on in production. Cost: Resend's free plan is $0 forever (3,000 emails a month, 100 a day), far above this app's needs; Pro is $20 a month. The Vercel Marketplace install requires a domain you own to send from, so instead you signed up at resend.com with ducksonthepondcards@gmail.com and saved its key in Vercel as RESEND_API_KEY (Production only, Sensitive). The direct link was vercel.com/team-lee5/ducks-on-the-pond/settings/environment-variables, since the team's Settings page has no such section. Checked by name only (vercel env ls: Hidden, Production). The waiting commits (reply-to address, prompt log) were pushed to redeploy so the site picks up the key. Without a domain, email comes from onboarding@resend.dev and reaches only ducksonthepondcards@gmail.com; a domain is needed before other collectors sign up.
+
+
+PROMPT 187
+Here is the email code from Resend: [Resend's quick-start sample: new Resend('re_xxxxxxxxx'); resend.emails.send({ from: 'onboarding@resend.dev', to: 'ducksonthepondcards@gmail.com', subject: 'Hello World', html: ... })]. I have no way of sending or receiving an email inside the application. What needs to change?
+
+What it gives you:
+No code change needed: lib/email.ts already makes the same send to Resend's API, reading the key from Vercel's RESEND_API_KEY instead of writing it into the code. The app only sends account emails: confirmation (at sign-up and from the banner's "Send it again") and password reset ("Forgot your password?"). It has no inbox; replies go to ducksonthepondcards@gmail.com.
+
+
+PROMPT 188
+add an admin "send a test email" button
+
+What it gives you:
+An Email card at the top of the Admin page (admins only) with a "Send a test email" button. It sends to the signed-in admin's own address and reports exactly what happened. On success it gives the address and Resend's message id; on failure, Resend's status and error name (never the key or the message body). Limited to 5 an hour. The page title is now "Admin", with serial-number conflicts as a section below. Tested on dev: the button appears for an admin and its send works, and a non-admin doesn't see it. The test accounts were deleted.

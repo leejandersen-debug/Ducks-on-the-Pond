@@ -11,17 +11,19 @@ const FROM = process.env.EMAIL_FROM || "Ducks on the Pond Cards <onboarding@rese
 // Replies to app emails go to the app's own mailbox (Resend can't send *from* a gmail.com address).
 const REPLY_TO = process.env.EMAIL_REPLY_TO || "ducksonthepondcards@gmail.com";
 
-export class EmailError extends Error {}
+export class EmailError extends Error {
+  constructor(message: string, readonly detail?: string) { super(message); }
+}
 
-export async function sendEmail(to: string, subject: string, text: string, html: string): Promise<void> {
+export async function sendEmail(to: string, subject: string, text: string, html: string): Promise<string | null> {
   const key = process.env.RESEND_API_KEY;
   if (!key) {
     if (process.env.NODE_ENV !== "production") {
       console.log(`\n[dev email, not sent] To: ${to}\nSubject: ${subject}\n\n${text}\n`);
-      return;
+      return null;
     }
     log.error("email_not_configured", {});
-    throw new EmailError("Email isn't set up on this site yet.");
+    throw new EmailError("Email isn't set up on this site yet.", "RESEND_API_KEY is not set in this environment");
   }
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -33,13 +35,17 @@ export async function sendEmail(to: string, subject: string, text: string, html:
     let name = "unknown";
     try { name = ((await res.json()) as { name?: string }).name ?? name; } catch {}
     log.error("email_failed", { status: res.status, name });
-    throw new EmailError("Couldn't send the email right now. Try again in a few minutes.");
+    throw new EmailError("Couldn't send the email right now. Try again in a few minutes.", `Resend said ${res.status} ${name}`);
   }
-  log.info("email_sent", { subject });
+  const id = ((await res.json().catch(() => ({}))) as { id?: string }).id ?? null;
+  log.info("email_sent", { subject, id });
+  return id;
 }
 
 // The site's own address for links in emails. Never taken from the request's Host header,
 // which a caller controls (it would let someone mail a reset link pointing at their own site).
+export const emailFrom = () => FROM;
+
 export function appUrl(): string {
   if (process.env.APP_URL) return process.env.APP_URL.replace(/\/$/, "");
   if (process.env.VERCEL_ENV === "production" && process.env.VERCEL_PROJECT_PRODUCTION_URL)

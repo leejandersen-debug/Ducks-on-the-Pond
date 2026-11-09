@@ -180,3 +180,4 @@ summary { cursor: pointer; font-weight: 600; color: var(--teal); }
 .right { text-align: right; margin: -0.5rem 0 1rem; font-size: 0.9rem; }
 .verify-banner { background: var(--yellow-tint); border-bottom: 2px solid var(--yellow); }
 .verify-banner .bar { margin: 0 auto; padding: 0.5rem 1rem; justify-content: flex-start; }
+.tight { margin-top: 0; }
