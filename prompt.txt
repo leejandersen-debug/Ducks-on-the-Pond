@@ -1681,3 +1681,192 @@ add an admin "send a test email" button
 
 What it gives you:
 An Email card at the top of the Admin page (admins only) with a "Send a test email" button. It sends to the signed-in admin's own address and reports exactly what happened. On success it gives the address and Resend's message id; on failure, Resend's status and error name (never the key or the message body). Limited to 5 an hour. The page title is now "Admin", with serial-number conflicts as a section below. Tested on dev: the button appears for an admin and its send works, and a non-admin doesn't see it. The test accounts were deleted.
+
+
+PROMPT 189
+Don't act on this, just note here is the shape of the questions I'm about to ask: [pasted worked example: the product-record cleanup pair. A rules file in three tiers (May do alone: add missing category tags, fix obvious tag-name typos; Ask first: renames, proposed in the report but not applied; Never: delete a record, touch prices or payment fields), written by asking "what would make me sick to discover tomorrow?". A task file (read the rules first; scan every record; fix what the rules allow; flag what they don't; finish with a report of every change and judgment call; done means every record checked once, report complete, nothing outside the rules touched). A dry test: read the task file as a careful stranger and find the guesses; the first draft failed twice ("obvious typos" in what? tag names only; a record missing everything is a flag, not a fix), fixed with two added sentences.]
+
+What it gives you:
+Nothing was changed; the example is noted as the template for the questions that follow. Answers will follow the same shape: a chore, a three-tier rules file (alone / ask first / never) with the reason for each line, a task file that starts by reading the rules and defines "done", and a dry-test pass that names where a stranger would have to guess and the sentences that fix it.
+
+
+PROMPT 190
+Your turn. Pick your chore and name the disasters first (the inversion question: the two or three outcomes you'd hate most become the NEVER tier and ask-first candidates). Write the rules file: three tiers (may do alone, ask first, never) sorted by the undo test, plus the standing report rule (every change, every judgment call), named CLAUDE.md at the repo root so it loads automatically. Write the task file: step 1 points at the rules, then steps in order, limits specific to this chore, and a done-means concrete enough to check (it must name an artifact you could inspect). Dry-test it on yourself: read the pair as a careful stranger, find at least one soft spot and tighten it.
+
+What it gives you:
+A rules-and-task pair for tidying the shared card catalog, which drifts because any signed-in user can add sets, parallels, players and cards. The disasters named first: merging two records that are really different (Griffey Sr. and Jr., a base set and its Update set), which moves collectors' copies onto the wrong card; reaching production or touching anyone's copies, prices, wants or trades; and deleting catalog rows. CLAUDE.md (repo root, scoped to task files in tasks/) holds the three tiers. Alone: spaces and the case of manufacturer names in five named columns. Ask first: spelling fixes, merges, renames, year/sport/card number/rookie. Never: deletes, writes to collector tables or prices, anything but the dev branch, schema or code. tasks/catalog-cleanup.md has the steps, the limits (five columns only, stop past 200 fixes) and the done-means: a dated report in cleanup-reports/ with counts, changes, undo statements, flags and judgment calls, and a clean git status. The dry test found six soft spots, each fixed: no connect-and-check step (a worker could reach production through .env.local); no rule for a tie between manufacturer spellings; a trim that creates a duplicate; sets with no cards; a done-means with no file to inspect; and "no code" also forbidding the report.
+
+
+PROMPT 191
+Now I need it answered like this: [image: a submission template with five headings: "My chore (what and why it needs judgment):", "The disasters I named first:", "RULES FILE (pasted):", "TASK FILE (pasted):", "Dry test — the soft spot I caught and the fix:", each followed by "..."]
+
+What it gives you:
+The catalog-cleanup pair from PROMPT 190 rewritten into the lesson's five-part template, ready to paste: the chore and why it takes judgment, the three disasters, CLAUDE.md and tasks/catalog-cleanup.md pasted in full, and the dry test's soft spots with the fix for each. Plain text, no tables.
+
+
+PROMPT 192
+Rename Claude.md to Rules.md
+
+What it gives you:
+The rules file is now Rules.md at the repo root, and tasks/catalog-cleanup.md points at Rules.md in both places it named CLAUDE.md (step 1 and the five-columns limit). Trade-off: Claude Code loads only CLAUDE.md automatically, so Rules.md now loads only because step 1 of the task file says to read it. The worker must be handed the task file, or told to read Rules.md, before starting.
+
+
+PROMPT 193
+Where did the lesson topic say to change the rules file to Claude.md?
+
+What it gives you:
+The source of the CLAUDE.md name: the second step of the "Your turn" exercise (PROMPT 190) says "Add the standing report rule: every change, every judgment call. Name the file CLAUDE.md at your repo root so it loads automatically." The worked example (PROMPT 189) only calls it "the rules file" and gives no filename.
+
+
+PROMPT 194
+I want to add this spreadsheet into my database. Analyze it and tell me what needs to be done to format for use in the application database. Do I have enough credits to do this? '/Users/landersen/Sports Cards Business/Main.xlsx' [first asked without a file; a search found Downloads/Main.csv and Main-2.csv, and the user stopped that and pointed to this workbook]
+
+What it gives you:
+An analysis of Main.xlsx (one sheet, 2,396 card rows from the CardScan app, with a title row above the headers) mapped onto the app's catalog and collection tables, and the list of cleanup it needs first. No schema change is required: AI grade and condition go in condition_notes because the grade column is only for professional slabs (PSA, BGS and so on), and Value goes to variant_prices. What needs work: a manufacturer and a sport for every set (neither column exists), about 15 set-name spelling pairs to merge, 9 rows missing a set or card number, 53 multi-player names to split, 198 repeat rows (114 look identical) to confirm or remove, and the photos, which live on the scanning app's servers. Size: roughly 13,000 rows and a few MB, far inside Neon's free storage. Nothing was imported or changed.
+
+
+PROMPT 195
+We'll come back to this later.
+
+What it gives you:
+The spreadsheet import is parked. Nothing was imported or changed. The analysis (PROMPT 194) stands as the starting point, and a memory note records where it left off so a later session can pick it up.
+
+
+PROMPT 196
+Here is the shape of the lesson plan output: [pasted worked example, "Run #1": the whole loop once on the Trailhead demo app. The handoff: a task file asks for a product-record cleanup pass (tag missing categories from the approved list, flag anything ambiguous, propose but never apply name fixes); send three sentences and take your hands off the keyboard. The watch: it reads both files, then the records ("Found 214 records, 37 missing a category tag"); record #88 is filed as apparel but reads like camping gear, a case the steps never covered, so the rules' "flag anything ambiguous" makes it flag instead of re-tag, a decision noted; near the end it re-counts unprompted (37 missing now 0, total still 214), a self-check, noted. The report: "Tagged 37 records. Flagged 1 for review. Wrote 6 proposed renames to renames.md. Deleted nothing." Four claims, each verified independently: tag count against a fresh query, #88's flag, renames.md with six lines and none applied, 214 records before and after. Believe the report because you checked it, not because it sounded confident.]
+
+What it gives you:
+Nothing was run; the example is noted as the shape for the next exercise. For the catalog-cleanup pair the run would go: hand off with a short instruction pointing at tasks/catalog-cleanup.md, watch and note each decision the steps didn't cover and any self-check, then verify every claim in the report against a fresh query on the dev branch rather than trusting it.
+
+
+PROMPT 197
+Your turn: kick off the run (send the three sentences pointed at your files, then hands off; keep two running lists, decisions and self-checks; stop it only if it heads toward something the rules forbid). Read the report like a skeptic: number every claim. Verify against the data, not the transcript: spot-check changed and untouched records, and walk the rules file line by line. Write the verification note (what was checked and how, what held, what surprised you, the one change before the next run) and paste the report's key lines plus the note.
+
+What it gives you:
+The first run of the catalog-cleanup pair. Dev held only 12 clean seed rows, so (with your OK) known drift was planted there first: messy spaces, a case mismatch, a tie, a duplicate that a trim would create, a Griffey Jr./Jr. pair beside a Sr., empty sets old and new, and a card number with a space. Every table was fingerprinted. The run fixed 5 rows, flagged the rest, deleted nothing, and wrote cleanup-reports/catalog-cleanup-2026-11-10.md. Verification used fresh queries and md5 fingerprints, not the transcript; the undo SQL was tested in a rolled-back transaction. 31 of 32 checks held and the result matched the planted answer key exactly. One claim failed: the flag count ("7") mixed flag lines and flagged rows (there are 6 flags covering 8 rows), which shows the task file never defined what a flag count counts. The planted rows remain on dev. Nothing was committed.
+
+
+PROMPT 198
+Here is the lesson plan output I need: [image: two headings, "Rules check — every 'never' and 'ask first' line: ..." and "One edit I'd make before the next run: ..."]
+
+What it gives you:
+The run's verification rewritten into the lesson's two parts. The rules check takes each of the 5 ask-first and 4 never lines in Rules.md and says how it was confirmed against the data: values, fingerprints, row counts, the undo test and git status. The one edit is to the task file's Counts section: define a flag count as flag entries, add a separate rows-flagged count, and add a done-means check that the entries in the Flags section equal the Flags total.
+
+
+PROMPT 199
+the last prompt was bad. Here is the right one: [image: the full submission template: "The chore (one line)", "The report's claims, numbered", "Verification — what I checked and how: Claim 1: checked by... held / didn't hold", "Decision moment I caught", "Self-check moment I caught", "Rules check — every 'never' and 'ask first' line", "One edit I'd make before the next run"]
+
+What it gives you:
+Replaces PROMPT 198's two-part answer with the full template for the first catalog-cleanup run: the chore in one line, the report broken into 12 numbered claims, how each was checked against the database (fresh queries, table fingerprints, the undo statements run in a rolled-back transaction, git status) with 11 held and the flag count not held, one decision moment (letting the database rule on the trim that would duplicate a set), one self-check (the unprompted re-scan), the rules check line by line, and the one edit (define what the flag count counts).
+
+
+PROMPT 200
+Using Tasks, answer this lesson: [image: "Write and respond — submission", aim for ~200 words. "Your autonomy justification: the chore, its action types, the rung you chose for each, and the two-way defense — what one rung up would cost you, what one rung down would waste. Close with the single sentence you'd say to a skeptic who asks 'why does your AI get to act alone at all?'" Template: "Chore: ... / Action type 1: ... — rung: ... — one rung up costs: ... — one rung down wastes: ... / Action type 2: ... / Skeptic sentence: ..."]
+
+What it gives you:
+An autonomy justification for the catalog-cleanup chore in tasks/catalog-cleanup.md, built from the four tiers in Rules.md. Space trims and majority-case manufacturer fixes act alone and are reported with undo lines; spelling fixes, merges, renames and changes to year, sport, card number or rookie status are proposed only; deletes and writes to collectors' data are never allowed. Each tier is defended both ways (what more freedom would risk, what less would waste), and it closes with a one-sentence answer for a skeptic.
+
+
+PROMPT 201
+The run report. Paste the report your worker handed you (or its best excerpt) — what it says it did, in its own words. Add one line on the chore so readers know what job it was working.
+The rule that mattered most. Quote the one line from your rules file that earned its place — the "never delete," the "flag, don't fix" — and say what it stopped or shaped during the run.
+The decision that surprised you. One thing the worker decided that you didn't see coming — a call it made differently than you would have, right or wrong. Say whether you'd let it make that call again.
+
+What it gives you:
+The three-part write-up for the first catalog-cleanup run, taken from cleanup-reports/catalog-cleanup-2026-11-10.md. The run report is an excerpt in the worker's own words (5 fixes, 7 flags, nothing deleted). The rule that mattered most is the never-delete line in Rules.md, which turned three empty or duplicate records into proposals instead of removals. The surprising decision is that the worker attempted the "Topps Update " trim and let the database's unique constraint reject it, instead of skipping it in advance. The verdict is yes, let it make that call again, with the reason.
+
+
+PROMPT 202
+Explain to me the rationale of the database unique-constraint error
+
+What it gives you:
+A plain explanation of the unique constraint on sets (year, manufacturer, name, sport) from the initial migration: what it guarantees, why trimming "Topps Update " collided with the existing "Topps Update", and why the rules use the database's rejection as the referee for "this would be a duplicate" instead of having the worker check for itself first.
+
+
+PROMPT 203
+list all of my data fields for this application
+
+What it gives you:
+A complete inventory of every table and column in the app's Postgres database, read from the four migrations in migrations/ (initial schema, corpus chunks, accounts and sessions, auth recovery). Fields are grouped by area (users, catalog, collection, wants and trades, admin and pricing, sign-in, RAG corpus) with their types, required/optional status and key rules, plus the three enum value lists and the reporting views built on top.
+
+
+PROMPT 204
+put this in a spreadsheet
+
+What it gives you:
+The data-field inventory from PROMPT 203 as a shared spreadsheet (a Claude Sheets artifact that downloads as .xlsx): one row per column, with the table, area, field name, type, whether it's required, its default, and its rules or allowed values, so the fields can be sorted and filtered.
+
+
+PROMPT 205
+Cannot open the sheet because Claude says "this browser isn't supported"
+
+What it gives you:
+The same 142-field inventory as a regular Excel file, data-fields.xlsx, at the project root, so it opens in Excel, Numbers or Google Sheets without the Claude Sheets page. One sheet, "Fields", with the same eight columns, a frozen header row and filter buttons on every column.
+
+
+PROMPT 206
+Check my MCP server.  I have deleted one server and just using "ducks on the pond" Make sure I did it right.
+
+What it gives you:
+A check of Claude Desktop's MCP setup in claude_desktop_config.json. The ducks-on-the-pond server is set up correctly and works: its node path exists, it starts, lists its two tools, and check_ducks_health returns HTTP 200 with the database ok. But the deletion didn't take: the "filesystem" server (now pointed at the Ducks Corpus folder) is still in the config, so Claude Desktop still starts two servers. Includes how to remove it and the offer to do it.
+
+
+PROMPT 207
+yes, remove the filesystem server
+
+What it gives you:
+The "filesystem" server removed from Claude Desktop's claude_desktop_config.json, after a dated backup of the file, so ducks-on-the-pond is the only MCP server Claude Desktop starts. All other settings in the file are unchanged. Quit Claude Desktop (Cmd+Q) and reopen it for the change to take effect.
+
+
+PROMPT 208
+Read the rules first.  Scaffold the the smallest possible program, beside my app, that give an AI one ability:  Search and read my catalog set records.  Standard menu shape - the one AI assistants read.  Read-only database access.  Show me the menu it will publish and the fields search returns before wiring anything to real data.
+
+What it gives you:
+A new MCP server scaffold in catalog-mcp/ (catalog-mcp.mjs plus a README), next to the app and the existing ducks-on-the-pond server. It is a single Node file with no dependencies. Its menu (the MCP tools/list that AI assistants read) has two read-only tools: search_sets (find sets by name or manufacturer, optionally by year and sport; returns id, year, sport, manufacturer, name) and get_set (one set in full, adding attributes, created_at, parallels and card count). It isn't connected to any database yet. It answers from two made-up sets so the menu and fields can be reviewed first. sets.created_by is never returned. The read-only wiring plan is the Neon dev branch only, READ ONLY transactions, and a SELECT-only role, which needs a migration and your approval.
+
+
+PROMPT 209
+remove 2. get_set entirely.  the menu has one item
+
+What it gives you:
+get_set removed from the catalog MCP scaffold: its menu entry, handler, data lookup and the extra fixture fields it alone used (attributes, created_at, parallels, card count). The menu now publishes one read-only tool, search_sets, which returns count plus each matching set's id, year, sport, manufacturer and name. Calling get_set now gets "Unknown tool". The README says the same. Still fixture data only, not wired to any database.
+
+
+PROMPT 210
+wire it to the dev branch, read-only
+
+What it gives you:
+The catalog MCP server's one tool, search_sets, now searches the real sets table on the Neon dev branch instead of made-up rows. It reads only NEON_BRANCH and DATABASE_URL_UNPOOLED from .env.development.local and refuses to start unless the branch is dev. Read-only is enforced by the database twice: the connection defaults every transaction to read-only, and each query runs inside BEGIN READ ONLY. A probe confirmed the dev connection refuses an UPDATE ("cannot execute UPDATE in a read-only transaction"). Searches return real dev rows (id, year, sport, manufacturer, name). % and _ are matched literally, and created_by is never returned. Not yet added to Claude Desktop, and no database role or migration was changed.
+
+
+PROMPT 211
+add it to Claude Desktop
+
+What it gives you:
+The catalog server added to Claude Desktop's claude_desktop_config.json as "ducks-catalog-sets", next to ducks-on-the-pond, after a dated backup of the file. It runs with /usr/local/bin/node and has no env block, because the server reads the dev-branch connection from .env.development.local itself, so no database credentials are in the Claude config. Launched exactly as Claude Desktop will launch it, from outside the repo, it started, listed its one tool, search_sets, and returned the 2024 Topps Chrome set from the dev branch. Quit Claude Desktop (Cmd+Q) and reopen it to load it.
+
+
+PROMPT 212
+Connect, run, and test the ability. Wire the reviewed program to your real database, start it locally, and call the search with a word you know is in your data. Check the response against your exposed list — right records, right fields, nothing extra riding along.
+Test the refusal. Ask your door to do something your sheet forbids — delete, edit, whatever your NEVER column names. Confirm there's nothing there to run, and save the evidence: this refusal is half of tonight's proof, and tomorrow's whole argument.
+
+What it gives you:
+A repeatable proof run, catalog-mcp/prove.mjs, and its saved evidence, catalog-mcp/evidence-2026-11-13.md: 29 of 29 checks passed. The script starts the server the way Claude Desktop does, on the Neon dev branch, read-only. A search for "Topps" returned 5 sets that match a separate read-only database query record for record, in the same order. Each record had exactly the five exposed fields (id, year, sport, manufacturer, name), and attributes, created_by and created_at never appeared. Every NEVER item in Rules.md was asked for (delete, update, write to copies, wants, trades and profiles, set a price, run SQL, connect elsewhere) and refused as "Unknown tool", because there is nothing on the menu to run. Extra inputs sneaked into search_sets are refused, and a SQL-injection string was matched as plain text and found 0 sets. As a floor under the door, the same connection settings refused DELETE, UPDATE and CREATE TABLE. The ten guarded tables had identical row counts and hashes before and after. One fix along the way: search_sets now refuses inputs that aren't on its menu, where before it silently ignored them.
+
+
+PROMPT 213
+[Image: a lesson template to fill in, with four headings, each followed by "...":
+"My decision sheet (does / does not / shows / withholds):"
+"Review notes — what I caught or confirmed against the sheet:"
+"The successful local call (request + response excerpt):"
+"The refusal test (what I asked for, what happened):"]
+
+What it gives you:
+The four template sections filled in for the catalog MCP server, in plain text ready to paste. The decision sheet lists what the server does (search sets on the dev branch, read-only), what it does not do (any write, any other table, any other database), what it shows (id, year, sport, manufacturer, name) and what it withholds (created_by, attributes, created_at, and everything outside the sets table). The review notes cover what was caught: get_set cut so the menu has one item, extra inputs no longer silently ignored, the injection result labelled harmless rather than refused. The successful call is the "Topps" request with a response excerpt. The refusal test covers delete_set and the other NEVER items, all "Unknown tool", with the database-level refusal and the unchanged fingerprints as backup.
+
+
+PROMPT 214
+commit catalog-mcp and the prompt log
+
+What it gives you:
+One commit on main with the catalog MCP server folder (catalog-mcp.mjs, prove.mjs, README.md and evidence-2026-11-13.md) and prompt.txt through this entry. Nothing else was staged: Rules.md, tasks/, cleanup-reports/ and data-fields.xlsx stay uncommitted. Not pushed.
