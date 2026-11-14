@@ -1870,3 +1870,10 @@ commit catalog-mcp and the prompt log
 
 What it gives you:
 One commit on main with the catalog MCP server folder (catalog-mcp.mjs, prove.mjs, README.md and evidence-2026-11-13.md) and prompt.txt through this entry. Nothing else was staged: Rules.md, tasks/, cleanup-reports/ and data-fields.xlsx stay uncommitted. Not pushed.
+
+
+PROMPT 215
+push it
+
+What it gives you:
+The catalog MCP commit and this log entry pushed to main on GitHub (leejandersen-debug/Ducks-on-the-Pond). The Vercel build ignores catalog-mcp/: it's .mjs outside app/ and not in tsconfig's includes, so the live site is unchanged apart from a fresh deploy of the same app.
