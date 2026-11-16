@@ -1877,3 +1877,17 @@ push it
 
 What it gives you:
 The catalog MCP commit and this log entry pushed to main on GitHub (leejandersen-debug/Ducks-on-the-Pond). The Vercel build ignores catalog-mcp/: it's .mjs outside app/ and not in tsconfig's includes, so the live site is unchanged apart from a fresh deploy of the same app.
+
+
+PROMPT 216
+how do I test this manually on my own to see the actual test?
+
+What it gives you:
+Three ways to run the catalog server test yourself in Terminal and Claude Desktop. (1) Run the full proof, node catalog-mcp/prove.mjs, and open the evidence file it rewrites. (2) Talk to the server directly by piping hand-typed JSON-RPC lines into it: see the menu, run a search, ask for delete_set and watch it refused. (3) Ask Claude Desktop in plain English, including asking it to delete a set, and see that it has no tool for that.
+
+
+PROMPT 217
+commit push
+
+What it gives you:
+The prompt log entries for 216 and 217 committed and pushed to main on GitHub. Only prompt.txt was committed; the untracked files (Rules.md, cleanup-reports/, data-fields.xlsx, tasks/) were left out as in earlier commits.
