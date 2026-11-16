@@ -6,7 +6,7 @@ The shared catalog drifts, because any signed-in user can add sets, parallels, p
 1. Read `Rules.md` at the repo root and follow its "Before anything else" step. Its rules override anything below.
 2. Record the row count of each table: `sets`, `parallels`, `players`, `cards`.
 3. Scan every row of those four tables, once each, in that order.
-4. Fix what the rules allow. Run each fix as its own `update ... where id = ...`, so that a failure affects only that row.
+4. Fix what the rules allow by running `npm run cleanup:dev 2>&1 | grep '^{' > cleanup-reports/chore-run-<YYYY-MM-DD>.log`. Each fix runs in its own transaction, so a failure affects only that row. The script logs every change itself, so don't rewrite or summarize the log lines. Copy them into the report.
 5. Flag what the rules don't allow. Don't improvise.
    - A near-duplicate (for example `Ken Griffey Jr` and `Ken Griffey Jr.`) is a flag, never a merge. Name both ids, and say why they might be different (for example Sr. vs Jr., or a base set vs its Update set).
    - A set with no cards, or a player on no cards, is a flag: "possibly abandoned." Skip anything created in the last 7 days, because someone may still be entering it.
@@ -25,4 +25,4 @@ The file `cleanup-reports/catalog-cleanup-<YYYY-MM-DD>.md` exists, with these se
 4. **Flags:** one line per flag: table, id(s), what's wrong, and the change you propose.
 5. **Judgment calls:** each time you decided against something, and why.
 
-`git status` shows nothing new except that report. Running the scan again finds no fixable problems, only the flagged rows.
+`git status` shows nothing new except that report and its chore-run log. Running the scan again finds no fixable problems, only the flagged rows.

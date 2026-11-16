@@ -1962,3 +1962,68 @@ commit push
 
 What it gives you:
 Prompt log entries 223 to 226 committed and pushed to main on GitHub.
+
+
+PROMPT 227
+Refresh my memory on how we log events and the log keeping practice.
+
+What it gives you:
+A recap of both kinds of logging in the build. (1) App events: lib/log.ts writes one JSON line per event (time, level, event name, details), and LOG_LEVEL sets how detailed it gets. Sensitive fields and values (passwords, tokens, emails, card numbers, connection strings) are blanked out automatically. Every request gets request_start and request_done lines, plus request_failed on errors. Named events cover sign-in, sign-up, password reset, email, catalog, trades, search and health. The rule is to log references (IDs, event names, statuses), never content. (2) The prompt log: every prompt goes into prompt.txt as a numbered entry with the prompt verbatim and a "What it gives you" paragraph, committed when you say "commit push".
+
+
+PROMPT 228
+show me what is in log.debug
+
+What it gives you:
+What log.debug is and where it's used. In lib/log.ts it's a one-liner: it hands the event to the shared write() function at level "debug", the lowest level. It's only written when the minimum level is debug, which is the default in development (npm run dev). Production (info) skips it. The whole app has exactly one debug call: log.debug("health.ok") in app/api/health/route.ts, line 12. It fires when /api/health reaches the database successfully: noise on a healthy system, useful while developing.
+
+
+PROMPT 229
+did we do this in a previous prompt?  Item #1 — my wiring and re-run on the Trailhead demo store, so you can see the shape.
+
+"The direction. I gave Claude Code the spec in three sentences: "Extend the existing structured logging so every data change in the cleanup chore's path writes one log line: timestamp, the exact record touched, the field with its before and after values, and the author of the change. The logging goes in the functions that perform the changes — not in the task file, not as an instruction to the AI. Tag lines from the chore with the author chore-run."
+
+What it gives you:
+No, this hasn't been done yet. A search of prompt.txt and the code finds no "chore-run" tag and no before/after change logging. Today the cleanup chore has no logged change path. Its fixes were run by throwaway scripts in the session scratchpad, and the only record of what changed is the cleanup report (with its undo SQL), which the AI wrote itself. The app's logger (lib/log.ts) only logs references, e.g. set_created with an id, never a field's old and new values. Doing the lesson means adding a change function in the repo that every cleanup write goes through, which logs one line per change, and pointing Rules.md/the task at it.
+
+
+PROMPT 230
+yes, build it and re-run on dev
+
+What it gives you:
+Change logging built into the cleanup chore and proven on the Neon dev catalog. scripts/lib/catalog-change.mjs has changeField(), the only function the chore uses to change data. It accepts only the five allowed columns. It locks and reads the old value, updates the row in its own transaction, and only after the commit writes one line through the app's own logger (lib/log.ts): event catalog.change with timestamp, table, id, field, before, after and author. A change the database rejects logs a catalog.change_rejected warning instead. scripts/catalog-cleanup.mjs (npm run cleanup:dev, with --dry-run) finds the whitespace and manufacturer-case fixes and makes them with author "chore-run". Re-run: six problems were planted through the same function (author "lesson-seed"). The chore fixed 5, each with its own log line, and refused 1 that would have duplicated "Topps Update", which was logged and flagged. The planted name was then put back, and a dry run shows 0 changes. Evidence: cleanup-reports/chore-run-2026-11-15.log. Rules.md and the task now require the script and never a hand-written update.
+
+
+PROMPT 231
+(pasted lesson steps) Your turn. Direct the build: give Claude Code the spec in your own words. Every data change in the chore's path writes one line with the four facts, logging lives in the code that makes the change, and chore touches carry their own author label. Then review the diff like you reviewed the door: does what got built match what you decided? Before-and-after on the line, no worker-kept journal, no change path left unlogged. Re-run the chore: same prompt as Monday (rules file, task file, report). Let it work. Read the logbook back: open the log and find the run. Pick at least three lines and check them against the actual data, the way you checked Monday's report, except now you're checking receipts, not a summary. Look for your rules in the record: proposals without applies, flags where it was uncertain, and the absences that should be absent. Submit the evidence: paste the log excerpt covering a real stretch of the run, plus two or three sentences on what you checked and what the record showed. QUALITY CHECK: real run against real data; all four facts on every line; at least three lines checked directly against the database; at least one rules-file promise visible in the record; note where the logging lives in the code.
+
+What it gives you:
+The lesson done end to end on the Neon dev catalog. Review: the chore path has exactly one write (the update at scripts/lib/catalog-change.mjs:37), and the log line is written at line 47 after the commit, or at line 42 for a rejection. The chore can't change data without a log line. Seven problems were planted through the same function as "lesson-seed". The chore then ran per the task file: guard, counts, scan, npm run cleanup:dev. It made 4 changes and logged 1 database rejection, all as "chore-run", saved in cleanup-reports/chore-run-2026-11-15b.log. Every line was checked against the database: the 4 changes hold their "after" value and the rejected row still holds its "before". The proposals and flags ("Tops", the UPPER DECK case tie, abandoned rows) have no log line and are unchanged in the data. Report: cleanup-reports/catalog-cleanup-2026-11-15.md. A submission draft was written: the log excerpt plus three sentences. Dev still holds the three planted problems that are open flags ("Tops", "UPPER DECK", parallel "Base ").
+
+
+PROMPT 232
+Here is the lesson submission questions: (image) "The log excerpt (paste a real stretch of the run): … What I checked against the database, and what I found: … Where my rules show up in the record: … Where the logging lives in the code: …"
+
+What it gives you:
+The submission rewritten to fit the lesson's four prompts, ready to paste. (1) The five real log lines from the 2026-11-15 chore run (cleanup-reports/chore-run-2026-11-15b.log). (2) All five lines checked against the dev database: the four changes hold their "after" values, the rejected parallel still holds its "before", and the row counts are unchanged at 38. (3) The rules in the record: the rejected trim was flagged, not forced; the case tie, the "Tops" misspelling (ask first) and the abandoned rows (never delete) have no change line and are unchanged. (4) The logging lives in changeField() in scripts/lib/catalog-change.mjs. The update is at line 37 and the log line at line 47, written only after the commit, or line 42 for a rejection. It's the chore's only write path.
+
+
+PROMPT 233
+what file is my logbook and tell me how I can view it
+
+What it gives you:
+Where the logbook is and how to open it. The chore run's logbook is cleanup-reports/chore-run-2026-11-15b.log, with one JSON line per change. cleanup-reports/chore-run-2026-11-15.log is the earlier build demo. Ways to view it: open it in the editor or with Finder Quick Look; cat it in Terminal; or pretty-print it with jq or a one-line Node command that shows time, author, record, field and before → after. The lines aren't stored anywhere else: the script prints them, and the run saves them into this file.
+
+
+PROMPT 234
+We have cleanup reports, but what reports daily issues?
+
+What it gives you:
+The honest answer: nothing reports daily issues yet. There is no cron in vercel.json, no CI workflow, no monitor and no alert. What exists is all pull, not push: the JSON event logs in Vercel's log view (request_failed, sign_in_throttled, email_failed and others), /api/health when someone calls it, the admin page's serial-conflict queue, and the cleanup chore when it's run by hand. serial_conflicts.admin_notified_at was planned for admin emails but never wired up. Suggested next step: a daily Vercel Cron route that gathers the day's issues (open serial conflicts, database health, catalog drift from a read-only scan) and emails the admin through the existing lib/email.ts. Optionally add a Vercel alert or uptime monitor on /api/health for outages between digests.
+
+
+PROMPT 235
+commit push
+
+What it gives you:
+The logged cleanup chore committed and pushed to main: scripts/lib/catalog-change.mjs (changeField, the logged change path), scripts/catalog-cleanup.mjs and the npm run cleanup:dev script, the updated Rules.md and task file, the 2026-11-15 cleanup report, both chore-run logs, and prompt log entries 227 to 235.

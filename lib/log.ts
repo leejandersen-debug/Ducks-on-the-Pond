@@ -1,4 +1,4 @@
-// Structured logger: one JSON line per call, e.g.
+show msho// Structured logger: one JSON line per call, e.g.
 //   {"ts":"2026-10-24T15:04:05.123Z","level":"info","event":"health.check","details":{"db":"ok"}}
 // LOG_LEVEL (debug | info | warn | error) sets the minimum level written.
 // Defaults: debug in development, info everywhere else.
