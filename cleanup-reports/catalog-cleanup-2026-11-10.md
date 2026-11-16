@@ -60,3 +60,39 @@ update cards     set title = ' Rookie Debut '     where id = 'c711a748-c6d7-4cbb
 - **Base parallels of empty sets:** they have no variants. The rules cover abandoned sets and players, not parallels, so they weren't flagged separately.
 - **Self-check:** after the fixes I ran the scan again. Counts were unchanged at 41, and the only remaining fixable row was the rejected "Topps Update ", which is already flagged.
 - **Working scripts:** the scan and update scripts were kept outside the repo, in the session scratchpad. The only file written in the repo is this report.
+
+## 6. Follow-up: flags resolved on 2026-11-15
+
+The user approved the proposals. The fixes ran on the Neon dev branch, with the guard script passing first, in one transaction. Each statement had to touch exactly the expected number of rows or everything rolled back. Nothing outside the catalog referenced any affected row: no copies, wants or trades.
+
+| Flag | Decision | Applied |
+|---|---|---|
+| 1 | Duplicate set | Deleted the empty set `7e114c88…` ("Topps Update ") and its empty Base parallel `971e20d4-5914-451c-b3cf-e4ee853ad9fa`. Set `ee2abc1b…` remains. |
+| 2 | Spelling "Upper Deck" | Set `0b2169d6…` manufacturer `"upper deck"` → `"Upper Deck"` |
+| 3 | Rename, keep set | Set `e88b7033…` manufacturer `"Tops"` → `"Topps"`. The set and its Base parallel are kept. |
+| 4 | Keep | Player `05d0449e…` ("Javier Lopez") left unchanged |
+| 5 | Same person, merge | The 2 card_players rows on `17113280…` ("Ken Griffey Jr") moved to `10b932c3…` ("Ken Griffey Jr."), then `17113280…` deleted. Cards affected: `bfc51985-3af8-4744-9bf3-b222e9b8428a` and `c711a748-c6d7-4cbb-b99e-e1651288100a`. "Ken Griffey Sr." untouched. |
+| 6 | Trim | Card `294ea93b…` card_number `" 42"` → `"42"` |
+
+Counts after: sets 8 (was 9), parallels 12 (was 13), players 8 (was 9), cards 10 (unchanged).
+
+### Undo
+
+```sql
+begin;
+update cards set card_number = ' 42' where id = '294ea93b-8ad2-48af-bd5c-b6a790c4ca7f';
+insert into players (id, full_name, attributes, created_by, created_at)
+  values ('17113280-02d7-4627-95d2-c4c4d8c8e491', 'Ken Griffey Jr', '{}', null, '2026-10-12T02:19:21.601Z');
+update card_players set player_id = '17113280-02d7-4627-95d2-c4c4d8c8e491'
+  where player_id = '10b932c3-1821-447e-8c90-efd085d05505'
+    and card_id in ('bfc51985-3af8-4744-9bf3-b222e9b8428a', 'c711a748-c6d7-4cbb-b99e-e1651288100a');
+update sets set manufacturer = 'Tops'       where id = 'e88b7033-bc08-4467-8231-b574513ba22c';
+update sets set manufacturer = 'upper deck' where id = '0b2169d6-c0a6-4381-893c-c95abfec039f';
+insert into sets (id, year, manufacturer, name, sport, created_at)
+  values ('7e114c88-07ba-4bef-84cf-91f65ecd398a', 2017, 'Topps', 'Topps Update ', 'baseball', '2026-10-12T02:19:21.601Z');
+insert into parallels (id, set_id, name, print_run, attributes, created_by, created_at)
+  values ('971e20d4-5914-451c-b3cf-e4ee853ad9fa', '7e114c88-07ba-4bef-84cf-91f65ecd398a', 'Base', null, '{}', null, '2026-10-12T02:19:21.601Z');
+commit;
+```
+
+The undo leaves out sets columns that weren't read, such as `created_by`. Those take their defaults.

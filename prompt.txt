@@ -1898,3 +1898,17 @@ Check to make sure there is no sensitive data in these 4 files and if there isn'
 
 What it gives you:
 A check of Rules.md, tasks/catalog-cleanup.md, cleanup-reports/catalog-cleanup-2026-11-10.md and data-fields.xlsx for secrets and personal data: no passwords, keys, tokens, connection strings or email addresses. The only hits were column names in the data dictionary (password_hash, token_hash, auth_tokens) and mentions of the Neon dev branch. They describe the schema and hold no data. The spreadsheet's file metadata names only "openpyxl" as its author. All four files and this log entry are committed and pushed to main.
+
+
+PROMPT 219
+apply the flagged fixes from the cleanup report
+
+What it gives you:
+The cleanup report's flagged proposals applied to the Neon dev catalog, after two questions: the 2017 Bowman set and Javier Lopez are both kept. In one all-or-nothing transaction: the empty duplicate "Topps Update " set and its Base parallel are gone, "upper deck" became "Upper Deck", "Tops" became "Topps", the two Ken Griffey Jr records were merged into "Ken Griffey Jr." (now on 3 cards; Sr. untouched), and card number " 42" became "42". The report has a new section 6 listing each change and the undo SQL. Production was not touched.
+
+
+PROMPT 220
+commit push
+
+What it gives you:
+The cleanup report's new section 6 (the resolved flags and their undo SQL) and prompt log entries 219 and 220 committed and pushed to main on GitHub.
