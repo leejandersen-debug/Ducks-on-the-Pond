@@ -1912,3 +1912,17 @@ commit push
 
 What it gives you:
 The cleanup report's new section 6 (the resolved flags and their undo SQL) and prompt log entries 219 and 220 committed and pushed to main on GitHub.
+
+
+PROMPT 221
+run the cleanup scan again to confirm nothing's left
+
+What it gives you:
+A read-only re-scan of the Neon dev catalog confirming the cleanup is complete. Counts are sets 8, parallels 12, players 8, cards 10. It found no fixable whitespace or case problems, no stray spaces in other columns, no near-duplicate players, sets or parallels, and no near-miss manufacturer spellings. The only rows still showing are the two you chose to keep (the empty 2017 Topps Bowman set and Javier Lopez). The 2025 Topps "Series 2" set is still in its 7-day grace window, and it becomes flaggable as possibly abandoned on 2026-11-18 if it still has no cards.
+
+
+PROMPT 222
+commit push
+
+What it gives you:
+Prompt log entries 221 and 222 committed and pushed to main on GitHub.
