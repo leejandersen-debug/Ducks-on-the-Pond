@@ -1926,3 +1926,39 @@ commit push
 
 What it gives you:
 Prompt log entries 221 and 222 committed and pushed to main on GitHub.
+
+
+PROMPT 223
+(pasted lesson steps) First, open the config. Claude menu → Settings → Developer → Edit Config. It's the same claude_desktop_config.json you edited in Week 9 — and if you scoped the filesystem server back then, your old entry is still sitting in it. Leave it alone. You're adding a sibling, not replacing anything.
+
+Second, add your door's entry. Inside mcpServers, a new entry with a name you'll recognize in a menu, the command that starts your server, and the absolute path to it. For a Node server that looks roughly like:
+
+"my-app": {
+  "command": "node",
+  "args": ["/absolute/path/to/your/server.js"]
+}
+
+What it gives you:
+A check that both steps were already done, with no edits needed. claude_desktop_config.json is valid JSON. Its mcpServers block holds the earlier ducks-on-the-pond entry, left untouched, and next to it a ducks-catalog-sets entry: command /usr/local/bin/node and the absolute path to catalog-mcp/catalog-mcp.mjs. There was no filesystem server entry in the file. Launching the server exactly as Claude Desktop does, from /, it answered the handshake and listed its one tool, search_sets. Next: quit Claude Desktop fully (Cmd+Q) and reopen it so it loads the server.
+
+
+PROMPT 224
+In the ducks-mcp.mjs, which line says what fields are displayed during a search?
+
+What it gives you:
+In mcp-server/ducks-mcp.mjs, line 67 decides what each search result shows: its number, source document, section (if any) and similarity score, with the passage text on the next line. Line 62/64 adds the header line above the results. For the catalog sets server (catalog-mcp/catalog-mcp.mjs), the equivalent is line 93, the SQL select that picks id, year, sport, manufacturer and name. Line 45 notes that created_by is deliberately left out.
+
+
+PROMPT 225
+(pasted lesson exercise) Write and respond. Aim for ~120 words — short and precise beats long and vague. Your scoped-permissions note: what your door can do (each tool, one line), what it deliberately cannot (each withheld ability), and one honest sentence of why for each refusal — naming the worst case the absence prevents, not just "for security."
+(image) Example layout: "CAN: search_products — reads product records from the store database, nothing else. DELIBERATELY CANNOT: Edit — because … Delete — because … (one honest worst-case sentence per refusal)"
+
+What it gives you:
+A ~120-word scoped-permissions note for the ducks-catalog-sets server, in the example's layout. CAN: search_sets, which reads set records from the Neon dev catalog and nothing else. DELIBERATELY CANNOT: create, edit, delete, see who created a set, read any other table, or reach production, each with the worst case its absence prevents.
+
+
+PROMPT 226
+commit push
+
+What it gives you:
+Prompt log entries 223 to 226 committed and pushed to main on GitHub.
