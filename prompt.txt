@@ -1891,3 +1891,10 @@ commit push
 
 What it gives you:
 The prompt log entries for 216 and 217 committed and pushed to main on GitHub. Only prompt.txt was committed; the untracked files (Rules.md, cleanup-reports/, data-fields.xlsx, tasks/) were left out as in earlier commits.
+
+
+PROMPT 218
+Check to make sure there is no sensitive data in these 4 files and if there isn't, commit and push
+
+What it gives you:
+A check of Rules.md, tasks/catalog-cleanup.md, cleanup-reports/catalog-cleanup-2026-11-10.md and data-fields.xlsx for secrets and personal data: no passwords, keys, tokens, connection strings or email addresses. The only hits were column names in the data dictionary (password_hash, token_hash, auth_tokens) and mentions of the Neon dev branch. They describe the schema and hold no data. The spreadsheet's file metadata names only "openpyxl" as its author. All four files and this log entry are committed and pushed to main.
