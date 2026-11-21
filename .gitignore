@@ -11,3 +11,6 @@ chroma-data/
 
 # macOS folder metadata
 .DS_Store
+
+# Prompt log: local document only, never committed
+prompt.txt
