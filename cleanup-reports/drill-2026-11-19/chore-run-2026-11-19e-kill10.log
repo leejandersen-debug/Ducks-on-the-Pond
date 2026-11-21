@@ -1,0 +1,1 @@
+{"ts":"2026-11-20T01:39:10.282Z","level":"warn","event":"catalog.unreadable_skipped","details":{"table":"sets","id":"d22cb690-2f24-49b3-8f45-a7cc2eb7fac2","field":"manufacturer","value":"  ##~!  ","author":"chore-run"}}

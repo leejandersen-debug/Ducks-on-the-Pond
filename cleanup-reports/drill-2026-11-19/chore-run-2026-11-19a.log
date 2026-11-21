@@ -1,0 +1,3 @@
+{"ts":"2026-11-20T01:35:00.644Z","level":"info","event":"catalog.change","details":{"table":"players","id":"057265a2-41f1-41ef-910a-962476f6466c","field":"full_name","before":" Shohei Ohtani","after":"Shohei Ohtani","author":"chore-run"}}
+{"ts":"2026-11-20T01:35:01.005Z","level":"info","event":"catalog.change","details":{"table":"players","id":"37dec291-2936-4423-baf1-66d0067dafd6","field":"full_name","before":"Mike Piazza ","after":"Mike Piazza","author":"chore-run"}}
+{"ts":"2026-11-20T01:35:01.359Z","level":"info","event":"catalog.change","details":{"table":"players","id":"8b5b7fad-d6f6-46cb-a924-01e95b9528d5","field":"full_name","before":"Aaron  Judge","after":"Aaron Judge","author":"chore-run"}}

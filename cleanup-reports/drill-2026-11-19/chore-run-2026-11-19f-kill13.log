@@ -1,0 +1,3 @@
+{"ts":"2026-11-20T01:40:57.815Z","level":"warn","event":"catalog.unreadable_skipped","details":{"table":"sets","id":"d22cb690-2f24-49b3-8f45-a7cc2eb7fac2","field":"manufacturer","value":"  ##~!  ","author":"chore-run"}}
+{"ts":"2026-11-20T01:40:58.735Z","level":"warn","event":"catalog.change_rejected","details":{"table":"parallels","id":"3cda0f30-7aa6-4e6d-a4e1-85f406c3e3ce","field":"name","before":"Base ","after":"Base","author":"chore-run","constraint":"parallels_set_id_name_key"}}
+{"ts":"2026-11-20T01:40:59.096Z","level":"info","event":"catalog.change_committing","details":{"table":"players","id":"37dec291-2936-4423-baf1-66d0067dafd6","field":"full_name","before":"Mike Piazza ","after":"Mike Piazza","author":"chore-run"}}

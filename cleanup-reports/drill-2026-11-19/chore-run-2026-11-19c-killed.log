@@ -1,0 +1,5 @@
+{"ts":"2026-11-20T01:36:34.101Z","level":"info","event":"catalog.change","details":{"table":"sets","id":"0b2169d6-c0a6-4381-893c-c95abfec039f","field":"name","before":"MVP ","after":"MVP","author":"chore-run"}}
+{"ts":"2026-11-20T01:36:34.465Z","level":"info","event":"catalog.change","details":{"table":"sets","id":"64dc9b8b-5bb0-4fb2-abb4-b887bd7e762f","field":"name","before":"Series 2 ","after":"Series 2","author":"chore-run"}}
+{"ts":"2026-11-20T01:36:34.824Z","level":"info","event":"catalog.change","details":{"table":"sets","id":"798d98ee-df91-4a80-83f1-607b43ae2cfd","field":"name","before":"Chrome ","after":"Chrome","author":"chore-run"}}
+{"ts":"2026-11-20T01:36:35.179Z","level":"info","event":"catalog.change","details":{"table":"sets","id":"da4137c6-3ecb-41c2-a9cf-a63d0c5966fb","field":"name","before":"Encore ","after":"Encore","author":"chore-run"}}
+{"ts":"2026-11-20T01:36:35.535Z","level":"info","event":"catalog.change","details":{"table":"sets","id":"e88b7033-bc08-4467-8231-b574513ba22c","field":"name","before":"Bowman ","after":"Bowman","author":"chore-run"}}

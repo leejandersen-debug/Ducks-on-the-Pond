@@ -1,0 +1,1 @@
+{"ts":"2026-11-20T01:35:49.131Z","level":"info","event":"catalog.change","details":{"table":"players","id":"8b5b7fad-d6f6-46cb-a924-01e95b9528d5","field":"full_name","before":"Aaron  Judge","after":"Aaron Judge","author":"chore-run"}}

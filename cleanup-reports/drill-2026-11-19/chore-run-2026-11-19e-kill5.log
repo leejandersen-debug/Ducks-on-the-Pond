@@ -1,0 +1,2 @@
+{"ts":"2026-11-20T01:38:52.182Z","level":"warn","event":"catalog.unreadable_skipped","details":{"table":"sets","id":"d22cb690-2f24-49b3-8f45-a7cc2eb7fac2","field":"manufacturer","value":"  ##~!  ","author":"chore-run"}}
+{"ts":"2026-11-20T01:38:53.055Z","level":"warn","event":"catalog.change_rejected","details":{"table":"parallels","id":"3cda0f30-7aa6-4e6d-a4e1-85f406c3e3ce","field":"name","before":"Base ","after":"Base","author":"chore-run","constraint":"parallels_set_id_name_key"}}

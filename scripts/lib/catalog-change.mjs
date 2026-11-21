@@ -14,8 +14,13 @@ const EDITABLE = {
   cards: ["title"],
 };
 
-// Changes one field of one row, in its own transaction, and logs it once committed.
-// The line is written only after the commit, so the log never shows a change that didn't happen.
+// Changes one field of one row, in its own transaction, and logs it in two steps:
+//   catalog.change_committing  written just before the commit: unconfirmed, may or may not land
+//   catalog.change             written once the commit is acknowledged: confirmed
+// A process killed between the two leaves a committing line with no confirmation: check that
+// one record. (Logging only after the commit missed changes when the process died after Postgres
+// committed but before the acknowledgement arrived; logging only before it would claim changes
+// that never landed.)
 // Returns { changed: true, before, after }, { changed: false, before } when the value
 // already matches, or { rejected: true, code, constraint } when the database refuses it.
 export async function changeField(client, { table, id, field, to, author }) {
@@ -35,6 +40,7 @@ export async function changeField(client, { table, id, field, to, author }) {
       return { changed: false, before };
     }
     await client.query(`update ${table} set ${field} = $1 where id = $2`, [to, id]);
+    log.info("catalog.change_committing", { table, id, field, before, after: to, author });
     await client.query("commit");
   } catch (err) {
     await client.query("rollback");
