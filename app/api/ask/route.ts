@@ -1,5 +1,6 @@
+import { createHash, timingSafeEqual } from "node:crypto";
 import Anthropic from "@anthropic-ai/sdk";
-import { AnswerError, TOP_K, answerFromContext } from "@/lib/grounding";
+import { AnswerError, TOP_K, answerFromContext, checkpoint } from "@/lib/grounding";
 import { log } from "@/lib/log";
 import { MAX_QUERY_CHARS, retrievePassages, searchUnavailable } from "@/lib/search";
 import { currentUserId } from "@/lib/session";
@@ -10,10 +11,22 @@ import { currentUserId } from "@/lib/session";
 // The engine from the rig (scripts/ask.mjs), moved unchanged: the top 3 chunks of the Ducks Corpus
 // from doc_chunks, then Claude answers from those chunks only (lib/grounding.ts). A refusal
 // ("I don't know") is a normal 200 reply with refused: true. Spec: ask-spec.md.
+// Output checkpoint: before the reply, an answer whose citation matches no retrieved chunk is
+// turned into "I don't know" (refused: true, blocked: true) and logged as ask.blocked.
 
 let client: Anthropic | null = null; // one per server instance; reads ANTHROPIC_API_KEY
 
 const fail = (status: number, error: string) => Response.json({ error }, { status });
+
+// Checkpoint drill: proves the checkpoint on the live site. Only when ASK_DRILL_TOKEN is set in the
+// environment AND the request's x-ask-drill header matches it, the model's citation is swapped for
+// one that was never retrieved, so the checkpoint must stop it. It can only make an answer worse,
+// never reveal anything. Remove ASK_DRILL_TOKEN to switch the drill off.
+const digest = (s: string) => createHash("sha256").update(s).digest();
+function isDrill(request: Request) {
+  const want = process.env.ASK_DRILL_TOKEN, got = request.headers.get("x-ask-drill");
+  return !!want && !!got && timingSafeEqual(digest(want), digest(got));
+}
 
 export async function POST(request: Request) {
   let question: unknown;
@@ -59,6 +72,25 @@ export async function POST(request: Request) {
     return fail(502, "Couldn't get an answer right now.");
   }
 
+  const drill = isDrill(request);
+  if (drill && !result.refused) {
+    result = { ...result, source: { document: "drill.txt", section: "NOT RETRIEVED" }, citationMatchesContext: false };
+  }
+
+  // The output checkpoint: nothing below sees an answer whose citation isn't in the retrieved context.
+  const cited = result.source ? `${result.source.document} · ${result.source.section}` : null;
+  const checked = checkpoint(result);
+  if (checked.blocked) {
+    log.warn("ask.blocked", {
+      question: q,
+      reason: checked.blocked,
+      cited,
+      retrieved: passages.map((p) => `${p.id} (${p.similarity})`),
+      drill,
+    });
+  }
+  result = checked.result;
+
   // Ids and scores only: never the key, the prompt or the passage text.
   log.info("ask.query", {
     question: q,
@@ -66,12 +98,14 @@ export async function POST(request: Request) {
     refused: result.refused,
     source: result.source ? `${result.source.document} · ${result.source.section}` : null,
     citationMatchesContext: result.refused ? null : result.citationMatchesContext,
+    blocked: !!checked.blocked,
   });
 
   return Response.json({
     question: q,
     answer: result.answer,
     refused: result.refused,
+    blocked: !!checked.blocked,
     source: result.source,
     passages: passages.map((p) => ({ id: p.id, document: p.source, section: p.section, similarity: p.similarity })),
   });

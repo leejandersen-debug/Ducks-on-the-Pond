@@ -79,6 +79,21 @@ export async function answerFromContext(client: Anthropic, question: string, chu
     answer: refused ? DONT_KNOW : parsed.answer,
     refused,
     source,
-    citationMatchesContext: !!source && chunks.some((c) => c.document === source.document && c.section === source.section),
+    citationMatchesContext: citesRetrieved(source, chunks),
+  };
+}
+
+export function citesRetrieved(source: GroundedAnswer["source"], chunks: Pick<ContextChunk, "document" | "section">[]): boolean {
+  return !!source && chunks.some((c) => c.document === source.document && c.section === source.section);
+}
+
+// The output checkpoint, run on every answer before anyone sees it. An answer whose cited source
+// isn't one of the retrieved chunks can't be shown to come from the corpus, so it becomes the
+// normal refusal. `blocked` carries the reason so the caller can log it (ask.blocked).
+export function checkpoint(result: GroundedAnswer): { result: GroundedAnswer; blocked: string | null } {
+  if (result.refused || result.citationMatchesContext) return { result, blocked: null };
+  return {
+    result: { answer: DONT_KNOW, refused: true, source: null, citationMatchesContext: false },
+    blocked: "citation_not_in_context",
   };
 }

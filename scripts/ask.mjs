@@ -14,7 +14,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { ChromaClient } from "chromadb";
 import { DefaultEmbeddingFunction } from "@chroma-core/default-embed";
-import { AnswerError, TOP_K, answerFromContext, buildContext } from "../lib/grounding.ts";
+import { AnswerError, TOP_K, answerFromContext, buildContext, checkpoint } from "../lib/grounding.ts";
 
 const COLLECTION = "ducks";
 const EMBED_MODEL = "Xenova/all-MiniLM-L6-v2"; // must match the model the chunks were stored with
@@ -75,12 +75,13 @@ try {
   process.exit(1);
 }
 
-// 4. Print the answer, then the source line.
+// 4. The output checkpoint (same as the app): a citation that matches no retrieved chunk becomes
+// "I don't know" before it's printed.
+const checked = checkpoint(result);
+if (checked.blocked) console.log(`(blocked: ${checked.blocked}; cited ${result.source.document} · ${result.source.section})`);
+result = checked.result;
+
+// 5. Print the answer, then the source line.
 console.log(result.answer);
-if (result.refused) {
-  console.log("Source: none (the retrieved context doesn't contain the answer)");
-} else {
-  console.log(`Source: ${result.source.document} · ${result.source.section}`);
-  // Guard against a citation that doesn't match any chunk that was actually retrieved.
-  if (!result.citationMatchesContext) console.log("(warning: that source doesn't match any retrieved chunk)");
-}
+if (result.refused) console.log("Source: none (the retrieved context doesn't contain the answer)");
+else console.log(`Source: ${result.source.document} · ${result.source.section}`);
