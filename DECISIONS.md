@@ -37,3 +37,5 @@ A React Native mobile app is planned later.
 **2026-10-25: Chroma for the lesson only.** `chromadb` was installed for the RAG-corpus lesson as an exception to Postgres-only. The app stays on Postgres for everything, including vector search through pgvector on Neon. App features don't get built on Chroma. Removing the Chroma leftovers (`lib/chroma.ts`, the local store and the packages) is still an open call.
 
 **2026-10-26: Production migrations need approval.** The hold on production schema deploys was lifted, but each production migration still needs approval before it runs.
+
+**2026-11-20: The live catalog door is scoped to the caller's own collection.** When `catalog-mcp` is deployed, its credential maps to one account, and its search reads only that account's own copies (`owner_id = app_user()`, as `inventory_report` does). Callers have no parameter that can name another account. The scope is filtered explicitly rather than left to RLS alone, because RLS also lets anyone read other users' tradeable copies and lets admins read everything.

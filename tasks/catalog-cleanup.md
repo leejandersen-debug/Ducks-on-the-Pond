@@ -6,7 +6,7 @@ The shared catalog drifts, because any signed-in user can add sets, parallels, p
 1. Read `Rules.md` at the repo root and follow its "Before anything else" step. Its rules override anything below.
 2. Record the row count of each table: `sets`, `parallels`, `players`, `cards`.
 3. Scan every row of those four tables, once each, in that order.
-4. Fix what the rules allow by running `npm run cleanup:dev 2>&1 | grep '^{' > cleanup-reports/chore-run-<YYYY-MM-DD>.log`. Each fix runs in its own transaction, so a failure affects only that row. The script logs every change itself, so don't rewrite or summarize the log lines. Copy them into the report.
+4. Fix what the rules allow by running `npm run cleanup:prod 2>&1 | grep '^{' > cleanup-reports/chore-run-<YYYY-MM-DD>.log`. Each fix runs in its own transaction, so a failure affects only that row. The script logs every change itself, so don't rewrite or summarize the log lines. Copy them into the report.
 5. Flag what the rules don't allow. Don't improvise.
    - A near-duplicate (for example `Ken Griffey Jr` and `Ken Griffey Jr.`) is a flag, never a merge. Name both ids, and say why they might be different (for example Sr. vs Jr., or a base set vs its Update set).
    - A set with no cards, or a player on no cards, is a flag: "possibly abandoned." Skip anything created in the last 7 days, because someone may still be entering it.

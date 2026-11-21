@@ -2027,3 +2027,136 @@ commit push
 
 What it gives you:
 The logged cleanup chore committed and pushed to main: scripts/lib/catalog-change.mjs (changeField, the logged change path), scripts/catalog-cleanup.mjs and the npm run cleanup:dev script, the updated Rules.md and task file, the 2026-11-15 cleanup report, both chore-run logs, and prompt log entries 227 to 235.
+
+
+PROMPT 236
+how do I log in
+
+What it gives you:
+How to log in to Claude Code: type /login in the prompt and follow the browser sign-in. You ran /login and it reported "Login successful", so you're signed in. Use /logout to sign out or switch accounts, and /status to check which account is active.
+
+
+PROMPT 237
+Shape of today's lesson exercise (understand only, do not act): Force both failures, catch one bad output. Predict, break, watch, check the log and the data, fix anything ugly, submit the evidence. Three tests on your own chore: garbage record, mid-run kill, checkpoint review. Worked example included.
+
+What it gives you:
+A restatement of the exercise shape, mapped to this app's catalog cleanup chore, with nothing run or changed yet.
+
+
+PROMPT 238
+Your turn: write three expect lines first, then Test 1 (garbage record: save original, mangle a field, run the normal chore, inspect log and record), Test 2 (kill mid-run cold, inspect data and log's last line vs last landed change), Test 3 (checkpoint: grade at least three proposed changes against records known cold before applying). Fix anything that failed ugly, re-run that test, then restore the mangled record.
+
+What it gives you:
+The failure drill, run on the dev branch and written up in cleanup-reports/failure-drill-2026-11-19.md with all logs in cleanup-reports/drill-2026-11-19/. Test 3: of four proposals, three player trims were right and the Base trim was rejected as a duplicate the dry run had shown as clean. Test 1 failed first (garbage passed over silently) and passed after the chore learned to flag and skip unreadable values. Logger warn lines were also missing from the logbook (fixed). Test 2: the first kill passed, but probing found a change that landed with no log line (killed between the Postgres commit and its acknowledgement), and that passed after a two-step committing/confirmed receipt: 34 more kills, 0 unlogged, 0 phantom. Fleer restored, seeded names tidied back, Rules.md updated.
+
+
+PROMPT 239
+Answer the submission questions in text format: my three expect lines; Test 1 garbage record (log excerpt + data check); Test 2 mid-run kill (data trail + log trail); Test 3 checkpoint (what I graded, what it caught); what failed ugly, the fix, and the re-run.
+
+What it gives you:
+Plain-text answers to the five submission prompts, drawn from cleanup-reports/failure-drill-2026-11-19.md and the drill logs, with short log excerpts and the data checks.
+
+
+PROMPT 240
+Shape of the break-even verdict exercise (read only, do not act): setup cost, per-run saving (with review time counted in the robot's column), real recurrence rate, and the run or date the robot pays for itself, if ever. Inputs: the W8D5 baseline note, this morning's logbook, and honest recall of where the week's evenings went. Worked example included.
+
+What it gives you:
+A restatement of the exercise shape and the inputs it will need, with nothing calculated or changed yet.
+
+
+PROMPT 241
+Evening hours are 3 per night since we started running the exercises from the baseline, approx. 30 hrs. Your turn: per-run numbers (hand time from the W8D5 baseline note, agent time from this morning's log, plus review time), tally all setup, pin the recurrence against something real, divide, date it, and write the verdict: robot vacuum or bread machine, asterisks named.
+
+What it gives you:
+The break-even verdict. The pasted W8 baseline note (about 40 hours, frictions: CORS, late data-model change, 4.5MB upload limit) has no chore hand time, so hand time is an honest estimate (30 min a run). The robot column is about 10 min (a 4-second run from log 19g, plus review). Saving: 20 min a run. Setup: 30 hours (1800 min) as stated, so break even at run 90. Recurrence checked against the data: no catalog rows added since 2026-11-11, and every mess the chore has fixed was planted for lessons, so real recurrence is about zero. Verdict: bread machine. Weekly would only pay back about 2028-08-10. Asterisks: real users adding to the prod catalog, reusable setup, estimated hand time.
+
+
+PROMPT 242
+What did we use for host account? Do you still have that information?
+
+What it gives you:
+The host on record: Vercel (DECISIONS.md), with Neon Postgres for data. The repo's local Vercel link points at the project ducks-on-the-pond, the Vercel CLI isn't installed yet, and catalog-mcp/ is identified as the likely Tuesday door.
+
+
+PROMPT 243
+Yes, catalog-mcp is Tuesday's door.
+
+What it gives you:
+Three things to settle before deploying it: the door speaks stdio only and needs an HTTP transport, it reads its config from .env.development.local instead of environment variables, and its one tool searches the shared catalog, so "someone else's record" could never come back empty. The scope has to come from somewhere private.
+
+
+PROMPT 244
+Scope it to the account's own collection.
+
+What it gives you:
+The decision, recorded in DECISIONS.md: the live door's credential maps to one account, and the search reads only that account's own copies, filtered explicitly by owner, because RLS alone would also show other users' tradeable copies and show an admin everything. Dev test accounts checked: alice (3 copies), bob (3), carol (admin, 1).
+
+
+PROMPT 245
+Use alice for the token and bob for knock 3.
+
+What it gives you:
+The live door, built in catalog-mcp/live/ (Tuesday's stdio door is left untouched, so its evidence still holds): lib/door.mjs holds MCP over HTTP behind two locks, api/mcp.mjs and vercel.json route every path on the host through the lock, dev.mjs runs it locally, and knocks.mjs runs the four knocks against any URL without printing the token. Lock one: no valid Bearer token gives 401 {"error":"unauthorized"} and nothing else. Lock two: the token maps to alice through DOOR_ACCOUNT_ID, and the one tool, search_my_collection, reads only her unsold copies, run as app_rw in a read-only transaction with an explicit owner filter. All four knocks passed locally against the dev branch: 2 Ohtani copies for alice, 401 three ways for a stranger, 0 results for Bob's tradeable Elly De La Cruz (and an owner_id input is rejected), and no delete ability to call.
+
+
+PROMPT 246
+Your turn: deploy the door (same host, start command, secrets as environment variables, a fresh credential; review whether any secret landed in a tracked file; read the build log before touching code if the deploy fails). Fit lock one (flat refusal, no tool list or detail). Fit lock two (scope by the credential's identity, never a caller-supplied value; point at the line). Run the four knocks, capturing request, status and body. Connect the AI to the live door and ask Tuesday's question again. Submit the live address, the four knocks with responses, and a refusal note.
+
+What it gives you:
+The door live at https://catalog-door.vercel.app/mcp, a new Vercel project (catalog-door) on the same team as the app. It deployed on the first try, with three settings marked sensitive (DATABASE_URL for the dev branch, a fresh 64-character DOOR_TOKEN, DOOR_ACCOUNT_ID=alice) and no secret in any tracked file (scanned). All four knocks passed on the live address: 2 Ohtani copies for alice, a flat 401 three ways, 0 results for Bob's Elly De La Cruz, and "Unknown tool" for delete. Claude Code is connected to the live door (local config) and listed alice's three Topps cards. Evidence and refusal note are in catalog-mcp/live/evidence-2026-11-20.md.
+
+
+PROMPT 247
+[Image: a submission template with seven prompts: "The live address of my door", "Knock 1 (my credential) — request, status, response", "Knock 2 (no credential) — request, status, response", "Knock 3 (someone else's record) — request, status, response", "Knock 4 (the ability I never built) — what happened", "Why each refusal happened, in my words", "Where the scope is decided in my code".] Answer in not more than 200 words.
+
+What it gives you:
+The seven submission answers in plain text, under 200 words, drawn from catalog-mcp/live/evidence-2026-11-20.md.
+
+
+PROMPT 248
+Shape of the governed-run exercise (take note, no action): start the chore by hand with one prompt against the live app, leave it about ten minutes unwatched with the laptop awake, read the log cold, prove each rule held one at a time (including never-delete, which leaves no line: search the log and compare counts), grade the checkpoint's proposals against records known cold, note anything that went sideways, and submit the evidence. Worked example included.
+
+What it gives you:
+A restatement of the exercise shape mapped to this app's catalog cleanup chore and Rules.md, plus one conflict to settle first: Rules.md allows the chore to connect only to the Neon dev branch, and the exercise says "against the live app". Nothing run or changed.
+
+
+PROMPT 249
+[Image: "Proving the rules held", one rule per row with three columns: the rule you wrote, what would break it, and the evidence it did not. May add tags and categories alone / a tag that never landed / "21:40:07 tags: +waterproof", applied, unprompted, logged. Propose renames, never apply them / a rename that landed / "21:40:19 proposed", prepared, held, still waiting. Never delete anything / any delete line at all / "grep delete: 0 hits", an absence you went looking for. Flag anything uncertain / a quiet, confident guess / "21:40:24 SKIPPED, flagged", named the doubt out loud. Footer: "Evidence is a line you can point at, or an absence you actually searched for. 'It behaved itself' is a feeling. Neither a grader nor a client can check a feeling."]
+
+What it gives you:
+The evidence table mapped to this app's Rules.md and the chore's actual log events. "May do alone" is settled by a catalog.change line, "Ask first" by a proposal in the report plus the record checked unchanged, "Never" by searched absences (delete, and writes to the guarded tables) plus before/after counts, and "Flag" by catalog.change_rejected or catalog.unreadable_skipped. One gap: the chore emits no "proposed" event, so ask-first evidence would come from the report, not the log. Nothing run or changed.
+
+
+PROMPT 250
+Your turn: start the run and leave (confirm the rules file, give the worker its one prompt, step away, don't babysit). Read the log cold before looking at the app; if the run can't be reconstructed from the log, that's the first finding. Prove each rule held, one row per rule, naming what was searched for the inaction rules and checking the app itself for at least one. Rule on what the checkpoint held back. Write the fix list.
+
+What it gives you:
+Decisions asked and answered: run on the production branch, unseeded, through a headless claude -p worker. Rules.md and the task file were pointed at production on purpose (new guard scripts/assert-prod-branch.mjs checks the label and the endpoint; npm run cleanup:prod; prod credentials in the git-ignored .env.cleanup-prod.local). Before and after fingerprints of 17 production tables, read-only. The worker ran 03:32:25 to 03:33:50 UTC unattended. Its log is empty (0 lines), which is the first finding: a quiet run can't be reconstructed from the log. The rules were proven from the worker's transcript, identical fingerprints, and the live app's /catalog page. The checkpoint's two open flags were graded (abandoned sets accepted, parallels near-duplicate rejected) and nothing was applied. Six fix-list items, four carried to tomorrow. Written up in cleanup-reports/governed-run-2026-11-20.md.
+
+
+PROMPT 251
+is the run finished yet?
+
+What it gives you:
+Not yet. It had started about 20 seconds earlier, checked without reading the log.
+
+
+PROMPT 252
+is it finished now?
+
+What it gives you:
+Yes. The worker finished at 03:33:50 UTC (exit 0), after a 1 min 25 s run, and the write-up is in cleanup-reports/governed-run-2026-11-20.md.
+
+
+PROMPT 253
+[Image: a submission template with five prompts: "How the run started (time, and the log line proving it) and how long you were away", "The log", "Rules held — one row per rule, with the evidence", "The checkpoint's verdict (graded / applied / rejected)", "Fix list, closed or scheduled".]
+
+What it gives you:
+The five submission answers in plain text, from cleanup-reports/governed-run-2026-11-20.md. The answers say plainly that no log line proves the start, because the log is empty, and name the worker's transcript as the proof instead.
+
+
+PROMPT 254
+commit and push
+
+What it gives you:
+Three commits on main, pushed to GitHub: the 2026-11-19 failure drill, the live catalog door (catalog-mcp/live with its evidence), and the governed production run (Rules.md and the task file pointed at production, the production guard and cleanup:prod script, the run's report, log and write-up, DECISIONS.md and the prompt log through this entry). Every committed file was scanned for the door tokens, the Vercel OIDC token and both database passwords first. The env files and Vercel link folders stay git-ignored.

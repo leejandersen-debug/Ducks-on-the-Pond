@@ -1,17 +1,18 @@
-// The catalog cleanup chore's fixes (Rules.md, "May do alone"), on the Neon dev branch only.
-//   npm run cleanup:dev              apply the fixes
-//   npm run cleanup:dev -- --dry-run list them without changing anything
+// The catalog cleanup chore's fixes (Rules.md, "May do alone"). Rules.md names the one branch allowed.
+//   npm run cleanup:dev | cleanup:prod              apply the fixes (each script runs its branch guard first)
+//   npm run cleanup:prod -- --dry-run               list them without changing anything
 // Every change goes through changeField (scripts/lib/catalog-change.mjs), which writes one
 // catalog.change log line per change with author "chore-run". Flags (anything the rules
 // don't allow) are listed for the report, never applied.
 import pg from "pg";
 import { changeField } from "./lib/catalog-change.mjs";
+import { log } from "../lib/log.ts";
 
 const AUTHOR = "chore-run";
 const dryRun = process.argv.includes("--dry-run");
 
-if (process.env.NEON_BRANCH !== "dev") {
-  console.error(`Refusing to run: NEON_BRANCH is "${process.env.NEON_BRANCH ?? ""}", expected "dev".`);
+if (!["dev", "production"].includes(process.env.NEON_BRANCH)) {
+  console.error(`Refusing to run: NEON_BRANCH is "${process.env.NEON_BRANCH ?? ""}", expected "dev" or "production".`);
   process.exit(1);
 }
 
@@ -21,6 +22,9 @@ const client = new pg.Client({
 await client.connect();
 const rows = async (sql, params) => (await client.query(sql, params)).rows;
 const say = (text) => console.error(text); // progress on stderr; stdout carries only log lines
+// The saved logbook is stdout. lib/log.ts writes warn lines with console.warn (stderr), which
+// would leave flags (catalog.change_rejected, catalog.unreadable_skipped) out of the logbook.
+console.warn = console.log;
 
 // Trim, and collapse runs of whitespace to one space.
 const tidy = (value) => value.replace(/\s+/g, " ").trim();
@@ -32,9 +36,17 @@ const WHITESPACE_COLUMNS = [
   ["cards", "title"],
 ];
 
-const summary = { changed: 0, rejected: [], ties: [] };
+// A value with no letter or digit, or with control or replacement characters, can't be read
+// safely. The chore flags it and leaves the whole record alone: no trimming, no case fix, no guess.
+// (Tabs and newlines are ordinary whitespace, which tidy handles.)
+const unreadable = (value) =>
+  !/[\p{L}\p{N}]/u.test(value) || /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F\uFFFD]/.test(value);
+const skipped = new Set(); // "table id" of records with an unreadable value
+
+const summary = { changed: 0, rejected: [], ties: [], unreadable: [] };
 
 async function apply(change) {
+  if (skipped.has(`${change.table} ${change.id}`)) return;
   if (dryRun) {
     say(`would change ${change.table} ${change.id} ${change.field}: ${JSON.stringify(change.from)} -> ${JSON.stringify(change.to)}`);
     return;
@@ -50,6 +62,16 @@ try {
     counts[t] = (await rows(`select count(*)::int as n from ${t}`))[0].n;
   }
   say(`Counts: ${JSON.stringify(counts)}${dryRun ? " (dry run)" : ""}`);
+
+  // 0. Unreadable values: flag and skip the record before any fix looks at it.
+  for (const [table, field] of WHITESPACE_COLUMNS) {
+    for (const r of await rows(`select id, ${field} as value from ${table} where ${field} is not null order by id`)) {
+      if (!unreadable(r.value)) continue;
+      skipped.add(`${table} ${r.id}`);
+      summary.unreadable.push({ table, id: r.id, field, value: r.value });
+      if (!dryRun) log.warn("catalog.unreadable_skipped", { table, id: r.id, field, value: r.value, author: AUTHOR });
+    }
+  }
 
   // 1. Whitespace in the five allowed columns.
   for (const [table, field] of WHITESPACE_COLUMNS) {
@@ -76,6 +98,7 @@ try {
   }
 
   say(`Changed: ${summary.changed}`);
+  for (const u of summary.unreadable) say(`FLAG (unreadable, skipped, left as found): ${u.table} ${u.id} ${u.field} ${JSON.stringify(u.value)}`);
   for (const r of summary.rejected) say(`FLAG (rejected by ${r.constraint}): ${r.table} ${r.id} ${r.field} ${JSON.stringify(r.from)}`);
   for (const t of summary.ties) say(`FLAG (case tie): ${t.spellings.join(" vs ")}`);
 } finally {
