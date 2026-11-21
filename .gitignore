@@ -15,3 +15,6 @@ chroma-data/
 # Prompt log: local document only, never committed
 prompt.txt
 prompt1.txt
+
+# Builder checklist: local document only, never committed
+Builder Checklist/
