@@ -23,13 +23,18 @@ Code: commit `32e0d94`. Live: production deployment `dpl_7fcrtkVYMjSTY78ZJZhKtYN
 - In each card's row, the Variants column is now headed "Variants (add to my collection)". Each variant has an **I own one** link to `/collection?variant=<id>#add`, which opens My collection with that variant already chosen.
 - The old **Add** button is now **Add variant**, under the heading "New variant for the catalog".
 - The live set page shows "Add variant" and "I own one" (fetched 2026-11-22 01:04 UTC).
+- **Proof on production:** the owner clicked **I own one** next to Ohtani's Base. My collection opened with Ohtani already chosen in the form (owner's check; the log shows the `/collection` request at 01:12:20 UTC). Nothing was submitted, so knock 1 still finds exactly one copy.
 
 ## Row 14: failed actions are logged
 Every failed action now writes `action_rejected` (action, code, the message shown) or `action_failed`. Before, a user error, "That already exists." and two other expected cases left no line.
+- **Proof on production:** the owner clicked **Add variant** on Ohtani's Base row (a duplicate). Deployment `dpl_CMLvj4SVHTsEFbkWJbZQvbaKiTdw`, request `vk9tf-1795309913085-4c8205fadd0e`, 01:11:53 UTC:
+  `{"level":"warn","event":"action_rejected","details":{"action":"create_variant","code":"23505","shown":"That already exists."}}`
 
 ## Row 17: verification email 403
 - **Cause, from the code:** the sender is Resend's shared test address `onboarding@resend.dev`. Resend delivers from it only to the Resend account's own address, so anyone else's address gets a 403 `validation_error`. BillyBob's did.
 - **What the code can fix:**
   - `email_failed` now logs `testSender: true` and the likely cause.
   - The banner no longer says "we sent you a link". It now says "If the link didn't arrive, send it again."
-- **What only the owner can fix:** verifying a domain in Resend (DNS records) and setting `EMAIL_FROM`. Until then, emails reach only the Resend account's own address.
+- **Proof of the code half on production:** BillyBob signed in at 01:17:58 UTC (`rpngg-1795310277914-1885fafb170f`) and clicked **Send it again**. Request `n7ngg-1795310288429-5bdec04fd1b1`, deployment `dpl_CMLvj4SVHTsEFbkWJbZQvbaKiTdw`, 01:18:08 UTC:
+  `{"level":"error","event":"email_failed","details":{"status":403,"name":"validation_error","testSender":true,"likelyCause":"test sender only delivers to the Resend account's own address; verify a domain and set EMAIL_FROM"}}`
+- **What only the owner can fix:** verifying a domain in Resend (DNS records) and setting `EMAIL_FROM`. Until then, emails reach only the Resend account's own address. The owner has no domain yet but expects one soon (2026-11-21), so row 17 stays open for that half.
