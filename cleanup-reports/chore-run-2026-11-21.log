@@ -1,0 +1,3 @@
+{"ts":"2026-11-22T01:07:52.607Z","level":"info","event":"catalog.run_started","details":{"branch":"production","author":"chore-run"}}
+{"ts":"2026-11-22T01:07:54.053Z","level":"warn","event":"catalog.flagged","details":{"table":"sets","id":"d09fe97a-ab61-4c79-ac99-6990832cd137","reason":"possibly_abandoned","detail":"2026 Bowman Prospects: no cards, older than 7 days","proposal":"keep; ask the owner","author":"chore-run"}}
+{"ts":"2026-11-22T01:07:54.418Z","level":"info","event":"catalog.run_finished","details":{"counts":{"sets":2,"parallels":2,"players":2,"cards":2},"changed":0,"rejected":0,"ties":0,"unreadable":0,"flagged":1,"proposed":0,"ms":1811,"author":"chore-run"}}
