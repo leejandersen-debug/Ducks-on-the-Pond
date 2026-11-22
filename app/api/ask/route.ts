@@ -19,9 +19,11 @@ let client: Anthropic | null = null; // one per server instance; reads ANTHROPIC
 const fail = (status: number, error: string) => Response.json({ error }, { status });
 
 // Checkpoint drill: proves the checkpoint on the live site. Only when ASK_DRILL_TOKEN is set in the
-// environment AND the request's x-ask-drill header matches it, the model's citation is swapped for
-// one that was never retrieved, so the checkpoint must stop it. It can only make an answer worse,
-// never reveal anything. Remove ASK_DRILL_TOKEN to switch the drill off.
+// environment AND the request's x-ask-drill header matches it, the model's answer is made bad on
+// purpose so the checkpoint must stop it: by default its citation is swapped for one that was never
+// retrieved; with x-ask-drill-kind: soft_refusal, its text becomes a soft refusal (real citation
+// kept). It can only make an answer worse, never reveal anything. Remove ASK_DRILL_TOKEN to
+// switch the drill off.
 const digest = (s: string) => createHash("sha256").update(s).digest();
 function isDrill(request: Request) {
   const want = process.env.ASK_DRILL_TOKEN, got = request.headers.get("x-ask-drill");
@@ -74,7 +76,9 @@ export async function POST(request: Request) {
 
   const drill = isDrill(request);
   if (drill && !result.refused) {
-    result = { ...result, source: { document: "drill.txt", section: "NOT RETRIEVED" }, citationMatchesContext: false };
+    result = request.headers.get("x-ask-drill-kind") === "soft_refusal"
+      ? { ...result, answer: "The context doesn't say that specifically. It only mentions related terms." }
+      : { ...result, source: { document: "drill.txt", section: "NOT RETRIEVED" }, citationMatchesContext: false };
   }
 
   // The output checkpoint: nothing below sees an answer whose citation isn't in the retrieved context.

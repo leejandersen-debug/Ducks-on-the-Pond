@@ -55,7 +55,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {verified === false && (
           <div className="verify-banner">
             <form action={resendVerification} className="bar">
-              <span>Please confirm your email address: we sent you a link when you signed up.</span>
+              <span>Please confirm your email address. If the link didn&apos;t arrive, send it again.</span>
               <button className="small">Send it again</button>
             </form>
           </div>

@@ -24,19 +24,24 @@ function withMessage(path: string, kind: "ok" | "error", message: string) {
   return url.pathname + url.search;
 }
 
-// Postgres errors we expect and whose messages are safe to show; everything else is logged.
+// Postgres errors we expect and whose messages are safe to show.
 const SHOWN_CODES = new Set(["P0001", "P0002", "28000", "42501", "23503", "23514", "22023"]);
 
+// Every failed action leaves a log line, including the ones the user simply sees as a message:
+// action_rejected (expected: what was shown, our own wording or a safe database message) or
+// action_failed (unexpected). Without these, a failed form left nothing in the logs.
 function describe(action: string, err: unknown): string {
-  if (err instanceof UserError) return err.message;
   const code = (err as { code?: string }).code;
-  if (code && SHOWN_CODES.has(code)) {
-    log.warn("action_rejected", { action, code });
-    return (err as Error).message;
+  let shown: string | null = null;
+  if (err instanceof UserError) shown = err.message;
+  else if (code && SHOWN_CODES.has(code)) shown = (err as Error).message;
+  else if (code === "23505") shown = "That already exists.";
+  else if (code === "22P02" || code === "22007") shown = "One of the values isn't valid.";
+  else if (code === "42P01") shown = "The database schema isn't applied in this environment.";
+  if (shown !== null) {
+    log.warn("action_rejected", { action, code: code ?? "user_error", shown });
+    return shown;
   }
-  if (code === "23505") return "That already exists.";
-  if (code === "22P02" || code === "22007") return "One of the values isn't valid.";
-  if (code === "42P01") return "The database schema isn't applied in this environment.";
   log.error("action_failed", { action, code, message: (err as Error).message });
   return "Something went wrong. It has been logged as action_failed.";
 }

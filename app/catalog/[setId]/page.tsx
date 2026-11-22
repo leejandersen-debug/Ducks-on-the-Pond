@@ -60,7 +60,7 @@ export default async function SetPage({ params, searchParams }: {
 
       <h2>Cards</h2>
       <table>
-        <thead><tr><th>#</th><th>Card</th><th>Rookie</th><th>Variants</th><th>Add a variant</th></tr></thead>
+        <thead><tr><th>#</th><th>Card</th><th>Rookie</th><th>Variants (add to my collection)</th><th>New variant for the catalog</th></tr></thead>
         <tbody>
           {cards.map((k) => (
             <tr key={k.id}>
@@ -72,6 +72,7 @@ export default async function SetPage({ params, searchParams }: {
                   {variants.filter((v) => v.card_id === k.id).map((v) => (
                     <li key={v.id}>
                       {v.parallel}{v.print_run ? ` /${v.print_run}` : ""}{v.is_autograph ? " Auto" : ""}{v.is_relic ? " Relic" : ""}
+                      {" · "}<a href={`/collection?variant=${v.id}#add`}>I own one</a>
                     </li>
                   ))}
                 </ul>
@@ -86,7 +87,7 @@ export default async function SetPage({ params, searchParams }: {
                   <label><input type="checkbox" name="is_autograph" /> Auto</label>{" "}
                   <label><input type="checkbox" name="is_relic" /> Relic</label>{" "}
                   <input name="print_run" type="number" min={1} placeholder="print run override" size={14} />{" "}
-                  <button>Add</button>
+                  <button>Add variant</button>
                 </form>
               </td>
             </tr>

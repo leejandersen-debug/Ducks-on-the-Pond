@@ -7,5 +7,8 @@ let host = "";
 try { host = new URL(process.env.DATABASE_URL_UNPOOLED ?? "").hostname; } catch {}
 if (branch !== "production" || !host.startsWith(`${PROD_ENDPOINT}.`)) {
   console.error(`Refusing to run: expected NEON_BRANCH "production" on endpoint ${PROD_ENDPOINT}, got "${branch}" on "${host.split(".")[0]}".`);
+  // Also one log line on stdout, so a refused run leaves a line in the chore-run log instead of nothing.
+  console.log(JSON.stringify({ ts: new Date().toISOString(), level: "error", event: "catalog.guard_refused",
+    details: { expected: `production on ${PROD_ENDPOINT}`, got: `${branch || "(unset)"} on ${host.split(".")[0] || "(no host)"}` } }));
   process.exit(1);
 }

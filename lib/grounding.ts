@@ -83,17 +83,33 @@ export async function answerFromContext(client: Anthropic, question: string, chu
   };
 }
 
-export function citesRetrieved(source: GroundedAnswer["source"], chunks: Pick<ContextChunk, "document" | "section">[]): boolean {
-  return !!source && chunks.some((c) => c.document === source.document && c.section === source.section);
+// A citation matches when it names a retrieved chunk's document and either that chunk's section
+// label or a heading printed inside that chunk's text. A chunk can span sub-sections, and Claude
+// sometimes cites the sub-heading (golden Q3 cited "6.3 What other collectors can see" from a chunk
+// labelled "5. ..."). For "A › B" labels, the last part is the heading checked.
+export function citesRetrieved(source: GroundedAnswer["source"], chunks: ContextChunk[]): boolean {
+  if (!source) return false;
+  const heading = source.section.split("›").at(-1)!.trim().toLowerCase();
+  return chunks.some((c) => c.document === source.document &&
+    (c.section === source.section || (heading.length >= 4 && c.text.toLowerCase().includes(heading))));
 }
 
-// The output checkpoint, run on every answer before anyone sees it. An answer whose cited source
-// isn't one of the retrieved chunks can't be shown to come from the corpus, so it becomes the
-// normal refusal. `blocked` carries the reason so the caller can log it (ask.blocked).
+// A "soft refusal": the answer opens by saying the context doesn't cover the question, then cites a
+// real chunk anyway (seen 2026-11-21: "The context doesn't define PSA 10 specifically. It only
+// says..."). Only the opening sentence is checked, so a partial answer that says what's missing
+// later on (golden Q7) still gets through.
+const SOFT_REFUSAL = /^(the |this )?(provided |given |retrieved )?(context|documents?|passages?|sources?|information)( provided| given)? (does not|doesn't|do not|don't|did not|didn't)\b/i;
+export const isSoftRefusal = (answer: string) => SOFT_REFUSAL.test(answer.trim());
+
+// The output checkpoint, run on every answer before anyone sees it. It blocks two kinds of answer
+// and turns them into the normal refusal, with `blocked` naming the reason so the caller can log it
+// (ask.blocked): a cited source that isn't one of the retrieved chunks, which can't be shown to come
+// from the corpus, and a soft refusal, which is "I don't know" written as if it were an answer.
 export function checkpoint(result: GroundedAnswer): { result: GroundedAnswer; blocked: string | null } {
-  if (result.refused || result.citationMatchesContext) return { result, blocked: null };
-  return {
-    result: { answer: DONT_KNOW, refused: true, source: null, citationMatchesContext: false },
-    blocked: "citation_not_in_context",
-  };
+  if (result.refused) return { result, blocked: null };
+  const blocked = !result.citationMatchesContext ? "citation_not_in_context"
+    : isSoftRefusal(result.answer) ? "soft_refusal"
+    : null;
+  if (!blocked) return { result, blocked: null };
+  return { result: { answer: DONT_KNOW, refused: true, source: null, citationMatchesContext: false }, blocked };
 }

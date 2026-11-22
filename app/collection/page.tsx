@@ -111,12 +111,12 @@ export default async function CollectionPage({ searchParams }: { searchParams: F
         </tbody>
       </table>
 
-      <h2>Add a card to my collection</h2>
+      <h2 id="add">Add a card to my collection</h2>
       <form action={addCopy}>
         <input type="hidden" name="back" value={BACK} />
         <p>
           Card variant{" "}
-          <select name="variant_id" required>
+          <select name="variant_id" required defaultValue={typeof sp.variant === "string" && variants.some((v) => v.id === sp.variant) ? sp.variant : ""}>
             <option value="">Choose…</option>
             {variants.map((v) => <option key={v.id} value={v.id}>{v.label}</option>)}
           </select>{" "}

@@ -34,7 +34,13 @@ export async function sendEmail(to: string, subject: string, text: string, html:
     // Status and Resend's error name only: the body can echo the recipient address.
     let name = "unknown";
     try { name = ((await res.json()) as { name?: string }).name ?? name; } catch {}
-    log.error("email_failed", { status: res.status, name });
+    // With the shared test sender, Resend refuses (403 validation_error) any recipient except the
+    // Resend account's own address. Say so in the log, so the cause is readable without guessing.
+    const testSender = FROM.includes("@resend.dev");
+    log.error("email_failed", {
+      status: res.status, name, testSender,
+      ...(testSender && res.status === 403 && { likelyCause: "test sender only delivers to the Resend account's own address; verify a domain and set EMAIL_FROM" }),
+    });
     throw new EmailError("Couldn't send the email right now. Try again in a few minutes.", `Resend said ${res.status} ${name}`);
   }
   const id = ((await res.json().catch(() => ({}))) as { id?: string }).id ?? null;
