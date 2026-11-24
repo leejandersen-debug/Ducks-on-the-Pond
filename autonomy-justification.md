@@ -1,6 +1,6 @@
 # Autonomy justification: catalog cleanup
 
-How much each part of the catalog-cleanup chore may do on its own, and why. The source of truth for the rules is `Rules.md`. This document explains the rungs chosen there. It was first written as the prompt 200 answer on 2026-11-13, and saved as a document and updated on 2026-11-21.
+How much each part of the catalog-cleanup chore may do on its own, and why. The source of truth for the rules is `Rules.md`. This document explains the rungs chosen there. It was first written as the prompt 200 answer on 2026-11-13, saved as a document and updated on 2026-11-21, and updated again on 2026-11-24 to record the closed gaps.
 
 ## The chore and who runs it
 - **The chore:** a cleanup of the shared card catalog (sets, parallels, players, cards). It runs from `tasks/catalog-cleanup.md` under `Rules.md`.
@@ -39,7 +39,7 @@ How much each part of the catalog-cleanup chore may do on its own, and why. The 
 - **Every touch is logged where the change happens.** The log line is written by the code that makes the change, not by the worker, so the worker can't skip or reword it.
 - **Failures were tested.** In the 2026-11-19 failure drill, a garbage value was flagged and skipped (after one fix), and 34 kills in the middle of a run left 0 changes unlogged and 0 phantom log lines. See `cleanup-reports/failure-drill-2026-11-19.md`.
 - **The rungs held on a real unattended run.** On the 2026-11-20 production run, all 17 tables had the same fingerprints before and after. The worker didn't work around a blocked query and flagged what it couldn't check. See `cleanup-reports/governed-run-2026-11-20.md`.
-- **Known gaps are on the fix list, not hidden.** A run with nothing to do leaves an empty log, and flags and proposals reach only the report (`fix-list-2026-11-21.md`, rows 7–10).
+- **Known gaps went on the fix list, not hidden, and are now closed.** The 11-20 run showed four: a run with nothing to do left an empty log, a pipe in step 4 hid guard refusals, the worker had no read-only way to check rows for step 5, and flags and proposals reached only the report (`fix-list-2026-11-21.md`, rows 7–10). All four closed on 2026-11-21. Every run now logs `catalog.run_started` and `catalog.run_finished` (or `catalog.run_failed`), the guard logs `catalog.guard_refused`, `--list` gives a read-only listing, and flags and proposals are logged as `catalog.flagged` and `catalog.proposed`. See `cleanup-reports/governed-run-2026-11-21.md`.
 
 ## Skeptic sentence
 It acts alone only on changes its own report can undo in one line, and on the first run I checked every claim in that report against the database instead of trusting it.

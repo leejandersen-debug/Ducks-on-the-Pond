@@ -2,7 +2,7 @@
 
 **Course 2 build:** the Baseball Card Database from Week 6. It was two projects: First-Server (Express plus MongoDB) and First-Client (static HTML), built 2026-10-03 to 10-18.
 **The Rebuild:** Ducks on the Pond Cards (this repo). It is one Next.js app on Postgres, built 2026-10-23 to 11-21.
-**Measured against:** my Week 8 Baseline Note (about Course 2) and last week's Progress Note (about the Rebuild). Written 2026-11-21.
+**Measured against:** my Week 8 Baseline Note (about Course 2) and last week's Progress Note (about the Rebuild). Written 2026-11-21, updated 2026-11-24: the "Worse" list now reflects the fix-list rows closed later on 11-21.
 
 ## Time
 
@@ -36,10 +36,11 @@ The like-for-like number is the commit span: **28.3 h against 37.3 h, about a qu
 - A live MCP door with two locks.
 
 **Worse:**
-- No automated test suite. Course 2 had 123 Jest/supertest tests in 6 files. The Rebuild has 0 unit tests and relies on type-checking, the golden set and drills.
+- No automated test suite. Course 2 had 123 Jest/supertest test cases in 6 files (some use `test.each`, so Jest runs more than 123). The Rebuild has 0 unit tests and relies on type-checking, the golden set and drills.
 - No photo upload, which was Course 2's self-taught feature.
 - Production has 1 user and 0 copies, so there's no real use yet.
-- Two open fix-list rows: the AI output isn't blocked when its citation fails (row 5), and the door serves dev data (row 6).
+- One fix-list row is still half open (row 17). Account emails reach only the Resend account's own address until a domain is verified. The code half is done: the failure is logged with its likely cause, and the page no longer claims a link was sent.
+- When this memo was first written, rows 5 and 6 were also open. Both closed later on 2026-11-21. The AI output is now blocked when its citation isn't a retrieved passage (`ask-checkpoint-evidence-2026-11-21.md`), and the door now serves the live app's production data (`catalog-mcp/live/evidence-2026-11-21-production.md`).
 
 ## The claim
 
